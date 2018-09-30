@@ -1,0 +1,237 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ThePlaceToBe.Views.MainPage.MainPage">
+    <ContentPage.Content>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="120"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <AbsoluteLayout Grid.Row="0"
+                            Grid.Column="0">
+                <Image Source="logo.png"
+                       WidthRequest="120"
+                       AbsoluteLayout.LayoutFlags="PositionProportional"
+                       AbsoluteLayout.LayoutBounds="0.05, 0.1"/>
+
+
+                <StackLayout AbsoluteLayout.LayoutFlags="PositionProportional"
+                             AbsoluteLayout.LayoutBounds="0.95, 0"
+                             WidthRequest="100">
+                    <Image Source="imgAccount.png"
+                           WidthRequest="70"
+                           Margin="0, 10, 0, 0"/>
+
+                    <Label Text="Octofen"
+                       FontAttributes="Bold"
+                       FontSize="14"
+                       TextColor="{StaticResource textColor}"
+                       HorizontalOptions="Center"/>
+                </StackLayout>
+            </AbsoluteLayout>
+
+            <Frame Grid.Row="1"
+                   Grid.Column="0"
+                   BackgroundColor="Silver"
+                   Margin="20, 0"
+                   CornerRadius="20"
+                   Padding="6"
+                   HasShadow="False">
+                <StackLayout Spacing="0">
+                    <StackLayout Orientation="Horizontal"
+                                 HorizontalOptions="FillAndExpand"
+                                 Spacing="0">
+                        <Label Text="Filter :"
+                               FontSize="18"
+                               FontAttributes="Bold"
+                               TextColor="Black"
+                               VerticalOptions="Center"
+                               Margin="10, 0, 10, 5"/>
+
+                        <Entry BackgroundColor="White"
+                               VerticalOptions="Center"
+                               FontSize="12"
+                               HeightRequest="25"
+                               WidthRequest="90"/>
+
+                        <StackLayout Spacing="0"
+                                     Orientation="Horizontal"
+                                     HorizontalOptions="EndAndExpand">
+                            <Image Source="loupe.png"
+                               HeightRequest="30"
+                               VerticalOptions="Center"/>
+
+                            <Entry BackgroundColor="White"
+                               VerticalOptions="Center"
+                               FontSize="12"
+                               HeightRequest="25"
+                               WidthRequest="90"
+                               Margin="10, 0, 10, 0"/>
+                        </StackLayout>
+                        
+                    </StackLayout>
+
+                    <BoxView BackgroundColor="Gray"
+                             HeightRequest="1"
+                             Margin="0, 10, 0, 0"/>
+
+                    <Grid VerticalOptions="FillAndExpand"
+                          HorizontalOptions="FillAndExpand"
+                          ColumnSpacing="0"
+                          RowSpacing="0">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <Button Text="IMG 1"
+                                BorderWidth="2"
+                                BorderColor="Gray"
+                                BorderRadius="50"
+                                BackgroundColor="DarkGray"
+                                TextColor="Gray"
+                                Grid.Column="0"
+                                Grid.Row="0"
+                                Margin="20, 10"/>
+                        
+                        <Button Text="IMG 2"
+                                BorderWidth="2"
+                                BorderColor="Gray"
+                                BorderRadius="50"
+                                BackgroundColor="DarkGray"
+                                TextColor="Gray"
+                                Grid.Column="1"
+                                Grid.Row="0"
+                                Margin="20, 10"/>
+                        
+                        <Button Text="IMG 3"
+                                BorderWidth="2"
+                                BorderColor="Gray"
+                                BorderRadius="50"
+                                BackgroundColor="DarkGray"
+                                TextColor="Gray"
+                                Grid.Column="2"
+                                Grid.Row="0"
+                                Margin="20, 10"/>
+                        
+                        <Button Text="IMG 4"
+                                BorderWidth="2"
+                                BorderColor="Gray"
+                                BorderRadius="50"
+                                BackgroundColor="DarkGray"
+                                TextColor="Gray"
+                                Grid.Column="0"
+                                Grid.Row="1"
+                                Margin="20, 10"/>
+                        
+                        <Button Text="IMG 5"
+                                BorderWidth="2"
+                                BorderColor="Gray"
+                                BorderRadius="50"
+                                BackgroundColor="DarkGray"
+                                TextColor="Gray"
+                                Grid.Column="1"
+                                Grid.Row="1"
+                                Margin="20, 10"/>
+                        
+                        <Button Text="IMG 6"
+                                BorderWidth="2"
+                                BorderColor="Gray"
+                                BorderRadius="50"
+                                BackgroundColor="DarkGray"
+                                TextColor="Gray"
+                                Grid.Column="2"
+                                Grid.Row="1"
+                                Margin="20, 10"/>
+                        
+                        <Button Text="IMG 7"
+                                BorderWidth="2"
+                                BorderColor="Gray"
+                                BorderRadius="50"
+                                BackgroundColor="DarkGray"
+                                TextColor="Gray"
+                                Grid.Column="0"
+                                Grid.Row="2"
+                                Margin="20, 10"/>
+                        
+                        <Button Text="IMG 8"
+                                BorderWidth="2"
+                                BorderColor="Gray"
+                                BorderRadius="50"
+                                BackgroundColor="DarkGray"
+                                TextColor="Gray"
+                                Grid.Column="1"
+                                Grid.Row="2"
+                                Margin="20, 10"/>
+                        
+                        <Button Text="IMG 9"
+                                BorderWidth="2"
+                                BorderColor="Gray"
+                                BorderRadius="50"
+                                BackgroundColor="DarkGray"
+                                TextColor="Gray"
+                                Grid.Column="2"
+                                Grid.Row="2"
+                                Margin="20, 10"/>
+                        
+                        <Button Text="IMG 10"
+                                BorderWidth="2"
+                                BorderColor="Gray"
+                                BorderRadius="50"
+                                BackgroundColor="DarkGray"
+                                TextColor="Gray"
+                                Grid.Column="0"
+                                Grid.Row="3"
+                                Margin="20, 10"/>
+                        
+                        <Button Text="IMG 11"
+                                BorderWidth="2"
+                                BorderColor="Gray"
+                                BorderRadius="50"
+                                BackgroundColor="DarkGray"
+                                TextColor="Gray"
+                                Grid.Column="1"
+                                Grid.Row="3"
+                                Margin="20, 10"/>
+                        
+                        <Button Text="IMG 12"
+                                BorderWidth="2"
+                                BorderColor="Gray"
+                                BorderRadius="50"
+                                BackgroundColor="DarkGray"
+                                TextColor="Gray"
+                                Grid.Column="2"
+                                Grid.Row="3"
+                                Margin="20, 10"/>
+                    </Grid>
+                </StackLayout>
+            </Frame>
+            
+            <Frame Grid.Row="2"
+                   Grid.Column="0"
+                   BackgroundColor="{StaticResource backgroundColor}">
+                <Button Text="Scan"
+                        FontSize="20"
+                        FontAttributes="Bold"
+                        TextColor="#d6840a"
+                        BorderWidth="5"
+                        BorderColor="#d6840a"
+                        BorderRadius="25"
+                        BackgroundColor="#f7b009"/>
+            </Frame>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>
