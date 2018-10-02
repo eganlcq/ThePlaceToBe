@@ -1,0 +1,78 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ThePlaceToBe.Views.ScanPage.ScanPage">
+    <ContentPage.Content>
+        <StackLayout>
+            <AbsoluteLayout HeightRequest="120"
+                            VerticalOptions="Start">
+                <Image Source="logo.png"
+                       WidthRequest="120"
+                       AbsoluteLayout.LayoutFlags="PositionProportional"
+                       AbsoluteLayout.LayoutBounds="0.05, 0.1"/>
+
+
+                <StackLayout AbsoluteLayout.LayoutFlags="PositionProportional"
+                             AbsoluteLayout.LayoutBounds="0.95, 0"
+                             WidthRequest="100">
+                    <Image Source="imgAccount.png"
+                           WidthRequest="70"
+                           Margin="0, 10, 0, 0"/>
+
+                    <Label Text="Octofen"
+                           FontAttributes="Bold"
+                           FontSize="14"
+                           TextColor="{StaticResource textColor}"
+                           HorizontalOptions="Center"/>
+                </StackLayout>
+            </AbsoluteLayout>
+
+            <Frame BackgroundColor="Silver"
+                   Margin="0, 100"
+                   CornerRadius="10"
+                   Padding="10, 5"
+                   HasShadow="False"
+                   HorizontalOptions="Center">
+                <StackLayout>
+                    <Label Text="Est-ce bien ce qui est écris ?"
+                           FontSize="20"
+                           FontAttributes="Bold"
+                           TextColor="Gray"
+                           HorizontalOptions="Center"/>
+                    <Frame BackgroundColor="White"
+                           Margin="0, 5, 0, 10"
+                           CornerRadius="15"
+                           Padding="5">
+                        <Label Text="Beer Name"
+                               TextColor="Black"
+                               HorizontalOptions="Center"
+                               FontAttributes="Bold"
+                               FontSize="16"/>
+                    </Frame>
+                    <StackLayout Orientation="Horizontal"
+                                 HorizontalOptions="Center"
+                                 Spacing="30">
+                        <Button Text="OUI"
+                                FontSize="14"
+                                FontAttributes="Bold"
+                                TextColor="#d6840a"
+                                BorderWidth="5"
+                                BorderColor="#d6840a"
+                                BorderRadius="10"
+                                BackgroundColor="#f7b009"
+                                HeightRequest="40"/>
+                        <Button Text="NON"
+                                FontSize="14"
+                                FontAttributes="Bold"
+                                TextColor="#d6840a"
+                                BorderWidth="5"
+                                BorderColor="#d6840a"
+                                BorderRadius="10"
+                                BackgroundColor="#f7b009"
+                                HeightRequest="40"/>
+                    </StackLayout>
+                </StackLayout>
+            </Frame>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
