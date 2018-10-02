@@ -1,0 +1,112 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ThePlaceToBe.Views.ProductPage.ProductPage">
+    <ContentPage.Content>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="120"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <AbsoluteLayout Grid.Row="0"
+                            Grid.Column="0">
+                <Image Source="logo.png"
+                       WidthRequest="120"
+                       AbsoluteLayout.LayoutFlags="PositionProportional"
+                       AbsoluteLayout.LayoutBounds="0.05, 0.1"/>
+
+
+                <StackLayout AbsoluteLayout.LayoutFlags="PositionProportional"
+                             AbsoluteLayout.LayoutBounds="0.95, 0"
+                             WidthRequest="100">
+                    <Image Source="imgAccount.png"
+                           WidthRequest="70"
+                           Margin="0, 10, 0, 0"/>
+
+                    <Label Text="Octofen"
+                       FontAttributes="Bold"
+                       FontSize="14"
+                       TextColor="{StaticResource textColor}"
+                       HorizontalOptions="Center"/>
+                </StackLayout>
+            </AbsoluteLayout>
+
+            <Frame Grid.Row="1"
+                   Grid.Column="0"
+                   BackgroundColor="Silver"
+                   Margin="20, 0"
+                   CornerRadius="10"
+                   Padding="6"
+                   HasShadow="False">
+                <StackLayout Padding="5">
+                    <Image Source="map.png"/>
+
+                    <BoxView HeightRequest="1"
+                             BackgroundColor="Gray"
+                             Margin="0, 5, 0, 5"/>
+
+                    <StackLayout Orientation="Horizontal"
+                                 HorizontalOptions="Center">
+                        <Label Text="Beer Name"
+                               FontSize="20"
+                               TextColor="Gray"
+                               FontAttributes="Bold"
+                               VerticalOptions="Center"/>
+                        <Button Text="FAVORIS"
+                                FontSize="10"
+                                FontAttributes="Bold"
+                                TextColor="Gray"
+                                BorderWidth="3"
+                                BorderColor="Gray"
+                                BorderRadius="10"
+                                BackgroundColor="DarkGray"
+                                HorizontalOptions="End"
+                                HeightRequest="30"
+                                WidthRequest="65"
+                                VerticalOptions="Center"
+                                Margin="15, 0, 0, 0"/>
+                    </StackLayout>
+                    <StackLayout Orientation="Horizontal"
+                                 HorizontalOptions="Center"
+                                 Margin="0, 5, 0, 0">
+                        <Image Source="bottle.png"
+                               HeightRequest="50"/>
+                        <StackLayout Margin="20, 0, 0, 0"
+                                     WidthRequest="100">
+                            <Label Text="% Alcool"
+                                   HorizontalOptions="Center"
+                                   FontSize="16"
+                                   FontAttributes="Bold"
+                                   TextColor="Gray"/>
+                            <Label Text="Saveur"
+                                   HorizontalOptions="Center"
+                                   FontSize="16"
+                                   FontAttributes="Bold"
+                                   TextColor="Gray"/>
+                        </StackLayout>
+                    </StackLayout>
+                </StackLayout>
+            </Frame>
+
+            <Frame Grid.Row="2"
+                   Grid.Column="0"
+                   BackgroundColor="{StaticResource backgroundColor}">
+                <Button Text="Retour"
+                        FontSize="14"
+                        FontAttributes="Bold"
+                        TextColor="#d6840a"
+                        BorderWidth="5"
+                        BorderColor="#d6840a"
+                        BorderRadius="10"
+                        BackgroundColor="#f7b009"
+                        HorizontalOptions="Start"
+                        HeightRequest="40"/>
+            </Frame>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>
