@@ -1,0 +1,58 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             BackgroundColor="{StaticResource backgroundColor}"
+             x:Class="TPTB.Views.Inscription">
+    <ContentPage.Content>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="120"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <StackLayout 
+                VerticalOptions="Center"
+                Grid.Column="0" Grid.Row="0"
+                >
+                <Label Text="ThePlaceToBe" TextColor="{StaticResource textColor}" FontSize="30"
+                    VerticalOptions="CenterAndExpand" 
+                    HorizontalOptions="CenterAndExpand" />
+            </StackLayout>
+            
+            <Frame Grid.Column="0" Grid.Row="1"
+                   BackgroundColor="Gray"
+                   Margin="20,0" Padding="6"
+                   HasShadow="False">
+                <StackLayout Padding="0,0,0,10">
+                    <StackLayout VerticalOptions="Start" HorizontalOptions="FillAndExpand">
+                        <Label Text="Inscription" FontAttributes="Bold" FontSize="30"
+                               HorizontalOptions="Center"/>
+                    </StackLayout>
+                    <StackLayout>
+                        <Label Text="Inscription :" TextColor="Gray"
+                               VerticalOptions="Start" />
+                        <Entry Placeholder="Nom"/>
+                        <Entry Placeholder="Prénom"/>
+                        <Entry Placeholder="Pseudo"/>
+                        <Entry Placeholder="Adresse@email.com"/>
+                        <Entry Placeholder="Mot de passe"
+                               IsPassword="True"/>
+                        <Entry Placeholder="Confirmation de mot de passe"
+                               IsPassword="True"/>
+                    </StackLayout>
+                </StackLayout>
+            </Frame>
+
+            <StackLayout Grid.Column="0" Grid.Row="2"
+                         HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand"
+                         HeightRequest="120" >
+                <Button Text="BOUTON"
+                        WidthRequest="175" Margin="0,20,0,0"/>
+            </StackLayout>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>
