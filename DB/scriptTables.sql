@@ -6,19 +6,18 @@ primary key (idsucces)
 );
 
 create table TbBar(
-idbar int(3) not null,
-nom varchar(16) not null,
+nombar varchar(16) not null,
 longitude varchar(11) not null,
 latitude varchar(11) not null,
-primary key (idbar)
+primary key (nombar)
 );
 
 create table TbAvis(
 idavis int(5) not null,
-idbar int(3) not null,
+nombar varchar(16) not null,
 avis varchar(500) not null,
 primary key (idavis),
-foreign key (idbar) references TbBar(idbar)
+foreign key (nombar) references TbBar(nombar)
 );
 
 create table TbUser(
@@ -40,31 +39,30 @@ foreign key (idsucces) references TbSucces(idsucces)
 );
 
 create table TbBiere(
-idbiere int(3) not null,
-nom varchar(16) not null,
+nombiere varchar(16) not null,
 alcoolemie decimal(2,1) not null,
 saveur varchar(16) not null,
 image blob not null,
-primary key (idbiere)
+primary key (nombiere)
 );
 
 
 
 create table TbCarte(
-idbiere int(3) not null,
-idbar int(3) not null,
-primary key (idbiere , idbar),
-foreign key (idbiere) references TbBiere(idbiere),
-foreign key (idbar) references TbBar(idbar)
+nombiere varchar(16) not null,
+nombar varchar(16) not null,
+primary key (nombiere , nombar),
+foreign key (nombiere) references TbBiere(nombiere),
+foreign key (nombar) references TbBar(nombar)
 );
 
 
 
 create table TbFavoris(
-idbiere int(3) not null,
+nombiere varchar(16) not null,
 iduser int(5) not null,
-primary key (idbiere, iduser),
-foreign key (idbiere) references TbBiere(idbiere),
+primary key (nombiere, iduser),
+foreign key (nombiere) references TbBiere(nombiere),
 foreign key (iduser) references TbUser(iduser)
 );
 
