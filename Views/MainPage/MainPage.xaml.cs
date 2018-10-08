@@ -15,6 +15,10 @@ namespace ThePlaceToBe.Views.MainPage
 		public MainPage ()
 		{
 			InitializeComponent ();
+
+			flavourPicker.Items.Add("Pouet");
+			flavourPicker.Items.Add("Pouet");
+			flavourPicker.Items.Add("Pouet");
 		}
 	}
 }
