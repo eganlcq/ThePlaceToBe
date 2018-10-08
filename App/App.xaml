@@ -4,7 +4,7 @@
              x:Class="ThePlaceToBe.App">
     <Application.Resources>
         <ResourceDictionary>
-            <Color x:Key="backgroundColor">#0f252E</Color>
+            <Color x:Key="backgroundColor">#3367b0</Color>
             <Color x:Key="textColor">#FFF200</Color>
             
             <Style TargetType="NavigationPage"
