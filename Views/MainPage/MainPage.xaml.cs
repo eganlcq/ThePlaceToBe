@@ -20,5 +20,10 @@ namespace ThePlaceToBe.Views.MainPage
 			flavourPicker.Items.Add("Pouet");
 			flavourPicker.Items.Add("Pouet");
 		}
+		
+		private void BiereTapped(object sender, EventArgs e)
+		{
+		    this.Navigation.PushAsync(new ProductPage());
+		}
 	}
 }
