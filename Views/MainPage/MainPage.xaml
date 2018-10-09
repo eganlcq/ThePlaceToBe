@@ -107,10 +107,17 @@
                         <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
 
+                    <!-- NE PAS SUPPRIMER -->
+                    <!-- CODE POUR IMAGE BOUTON -->
                     <Image Source="beer.png"
                            Grid.Column="0"
                            Grid.Row="0"
-                           Margin="5, 5"/>
+                           Margin="5, 5">
+                        <Image.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="BiereTapped"/>
+                        </Image.GestureRecognizers>
+                    </Image>
+                    <!-- CODE POUR IMAGE BOUTON -->
 
                     <Image Source="beer.png"
                            Grid.Column="1"
