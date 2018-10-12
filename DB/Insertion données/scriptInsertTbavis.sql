@@ -1,0 +1,1 @@
+ALTER TABLE tbavis auto_increment = 1;
