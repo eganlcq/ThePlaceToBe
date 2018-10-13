@@ -1,1 +1,1 @@
-ALTER TABLE tbavis auto_increment = 1;
+ALTER TABLE TbAvis auto_increment = 1;
