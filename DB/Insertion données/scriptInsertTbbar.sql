@@ -1,6 +1,6 @@
-ALTER TABLE tbbar auto_increment = 1;
+ALTER TABLE TbBar auto_increment = 1;
 
-INSERT INTO tbbar(nombar, latitude, longitude) VALUES
+INSERT INTO TbBar(nombar, latitude, longitude) VALUES
 ('Barger','50.669325', '4.614669'),
 ('Beer Bar','50.669300', '4.613746'),
 ('Brasse-Temps','50.668547', '4.616514'),
