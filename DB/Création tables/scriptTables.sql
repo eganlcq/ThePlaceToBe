@@ -25,6 +25,7 @@ create table TbUser(
 iduser int not null auto_increment,
 nom varchar(32) not null,
 prenom varchar(32) not null,
+pseudo varchar(32) not null,
 datenaiss date not null,
 email varchar(64) not null,
 mdp varchar(64) not null,
