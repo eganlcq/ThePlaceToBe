@@ -1,5 +1,5 @@
-ALTER TABLE tbuser auto_increment = 1;
+ALTER TABLE TbUser auto_increment = 1;
 
-INSERT INTO tbuser(nom, prenom, datenaiss, email, mdp, photo, nbrecherche, nbajout, datelastco) VALUES
+INSERT INTO TbUser(nom, prenom, datenaiss, email, mdp, photo, nbrecherche, nbajout, datelastco) VALUES
 
 ('Admin', 'istrateur', '1997-08-26', 'placetobe.ephec@hotmail.com', 'jej111jej222', default, default, default, default);
