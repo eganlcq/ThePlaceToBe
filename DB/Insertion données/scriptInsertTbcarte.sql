@@ -1,4 +1,4 @@
-INSERT INTO tbcarte VALUES
+INSERT INTO TbCarte VALUES
 
 ('26', '1'),
 ('32', '1'),
