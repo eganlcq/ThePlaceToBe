@@ -8,7 +8,7 @@ namespace test {
 			string server = "51.38.239.219";
 			string database = "theplacetobe";
 			string uid = "admin";
-			string password = "jej111jej222";
+			string password = "***********";
 			string connectionString = "SERVER=" + server + ";PORT=3306;DATABASE=" + database + ";UID=" + uid + ";PASSWORD=" + password + ";";
 			MySqlConnection mycon = new MySqlConnection(connectionString);
 			MySqlCommand cmd = mycon.CreateCommand();
