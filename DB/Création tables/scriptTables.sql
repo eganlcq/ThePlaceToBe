@@ -46,7 +46,7 @@ foreign key (idsucces) references TbSucces(idsucces)
 create table TbBiere(
 idbiere int(4) not null auto_increment,
 nombiere varchar(32) not null,
-alcoolemie varchar(4) not null,
+alcoolemie float(3,1) not null,
 typebiere varchar(16) not null,
 image varchar(128) not null,
 primary key (idbiere)
