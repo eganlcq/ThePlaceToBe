@@ -1,6 +1,6 @@
-ALTER TABLE tbbiere auto_increment = 1;
+ALTER TABLE TbBiere auto_increment = 1;
 
-INSERT INTO tbbiere(nombiere, alcoolemie, typebiere, image) VALUES
+INSERT INTO TbBiere(nombiere, alcoolemie, typebiere, image) VALUES
 
 ('Ambrasse-Temps', '5.5', 'Ambrée', 'beers\\AmbrasseTemps.PNG'),
 ('Blanche de Bruges', '4.8', 'Blanche', 'beers\\BlancheDeBruges.PNG'),
