@@ -6,7 +6,9 @@
         <ResourceDictionary>
             <Color x:Key="backgroundColor">#3367b0</Color>
             <Color x:Key="textColor">#FFF200</Color>
-            
+            <Color x:Key="textColorBlack">#000000</Color>
+            <Color x:Key="textColorGrey">#808080</Color>
+
             <Style TargetType="NavigationPage"
                    ApplyToDerivedTypes="True">
                 <Setter Property="BackgroundColor"
@@ -18,6 +20,29 @@
                 <Setter Property="BackgroundColor"
                         Value="{StaticResource backgroundColor}"/>
             </Style>
+
+            <Style TargetType="Entry"
+                  ApplyToDerivedTypes="True">
+                <Setter Property="PlaceholderColor"
+                        Value="{StaticResource textColorGrey}"/>
+            </Style>
+
+
+            <Style TargetType="Label"
+                   ApplyToDerivedTypes="True">
+                <Setter Property="FontFamily"
+                        Value="HelveticaNeue-Thin.ttf#HelveticaNeue-Thin"/>
+                <Setter Property="FontAttributes"
+                        Value="Bold"/>
+            </Style>
+
+            <Style TargetType="Button"
+                   ApplyToDerivedTypes="true">
+                <Setter Property="FontFamily"
+                        Value="HelveticaNeue-Thin.ttf#HelveticaNeue-Thin"/>
+            </Style>
+
+
         </ResourceDictionary>
     </Application.Resources>
 </Application>
