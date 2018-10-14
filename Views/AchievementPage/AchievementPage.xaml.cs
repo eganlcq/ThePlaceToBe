@@ -14,7 +14,27 @@ namespace Lelab1.View
 	{
 		public Page1 ()
 		{
-			InitializeComponent ();
+			InitializeComponent();
 		}
+
+        public void displayData()
+        {
+
+            DataBox.Children.RemoveAt(0);
+            var data = new View.DonnéesView();
+            DataBox.Children.Add(data);
+            DataButton.BackgroundColor =Color.FromHex("#4D97FF");
+            AchievementButton.BackgroundColor = Color.FromHex("#3367b0");
+
+        }
+
+        public void displayAchievement()
+        {
+            DataBox.Children.RemoveAt(0);
+            var ach = new View.AchievementView();
+            DataBox.Children.Add(ach);
+            AchievementButton.BackgroundColor = Color.FromHex("#4D97FF");
+            DataButton.BackgroundColor = Color.FromHex("#3367b0");
+        }
 	}
 }

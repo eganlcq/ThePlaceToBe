@@ -1,7 +1,9 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="A MODIFIER EN FONCTION DU NOM DU PROJET">
+             xmlns:views="clr-namespace:Lelab1.View" 
+             x:Class="Lelab1.View.Page1">
+    <!--A MODIFIER namespace-->
     <ContentPage.Content>
         <StackLayout 
             Spacing="10"  
@@ -34,7 +36,7 @@
                         HorizontalOptions="Center"/>
                     </Frame>
                     <Button 
-                       BackgroundColor="#0f252E"
+                       BackgroundColor="#3367b0"
                         CornerRadius="8"
                             Text="Modifier"
                        WidthRequest="120"
@@ -60,7 +62,7 @@
                     
                     <Label 
                         Text="Pseudo" 
-                        TextColor="Yellow" 
+                        TextColor="White" 
                         FontSize="30" 
                         VerticalOptions="Center" 
                         HorizontalOptions="Center"
@@ -96,298 +98,60 @@
             </StackLayout>
             <!--DONNEES-->
             <!--<Frame BackgroundColor="#0f252E">-->
-                <StackLayout Spacing="0">
+                <StackLayout Spacing="0" VerticalOptions="EndAndExpand" BackgroundColor="Silver" Margin="-10,0,0,0" HeightRequest="460">
                     <!--Bouton achievement et Donnees-->
-                    <StackLayout Orientation="Horizontal" Spacing="-1">
+                    <StackLayout Orientation="Horizontal" Spacing="0" Margin="0,10,0,0" HorizontalOptions="CenterAndExpand">
                         <Button 
+                            x:Name="AchievementButton"
+                            Margin="-46,0,0,0"
                             WidthRequest="140"
-                            BackgroundColor="Silver" 
+                            BackgroundColor="#3367b0" 
                             Text="Achievement" 
-                            BorderColor="Black" 
-                            TextColor="Black"
-                            BorderWidth="2"
-                            CornerRadius="7"/>
+                            BorderColor="#3367b0" 
+                            TextColor="White"
+                            BorderWidth="1"
+                            CornerRadius="7"
+                            Clicked="displayAchievement"/>
                         <Button 
+                            x:Name="DataButton"
                             WidthRequest="190"
-                            BackgroundColor="Silver" 
+                            BackgroundColor="#4D97FF" 
                             Text="Données personelles" 
-                            BorderColor="Black"
-                            TextColor="Black"
-                            BorderWidth="2"
-                            CornerRadius="7">
+                            BorderColor="#3367b0"
+                            TextColor="White"
+                            BorderWidth="1"
+                            CornerRadius="7"
+                            Clicked="displayData"
+                            HorizontalOptions="End">
 
                         </Button>
                     </StackLayout>
                     <!--achievement-->
                     <Frame 
-                        BackgroundColor="Silver" 
-                        Margin="-73,0,0,0"  
-                        HeightRequest="300" 
-                        WidthRequest="285"
-                        HorizontalOptions="Center"> <!-- ?-->
-                        
-                        <ScrollView>
-                            <StackLayout>
-                                <StackLayout Orientation="Horizontal">
-                                    <Frame 
-                                        Margin="10,10,10,10" 
-                                        Padding="13" 
-                                        BackgroundColor="Gray" 
-                                        VerticalOptions="Start" 
-                                        CornerRadius="100" 
-                                        HeightRequest="47"
-                                        BorderColor="Black"
-                                        HasShadow="False">
-                                        <Label 
-                                            Text="IMG ACH" 
-                                            TextColor="Black" 
-                                            FontSize="11" 
-                                            VerticalOptions="Center">
-                                        </Label>
-                                    </Frame>
-                                    <Frame 
-                                        Margin="10,10,10,10" 
-                                        Padding="13" 
-                                        BackgroundColor="Gray" 
-                                        VerticalOptions="Start" 
-                                        CornerRadius="100" 
-                                        HeightRequest="47"
-                                        BorderColor="Black"
-                                        HasShadow="False">
-                                        <Label 
-                                            Text="IMG ACH" 
-                                            TextColor="Black" 
-                                            FontSize="11" 
-                                            VerticalOptions="Center">
-                                        </Label>
-                                    </Frame>
-                                    <Frame 
-                                        Margin="10,10,10,10" 
-                                        Padding="13" 
-                                        BackgroundColor="Gray" 
-                                        VerticalOptions="Start" 
-                                        CornerRadius="100" 
-                                        HeightRequest="47"
-                                        BorderColor="Black"
-                                        HasShadow="False">
-                                        <Label 
-                                            Text="IMG ACH"
-                                            TextColor="Black" 
-                                            FontSize="11" 
-                                            VerticalOptions="Center">
-                                        </Label>
-                                    </Frame>
-                                </StackLayout>
-                                <StackLayout Orientation="Horizontal">
-                                    <Frame 
-                                        Margin="10,10,10,10" 
-                                        Padding="13" 
-                                        BackgroundColor="Gray" 
-                                        VerticalOptions="Start" 
-                                        CornerRadius="100" 
-                                        HeightRequest="47"
-                                        BorderColor="Black"
-                                        HasShadow="False">
-                                        <Label 
-                                            Text="IMG ACH" 
-                                            TextColor="Black" 
-                                            FontSize="11" 
-                                            VerticalOptions="Center">
-                                        </Label>
-                                    </Frame>
-                                    <Frame 
-                                        Margin="10,10,10,10" 
-                                        Padding="13" 
-                                        BackgroundColor="Gray" 
-                                        VerticalOptions="Start" 
-                                        CornerRadius="100" 
-                                        HeightRequest="47"
-                                        BorderColor="Black"
-                                        HasShadow="False">
-                                        <Label 
-                                            Text="IMG ACH" 
-                                            TextColor="Black" 
-                                            FontSize="11" 
-                                            VerticalOptions="Center">
-                                        </Label>
-                                    </Frame>
-                                    <Frame 
-                                        Margin="10,10,10,10" 
-                                        Padding="13" 
-                                        BackgroundColor="Gray" 
-                                        VerticalOptions="Start" 
-                                        CornerRadius="100" 
-                                        HeightRequest="47"
-                                        BorderColor="Black"
-                                        HasShadow="False">
-                                        <Label 
-                                            Text="IMG ACH"
-                                            TextColor="Black" 
-                                            FontSize="11" 
-                                            VerticalOptions="Center">
-                                        </Label>
-                                    </Frame>
-                                </StackLayout>
-                                <StackLayout Orientation="Horizontal">
-                                    <Frame 
-                                        Margin="10,10,10,10" 
-                                        Padding="13" 
-                                        BackgroundColor="Gray" 
-                                        VerticalOptions="Start" 
-                                        CornerRadius="100" 
-                                        HeightRequest="47"
-                                        BorderColor="Black"
-                                        HasShadow="False">
-                                        <Label 
-                                            Text="IMG ACH" 
-                                            TextColor="Black" 
-                                            FontSize="11" 
-                                            VerticalOptions="Center">
-                                        </Label>
-                                    </Frame>
-                                    <Frame 
-                                        Margin="10,10,10,10" 
-                                        Padding="13" 
-                                        BackgroundColor="Gray" 
-                                        VerticalOptions="Start" 
-                                        CornerRadius="100" 
-                                        HeightRequest="47"
-                                        BorderColor="Black"
-                                        HasShadow="False">
-                                        <Label 
-                                            Text="IMG ACH" 
-                                            TextColor="Black" 
-                                            FontSize="11" 
-                                            VerticalOptions="Center">
-                                        </Label>
-                                    </Frame>
-                                    <Frame 
-                                        Margin="10,10,10,10" 
-                                        Padding="13" 
-                                        BackgroundColor="Gray" 
-                                        VerticalOptions="Start" 
-                                        CornerRadius="100" 
-                                        HeightRequest="47"
-                                        BorderColor="Black"
-                                        HasShadow="False">
-                                        <Label 
-                                            Text="IMG ACH" 
-                                            TextColor="Black" 
-                                            FontSize="11" 
-                                            VerticalOptions="Center">
-                                        </Label>
-                                    </Frame>
-                                </StackLayout>
-                                <StackLayout Orientation="Horizontal">
-                                    <Frame 
-                                        Margin="10,10,10,10" 
-                                        Padding="13" 
-                                        BackgroundColor="Gray" 
-                                        VerticalOptions="Start" 
-                                        CornerRadius="100" 
-                                        HeightRequest="47"
-                                        BorderColor="Black"
-                                        HasShadow="False">
-                                        <Label 
-                                            Text="IMG ACH" 
-                                            TextColor="Black" 
-                                            FontSize="11" 
-                                            VerticalOptions="Center">
-                                        </Label>
-                                    </Frame>
-                                    <Frame 
-                                        Margin="10,10,10,10" 
-                                        Padding="13" 
-                                        BackgroundColor="Gray" 
-                                        VerticalOptions="Start" 
-                                        CornerRadius="100" 
-                                        HeightRequest="47"
-                                        BorderColor="Black"
-                                        HasShadow="False">
-                                        <Label 
-                                            Text="IMG ACH" 
-                                            TextColor="Black" 
-                                            FontSize="11" 
-                                            VerticalOptions="Center">
-                                        </Label>
-                                    </Frame>
-                                    <Frame 
-                                        Margin="10,10,10,10" 
-                                        Padding="13" 
-                                        BackgroundColor="Gray" 
-                                        VerticalOptions="Start" 
-                                        CornerRadius="100" 
-                                        HeightRequest="47"
-                                        BorderColor="Black"
-                                        HasShadow="False">
-                                        <Label 
-                                            Text="IMG ACH" 
-                                            TextColor="Black" 
-                                            FontSize="11" 
-                                            VerticalOptions="Center">
-                                        </Label>
-                                    </Frame>
-                                </StackLayout>
-                                <StackLayout Orientation="Horizontal">
-                                    <Frame 
-                                        Margin="10,10,10,10" 
-                                        Padding="13" 
-                                        BackgroundColor="Gray" 
-                                        VerticalOptions="Start" 
-                                        CornerRadius="100" 
-                                        HeightRequest="47"
-                                        BorderColor="Black"
-                                        HasShadow="False">
-                                        <Label 
-                                            Text="IMG ACH" 
-                                            TextColor="Black" 
-                                            FontSize="11" 
-                                            VerticalOptions="Center">
-                                        </Label>
-                                    </Frame>
-                                    <Frame 
-                                        Margin="10,10,10,10" 
-                                        Padding="13" 
-                                        BackgroundColor="Gray" 
-                                        VerticalOptions="Start" 
-                                        CornerRadius="100" 
-                                        HeightRequest="47"
-                                        BorderColor="Black"
-                                        HasShadow="False">
-                                        <Label 
-                                            Text="IMG ACH" 
-                                            TextColor="Black" 
-                                            FontSize="11" 
-                                            VerticalOptions="Center">
-                                        </Label>
-                                    </Frame>
-                                    <Frame 
-                                        Margin="10,10,10,10" 
-                                        Padding="13" 
-                                        BackgroundColor="Gray" 
-                                        VerticalOptions="Start" 
-                                        CornerRadius="100" 
-                                        HeightRequest="47"
-                                        BorderColor="Black"
-                                        HasShadow="False">
-                                        <Label 
-                                            Text="IMG ACH" 
-                                            TextColor="Black" 
-                                            FontSize="11" 
-                                            VerticalOptions="Center">
-                                        </Label>
-                                    </Frame>
-                                </StackLayout>
-                            </StackLayout>
-                        </ScrollView>
+                        BackgroundColor="#c6c6c6"
+                        BorderColor="#3367b0"
+                        Margin="18,0,0,0"   
+                        VerticalOptions="StartAndExpand"
+                        HorizontalOptions="StartAndExpand"
+                        WidthRequest="340"> <!-- ?-->
+                        <StackLayout  x:Name="DataBox">
+                            <views:DonnéesView/>
+                        </StackLayout>
                     </Frame>
-                </StackLayout>
+                <Button
+                        Text="RETOUR"
+                    HorizontalOptions="Start"
+                    TextColor="White"
+                    BackgroundColor="#3367b0"
+                    BorderColor="#3367b0"
+                    BorderWidth="2"
+                    BorderRadius="10"
+                    FontSize="12"
+                     HeightRequest="35"
+                    Margin="16,10,0,10"/>
+            </StackLayout>
             <!--</Frame>-->
-            <Button 
-                HorizontalOptions="Start"
-                Text="Retour"
-                WidthRequest="100"
-                />
+            
         </StackLayout>
         
     </ContentPage.Content>
