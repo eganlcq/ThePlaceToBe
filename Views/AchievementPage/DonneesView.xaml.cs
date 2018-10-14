@@ -10,9 +10,9 @@ using Xamarin.Forms.Xaml;
 namespace ThePlaceToBe.Views.AchievementPage
 {
 	[XamlCompilation(XamlCompilationOptions.Compile)]
-	public partial class AchievementView : ContentView
+	public partial class DonneesView : ContentView
 	{
-		public AchievementView ()
+		public DonneesView ()
 		{
 			InitializeComponent ();
 		}

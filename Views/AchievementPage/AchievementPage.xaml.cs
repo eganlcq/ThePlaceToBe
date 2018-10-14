@@ -7,34 +7,37 @@ using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
-namespace Lelab1.View
+namespace ThePlaceToBe.Views.AchievementPage
 {
 	[XamlCompilation(XamlCompilationOptions.Compile)]
-	public partial class Page1 : ContentPage
+	public partial class AchievementPage : ContentPage
 	{
-		public Page1 ()
-		{
+		public AchievementPage() {
 			InitializeComponent();
+			NavigationPage.SetHasNavigationBar(this, false);
 		}
 
-        public void displayData()
-        {
+		public void displayData() {
 
-            DataBox.Children.RemoveAt(0);
-            var data = new View.DonnéesView();
-            DataBox.Children.Add(data);
-            DataButton.BackgroundColor =Color.FromHex("#4D97FF");
-            AchievementButton.BackgroundColor = Color.FromHex("#3367b0");
+			DataBox.Children.RemoveAt(0);
+			var data = new DonneesView();
+			DataBox.Children.Add(data);
+			DataButton.BackgroundColor = Color.FromHex("#4D97FF");
+			AchievementButton.BackgroundColor = Color.FromHex("#3367b0");
 
-        }
+		}
 
-        public void displayAchievement()
-        {
-            DataBox.Children.RemoveAt(0);
-            var ach = new View.AchievementView();
-            DataBox.Children.Add(ach);
-            AchievementButton.BackgroundColor = Color.FromHex("#4D97FF");
-            DataButton.BackgroundColor = Color.FromHex("#3367b0");
-        }
+		public void displayAchievement() {
+			DataBox.Children.RemoveAt(0);
+			var ach = new AchievementView();
+			DataBox.Children.Add(ach);
+			AchievementButton.BackgroundColor = Color.FromHex("#4D97FF");
+			DataButton.BackgroundColor = Color.FromHex("#3367b0");
+		}
+
+		// RETOUR PAGE PRECEDENTE
+		private void BtnRetourClicked(object sender, EventArgs e) {
+			this.Navigation.PopAsync();
+		}
 	}
 }

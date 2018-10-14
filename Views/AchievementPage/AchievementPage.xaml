@@ -1,9 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:views="clr-namespace:Lelab1.View" 
-             x:Class="Lelab1.View.Page1">
-    <!--A MODIFIER namespace-->
+             x:Class="ThePlaceToBe.Views.AchievementPage.AchievementPage">
     <ContentPage.Content>
         <StackLayout 
             Spacing="10"  
@@ -11,9 +9,9 @@
             <!-- AVATAR-->
             <StackLayout 
                 VerticalOptions="Start" 
-                Orientation="Horizontal"
-                >
-                <RelativeLayout> <!--Avatar + bouton-->
+                Orientation="Horizontal">
+                <RelativeLayout>
+                    <!--Avatar + bouton-->
                     <Frame 
                     Margin="10" 
                     BackgroundColor="White" 
@@ -26,7 +24,7 @@
                              Property=Height,
                              Factor=0,
                              Constant=0}"
-                    CornerRadius="100" 
+                    CornerRadius="100"  
                     HeightRequest="85"
                     WidthRequest="85">
                         <Label 
@@ -55,11 +53,12 @@
                     Property=Y,
                     Factor=1,
                     Constant=125}"/>
-                
-                
+
+
                 </RelativeLayout>
+
                 <RelativeLayout>
-                    
+
                     <Label 
                         Text="Pseudo" 
                         TextColor="White" 
@@ -70,38 +69,40 @@
                         x:Name="pseudo"
                         Margin="0,20,0,0"
                          RelativeLayout.XConstraint="{ConstraintExpression 
-                             Type=RelativeToParent,
-                             Property=Width,
-                             Factor=0,
-                             Constant=15}"
+                                                     Type=RelativeToParent,
+                                                     Property=Width,
+                                                     Factor=0,
+                                                     Constant=15}"
                         RelativeLayout.YConstraint="{ConstraintExpression 
-                             Type=RelativeToParent,
-                             Property=Height,
-                             Factor=0,
-                             Constant=37}"/>
+                                                         Type=RelativeToParent,
+                                                         Property=Height,
+                                                         Factor=0,
+                                                         Constant=37}"/>
+
                     <Button BackgroundColor="Green"
                         WidthRequest="20"
                         HeightRequest="20"
                         CornerRadius="100"
                         RelativeLayout.XConstraint="{ConstraintExpression 
-                    Type=RelativeToView,
-                    ElementName=pseudo,
-                    Property=X,Factor=1,
-                    Constant=100}"
+                                                Type=RelativeToView,
+                                                ElementName=pseudo,
+                                                Property=X,Factor=1,
+                                                Constant=100}"
                         RelativeLayout.YConstraint="{ConstraintExpression 
-                    Type=RelativeToView,
-                    ElementName=pseudo,
-                    Property=Y,
-                    Factor=1,
-                    Constant=30}"/>
+                                                Type=RelativeToView,
+                                                ElementName=pseudo,
+                                                Property=Y,
+                                                Factor=1,
+                                                Constant=30}"/>
                 </RelativeLayout>
             </StackLayout>
             <!--DONNEES-->
             <!--<Frame BackgroundColor="#0f252E">-->
-                <StackLayout Spacing="0" VerticalOptions="EndAndExpand" BackgroundColor="Silver" Margin="-10,0,0,0" HeightRequest="460">
-                    <!--Bouton achievement et Donnees-->
-                    <StackLayout Orientation="Horizontal" Spacing="0" Margin="0,10,0,0" HorizontalOptions="CenterAndExpand">
-                        <Button 
+            <StackLayout Spacing="0" VerticalOptions="EndAndExpand" BackgroundColor="Silver" Margin="-10,0,0,0" HeightRequest="460">
+                <!--Bouton achievement et Donnees-->
+
+                <StackLayout Orientation="Horizontal" Spacing="0" Margin="0,10,0,0" HorizontalOptions="CenterAndExpand">
+                    <Button 
                             x:Name="AchievementButton"
                             Margin="-46,0,0,0"
                             WidthRequest="140"
@@ -112,7 +113,7 @@
                             BorderWidth="1"
                             CornerRadius="7"
                             Clicked="displayAchievement"/>
-                        <Button 
+                    <Button 
                             x:Name="DataButton"
                             WidthRequest="190"
                             BackgroundColor="#4D97FF" 
@@ -124,22 +125,22 @@
                             Clicked="displayData"
                             HorizontalOptions="End">
 
-                        </Button>
-                    </StackLayout>
-                    <!--achievement-->
-                    <Frame 
+                    </Button>
+                </StackLayout>
+                <!--achievement-->
+                <Frame 
                         BackgroundColor="#c6c6c6"
                         BorderColor="#3367b0"
                         Margin="18,0,0,0"   
                         VerticalOptions="StartAndExpand"
                         HorizontalOptions="StartAndExpand"
-                        WidthRequest="340"> <!-- ?-->
-                        <StackLayout  x:Name="DataBox">
-                            <views:DonnéesView/>
-                        </StackLayout>
-                    </Frame>
-                <Button
-                        Text="RETOUR"
+                        WidthRequest="340">
+                    <!-- ?-->
+                    <StackLayout  x:Name="DataBox">
+                        <!--<views:DonneesView/>-->
+                    </StackLayout>
+                </Frame>
+                <Button Text="RETOUR"
                     HorizontalOptions="Start"
                     TextColor="White"
                     BackgroundColor="#3367b0"
@@ -148,11 +149,11 @@
                     BorderRadius="10"
                     FontSize="12"
                      HeightRequest="35"
-                    Margin="16,10,0,10"/>
+                    Margin="16,10,0,10"
+                    Clicked="BtnRetourClicked"/>
             </StackLayout>
             <!--</Frame>-->
-            
+
         </StackLayout>
-        
     </ContentPage.Content>
 </ContentPage>

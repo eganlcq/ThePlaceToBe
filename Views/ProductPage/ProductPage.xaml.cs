@@ -16,6 +16,7 @@ namespace ThePlaceToBe.Views.ProductPage
 		public ProductPage ()
 		{
 			InitializeComponent ();
+			NavigationPage.SetHasNavigationBar(this, false);
 			double lat = 50.669204;
 			double lon = 4.613774;
 			Position pos = new Position(lat, lon);
@@ -28,6 +29,21 @@ namespace ThePlaceToBe.Views.ProductPage
 			map.MoveToRegion(MapSpan.FromCenterAndRadius(pos, Distance.FromKilometers(0.1)));
 			map.MapType = MapType.Street;
 			map.Pins.Add(pin);
+		}
+
+		// CLIC SUR PROFIL
+		private void ProfilProductPageTapped(object sender, EventArgs e) {
+			this.Navigation.PushAsync(new AchievementPage.AchievementPage());
+		}
+
+		// BOUTON RETOUR EN ARRIERE
+		private void BtnRetourClicked(object sender, EventArgs e) {
+			this.Navigation.PopAsync();
+		}
+
+		// BOUTON 
+		private void BtnAjoutFavorisClicked(object sender, EventArgs e) {
+			// AJOUT PAGE FAVORIS
 		}
 	}
 }

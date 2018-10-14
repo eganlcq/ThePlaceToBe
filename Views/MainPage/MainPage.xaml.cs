@@ -12,18 +12,29 @@ namespace ThePlaceToBe.Views.MainPage
 	[XamlCompilation(XamlCompilationOptions.Compile)]
 	public partial class MainPage : ContentPage
 	{
-		public MainPage ()
-		{
-			InitializeComponent ();
+		public MainPage() {
+			InitializeComponent();
+			NavigationPage.SetHasNavigationBar(this, false);
 
 			flavourPicker.Items.Add("Pouet");
 			flavourPicker.Items.Add("Pouet");
 			flavourPicker.Items.Add("Pouet");
+
 		}
-		
-		private void BiereTapped(object sender, EventArgs e)
-		{
-		    this.Navigation.PushAsync(new ProductPage());
+
+		// CLIC SUR PROFIL
+		private void ProfilMainPageTapped(object sender, EventArgs e) {
+			this.Navigation.PushAsync(new AchievementPage.AchievementPage());
+		}
+
+		// CLIC SUR UN BIERE
+		private void BiereTapped(object sender, EventArgs e) {
+			this.Navigation.PushAsync(new ProductPage.ProductPage());
+		}
+
+		// CLIC BOUTON SCAN
+		private void ScanClicked(object sender, EventArgs e) {
+			this.Navigation.PushAsync(new ScanPage.ScanPage());
 		}
 	}
 }

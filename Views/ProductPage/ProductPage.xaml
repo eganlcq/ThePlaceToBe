@@ -33,7 +33,11 @@
                            Padding="1"
                            HorizontalOptions="Center">
                         <Image Source="imgAccount.png"
-                               HorizontalOptions="Center"/>
+                               HorizontalOptions="Center">
+                            <Image.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="ProfilProductPageTapped"/>
+                            </Image.GestureRecognizers>
+                        </Image>
                     </Frame>
 
 
@@ -68,6 +72,7 @@
                              Margin="0, 5, 0, 5"/>
 
                     <Frame BorderColor="White"
+                           
                            HorizontalOptions="Center"
                            Padding="5"
                            CornerRadius="20"
@@ -129,24 +134,28 @@
                     <StackLayout Orientation="Horizontal"
                                  Spacing="0"
                                  VerticalOptions="CenterAndExpand">
+
                         <Button Text="RETOUR"
-                                BackgroundColor="White"
-                                TextColor="{StaticResource backgroundColor}"
-                                BorderColor="{StaticResource backgroundColor}"
-                                BorderWidth="2"
-                                BorderRadius="10"
-                                HeightRequest="35"
-                                FontSize="12"/>
+                                FontSize="14"
+                                FontAttributes="Bold"
+                                TextColor="White"
+                                BorderRadius="15" BorderColor="{StaticResource backgroundColor}" BorderWidth="2"
+                                BackgroundColor="{StaticResource backgroundColor}"
+                                HeightRequest="40"
+                                Margin="20,0,0,0"
+                                Clicked="BtnRetourClicked"/>
 
                         <Button Text="FAVORIS"
-                                BackgroundColor="White"
-                                TextColor="{StaticResource backgroundColor}"
-                                BorderColor="{StaticResource backgroundColor}"
-                                BorderWidth="2"
-                                BorderRadius="10"
-                                HeightRequest="35"
-                                FontSize="12"
-                                HorizontalOptions="EndAndExpand"/>
+                                FontSize="14"
+                                FontAttributes="Bold"
+                                TextColor="White"
+                                BorderRadius="15" BorderColor="{StaticResource backgroundColor}" BorderWidth="2"
+                                BackgroundColor="{StaticResource backgroundColor}"
+                                HeightRequest="40"
+                                HorizontalOptions="EndAndExpand"
+                                Margin="0,0,20,0"
+                                Clicked="BtnAjoutFavorisClicked"/>
+
                     </StackLayout>
                 </StackLayout>
 
