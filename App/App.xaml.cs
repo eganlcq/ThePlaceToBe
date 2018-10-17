@@ -4,6 +4,7 @@ using Android.Content.PM;
 using Android.Support.V4.App;
 using Android.Support.V4.Content;
 using System;
+using ThePlaceToBe.Views;
 using ThePlaceToBe.Views.AchievementPage;
 using ThePlaceToBe.Views.ConnexionPage;
 using ThePlaceToBe.Views.InscriptionPage;

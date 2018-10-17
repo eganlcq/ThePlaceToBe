@@ -31,7 +31,7 @@
             <Style TargetType="Label"
                    ApplyToDerivedTypes="True">
                 <Setter Property="FontFamily"
-                        Value="HelveticaNeue-Thin.ttf#HelveticaNeue-Thin"/>
+                        Value="Helvetica Neu Bold.ttf#Helvetica Neu Bold"/>
                 <Setter Property="FontAttributes"
                         Value="Bold"/>
             </Style>
@@ -39,7 +39,7 @@
             <Style TargetType="Button"
                    ApplyToDerivedTypes="true">
                 <Setter Property="FontFamily"
-                        Value="HelveticaNeue-Thin.ttf#HelveticaNeue-Thin"/>
+                        Value="Helvetica Neu Bold.ttf#Helvetica Neu Bold"/>
             </Style>
 
 
