@@ -11,7 +11,7 @@ class Db
     public function __construct()
     {
         try {
-            $this->iPdo = new PDO('mysql:host=51.38.239.219;port=3306;dbname=theplacetobe', 'admin', 'jej111jej222');
+            $this->iPdo = new PDO('mysql:host=172.17.0.3;port=3306;dbname=theplacetobe', 'admin', 'jej111jej222');
             $this->iPdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         }
         catch (PDOException $e){
@@ -27,4 +27,6 @@ class Db
     public function getException(){
         return 'PDOException : '.($this->pdoException ? $this->pdoException->getMessage() : 'aucune !');
     }
+
 }
+

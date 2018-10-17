@@ -47,9 +47,9 @@
         </div>
         <div class="headFoot">
             <ul id="social">
-                <li><a href="https://www.facebook.com/The-place-to-be-520936104980844/?notif_id=1539260456516354&notif_t=page_admin"><img src="../image/facebook.png"></a></li>
-                <li><a href="https://twitter.com/ThePlaceToBe5"><img src="../image/twitter.png"></a></li>
-                <li><a href="https://www.instagram.com/theplacetobe6/"><img src="../image/insta.png"></a></li>
+                <li><a href="https://www.facebook.com/The-place-to-be-520936104980844/?notif_id=1539260456516354&notif_t=page_admin" target="_blank"><img src="../image/facebook.png"></a></li>
+                <li><a href="https://twitter.com/ThePlaceToBe5" target="_blank"><img src="../image/twitter.png"></a></li>
+                <li><a href="https://www.instagram.com/theplacetobe6/" target="_blank"><img src="../image/insta.png"></a></li>
             </ul>
         </div>
         <div id="legal">
