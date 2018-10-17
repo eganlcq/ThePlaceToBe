@@ -1,6 +1,6 @@
-ALTER TABLE tbsucces auto_increment = 1;
+ALTER TABLE TbSucces auto_increment = 1;
 
-INSERT INTO tbsucces(nom, descr) VALUES
+INSERT INTO TbSucces(nom, descr) VALUES
 
 ('Adventurer', 'Faire 1 recherche !'),
 ('Casual', 'Faire 5 recherches !'),

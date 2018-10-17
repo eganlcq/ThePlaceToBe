@@ -4,7 +4,7 @@ INSERT INTO TbBiere(nombiere, alcoolemie, typebiere, image) VALUES
 
 ('Ambrasse-Temps', '5.5', 'Ambrée', 'image\\beers\\AmbrasseTemps.PNG'),
 ('Blanche de Bruges', '4.8', 'Blanche', 'image\\beers\\BlancheDeBruges.PNG'),
-('Blanche de Hoegaarden', '4.9', 'Blanche', 'image\\beers\\BlancheDeHoegaarden.PNG'),
+('Hoegaarden Blanche', '4.9', 'Blanche', 'image\\beers\\BlancheDeHoegaarden.PNG'),
 ('Blanche de Namur à la Pomme', '3.2', 'Fruitée', 'image\\beers\\BlancheDeNamurALaPomme.PNG'),
 ('Blanche Neuve', '4.5', 'Blanche', 'image\\beers\\BlancheNeuve.PNG'),
 ('Bourgogne Des Flandres', '5.0', 'Spéciale Brune', 'image\\beers\\BourgogneDesFlandres.PNG'),
