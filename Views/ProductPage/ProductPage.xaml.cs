@@ -23,8 +23,8 @@ namespace ThePlaceToBe.Views.ProductPage
 			Pin pin = new Pin {
 				Type = PinType.Generic,
 				Position = pos,
-				Label = "Enorme étron fragile",
-				Address = "Tu te calme"
+				Label = "Beer Bar",
+				Address = "Grand-rue 5"
 			};
 			map.MoveToRegion(MapSpan.FromCenterAndRadius(pos, Distance.FromKilometers(0.1)));
 			map.MapType = MapType.Street;
