@@ -1,0 +1,77 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ThePlaceToBe.Views.ConnexionPage.ConnexionPage">
+    <ContentPage.Content>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="120"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <StackLayout 
+                VerticalOptions="FillAndExpand"
+                Grid.Column="0" Grid.Row="0">
+                <Image Source="logo.png"
+                       VerticalOptions="CenterAndExpand"
+                       WidthRequest="130"/>
+            </StackLayout>
+
+            <StackLayout Grid.Column="0" Grid.Row="1"
+                         BackgroundColor="#c6c6c6"
+                         Padding="6">
+                <StackLayout VerticalOptions="FillAndExpand">
+
+                    <StackLayout VerticalOptions="Start" HorizontalOptions="FillAndExpand">
+                        <Label Text="Connectez-vous" TextColor="Black" FontAttributes="Bold" FontSize="20"
+                               HorizontalOptions="Center"
+                               Margin="0,10,0,5"/>
+                    </StackLayout>
+
+                    <StackLayout >
+                        <Entry Placeholder="Pseudo/email" PlaceholderColor="Gray"
+                               TextColor="Black"/>
+                        <Entry Placeholder="Mot de passe" PlaceholderColor="Gray"
+                               TextColor="Black"
+                               IsPassword="True"/>
+                    </StackLayout>
+                </StackLayout>
+
+                <StackLayout HorizontalOptions="Center">
+
+                    <!-- BOUTON CONNEXION -->
+                    <Button Text="Connexion"
+                            FontSize="20"
+                            FontAttributes="Bold"
+                            TextColor="White"
+                            BorderRadius="15" BorderColor="{StaticResource backgroundColor}" BorderWidth="2"
+                            BackgroundColor="{StaticResource backgroundColor}"
+                            HorizontalOptions="Center"
+                            WidthRequest="180" HeightRequest="65"
+                            Margin="0,0,0,60"
+                             Clicked="ConnexionClicked"/>
+
+                    <!-- LABEL PAS ENCORE INSCRIT -->
+                    <Label Text="Pas encore inscrit(e)?" TextColor="black" FontSize="17" FontAttributes="Bold"
+                           HorizontalOptions="Center"/>
+
+                    <!-- BOUTON INSCRIPTION -->
+                    <Button Text="Inscription"
+                            FontSize="20" FontAttributes="Bold"
+                            TextColor="White"
+                            BorderRadius="15" BorderColor="{StaticResource backgroundColor}" BorderWidth="2"
+                            BackgroundColor="{StaticResource backgroundColor}"
+                            HorizontalOptions="Center"
+                            WidthRequest="180" HeightRequest="65"
+                            Margin="0,0,0,60"
+                            Clicked="InscriptionClicked"/>
+                </StackLayout>
+
+            </StackLayout>
+
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>
