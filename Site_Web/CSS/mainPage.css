@@ -1,7 +1,7 @@
 body, html {
     margin: 0;
     padding: 0;
-    height: 100%;
+    width: 100%;
     font-family: "Brush Script MT";
     color: #ecf0f1;
     background: url("../image/fond.jpg") no-repeat;
