@@ -1,3 +1,14 @@
+/*
+GENERAL : 12 - 38
+MENU    : 44 - 97
+MAIN    : 103 - 148
+entre MAIN et FOOTER : 153 - 155
+FOOTER  : 161 - 199
+A PROPOS : 205 - 232
+PROFIL & LOGIN : 238 - 324
+*/
+
+/* ----- GENERAL ----- */
 html{
     background: url("../image/fond.jpg") no-repeat center fixed; 
     background-size: cover;
@@ -8,14 +19,7 @@ body, html {
     font-family: "Brush Script MT";
     color: #ecf0f1;
     overflow: auto;
-    
 }
-
-#imgCentreDroit{
-    width: 100%;
-    height: auto;
-}
-
 h1, ul, p{
     margin: 0;
     padding: 0;
@@ -28,6 +32,23 @@ a {
 legend {
     font-size: 2em;
 }
+footer a:hover, #gestion a:hover {
+    color: #D5B927;
+    transition: all 1s ease;
+}
+/* ----- GENERAL ----- */
+
+
+
+/* ----- MENU ----- */
+menu {
+    margin: 0;
+    padding: 0;
+    position: fixed;
+    z-index: 5;
+    width: 100%;
+}
+
 #bandeau {
     background: black;
     width: 100%;
@@ -38,6 +59,7 @@ legend {
     text-align: center;
     font-size: 3em;
 }
+
 #compte {
     background-color: black;
     opacity: 0.7;
@@ -49,11 +71,52 @@ legend {
     content: url("../image/icon7.png");
     padding: 10px;
 }
+
+#compte img, #compte p {
+    display: inline-block;
+    margin: auto;
+}
+#compte p {
+    font-size: 2.7em;
+    cursor: pointer;
+}
+
+#gestion {
+    text-align: center;
+    display: none;
+    opacity: 0.7;
+    width: 7%;
+    float: right;
+    font-size: 1.7em;
+}
+#gestion ul {
+    list-style-type: none;
+}
+#gestion li {
+        margin: 10px;
+}
+/* ----- MENU ----- */
+
+
+
+/* ----- MAIN ----- */
 main{
     padding-top: 150px;
     text-align: center;
     display: flex;
 }
+
+#slogan {
+    text-align: center;
+    color: white;
+    margin: auto;
+    width: 60%;
+    font-size: 5em;
+}
+#second{
+    padding-left: 45%;
+}
+
 #app {
     width: 40%;
 }
@@ -77,32 +140,24 @@ main{
     background: none;
     transition: all 0.3s ease 0s;
 }
-#slogan {
-    text-align: center;
-    color: white;
-    margin: auto;
-    width: 60%;
-    font-size: 5em;
-}
-#slogan h1:first-child {
-    
-}
-#second{
-    padding-left: 45%;
-}
-menu {
-    margin: 0;
-    padding: 0;
-    position: fixed;
-    z-index: 5;
+
+#imgCentreDroit{
     width: 100%;
+    height: auto;
 }
-.headFoot {
-    width: 25%;
-    vertical-align: top;
-    text-align: center;
-    display: inline-block;
+/* ----- MAIN ----- */
+
+
+
+/* entre MAIN et FOOTER */
+.espacement{
+    height: 150px;
 }
+/* entre MAIN et FOOTER */
+
+
+
+/* ----- FOOTER ----- */
 footer {
     text-align: center;
     background: black;
@@ -113,29 +168,27 @@ footer {
     position: absolute;
     top: 1;
 }
-
-.espacement{
-    height: 150px;
+footer li {
+    list-style-type: none;
+    display: inline-block;
 }
 
 #societe li {
     display: block;
     font-size: 20px;
 }
-footer a:hover, #gestion a:hover {
-    color: #D5B927;
-    transition: all 1s ease;
-}
 #societe h1 {
     font-size: 2.3em;
 }
+
 .headFoot {
+    width: 25%;
     margin: 0 25px;
-}
-footer li {
-    list-style-type: none;
+    vertical-align: top;
+    text-align: center;
     display: inline-block;
 }
+
 #legal {
     letter-spacing: 2px;
     padding: 10px 0;
@@ -144,6 +197,11 @@ footer li {
     margin: 0 20px;
     font-size: 20px;
 }
+/* ----- FOOTER ----- */
+
+
+
+/* ----- A PROPOS ----- */
 #propos {
     font-size: 2em;
     margin: 0 5% 0 40%;
@@ -172,6 +230,11 @@ footer li {
     border-radius: 20px;
     width: 100%;
 }
+/* ----- A PROPOS ----- */
+
+
+
+/* ----- PROFIL & LOGIN ----- */
 #profil img {
     border-radius:100px;
 }
@@ -250,28 +313,7 @@ footer li {
 #avatar {
     border-radius: 100px ;
 }
-#compte img, #compte p {
-    display: inline-block;
-    margin: auto;
-}
-#compte p {
-    font-size: 2.7em;
-    cursor: pointer;
-}
-#gestion {
-    text-align: center;
-    display: none;
-    opacity: 0.7;
-    width: 7%;
-    float: right;
-    font-size: 1.7em;
-}
-#gestion ul {
-    list-style-type: none;
-}
-#gestion li {
-        margin: 10px;
-}
+
 #gestCompte {
     width: 50%;
     opacity: 0.8;
@@ -280,3 +322,4 @@ footer li {
     background-color: #202225;
     margin: auto;
 }
+/* ----- PROFIL & LOGIN ----- */
