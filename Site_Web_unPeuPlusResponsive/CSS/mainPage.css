@@ -1,0 +1,276 @@
+html{
+    background: url("../image/fond.jpg") no-repeat center fixed; 
+    background-size: cover;
+}
+body, html {
+    margin: 0;
+    padding: 0;
+    font-family: "Brush Script MT";
+    color: #ecf0f1;
+    overflow: auto;
+    
+}
+h1, ul, p{
+    margin: 0;
+    padding: 0;
+}
+a {
+    color: #ecf0f1;
+    text-decoration: none;
+    cursor: pointer;
+}
+legend {
+    font-size: 2em;
+}
+#bandeau {
+    background: black;
+    width: 100%;
+    height: 75px;
+    opacity: 0.7;
+}
+#bandeau h1 {
+    text-align: center;
+    font-size: 3em;
+}
+#compte {
+    background-color: black;
+    opacity: 0.7;
+    font-size: 11px;
+    text-align: right;
+    padding-right: 50px;
+}
+#compte h1:before {
+    content: url("../image/icon7.png");
+    padding: 10px;
+}
+main{
+    padding-top: 150px;
+    text-align: center;
+    display: flex;
+}
+#app {
+    width: 40%;
+}
+#app input {
+    border: none;
+    background: #620F00;
+    color: #ecf0f1;
+    font-size: 1.2em;
+    font-family: Algerian;
+    text-transform: uppercase;
+    padding: 20px;
+    margin-bottom: 80px;
+    width: 65%;
+    border-radius: 75px;
+    box-shadow: 1px 2px 121px 0px rgba(0,0,0,0.75);
+}
+#app input:hover {
+    color: black;
+    font-weight: 700;
+    letter-spacing: 3px;
+    background: none;
+    transition: all 0.3s ease 0s;
+}
+#slogan {
+    text-align: center;
+    color: white;
+    margin: auto;
+    width: 60%;
+    font-size: 5em;
+}
+#slogan h1:first-child {
+    
+}
+#second{
+    padding-left: 45%;
+}
+menu {
+    margin: 0;
+    padding: 0;
+    position: fixed;
+    z-index: 5;
+    width: 100%;
+}
+.headFoot {
+    width: 25%;
+    vertical-align: top;
+    text-align: center;
+    display: inline-block;
+}
+footer {
+    text-align: center;
+    background: black;
+    width: 100%;
+    opacity: 0.9;
+    margin-top: 5%;
+    padding: 20px 0;
+    position: absolute;
+    top: 1;
+}
+
+.espacement{
+    height: 150px;
+}
+
+#societe li {
+    display: block;
+    font-size: 20px;
+}
+footer a:hover, #gestion a:hover {
+    color: #D5B927;
+    transition: all 1s ease;
+}
+#societe h1 {
+    font-size: 2.3em;
+}
+.headFoot {
+    margin: 0 25px;
+}
+footer li {
+    list-style-type: none;
+    display: inline-block;
+}
+#legal {
+    letter-spacing: 2px;
+    padding: 10px 0;
+}
+#legal li {
+    margin: 0 20px;
+    font-size: 20px;
+}
+#propos {
+    font-size: 2em;
+    margin: 0 5% 0 40%;
+    border-radius: 50px;
+    padding: 15px;
+    width: 70%;
+    text-align: left;
+    opacity: 0.7;
+    background-color: black;
+    box-shadow: 10px 10px 194px 13px rgba(0,0,0,0.75);
+}
+#propos li {
+    display: inline-block;
+    margin: 0 40px;
+}
+#propos li:hover, #gestion li:hover {
+    color: #D5B927;
+    transition: all 1s ease;
+    cursor: pointer;
+}
+#propos h1 {
+    color: #cac6c3!important;
+    text-decoration: underline;
+}
+#propos video {
+    border-radius: 20px;
+    width: 100%;
+}
+#profil img {
+    border-radius:100px;
+}
+#profil section{
+    margin: 20px 60px;
+    display: inline-block;
+    text-align: center;
+    width: 20%;
+}
+#jordan {
+    font-size: 0.8em;
+}
+#login {
+    margin: auto;
+    position: fixed;
+    z-index: 20;
+    top: 35%;
+    right: 25%;
+    width: 50%;
+}
+#fond {
+    width: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    background-color: black;
+    z-index: 10;
+    opacity: 0.6;
+}
+#login div {
+    display: inline-block;
+    vertical-align: top;
+    text-align: center;
+    width: 40%;
+    margin: 0 40px;
+}
+#login input {
+    display: block;
+    width: 100%;
+    height: 40px;
+    font-size: 1em;
+    border-radius: 5px;
+    margin: 10px 0;
+    padding-left: 10px;
+}
+#login input[type=submit]:hover {
+    background: #620F00;
+    border: 2px solid #620F00;
+    color: white;
+}
+#login input[type=submit], #login input[type=button] {
+    width: 50%;
+    margin: auto;
+}
+.selected {
+    color: #D5B927;
+}
+#logo {
+    float: right;
+    width: 10%;
+    height: 10%;
+}
+#login input[type=button] {
+    margin-top: 30px;
+    background-color: #620F00;
+    border: none;
+    color:white;
+}
+#login input[type=button]:hover {
+    background-color: white;
+    color: #55000F;
+    opacity: 0.7;
+    transition: all 1s ease 0s;
+}
+#avatar {
+    border-radius: 100px ;
+}
+#compte img, #compte p {
+    display: inline-block;
+    margin: auto;
+}
+#compte p {
+    font-size: 2.7em;
+    cursor: pointer;
+}
+#gestion {
+    text-align: center;
+    display: none;
+    opacity: 0.7;
+    width: 7%;
+    float: right;
+    font-size: 1.7em;
+}
+#gestion ul {
+    list-style-type: none;
+}
+#gestion li {
+        margin: 10px;
+}
+#gestCompte {
+    width: 50%;
+    opacity: 0.8;
+    border-radius: 10px;
+    padding: 15px;
+    background-color: #202225;
+    margin: auto;
+}
