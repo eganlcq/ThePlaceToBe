@@ -29,7 +29,7 @@
             <h1 id="second">coule à flot</h1>
         </div>
         <div id="app">
-            <img src="../image/ThePlaceToBe.png">
+            <img id=imgCentreDroit src="../image/ThePlaceToBe.png">
             <input type="button" value="Download application">
         </div>
     </main>
