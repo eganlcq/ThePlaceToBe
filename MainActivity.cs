@@ -8,6 +8,7 @@ using Android.Widget;
 using Android.OS;
 using System.Threading.Tasks;
 using Android;
+using ThePlaceToBe.Data;
 
 namespace ThePlaceToBe.Droid
 {
@@ -22,7 +23,7 @@ namespace ThePlaceToBe.Droid
 			TryToGetPermissions();
             base.OnCreate(savedInstanceState);
             global::Xamarin.Forms.Forms.Init(this, savedInstanceState);
-			Xamarin.Forms.Forms.Init(this, savedInstanceState);
+			Xamarin.FormsMaps.Init(this, savedInstanceState);
             LoadApplication(new App());
         }
 

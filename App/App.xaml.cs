@@ -23,6 +23,7 @@ namespace ThePlaceToBe {
 			InitializeComponent();
 			NavigationPage.SetHasNavigationBar(this, false);
 			MainPage = new NavigationPage(new ConnexionPage());
+			//MainPage = new Test();
 		}
 
 		protected override void OnStart() {

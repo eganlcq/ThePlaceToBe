@@ -5,7 +5,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using ThePlaceToBe.Views.Database;
+using ThePlaceToBe.Data;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -23,7 +23,8 @@ namespace ThePlaceToBe.Views.MainPage
 			flavourPicker.Items.Add("Pouet");
 			flavourPicker.Items.Add("Pouet");
 			
-			List<Beer> listBiere = RestService.Request();
+			RestService.dic = new Dictionary<string, string>();
+			List<Beer> listBiere = RestService.Request(RestService.dic, "selectBeer").Result;
 			int nbBiere = listBiere.Count();
 			double nbRow = Math.Ceiling(nbBiere / 3.0);
 			double nbColumn = 3;
@@ -42,13 +43,11 @@ namespace ThePlaceToBe.Views.MainPage
 
 				for(int y = 0; y < nbColumn && count < nbBiere; y++, count ++) {
 					
+					Beer beer = listBiere[count];
 					string imgBiere = listBiere[count].Image;
 					Image img;
 					TapGestureRecognizer tap = new TapGestureRecognizer();
-					tap.Tapped += (s, e) => {
-
-						this.Navigation.PushAsync(new ProductPage.ProductPage());
-					};
+					
 
 					if (imgBiere != "" && imgBiere != null) {
 
@@ -57,8 +56,6 @@ namespace ThePlaceToBe.Views.MainPage
 							Source = imgBiere,
 							Margin = new Thickness(5, 5)
 						};
-						
-						img.GestureRecognizers.Add(tap);
 					}
 					else {
 
@@ -66,13 +63,22 @@ namespace ThePlaceToBe.Views.MainPage
 							Source = "oneBeer.png",
 							Margin = new Thickness(5, 5)
 						};
-
-						img.GestureRecognizers.Add(tap);
 					}
-					
+
+					tap.Tapped += (s, e) => BeerTapped(s, e, beer);
+					img.GestureRecognizers.Add(tap);
 					beerGrid.Children.Add(img, y, x);
 				}
 			}
+		}
+
+		private void BeerTapped(object s, EventArgs e, Beer beer) {
+
+			RestService.dic = new Dictionary<string, string> {
+
+				{"idBiere", beer.Idbiere.ToString() }
+			};
+			this.Navigation.PushAsync(new ProductPage.ProductPage());
 		}
 
 		// CLIC SUR PROFIL
