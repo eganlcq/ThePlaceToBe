@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+using ThePlaceToBe.Data;
 using Xamarin.Forms;
 using Xamarin.Forms.Maps;
 using Xamarin.Forms.Xaml;
@@ -29,6 +29,9 @@ namespace ThePlaceToBe.Views.ProductPage
 			map.MoveToRegion(MapSpan.FromCenterAndRadius(pos, Distance.FromKilometers(0.1)));
 			map.MapType = MapType.Street;
 			map.Pins.Add(pin);
+
+			List<Beer> listBiere = RestService.Request(RestService.dic, "selectOneBeer").Result;
+			lblName.Text = listBiere[0].Nombiere;
 		}
 
 		// CLIC SUR PROFIL
