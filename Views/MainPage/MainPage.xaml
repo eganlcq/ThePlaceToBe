@@ -31,11 +31,15 @@
                            Padding="1"
                            HorizontalOptions="Center">
 
-                        <Image Source="imgAccount.png"
+                        <!--Source="imgAccount.png"-->
+                        <Image 
+                               x:Name="imgAccount"
                                HorizontalOptions="Center">
+                            <!--
                             <Image.GestureRecognizers>
                                 <TapGestureRecognizer Tapped="ProfilMainPageTapped"/>
                             </Image.GestureRecognizers>
+                            -->
                         </Image>
                     </Frame>
 

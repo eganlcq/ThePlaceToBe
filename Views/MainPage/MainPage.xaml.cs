@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using ThePlaceToBe.Data;
+using ThePlaceToBe.Views.Data;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -79,6 +80,15 @@ namespace ThePlaceToBe.Views.MainPage
                     beerGrid.Children.Add(img, y, x);
                 }
             }
+
+            // PARTIE PROFIL
+            // CHARGER LE PROFIL AU CHARGEMENT
+            List<User> utilisateur = RestService.RequestProfil(RestService.dic, "selectProfil").Result;
+            TapGestureRecognizer tap2 = new TapGestureRecognizer();
+            tap2.Tapped += (s, e) => ProfilMainPageTapped(s, e, utilisateur[0]);
+            imgAccount.Source = "imgAccount.png";//utilisateur[0].Photo.Substring(12);
+            imgAccount.GestureRecognizers.Add(tap2);
+
         }
 
         private void BeerTapped(object s, EventArgs e, Beer beer)
@@ -92,15 +102,14 @@ namespace ThePlaceToBe.Views.MainPage
         }
 
         // CLIC SUR PROFIL
-        private void ProfilMainPageTapped(object sender, EventArgs e)
+        private void ProfilMainPageTapped(object sender, EventArgs e, User utilisateur)
         {
+            RestService.dic = new Dictionary<string, string>
+            {
+                //{"objUser", utilisateur}
+                {"objUser", utilisateur.Iduser.ToString()}
+            };
             this.Navigation.PushAsync(new AchievementPage.AchievementPage());
-        }
-
-        // CLIC SUR UN BIERE
-        private void BiereTapped(object sender, EventArgs e)
-        {
-            this.Navigation.PushAsync(new ProductPage.ProductPage());
         }
 
         // CLIC BOUTON SCAN
