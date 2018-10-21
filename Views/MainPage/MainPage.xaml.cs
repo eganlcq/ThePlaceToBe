@@ -86,7 +86,7 @@ namespace ThePlaceToBe.Views.MainPage
             List<User> utilisateur = RestService.RequestProfil(RestService.dic, "selectProfil").Result;
             TapGestureRecognizer tap2 = new TapGestureRecognizer();
             tap2.Tapped += (s, e) => ProfilMainPageTapped(s, e, utilisateur[0]);
-            imgAccount.Source = "imgAccount.png";//utilisateur[0].Photo.Substring(12);
+            imgAccount.Source = "theplacetobe.ovh/image/app/imgAccount.png"; //+ utilisateur[0].Photo.Substring(12);
             imgAccount.GestureRecognizers.Add(tap2);
 
         }

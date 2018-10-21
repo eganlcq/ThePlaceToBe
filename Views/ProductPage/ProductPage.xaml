@@ -81,40 +81,38 @@
                            CornerRadius="20"
                            BackgroundColor="#c6c6c6"
                            HasShadow="False">
-                        <Grid>
+                        <Grid Padding="25,0,25,0">
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="*"/>
                                 <RowDefinition Height="*"/>
                                 <RowDefinition Height="*"/>
                             </Grid.RowDefinitions>
                             <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="150"/>
-                                <ColumnDefinition Width="150"/>
+                                <ColumnDefinition Width="90"/>
+                                <ColumnDefinition Width="*"/>
                             </Grid.ColumnDefinitions>
 
                             <Label Text="Bière"
                                    Grid.Row="0"
                                    Grid.Column="0"
                                    TextColor="{StaticResource backgroundColor}"
-                                   HorizontalOptions="Center"/>
+                                   HorizontalOptions="Start"/>
 
-                            <Label Text="Beer Name"
-                                   x:Name="lblName"
+                            <Label x:Name="lblName"
                                    Grid.Row="0"
                                    Grid.Column="1"
                                    TextColor="{StaticResource backgroundColor}"
-                                   HorizontalOptions="Center"
+                                   HorizontalOptions="Start"
                                    />
 
                             <Label Text="% Alcool"
                                    Grid.Row="1"
                                    Grid.Column="0"
                                    TextColor="{StaticResource backgroundColor}"
-                                   HorizontalOptions="Center"
+                                   HorizontalOptions="Start"
                                    />
 
-                            <Label Text="%"
-                                   x:Name="lblAlcool"
+                            <Label x:Name="lblAlcool"
                                    Grid.Row="1"
                                    Grid.Column="1"
                                    TextColor="{StaticResource backgroundColor}"
@@ -124,9 +122,9 @@
                                    Grid.Row="2"
                                    Grid.Column="0"
                                    TextColor="{StaticResource backgroundColor}"
-                                   HorizontalOptions="Center"/>
+                                   HorizontalOptions="Start"/>
 
-                            <Label Text="Pouet"
+                            <Label 
                                    x:Name="lblSaveur"
                                    Grid.Row="2"
                                    Grid.Column="1"
@@ -167,30 +165,22 @@
 
                     </StackLayout>
                 </StackLayout>
-
-                <Image Source="bubble.png"
-                       HeightRequest="100"
-                       AbsoluteLayout.LayoutFlags="PositionProportional"
-                       AbsoluteLayout.LayoutBounds="0.05, 0.65"/>
-                <Image Source="oneBeer.png"
-                       x:Name="imgBeer"
-                       HeightRequest="70"
-                       AbsoluteLayout.LayoutFlags="PositionProportional"
-                       AbsoluteLayout.LayoutBounds="0.08, 0.63"/>
-                <!--
-                <Frame CornerRadius="50"
+                
+                <Frame CornerRadius="20"
+                       BackgroundColor="Transparent"
+                       BorderColor="Transparent"
                         HeightRequest="70"
                         WidthRequest="70"
                         Padding="1"
-                        HorizontalOptions="Center">
+                        HorizontalOptions="Center"
+                       AbsoluteLayout.LayoutFlags="PositionProportional"
+                       AbsoluteLayout.LayoutBounds="0.02, 0.01">
                     <Image Source="oneBeer.png"
                        x:Name="imgBeer"
                        HeightRequest="70"
-                       AbsoluteLayout.LayoutFlags="PositionProportional"
-                       AbsoluteLayout.LayoutBounds="0.05, 0.05"/>
+                       />
                 </Frame>
--->
-                
+
             </AbsoluteLayout>
         </Grid>
     </ContentPage.Content>
