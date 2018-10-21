@@ -1,7 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="ThePlaceToBe.AchievementPage">
+             xmlns:views="clr-namespace:ThePlaceToBe.Views.AchievementPage"
+             x:Class="ThePlaceToBe.Views.AchievementPage.AchievementPage">
     <ContentPage.Content>
         <StackLayout 
             Spacing="10"  
@@ -97,7 +98,6 @@
                 </RelativeLayout>
             </StackLayout>
             <!--DONNEES-->
-            <!--<Frame BackgroundColor="#0f252E">-->
             <StackLayout Spacing="0" VerticalOptions="EndAndExpand" BackgroundColor="Silver" Margin="-10,0,0,0" HeightRequest="460">
                 <!--Bouton achievement et Donnees-->
 
@@ -135,7 +135,6 @@
                         VerticalOptions="StartAndExpand"
                         HorizontalOptions="StartAndExpand"
                         WidthRequest="340">
-                    <!-- ?-->
                     <StackLayout  x:Name="DataBox">
 
                     </StackLayout>
@@ -152,7 +151,6 @@
                     Margin="16,10,0,10"
                     Clicked="BtnRetourClicked"/>
             </StackLayout>
-            <!--</Frame>-->
 
         </StackLayout>
     </ContentPage.Content>

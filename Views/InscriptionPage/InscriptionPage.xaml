@@ -15,7 +15,7 @@
             <StackLayout 
                 VerticalOptions="FillAndExpand"
                 Grid.Column="0" Grid.Row="0">
-                <Image Source="logo.png"
+                <Image x:Name="imgLogo"
                        VerticalOptions="CenterAndExpand"
                        WidthRequest="130"/>
             </StackLayout>
