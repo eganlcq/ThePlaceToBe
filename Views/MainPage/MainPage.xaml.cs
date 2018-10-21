@@ -26,7 +26,7 @@ namespace ThePlaceToBe.Views.MainPage
             flavourPicker.Items.Add("Pouet");
 
             RestService.dic = new Dictionary<string, string>();
-            List<Beer> listBiere = RestService.Request(RestService.dic, "selectBeer").Result;
+            List<Beer> listBiere = RestService.RequestT<Beer>(RestService.dic, "selectBeer").Result;
             int nbBiere = listBiere.Count();
             double nbRow = Math.Ceiling(nbBiere / 3.0);
             double nbColumn = 3;
@@ -58,7 +58,7 @@ namespace ThePlaceToBe.Views.MainPage
                     if (imgBiere != "" && imgBiere != null)
                     {
 
-                        imgBiere = imgBiere.Substring(12);
+                        
                         img = new Image
                         {
                             Source = imgBiere,
@@ -83,7 +83,7 @@ namespace ThePlaceToBe.Views.MainPage
 
             // PARTIE PROFIL
             // CHARGER LE PROFIL AU CHARGEMENT
-            List<User> utilisateur = RestService.RequestProfil(RestService.dic, "selectProfil").Result;
+            List<User> utilisateur = RestService.RequestT<User>(RestService.dic, "selectProfil").Result;
             TapGestureRecognizer tap2 = new TapGestureRecognizer();
             tap2.Tapped += (s, e) => ProfilMainPageTapped(s, e, utilisateur[0]);
             imgAccount.Source = "theplacetobe.ovh/image/app/imgAccount.png"; //+ utilisateur[0].Photo.Substring(12);

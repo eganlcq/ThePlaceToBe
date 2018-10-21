@@ -31,7 +31,7 @@ namespace ThePlaceToBe.Views.ProductPage
             map.MapType = MapType.Street;
             map.Pins.Add(pin);
 
-            List<Beer> listBiere = RestService.Request(RestService.dic, "selectOneBeer").Result;
+            List<Beer> listBiere = RestService.RequestT<Beer>(RestService.dic, "selectOneBeer").Result;
             RemplitChampsBiere(listBiere);
 
             
@@ -62,7 +62,7 @@ namespace ThePlaceToBe.Views.ProductPage
             lblName.Text = listBiere[0].Nombiere;
             lblAlcool.Text = listBiere[0].Alcoolemie.ToString() + '%';
             lblSaveur.Text = listBiere[0].Typebiere;
-            imgBeer.Source = listBiere[0].Image.Substring(12);
+            imgBeer.Source = listBiere[0].Image;
         }
     }
 }
