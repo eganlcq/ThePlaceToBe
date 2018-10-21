@@ -1,4 +1,4 @@
-CREATE DEFINER=`root`@`localhost` PROCEDURE `beerbysearch`(beername varchar(32))
+CREATE DEFINER=`admin`@`%` PROCEDURE `beerbysearch`(beername varchar(32))
 BEGIN
 SELECT *
 FROM TbBiere

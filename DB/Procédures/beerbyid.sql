@@ -1,4 +1,4 @@
-CREATE DEFINER=`root`@`localhost` PROCEDURE `beerbyid`(beerid int(4))
+CREATE DEFINER=`admin`@`%` PROCEDURE `beerbyid`(beerid int(4))
 BEGIN
 SELECT * 
 FROM TbBiere

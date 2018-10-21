@@ -1,4 +1,4 @@
-CREATE DEFINER=`root`@`localhost` PROCEDURE `beerdesc`()
+CREATE DEFINER=`admin`@`%` PROCEDURE `beerdesc`()
 BEGIN
 SELECT *
 FROM TbBiere
