@@ -10,7 +10,7 @@
 
     $db = Database::connect();
 
-    $sql =  'select iduser, nom, prenom, datenaiss, photo from TbUser where iduser = ?;';
+    $sql =  'CALL userbyid(?);';
     $statement = $db->prepare($sql);
     $statement->execute([$idUser]);
     $item = $statement->fetchAll(PDO::FETCH_ASSOC);
