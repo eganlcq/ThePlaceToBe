@@ -8,7 +8,7 @@ require_once 'database.php';
     }
 
     $db = Database::connect();
-    $sql =  'call beerbyid(?);';
+    $sql =  'call barlocalisation(?);';
     $statement = $db->prepare($sql);
     $statement->execute([$idBiere]);
     $item = $statement->fetchAll(PDO::FETCH_ASSOC);

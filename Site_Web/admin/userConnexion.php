@@ -1,16 +1,18 @@
 <?php
 require_once 'database.php';
 
-    $idBiere              = "";
+    $pseudo             = "";
+    $pswd               = "";
 
     if(!empty($_POST)) {
-        $idBiere          = $_POST['idBiere'];
+        $pseudo         = $_POST['pseudo'];
+        $pswd           = $_POST['pswd'];
     }
 
     $db = Database::connect();
-    $sql =  'call beerbyid(?);';
+    $sql =  'call userconnexion(?, ?);';
     $statement = $db->prepare($sql);
-    $statement->execute([$idBiere]);
+    $statement->execute([$pseudo, $pswd]);
     $item = $statement->fetchAll(PDO::FETCH_ASSOC);
     Database::disconnect();
     echo json_encode($item);
