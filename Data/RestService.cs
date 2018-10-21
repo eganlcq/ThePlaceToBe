@@ -14,14 +14,14 @@ namespace ThePlaceToBe.Data {
 		public RestService() {
 		}
 
-		public static async Task<List<Beer>> Request(Dictionary<string, string> dic, string page) {
+		public static async Task<List<T>> Request<T>(Dictionary<string, string> dic, string page) {
 
 			if(client == null) client = new HttpClient();
 			Dictionary<string, string> values = dic;
 			FormUrlEncodedContent content = new FormUrlEncodedContent(values);
-			HttpResponseMessage response = await client.PostAsync("http://51.38.239.219/admin/" + page + ".php", content).ConfigureAwait(false);
+			HttpResponseMessage response = await client.PostAsync("http://theplacetobe.ovh/admin/" + page + ".php", content).ConfigureAwait(false);
 			string responseString = await response.Content.ReadAsStringAsync();
-			return JsonConvert.DeserializeObject<List<Beer>>(responseString);
+			return JsonConvert.DeserializeObject<List<T>>(responseString);
 		}
 	}
 }

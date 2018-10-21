@@ -6,15 +6,15 @@
         <StackLayout Spacing="20">
             <StackLayout Orientation="Horizontal" >
                 <Label  Text="Nom" TextColor="Black" FontSize="18" WidthRequest="110" />
-                <Label  Text="Tartenpion" TextColor="Black" FontSize="16" />
+                <Label  x:Name="nom" TextColor="Black" FontSize="16" />
             </StackLayout>
             <StackLayout Orientation="Horizontal">
                 <Label  Text="Prenom" TextColor="Black" FontSize="18" WidthRequest="110"/>
-                <Label  Text="Toto" TextColor="Black" FontSize="16"/>
+                <Label  x:Name="prenom" TextColor="Black" FontSize="16"/>
             </StackLayout>
             <StackLayout Orientation="Horizontal" >
                 <Label  Text="E-Mail" TextColor="Black" FontSize="18" WidthRequest="110"/>
-                <Label  Text="t.tartenpion@tata.com" TextColor="Black" FontSize="16"/>
+                <Label  x:Name="email" TextColor="Black" FontSize="16"/>
             </StackLayout>
         </StackLayout>
     </ContentView.Content>

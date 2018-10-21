@@ -8,7 +8,7 @@ require_once 'database.php';
     }
 
     $db = Database::connect();
-    $sql =  'select * from TbBiere where idBiere = ?;';
+    $sql =  'call beerbyid(?);';
     $statement = $db->prepare($sql);
     $statement->execute([$idBiere]);
     $item = $statement->fetchAll(PDO::FETCH_ASSOC);

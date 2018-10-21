@@ -1,23 +1,28 @@
-﻿using System;
+﻿using Java.Sql;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace ThePlaceToBe.Views.Data
+namespace ThePlaceToBe.Data
 {
-    public class User
+    class User
     {
-        public int Iduser { get; set; }
-        public string Nom { get; set; }
-        public string Prenom { get; set; }
+		public static User currentUser;
 
-        //public string Datenaiss { get; set; }
-        public DateTime DatenaissDateTime { get; set; }
+		public int Iduser { get; set; }
+		public string Nom { get; set; }
+		public string Prenom { get; set; }
+		public string Pseudo { get; set; }
+		//public Date Datenaiss { get; set; }
+		public string Email { get; set; }
+		//public string Mdp { get; set; }
+		public string Photo { get; set; }
+		//public int Nbrecherche { get; set; }
+		//public int Nbajout { get; set; }
+		//public DateTime Datelastco { get; set; }
 
-        public string Photo { get; set; }
+		public User() {
 
-
-        public User(){
-            
-        }
-    }
+		}
+	}
 }

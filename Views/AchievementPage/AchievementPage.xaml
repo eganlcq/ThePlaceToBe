@@ -98,7 +98,6 @@
                 </RelativeLayout>
             </StackLayout>
             <!--DONNEES-->
-            <!--<Frame BackgroundColor="#0f252E">-->
             <StackLayout Spacing="0" VerticalOptions="EndAndExpand" BackgroundColor="Silver" Margin="-10,0,0,0" HeightRequest="460">
                 <!--Bouton achievement et Donnees-->
 
@@ -136,9 +135,8 @@
                         VerticalOptions="StartAndExpand"
                         HorizontalOptions="StartAndExpand"
                         WidthRequest="340">
-                    <!-- ?-->
                     <StackLayout  x:Name="DataBox">
-                        <views:DonneesView/>
+                      
                     </StackLayout>
                 </Frame>
                 <Button Text="RETOUR"
@@ -153,7 +151,6 @@
                     Margin="16,10,0,10"
                     Clicked="BtnRetourClicked"/>
             </StackLayout>
-            <!--</Frame>-->
 
         </StackLayout>
     </ContentPage.Content>
