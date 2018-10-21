@@ -2,13 +2,16 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace ThePlaceToBe
+namespace ThePlaceToBe.Data
 {
-   
     class Succes
     {
-        public int idsucces;
-        public string nom;
-        public string descr;
+		public int Idsucces { get; set; }
+		public string Nom { get; set; }
+		public string Descr { get; set; }
+
+		public Succes() {
+
+		}
     }
 }
