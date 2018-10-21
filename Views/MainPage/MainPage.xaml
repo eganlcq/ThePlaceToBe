@@ -38,6 +38,7 @@
                             <Image.GestureRecognizers>
                                 <TapGestureRecognizer Tapped="ProfilMainPageTapped"/>
                             </Image.GestureRecognizers>
+                            -->
                         </Image>
                     </Frame>
 

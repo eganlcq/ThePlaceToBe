@@ -10,6 +10,7 @@ idbar int(4) not null auto_increment,
 nombar varchar(32) not null,
 latitude double(10,7) not null,
 longitude double(10,7) not null,
+adresse varchar(128) not null,
 primary key (idbar)
 );
 

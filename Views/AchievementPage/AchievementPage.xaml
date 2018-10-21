@@ -136,7 +136,7 @@
                         HorizontalOptions="StartAndExpand"
                         WidthRequest="340">
                     <StackLayout  x:Name="DataBox">
-
+                      
                     </StackLayout>
                 </Frame>
                 <Button Text="RETOUR"

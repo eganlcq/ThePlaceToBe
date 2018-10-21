@@ -37,10 +37,12 @@
                         <Image x:Name="imgAccount"
                                HorizontalOptions="Center"
                                HeightRequest="65">
+
                             <Image.GestureRecognizers>
                                 <TapGestureRecognizer Tapped="ProfilMainPageTapped"/>
                             </Image.GestureRecognizers>
                         </Image>
+                        
                     </Frame>
 
 
@@ -164,7 +166,6 @@
 
                     </StackLayout>
                 </StackLayout>
-
                 <Frame CornerRadius="20"
                        BackgroundColor="Transparent"
                        BorderColor="Transparent"

@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using ThePlaceToBe.Data;
+using ThePlaceToBe.Views.Data;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -99,4 +100,5 @@ namespace ThePlaceToBe.Views.MainPage
 			this.Navigation.PushAsync(new ScanPage.ScanPage());
 		}
 	}
+
 }
