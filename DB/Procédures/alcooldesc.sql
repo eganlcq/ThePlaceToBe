@@ -1,4 +1,4 @@
-CREATE DEFINER=`root`@`localhost` PROCEDURE `alcooldesc`()
+CREATE DEFINER=`admin`@`%` PROCEDURE `alcooldesc`()
 BEGIN
 SELECT *
 FROM TbBiere

@@ -1,4 +1,4 @@
-CREATE DEFINER=`root`@`localhost` PROCEDURE `achievementbyuser`(userid int)
+CREATE DEFINER=`admin`@`%` PROCEDURE `achievementbyuser`(userid int)
 BEGIN
 SELECT tbs.idsucces, tbs.nom, tbs.descr
 FROM TbSucces AS tbs

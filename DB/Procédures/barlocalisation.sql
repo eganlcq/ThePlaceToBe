@@ -1,4 +1,4 @@
-CREATE DEFINER=`root`@`localhost` PROCEDURE `barlocalisation`(beerid varchar(32))
+CREATE DEFINER=`admin`@`%` PROCEDURE `barlocalisation`(beerid varchar(32))
 BEGIN
 SELECT tbba.idbar, tbba.nombar, tbba.latitude, tbba.longitude
 FROM TbBar AS tbba
