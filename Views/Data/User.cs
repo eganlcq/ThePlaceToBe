@@ -10,7 +10,7 @@ namespace ThePlaceToBe.Views.Data
         public string Nom { get; set; }
         public string Prenom { get; set; }
 
-        public string Datenaiss { get; set; }
+        //public string Datenaiss { get; set; }
         public DateTime DatenaissDateTime { get; set; }
 
         public string Photo { get; set; }
