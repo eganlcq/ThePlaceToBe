@@ -31,4 +31,3 @@
     Database::disconnect();
 
     echo json_encode($item);
-?>

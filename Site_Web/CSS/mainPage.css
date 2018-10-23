@@ -1,12 +1,21 @@
+html{
+    background: url("../image/fond.jpg") no-repeat center fixed; 
+    background-size: cover;
+}
 body, html {
     margin: 0;
     padding: 0;
-    width: 100%;
     font-family: "Brush Script MT";
     color: #ecf0f1;
-    background: url("../image/fond.jpg") no-repeat;
     overflow: auto;
+    
 }
+
+#imgCentreDroit{
+    width: 100%;
+    height: auto;
+}
+
 h1, ul, p{
     margin: 0;
     padding: 0;
@@ -75,12 +84,7 @@ main{
     width: 60%;
     font-size: 5em;
 }
-#slogan h1:first-child {
-    padding-right: 10%;
-    display: inline;
-}
 #second{
-    display: inline;
     padding-left: 45%;
 }
 menu {
@@ -99,12 +103,13 @@ menu {
 footer {
     text-align: center;
     background: black;
-    position: absolute;
-    top: 100%;
     width: 100%;
     opacity: 0.9;
-    padding: 15px 0;
+    margin-top: 5%;
+    padding: 20px 0;
+    position: absolute;
 }
+
 #societe li {
     display: block;
     font-size: 20px;
@@ -205,6 +210,7 @@ footer li {
     margin: 10px 0;
     padding-left: 10px;
 }
+
 #login input[type=submit]:hover {
     background: #620F00;
     border: 2px solid #620F00;
@@ -213,6 +219,10 @@ footer li {
 #login input[type=submit], #login input[type=button] {
     width: 50%;
     margin: auto;
+}
+#login input[type=date]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    display: none;
 }
 .selected {
     color: #D5B927;
@@ -266,4 +276,9 @@ footer li {
     padding: 15px;
     background-color: #202225;
     margin: auto;
+}
+#erreur {
+    font-size: 1.5em;
+    font-family: "Comic Sans MS",sans-serif;
+    color: red;
 }
