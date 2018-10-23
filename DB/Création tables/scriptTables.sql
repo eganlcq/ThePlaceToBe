@@ -49,8 +49,8 @@ foreign key (idsucces) references TbSucces(idsucces)
 create table TbBiere(
 idbiere int(4) not null auto_increment,
 nombiere varchar(32) not null,
-alcoolemie float(3,1) not null,
-typebiere varchar(16) not null,
+alcoolemie float(3,1) DEFAULT null,
+typebiere varchar(16) DEFAULT null,
 image varchar(128) not null DEFAULT 'oneBeer.png',
 primary key (idbiere)
 );
