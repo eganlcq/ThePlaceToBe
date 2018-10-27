@@ -15,7 +15,7 @@ namespace ThePlaceToBe.Views.AchievementPage
 		public DonneesView (string idUser)
 		{
 			InitializeComponent();
-			RestService.dic = RestService.dic = new Dictionary<string, string> {
+			RestService.dic = new Dictionary<string, string> {
 
 				{"idUser", idUser}
 			};

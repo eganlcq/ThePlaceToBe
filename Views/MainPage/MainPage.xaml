@@ -38,11 +38,10 @@
                             <Image.GestureRecognizers>
                                 <TapGestureRecognizer Tapped="ProfilMainPageTapped"/>
                             </Image.GestureRecognizers>
-                            -->
                         </Image>
                     </Frame>
 
-                    <Label Text="Octofen"
+                    <Label x:Name="lblPseudo"
                        FontAttributes="Bold"
                        FontSize="14"
                        TextColor="{StaticResource textColor}"

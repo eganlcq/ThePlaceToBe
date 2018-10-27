@@ -1,12 +1,12 @@
 ﻿using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using ThePlaceToBe.Data;
-using ThePlaceToBe.Views.Data;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -16,66 +16,16 @@ namespace ThePlaceToBe.Views.MainPage
 	public partial class MainPage : ContentPage
 	{
 		public MainPage() {
-
+			
 			InitializeComponent();
 			NavigationPage.SetHasNavigationBar(this, false);
-
-			imgLogo.Source = Constants.appImg + "logo.png";
-			imgAccount.Source = Constants.appImg + User.currentUser.Photo;
-			imgLoupe.Source = Constants.appImg + "loupe.png";
-
-			flavourPicker.Items.Add("Pouet");
-			flavourPicker.Items.Add("Pouet");
-			flavourPicker.Items.Add("Pouet");
-			
-			RestService.dic = new Dictionary<string, string>();
-			List<Beer> listBiere = RestService.Request<Beer>(RestService.dic, "selectBeer").Result;
-			int nbBiere = listBiere.Count();
-			double nbRow = Math.Ceiling(nbBiere / 3.0);
-			double nbColumn = 3;
-			int count = 0;
-			
-			for (int i = 0; i < nbRow; i++) {
-
-				RowDefinition row = new RowDefinition {
-					Height = 100
-				};
-				beerGrid.RowDefinitions.Add(row);
-			}
-
-
-			for(int x = 0; x < nbRow; x++) {
-
-				for(int y = 0; y < nbColumn && count < nbBiere; y++, count ++) {
-					
-					Beer beer = listBiere[count];
-					string imgBiere = listBiere[count].Image;
-					Image img;
-					TapGestureRecognizer tap = new TapGestureRecognizer();
-					
-
-					if (imgBiere != "" && imgBiere != null) {
-						
-						img = new Image {
-							Source = Constants.beersImg + imgBiere,
-							Margin = new Thickness(5, 5)
-						};
-					}
-					else {
-
-						img = new Image {
-							Source = Constants.beersImg + "oneBeer.png",
-							Margin = new Thickness(5, 5)
-						};
-					}
-
-					tap.Tapped += (s, e) => BeerTapped(s, e, beer);
-					img.GestureRecognizers.Add(tap);
-					beerGrid.Children.Add(img, y, x);
-				}
-			}
+			// Initialise des éléments présents dans le xaml
+			Init();
+			// Initialise la grille qui contiendra la liste des bières se trouvant dans la base de données
+			InitBeerGrid();
 		}
 
+		// Cette méthode se lance lorque l'on clique sur une image de bière
 		private void BeerTapped(object s, EventArgs e, Beer beer) {
 
 			RestService.dic = new Dictionary<string, string> {
@@ -85,20 +35,95 @@ namespace ThePlaceToBe.Views.MainPage
 			this.Navigation.PushAsync(new ProductPage.ProductPage());
 		}
 
-		// CLIC SUR PROFIL
+		// Cette méthode se lance lorque l'on clique sur l'image du user
 		private void ProfilMainPageTapped(object sender, EventArgs e) {
-			this.Navigation.PushAsync(new AchievementPage.AchievementPage());
+			this.Navigation.PushAsync(new AchievementPage.AchievementPage(User.currentUser.Iduser.ToString()));
 		}
 
-		// CLIC SUR UN BIERE
-		private void BiereTapped(object sender, EventArgs e) {
-			this.Navigation.PushAsync(new ProductPage.ProductPage());
-		}
-
-		// CLIC BOUTON SCAN
+		// Cette méthode se lance lorque l'on clique sur le bouton de scan
 		private void ScanClicked(object sender, EventArgs e) {
 			this.Navigation.PushAsync(new ScanPage.ScanPage());
 		}
-	}
 
+		// Initialise des éléments présents dans le xaml
+		private void Init() {
+
+			imgLogo.Source = Constants.appImg + "logo.png";
+			imgAccount.Source = Constants.userImg + User.currentUser.Photo;
+			imgLoupe.Source = Constants.appImg + "loupe.png";
+			lblPseudo.Text = User.currentUser.Pseudo;
+			flavourPicker.Items.Add("Pouet");
+			flavourPicker.Items.Add("Pouet");
+			flavourPicker.Items.Add("Pouet");
+		}
+
+		// Initialise la grille qui contiendra la liste des bières se trouvant dans la base de données
+		private void InitBeerGrid() {
+
+			RestService.dic = new Dictionary<string, string>();
+			List<Beer> listBiere = RestService.Request<Beer>(RestService.dic, "selectBeer").Result;
+			int nbBiere = listBiere.Count();
+			double nbRow = Math.Ceiling(nbBiere / 3.0);
+			double nbColumn = 3;
+
+			// Ajoute un nombre de ligne proportionnel au nombre de bières récupérées de la base de données
+			AddRows(nbRow);
+			// Ajoute les images de bière dans les cases de la grille
+			AddBeers(nbRow, nbColumn, nbBiere, listBiere);
+		}
+
+		// Ajoute un nombre de ligne proportionnel au nombre de bières récupérées de la base de données
+		private void AddRows(double nbRow) {
+
+			for (int i = 0; i < nbRow; i++) {
+
+				RowDefinition row = new RowDefinition {
+					Height = 100
+				};
+				beerGrid.RowDefinitions.Add(row);
+			}
+		}
+
+		// Ajoute les images de bière dans les cases de la grille
+		private void AddBeers(double nbRow, double nbColumn, int nbBiere, List<Beer> listBiere) {
+
+			int count = 0;
+			for (int x = 0; x < nbRow; x++) {
+
+				for (int y = 0; y < nbColumn && count < nbBiere; y++, count++) {
+
+					Beer beer = listBiere[count];
+					string imgBiere = listBiere[count].Image;
+					TapGestureRecognizer tap = new TapGestureRecognizer();
+					// Vérifie si l'image existe, si elle n'existe pas, affiche l'image par défaut
+					Image img = ChooseImage(imgBiere);
+					tap.Tapped += (s, e) => BeerTapped(s, e, beer);
+					img.GestureRecognizers.Add(tap);
+					beerGrid.Children.Add(img, y, x);
+				}
+			}
+		}
+
+		// Vérifie si l'image existe, si elle n'existe pas, affiche l'image par défaut
+		private Image ChooseImage(string imgBiere) {
+			
+			Image img;
+
+			if (imgBiere != "" && imgBiere != null) {
+
+				img = new Image {
+					Source = Constants.beersImg + imgBiere,
+					Margin = new Thickness(5, 5)
+				};
+			}
+			else {
+
+				img = new Image {
+					Source = Constants.beersImg + "oneBeer.png",
+					Margin = new Thickness(5, 5)
+				};
+			}
+			return img;
+		}
+	}
 }

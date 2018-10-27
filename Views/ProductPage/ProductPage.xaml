@@ -37,16 +37,14 @@
                         <Image x:Name="imgAccount"
                                HorizontalOptions="Center"
                                HeightRequest="65">
-
                             <Image.GestureRecognizers>
                                 <TapGestureRecognizer Tapped="ProfilMainPageTapped"/>
                             </Image.GestureRecognizers>
                         </Image>
-                        
                     </Frame>
 
 
-                    <Label Text="Octofen"
+                    <Label x:Name="lblPseudo"
                        FontAttributes="Bold"
                        FontSize="14"
                        TextColor="{StaticResource textColor}"
@@ -162,10 +160,11 @@
                                 HeightRequest="40"
                                 HorizontalOptions="EndAndExpand"
                                 Margin="0,0,20,0"
-                                Clicked="BtnAjoutFavorisClicked"/>
+                                x:Name="btnFavoris"/>
 
                     </StackLayout>
                 </StackLayout>
+
                 <Frame CornerRadius="20"
                        BackgroundColor="Transparent"
                        BorderColor="Transparent"

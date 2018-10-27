@@ -16,56 +16,36 @@ namespace ThePlaceToBe.Views.ProductPage
 		public ProductPage ()
 		{
 			InitializeComponent ();
-
-			imgLogo.Source = Constants.appImg + "logo.png";
-			imgAccount.Source = Constants.appImg + "imgAccount.png";
-
-			List<Beer> listBiere = RestService.Request<Beer>(RestService.dic, "selectOneBeer").Result;
-			RemplitChampsBiere(listBiere[0]);
-
-			List<Bar> listBar = RestService.Request<Bar>(RestService.dic, "selectBar").Result;
-
 			NavigationPage.SetHasNavigationBar(this, false);
-			double lat = 50.669204;
-			double lon = 4.613774;
-			Position pos = new Position(lat, lon);
-			List<Pin> listPin = new List<Pin>();
-
-			foreach(Bar bar in listBar) {
-
-				Pin pin = new Pin {
-					Type = PinType.Generic,
-					Position = new Position(bar.Latitude, bar.Longitude),
-					Label = bar.Nombar,
-					Address = ""
-				};
-				listPin.Add(pin);
-			}
-			
-			map.MoveToRegion(MapSpan.FromCenterAndRadius(pos, Distance.FromKilometers(0.15)));
-			map.MapType = MapType.Street;
-			foreach(Pin pin in listPin) {
-
-				map.Pins.Add(pin);
-			}
+			// Initialise des éléments présents dans le xaml
+			Init();
+			// Initialise des éléments pour faire fonctionner la map
+			InitMap();
 		}
 
-		// CLIC SUR PROFIL
+		// Méthode lancée lorsque l'on clique sur l'image du user
 		private void ProfilMainPageTapped(object sender, EventArgs e) {
-			this.Navigation.PushAsync(new AchievementPage.AchievementPage());
+			this.Navigation.PushAsync(new AchievementPage.AchievementPage(User.currentUser.Iduser.ToString()));
 		}
 
-		// BOUTON RETOUR EN ARRIERE
+		// Méthode lancée lorsque le bouton de retour est utilisé
 		private void BtnRetourClicked(object sender, EventArgs e) {
 			this.Navigation.PopAsync();
 		}
 
-		// BOUTON 
-		private void BtnAjoutFavorisClicked(object sender, EventArgs e) {
-			// AJOUT PAGE FAVORIS
+		// Méthode lancée lorsque le bouton d'ajout de favoris est utilisé
+		private void BtnAjoutFavorisClicked(object sender, EventArgs e, Beer beer) {
+			RestService.dic = new Dictionary<string, string> {
+
+				{ "idBeer", beer.Idbiere.ToString()},
+				{ "idUser", User.currentUser.Iduser.ToString()}
+			};
+			List<Beer> listBiere = RestService.Request<Beer>(RestService.dic, "insertFavoris").Result;
 		}
 
-		private void RemplitChampsBiere(Beer beer) {
+		// Affiche les info de la bière courante sur la page
+		private void DisplayBeerInfo(Beer beer) {
+
 			lblName.Text = beer.Nombiere;
 			lblAlcool.Text = beer.Alcoolemie.ToString() + '%';
 			lblSaveur.Text = beer.Typebiere;
@@ -76,6 +56,58 @@ namespace ThePlaceToBe.Views.ProductPage
 			else {
 
 				imgBeer.Source = Constants.beersImg + "oneBeer.png";
+			}
+		}
+
+		// Initialise des éléments présents dans le xaml
+		private void Init() {
+
+			imgLogo.Source = Constants.appImg + "logo.png";
+			imgAccount.Source = Constants.userImg + User.currentUser.Photo;
+			lblPseudo.Text = User.currentUser.Pseudo;
+			Beer beer = RestService.Request<Beer>(RestService.dic, "selectOneBeer").Result[0];
+			DisplayBeerInfo(beer);
+			btnFavoris.Clicked += (s, e) => BtnAjoutFavorisClicked(s, e, beer);
+		}
+
+		// Initialise des éléments pour faire fonctionner la map
+		private void InitMap() {
+
+			List<Bar> listBar = RestService.Request<Bar>(RestService.dic, "selectBar").Result;
+			double lat = 50.669204;
+			double lon = 4.613774;
+			Position pos = new Position(lat, lon);
+
+			List<Pin> listPin = AddPinsNeeded(listBar);
+			DisplayMap(pos, listPin);
+		}
+
+		// Ajoute un nombre définis de pins dans la liste en fonction du nombre de bar reçu
+		private List<Pin> AddPinsNeeded(List<Bar> listBar) {
+
+			List<Pin> listPin = new List<Pin>();
+
+			foreach (Bar bar in listBar) {
+
+				Pin pin = new Pin {
+					Type = PinType.Generic,
+					Position = new Position(bar.Latitude, bar.Longitude),
+					Label = bar.Nombar,
+					Address = ""
+				};
+				listPin.Add(pin);
+			}
+			return listPin;
+		}
+
+		// Ajoute des pins à la map et change la position de la map
+		private void DisplayMap(Position pos, List<Pin> listPin) {
+
+			map.MoveToRegion(MapSpan.FromCenterAndRadius(pos, Distance.FromKilometers(0.15)));
+			map.MapType = MapType.Street;
+			foreach (Pin pin in listPin) {
+
+				map.Pins.Add(pin);
 			}
 		}
 	}

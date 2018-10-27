@@ -4,19 +4,9 @@
              x:Class="ThePlaceToBe.Views.AchievementPage.AchievementView">
   <ContentView.Content>
         <ScrollView>
-            <Grid VerticalOptions="FillAndExpand"
-                          HorizontalOptions="FillAndExpand"
-                          ColumnSpacing="0"
-                          RowSpacing="0"
-                          x:Name="succesGrid">
-                <Grid.RowDefinitions>
-                </Grid.RowDefinitions>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="*"/>
-                </Grid.ColumnDefinitions>
-            </Grid>
+            <StackLayout x:Name="succesGrid" Spacing="5">
+
+            </StackLayout>
         </ScrollView>
     </ContentView.Content>
 </ContentView>

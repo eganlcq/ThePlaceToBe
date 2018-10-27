@@ -10,44 +10,44 @@ using Xamarin.Forms.Xaml;
 namespace ThePlaceToBe.Views.AchievementPage
 {
 	[XamlCompilation(XamlCompilationOptions.Compile)]
-	public partial class AchievementView : ContentView
-	{
+	public partial class AchievementView : ContentView {
 		public AchievementView(string idUser) {
 			InitializeComponent();
 			RestService.dic = RestService.dic = new Dictionary<string, string> {
 
-				{"idUser", idUser}
+			   {"idUser", idUser}
 			};
 			List<Succes> listSucces = RestService.Request<Succes>(RestService.dic, "selectAchievement").Result;
-			int nbSucces = listSucces.Count();
-			double nbRow = Math.Ceiling(nbSucces / 3.0);
-			double nbColumn = 3;
-			int count = 0;
+			foreach (Succes s in listSucces) {
 
-			for (int i = 0; i < nbRow; i++) {
-
-				RowDefinition row = new RowDefinition {
-					Height = 100
+				Label tmpLabelNom = new Label {
+					Text = s.Nom,
+					TextColor = Color.Black,
+					FontSize = 20
 				};
-				succesGrid.RowDefinitions.Add(row);
-			}
+				Label tmpLabelDescr = new Label {
+					Text = s.Descr,
+					TextColor = Color.Black,
+				};
 
+				StackLayout tmpStack = new StackLayout {
+					Spacing = 5
+				};
+				tmpStack.Children.Add(tmpLabelNom);
+				tmpStack.Children.Add(tmpLabelDescr);
+				Image tmpImg = new Image {
+					Source = "xamarin_logo.jpg", // a changer !!!!!!!!!!!!
+					HeightRequest = 70
+				};
+				StackLayout tmpStack2 = new StackLayout {
+					BackgroundColor = Color.DimGray,
+				};
 
-			for (int x = 0; x < nbRow; x++) {
+				tmpStack2.Orientation = StackOrientation.Horizontal;
+				tmpStack2.Children.Add(tmpImg);
+				tmpStack2.Children.Add(tmpStack);
+				succesGrid.Children.Add(tmpStack2);
 
-				for (int y = 0; y < nbColumn && count < nbSucces; y++, count++) {
-
-					Succes succes = listSucces[count];
-					Label tmpLab = new Label {
-						Text = listSucces[count].Nom,
-						TextColor = Color.Black,
-						FontSize = 11
-					};
-					tmpLab.HorizontalOptions = LayoutOptions.Center;
-					tmpLab.VerticalOptions = LayoutOptions.Center;
-
-					succesGrid.Children.Add(tmpLab, y, x);
-				}
 			}
 		}
 	}
