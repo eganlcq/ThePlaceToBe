@@ -9,7 +9,8 @@ namespace ThePlaceToBe.Data
 		public int Idsucces { get; set; }
 		public string Nom { get; set; }
 		public string Descr { get; set; }
-
+		public string Image { get; set; }
+	    
 		public Succes() {
 
 		}
