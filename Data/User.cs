@@ -13,13 +13,9 @@ namespace ThePlaceToBe.Data
 		public string Nom { get; set; }
 		public string Prenom { get; set; }
 		public string Pseudo { get; set; }
-		//public Date Datenaiss { get; set; }
 		public string Email { get; set; }
-		//public string Mdp { get; set; }
+		public string Datenaiss { get; set; }
 		public string Photo { get; set; }
-		//public int Nbrecherche { get; set; }
-		//public int Nbajout { get; set; }
-		//public DateTime Datelastco { get; set; }
 
 		public User() {
 

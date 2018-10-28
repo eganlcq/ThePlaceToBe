@@ -8,5 +8,7 @@ namespace ThePlaceToBe.Data
     {
 		public static string beersImg = "http://theplacetobe.ovh/image/beers/";
 		public static string appImg = "http://theplacetobe.ovh/image/app/";
+		public static string userImg = "http://theplacetobe.ovh/image/avatar/";
+
     }
 }
