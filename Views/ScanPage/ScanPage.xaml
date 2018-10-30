@@ -3,28 +3,8 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="ThePlaceToBe.Views.ScanPage.ScanPage">
     <ContentPage.Content>
-        <StackLayout>
-            <AbsoluteLayout HeightRequest="120"
-                            VerticalOptions="Start">
-                <Image Source="logo.png"
-                       WidthRequest="120"
-                       AbsoluteLayout.LayoutFlags="PositionProportional"
-                       AbsoluteLayout.LayoutBounds="0.05, 0.1"/>
-
-                <StackLayout AbsoluteLayout.LayoutFlags="PositionProportional"
-                             AbsoluteLayout.LayoutBounds="0.95, 0"
-                             WidthRequest="100">
-                    <Image Source="imgAccount.png"
-                           WidthRequest="70"
-                           Margin="0, 10, 0, 0"/>
-
-                    <Label Text="Octofen"
-                           FontAttributes="Bold"
-                           FontSize="14"
-                           TextColor="{StaticResource textColor}"
-                           HorizontalOptions="Center"/>
-                </StackLayout>
-            </AbsoluteLayout>
+        <StackLayout Orientation="Vertical">
+            <Image x:Name="photo" HorizontalOptions="Center" VerticalOptions="Center"/>
 
             <Frame BackgroundColor="Silver"
                    Margin="0, 100"
@@ -46,7 +26,8 @@
                                TextColor="Black"
                                HorizontalOptions="Center"
                                FontAttributes="Bold"
-                               FontSize="16"/>
+                               FontSize="16"
+                               x:Name="lblName"/>
                     </Frame>
                     <StackLayout Orientation="Horizontal"
                                  HorizontalOptions="Center"
@@ -59,7 +40,7 @@
                                 BorderRadius="15" BorderColor="{StaticResource backgroundColor}" BorderWidth="2"
                                 BackgroundColor="{StaticResource backgroundColor}"
                                 HeightRequest="40"
-                                Clicked="BtnOUIClicked"/>
+                                x:Name="btnUpload"/>
 
                         <Button Text="NON"
                                 FontSize="14"
@@ -72,6 +53,8 @@
                     </StackLayout>
                 </StackLayout>
             </Frame>
+
+            
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

@@ -36,7 +36,7 @@
 
                         <Image x:Name="imgAccount"
                                HorizontalOptions="Center"
-                               HeightRequest="65">
+                               HeightRequest="85">
                             <Image.GestureRecognizers>
                                 <TapGestureRecognizer Tapped="ProfilMainPageTapped"/>
                             </Image.GestureRecognizers>

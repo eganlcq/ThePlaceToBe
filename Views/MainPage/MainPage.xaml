@@ -34,7 +34,7 @@
 
                         <Image x:Name="imgAccount"
                                HorizontalOptions="Center"
-                               HeightRequest="65">
+                               HeightRequest="85">
                             <Image.GestureRecognizers>
                                 <TapGestureRecognizer Tapped="ProfilMainPageTapped"/>
                             </Image.GestureRecognizers>
@@ -133,7 +133,7 @@
                             HorizontalOptions="Center"
                             WidthRequest="150"
                             Margin="0, 20, 0, 10"
-                            Clicked="ScanClicked"
+                        x:Name="btnScan"
                         />
             </StackLayout>
         </Grid>

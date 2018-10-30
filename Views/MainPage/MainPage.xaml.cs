@@ -1,9 +1,15 @@
 ﻿using MySql.Data.MySqlClient;
+using Plugin.Media;
+using Plugin.Media.Abstractions;
+using Plugin.Permissions;
+using Plugin.Permissions.Abstractions;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
 using ThePlaceToBe.Data;
@@ -41,9 +47,9 @@ namespace ThePlaceToBe.Views.MainPage
 		}
 
 		// Cette méthode se lance lorque l'on clique sur le bouton de scan
-		private void ScanClicked(object sender, EventArgs e) {
+		/*private void ScanClicked(object sender, EventArgs e) {
 			this.Navigation.PushAsync(new ScanPage.ScanPage());
-		}
+		}*/
 
 		// Initialise des éléments présents dans le xaml
 		private void Init() {
@@ -55,6 +61,8 @@ namespace ThePlaceToBe.Views.MainPage
 			flavourPicker.Items.Add("Pouet");
 			flavourPicker.Items.Add("Pouet");
 			flavourPicker.Items.Add("Pouet");
+
+			btnScan.Clicked += (s, e) => TakePhoto();
 		}
 
 		// Initialise la grille qui contiendra la liste des bières se trouvant dans la base de données
@@ -124,6 +132,68 @@ namespace ThePlaceToBe.Views.MainPage
 				};
 			}
 			return img;
+		}
+
+		private async void TakePhoto() {
+
+			await CrossMedia.Current.Initialize();
+
+			var cameraStatus = await CrossPermissions.Current.CheckPermissionStatusAsync(Permission.Camera);
+			var storageStatus = await CrossPermissions.Current.CheckPermissionStatusAsync(Permission.Storage);
+
+			if (cameraStatus != PermissionStatus.Granted || storageStatus != PermissionStatus.Granted) {
+				var results = await CrossPermissions.Current.RequestPermissionsAsync(new[] { Permission.Camera, Permission.Storage });
+				cameraStatus = results[Permission.Camera];
+				storageStatus = results[Permission.Storage];
+			}
+
+			if (cameraStatus == PermissionStatus.Granted && storageStatus == PermissionStatus.Granted) {
+
+				if (!CrossMedia.Current.IsCameraAvailable || !CrossMedia.Current.IsTakePhotoSupported) {
+
+#pragma warning disable CS4014 // Dans la mesure où cet appel n'est pas attendu, l'exécution de la méthode actuelle continue avant la fin de l'appel
+					DisplayAlert("No Camera", "No camera available.", "OK");
+#pragma warning restore CS4014 // Dans la mesure où cet appel n'est pas attendu, l'exécution de la méthode actuelle continue avant la fin de l'appel
+					return;
+				}
+
+				var file = await CrossMedia.Current.TakePhotoAsync(new StoreCameraMediaOptions {
+
+					Directory = "Sample",
+					Name = "test.jpg",
+					PhotoSize = PhotoSize.Medium,
+					CompressionQuality = 92
+				});
+
+				if (file == null) return;
+
+				await DisplayAlert("File Location", file.Path, "OK");
+
+				ImageSource img = ImageSource.FromStream(() => {
+
+					var streamImg = file.GetStream();
+					return streamImg;
+				});
+
+				byte[] bitmapData;
+				var stream = new MemoryStream();
+				file.GetStream().CopyTo(stream);
+				bitmapData = stream.ToArray();
+				var fileContent = new ByteArrayContent(bitmapData);
+
+				await this.Navigation.PushAsync(new ScanPage.ScanPage(img, fileContent));
+
+				if (File.Exists(file.Path)) {
+
+					File.Delete(file.Path);
+				}
+
+				file.Dispose();
+			}
+			else {
+
+				await DisplayAlert("Permissions Denied", "Unable to take photos.", "OK");
+			}
 		}
 	}
 }
