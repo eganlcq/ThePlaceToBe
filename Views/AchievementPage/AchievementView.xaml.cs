@@ -36,7 +36,7 @@ namespace ThePlaceToBe.Views.AchievementPage
 				tmpStack.Children.Add(tmpLabelNom);
 				tmpStack.Children.Add(tmpLabelDescr);
 				Image tmpImg = new Image {
-					Source = "xamarin_logo.jpg", // a changer !!!!!!!!!!!!
+					Source = Constants.achievementImg + s.Image,
 					HeightRequest = 70
 				};
 				StackLayout tmpStack2 = new StackLayout {
