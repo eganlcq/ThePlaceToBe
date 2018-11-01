@@ -1,3 +1,4 @@
+<?php if(count(get_included_files())==1) die('--access denied--'); ?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -10,11 +11,13 @@
     <div>
         <form id="inscription" name="inscription" method="post" action="formSubmit.html">
             <legend>Inscription</legend>
-            <input type="text" name="prenom" id="prenom" placeholder="Prénom" required>
+            <input type="text" name="pseudoInscr" id="pseudoInscr" placeholder="nom d'utilisateur" required>
+            <input type="password" name="pwdInscr" id="pwdInscr" placeholder="Mot de passe" required>
             <input type="text" name="nom" id="nom" placeholder="Nom" required>
+            <input type="text" name="prenom" id="prenom" placeholder="Prénom" required>
             <input type="text" name="mail" id="mail" placeholder="Adresse électronique" required>
-            <input type="password" name="pwd" id="pwd" placeholder="Mot de passe" required>
-            <input type="text" name="pseudo" id="pseudo" placeholder="nom d'utilisateur" required>
+            <input type="date" name="datenaiss" id="datenaiss" placeholder="YYYY MM DD" required>
+            <p id="erreur1"></p>
             <input type="submit" value="S'INSCRIRE">
         </form>
     </div>
@@ -23,6 +26,7 @@
             <legend>Connexion</legend>
             <input type="text" name="pseudo" id="pseudo" placeholder="nom d'utilisateur" required>
             <input type="password" name="pwd" id="pwd" placeholder="Mot de passe" required>
+            <p id="erreur2"></p>
             <input type="submit" value="SE CONNECTER">
         </form>
     </div>

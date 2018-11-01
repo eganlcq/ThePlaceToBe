@@ -4,8 +4,9 @@
     <?php if(count(get_included_files())==1) die('--access denied--'); ?>
     <title>ThePlaceToBe</title>
     <meta charset=utf-8>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=1000"/>
     <link rel="stylesheet" href="CSS/mainPage.css">
+    <link rel="stylesheet" media="screen and (max-width: 1000px) and (orientation: portrait)" href="CSS/mobile.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script type="text/javascript" src="JS/index.js"></script>
 </head>
@@ -17,20 +18,21 @@
         <div id="compte">
             <?php echo $compte ?>
         </div>
-        <div id='gestion'>
-            <ul>
-                <li><a href="compte.html">Gérer compte</a></li>
-                <li><a href="logout.html">Déconnexion</a></li>
-            </ul>
-        </div>
     </menu>
+    <div id='gestion'>
+        <ul>
+            <li><a href="compte.html">Gérer compte</a></li>
+            <li><a href="achievements.html">Achievements</a></li>
+            <li><a href="logout.html">Déconnexion</a></li>
+        </ul>
+    </div>
     <main>
         <div id="slogan">
             <h1>Que la bière</h1><br>
             <h1 id="second">coule à flot</h1>
         </div>
         <div id="app">
-            <img src="../image/ThePlaceToBe.png">
+            <img id=imgCentreDroit src="../image/ThePlaceToBe.png">
             <input type="button" value="Download application">
         </div>
     </main>

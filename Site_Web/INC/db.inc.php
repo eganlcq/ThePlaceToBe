@@ -28,5 +28,28 @@ class Db
         return 'PDOException : '.($this->pdoException ? $this->pdoException->getMessage() : 'aucune !');
     }
 
+    public function call($nom, $param= []){
+        $p =[];
+        switch ($nom){
+            case 'gestioncompte':
+            case 'userinscription':array_push($p, '?', '?', '?', '?');
+            case 'verifmdp':
+            case 'userconnexion':array_push($p, '?');
+            case 'verifpseudo':
+            case 'verifmail': array_push($p, '?');
+                try {
+                    $appel = 'call '.$nom.'('.implode(',', $p).')';
+                    $sth = $this->iPdo->prepare($appel);
+                    $sth->execute($param);
+                    return $sth->fetchAll(PDO::FETCH_ASSOC);
+                }
+                catch(PDOException $e){
+                    $this->pdoException = $e;
+                    return ['__ERR__'=>$this->getException()];
+                }
+                break;
+            default : return ['__ERR__' => 'call impossible à '.$nom];
+        }
+    }
 }
 

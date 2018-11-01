@@ -1,3 +1,4 @@
+<?php if(count(get_included_files())==1) die('--access denied--'); ?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -51,7 +52,7 @@
     <div>
         <img src="../image/iconFooter.png" id="logo">
         <p><b>Ephec Belgium</b>,<br>Avenue du Ciseau 15,<br>1348 Ottignies-Louvain-la-Neuve</p>
-        <img src="../image/map.PNG">
+        <img id="map" src="../image/map.PNG">
     </div>
 </section>
 </body>
