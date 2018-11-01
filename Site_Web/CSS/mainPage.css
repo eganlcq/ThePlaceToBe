@@ -2,20 +2,21 @@ html{
     background: url("../image/fond.jpg") no-repeat center fixed; 
     background-size: cover;
 }
+@font-face {
+    font-family: "slt";
+    src: url("Good Unicorn - TTF.ttf");
+}
 body, html {
     margin: 0;
     padding: 0;
-    font-family: "Brush Script MT";
+    font-family: "slt";
     color: #ecf0f1;
     overflow: auto;
-    
 }
-
 #imgCentreDroit{
     width: 100%;
     height: auto;
 }
-
 h1, ul, p{
     margin: 0;
     padding: 0;
@@ -180,7 +181,7 @@ footer li {
     margin: auto;
     position: fixed;
     z-index: 20;
-    top: 35%;
+    top: 20%;
     right: 25%;
     width: 50%;
 }
@@ -199,19 +200,19 @@ footer li {
     vertical-align: top;
     text-align: center;
     width: 40%;
-    margin: 0 40px;
+    margin: 40px;
 }
 #login input {
     display: block;
     width: 100%;
-    height: 40px;
+    height: 3em;
     font-size: 1em;
     border-radius: 5px;
     margin: 10px 0;
     padding-left: 10px;
 }
 
-#login input[type=submit]:hover {
+#login input[type=submit]:hover, #formCompte input[type=submit]:hover {
     background: #620F00;
     border: 2px solid #620F00;
     color: white;
@@ -257,10 +258,13 @@ footer li {
 }
 #gestion {
     text-align: center;
+    position: fixed;
     display: none;
     opacity: 0.7;
-    width: 7%;
-    float: right;
+    z-index: 50;
+    width:10%;
+    left:91%;
+    top: 13%;
     font-size: 1.7em;
 }
 #gestion ul {
@@ -277,8 +281,50 @@ footer li {
     background-color: #202225;
     margin: auto;
 }
-#erreur {
+#erreur1, #erreur2, #erreur3 {
     font-size: 1.5em;
+    margin: 15px;
     font-family: "Comic Sans MS",sans-serif;
     color: red;
+}
+#gestionCompte{
+    margin: auto;
+    border-radius: 50px;
+    text-align: left!important;
+    padding: 15px;
+    width: 30%;
+    opacity: 0.9;
+    background-color: black;
+    box-shadow: 10px 10px 194px 13px rgba(0,0,0,0.75);
+}
+#gestionCompte img {
+    border-radius: 25px;
+}
+#formCompte input {
+    display: block;
+    width: 60%;
+    height: 3em;
+    font-size: 1em;
+    border-radius: 5px;
+    margin: 15px;
+}
+#gestionCompte label {
+    width: 25%;
+    font-size: 2em;
+}
+#gestionCompte input, #gestionCompte label {
+    display: inline-block;
+}
+#formCompte input[type=submit] {
+    display: block;
+    margin: 25px auto;
+}
+#image {
+    display: block!important;
+}
+#crayon {
+    margin-left: 10px;
+}
+#file{
+    display: none!important;
 }

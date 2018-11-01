@@ -6,6 +6,7 @@
     $pseudo                 = "";
     $email                  = "";
     $password               = "";
+    $dateNaiss              = "";
 
     if(!empty($_POST)) {
         $firstName          = $_POST['firstName'];
@@ -13,7 +14,7 @@
         $pseudo             = $_POST['pseudo'];
         $email              = $_POST['email'];
         $password           = $_POST['password'];
-        
+        $dateNaiss          = $_POST['dateNaiss'];
         
     }
         
@@ -23,10 +24,9 @@
     $preStatement = $db->prepare($preSql);
     $preStatement->execute();
 
-    $sql =  'insert into TbUser (prenom, nom, pseudo, datenaiss, email, mdp, photo, nbrecherche, nbajout, datelastco)
-            values (?, ?, ?, null, ?, ?, default, default, default, default);';
+    $sql =  'call userinscriptionapp(?, ?, ?, ?, ?, ?);';
     $statement = $db->prepare($sql);
-    $statement->execute([$name, $firstName, $pseudo, $email, $password]);
+    $statement->execute([$firstName, $name, $pseudo, $email, $dateNaiss, $password]);
     $item = $statement->fetchAll(PDO::FETCH_ASSOC);
     Database::disconnect();
 

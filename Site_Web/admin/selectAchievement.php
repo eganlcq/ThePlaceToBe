@@ -6,7 +6,7 @@
         $idUser = $_POST['idUser'];
     }
     $db = Database::connect();
-    $sql =  'SELECT t1.idsucces, t1.nom, t1.descr FROM TbSucces as t1
+    $sql =  'SELECT t1.idsucces, t1.nom, t1.descr, t1.image FROM TbSucces as t1
 JOIN TbOrnement as t2
 ON t1.idsucces = t2.idsucces
 JOIN TbUser as t3
