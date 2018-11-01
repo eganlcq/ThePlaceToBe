@@ -7,6 +7,10 @@ $(document).ready(function(){
         event.preventDefault();
         appelAjax(this);
     });
+    $('#gestion a').click(function (event) {
+        event.preventDefault();
+        appelAjax(this);
+    });
     $('#liste').click(function (event) {
         event.preventDefault();
         var bool = ($('#gestion').is(':visible'))? $('#gestion').css('display', bool).fadeOut(500) : $('#gestion').css('display', bool).fadeIn(500);
@@ -58,13 +62,9 @@ function gereRetour(retour){
                                $('.log').remove();
                            });
                            break;
-            case 'slogan' : $('main').html(retour[cle]); break;
-            case 'compte':
-                $('main').html(retour[cle]);
-                break;
             case 'connexion':
                 var x= JSON.parse(retour[cle]);
-                var affiche = "<img id=avatar src="+x['photo']+" height=50px width=50px>"+"<p>"+x["pseudo"]+"</p><p id='liste'>&#9662;</p>";
+                var affiche = "<img id=avatar src=image/avatar/"+x['photo']+" height=50px width=50px>"+"<p>"+x["pseudo"]+"</p><p id='liste'>&#9662;</p>";
                 $('#compte').html(affiche);
                 $('#liste').click(function (event) {
                     event.preventDefault();
@@ -73,12 +73,41 @@ function gereRetour(retour){
                 break;
             case 'logout':
                 $('#compte').html(retour[cle]);
-                $('menu a').click(function (event) {
+                $('#compte a').click(function (event) {
                     event.preventDefault();
                     appelAjax(this);
                 });
                 $('#gestion').css('display', 'none');
                 break;
+            case 'compte':
+                $('main').html(retour[cle]);
+                $('#file').change(function () {
+                    if (this.files[0]) {
+                        var reader = new FileReader();          //permet d'intercepté un fichier et de lire dans la mémoire tampon
+
+                        reader.onload = function (e) {          //permet de lancer la fonction quand le fichier est bien chargé
+                            $('#imageAvatar')
+                                .attr('src', e.target.result);  //e.target = this
+                        };
+
+                        reader.readAsDataURL(this.files[0]);    //
+                    }
+                });
+                $('#formCompte').submit(function (event) {
+                    event.preventDefault();
+                    appelAjax(this);
+                });
+                break;
+            case "erreur1":
+                $('#erreur1').html(retour[cle]);
+                break;
+            case "erreur2":
+                $('#erreur2').html(retour[cle]);
+                break;
+            case "erreur3":
+                $('#erreur3').html(retour[cle]);
+                break;
+            default: $('main').html(retour[cle]);
         }
     }
 }
