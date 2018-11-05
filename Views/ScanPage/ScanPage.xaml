@@ -15,17 +15,13 @@
                 <StackLayout>
                     <Label Text="Est-ce bien ce qui est écris ?"
                            FontSize="20"
-                           FontAttributes="Bold"
-                           TextColor="black"
-                           HorizontalOptions="Center"/>
+                           Style="{StaticResource labStyleBoldBlackHorizonCenter}"/>
                     <Frame BackgroundColor="White"
                            Margin="0, 5, 0, 10"
                            CornerRadius="15"
                            Padding="5">
                         <Label Text="Beer Name"
-                               TextColor="Black"
-                               HorizontalOptions="Center"
-                               FontAttributes="Bold"
+                               Style="{StaticResource labStyleBoldBlackHorizonCenter}"
                                FontSize="16"
                                x:Name="lblName"/>
                     </Frame>
@@ -34,27 +30,19 @@
                                  Spacing="30">
 
                         <Button Text="OUI"
+                                Style="{StaticResource buttonBlue}"
                                 FontSize="14"
-                                FontAttributes="Bold"
-                                TextColor="White"
-                                BorderRadius="15" BorderColor="{StaticResource backgroundColor}" BorderWidth="2"
-                                BackgroundColor="{StaticResource backgroundColor}"
                                 HeightRequest="40"
                                 x:Name="btnUpload"/>
 
                         <Button Text="NON"
                                 FontSize="14"
-                                FontAttributes="Bold"
-                                TextColor="White"
-                                BorderRadius="15" BorderColor="{StaticResource backgroundColor}" BorderWidth="2"
-                                BackgroundColor="{StaticResource backgroundColor}"
+                                Style="{StaticResource buttonBlue}"
                                 HeightRequest="40"
                                 Clicked="BtnNONClicked"/>
                     </StackLayout>
                 </StackLayout>
             </Frame>
-
-            
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>
