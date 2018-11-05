@@ -42,6 +42,26 @@
                         Value="Helvetica Neu Bold.ttf#Helvetica Neu Bold"/>
             </Style>
 
+            <Style x:Key="labStyleBoldBlackHorizonCenter" TargetType="Label" ApplyToDerivedTypes="True">
+                <Setter Property="FontAttributes" Value="Bold"/>
+                <Setter Property="TextColor" Value="Black"/>
+                <Setter Property="HorizontalOptions" Value="Center"/>
+            </Style>
+
+            <Style x:Key="labStyleBoldBlackVerticalCenter" TargetType="Label" ApplyToDerivedTypes="True">
+                <Setter Property="FontAttributes" Value="Bold"/>
+                <Setter Property="TextColor" Value="Black"/>
+                <Setter Property="HorizontalOptions" Value="Center"/>
+            </Style>
+
+            <Style x:Key="buttonBlue" TargetType="Button" ApplyToDerivedTypes="True">
+                <Setter Property="TextColor" Value="White"/>
+                <Setter Property="FontAttributes" Value="Bold"/>
+                <Setter Property="BorderRadius" Value="15"/>
+                <Setter Property="BorderColor" Value="{StaticResource backgroundColor}"/>
+                <Setter Property="BackgroundColor" Value="{StaticResource backgroundColor}"/>
+                <Setter Property="BorderWidth" Value="2"/>
+            </Style>
 
         </ResourceDictionary>
     </Application.Resources>
