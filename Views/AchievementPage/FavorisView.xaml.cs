@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -27,21 +27,30 @@ namespace ThePlaceToBe.Views.AchievementPage
             List<Beer> listFavoris = RestService.Request<Beer>(RestService.dic, "selectFavoris").Result;
 
             int nbBiere = listFavoris.Count();
-            double nbRow = Math.Ceiling(nbBiere / 3.0);
-            double nbColumn = 3;
-            int count = 0;
-
-            for (int i = 0; i < nbRow; i++)
+            
+            double nbRow = ConstructionRow(nbBiere);
+            RemplissageRow(nbRow, nbBiere, listFavoris);
+            
+        }
+        
+        private double ConstructionRow(int nbrBiere)
+        {
+          for (int i = 0; i < nbRow; i++)
             {
-
+                double nbRow = Math.Ceiling(nbrBiere / 3.0);
                 RowDefinition row = new RowDefinition
                 {
                     Height = 100
                 };
                 favoris.RowDefinitions.Add(row);
             }
-
-
+            return nbRow;
+        }
+        
+        private void RemplissageRow(double nbRow, int nbBiere, List<Beer> listFavoris)
+        {
+            double nbColumn = 3;
+            int count = 0;
             for (int x = 0; x < nbRow; x++)
             {
 
@@ -84,8 +93,7 @@ namespace ThePlaceToBe.Views.AchievementPage
         {
 
             RestService.dic = new Dictionary<string, string> {
-
-                {"idBiere", beer.Idbiere.ToString() }
+                {"idBiere", beer.Idbiere.ToString()}
             };
             this.Navigation.PushAsync(new ProductPage.ProductPage());
         }
