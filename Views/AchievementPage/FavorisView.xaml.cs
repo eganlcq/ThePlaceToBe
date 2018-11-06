@@ -35,9 +35,9 @@ namespace ThePlaceToBe.Views.AchievementPage
         
         private double ConstructionRow(int nbrBiere)
         {
-          for (int i = 0; i < nbRow; i++)
+            double nbRow = Math.Ceiling(nbrBiere / 3.0);
+            for (int i = 0; i < nbRow; i++)
             {
-                double nbRow = Math.Ceiling(nbrBiere / 3.0);
                 RowDefinition row = new RowDefinition
                 {
                     Height = 100
