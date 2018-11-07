@@ -2,7 +2,7 @@ create table TbSucces(
 idsucces int(2) not null auto_increment,
 nom varchar(32) not null,
 descr text not null,
-image varchar(64) not null,
+image varchar(64) not null, 
 primary key (idsucces)
 );
 

@@ -3,7 +3,7 @@ BEGIN
 INSERT INTO TbUser(prenom, nom, pseudo, datenaiss, email, mdp)
 VALUES(prenom, nom, pseudoInscr, CAST(datenaiss AS date), mail, pwdInscr);
 
-SELECT pseudo, photo
+SELECT tbu.iduser, tbu.nom, tbu.prenom, tbu.pseudo, tbu.email, tbu.datenaiss, tbu.photo 
 FROM TbUser AS tbu
-WHERE tbu.pseudo = pseudoInscr;
+WHERE tbu.pseudo = pseudoInscr AND tbu.mdp = pwdInscr;
 END
