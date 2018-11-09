@@ -1,0 +1,6 @@
+CREATE DEFINER=`admin`@`%` PROCEDURE `beerdesc`()
+BEGIN
+SELECT *
+FROM TbBiere
+ORDER BY nombiere DESC;
+END
