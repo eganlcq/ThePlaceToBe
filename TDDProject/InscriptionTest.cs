@@ -2,240 +2,256 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using ThePlaceToBe.Data;
 
-namespace TDDProject {
-	[TestClass]
-	public class InscriptionTest {
+namespace TDDProject
+{
+    [TestClass]
+    public class InscriptionTest
+    {
 
-		[TestMethod]
-		public void CanBeSubscribed_WithBlankInputs_ReturnsFalse() {
+        [TestMethod]
+        public void CanBeSubscribed_WithBlankInputs_ReturnsFalse()
+        {
 
-			// Arrange
-			string firstNameUser = "";
-			string nameUser = "";
-			string pseudoUser = "";
-			string emailUser = "";
-			string pswdUser = "";
-			string confirmPswdUser = "";
-			string birthDate = "";
+            // Arrange
+            string firstNameUser = "";
+            string nameUser = "";
+            string pseudoUser = "";
+            string emailUser = "";
+            string pswdUser = "";
+            string confirmPswdUser = "";
+            string birthDate = "";
 
-			// Act
-			bool result = Process.CheckInfo("", firstNameUser, nameUser, pseudoUser, emailUser, pswdUser, confirmPswdUser, birthDate);
+            // Act
+            bool result = Process.CheckInfo("", firstNameUser, nameUser, pseudoUser, emailUser, pswdUser, confirmPswdUser, birthDate);
 
-			// Assert
-			Assert.IsFalse(result);
-		}
+            // Assert
+            Assert.IsFalse(result);
+        }
 
-		[TestMethod]
-		public void CanBeSubscribed_WithNullInputs_ReturnsFalse() {
+        [TestMethod]
+        public void CanBeSubscribed_WithNullInputs_ReturnsFalse()
+        {
 
-			// Arrange
-			string firstNameUser = null;
-			string nameUser = null;
-			string pseudoUser = null;
-			string emailUser = null;
-			string pswdUser = null;
-			string confirmPswdUser = null;
-			string birthDate = null;
+            // Arrange
+            string firstNameUser = null;
+            string nameUser = null;
+            string pseudoUser = null;
+            string emailUser = null;
+            string pswdUser = null;
+            string confirmPswdUser = null;
+            string birthDate = null;
 
-			// Act
-			bool result = Process.CheckInfo(null, firstNameUser, nameUser, pseudoUser, emailUser, pswdUser, confirmPswdUser, birthDate);
+            // Act
+            bool result = Process.CheckInfo(null, firstNameUser, nameUser, pseudoUser, emailUser, pswdUser, confirmPswdUser, birthDate);
 
-			// Assert
-			Assert.IsFalse(result);
-		}
+            // Assert
+            Assert.IsFalse(result);
+        }
 
-		[TestMethod]
-		public void CanBeSubscribed_WithPasswordsNotTheSame_ReturnFalse() {
+        [TestMethod]
+        public void CanBeSubscribed_WithPasswordsNotTheSame_ReturnFalse()
+        {
 
-			// Arrange
-			string pswdUser = "password";
-			string confirmPswdUser = "other password";
+            // Arrange
+            string pswdUser = "password";
+            string confirmPswdUser = "other password";
 
-			// Act
-			bool result = Process.CheckSamePswd(pswdUser, confirmPswdUser);
+            // Act
+            bool result = Process.CheckSamePswd(pswdUser, confirmPswdUser);
 
-			// Assert
-			Assert.IsFalse(result);
-		}
+            // Assert
+            Assert.IsFalse(result);
+        }
 
-		[TestMethod]
-		public void CanBeSubscribed_WithAlreadyExistingPseudo_ReturnsFalse() {
+        [TestMethod]
+        public void CanBeSubscribed_WithAlreadyExistingPseudo_ReturnsFalse()
+        {
 
-			// Arrange
-			string pseudoUser = "Octofen";
-			
-			// Act
-			bool result = Process.CheckPseudo(pseudoUser);
+            // Arrange
+            string pseudoUser = "Octofen";
 
-			// Assert
-			Assert.IsFalse(result);
-		}
+            // Act
+            bool result = Process.CheckPseudo(pseudoUser);
 
-		[TestMethod]
-		public void CanBeSubscribed_WithAlreadyExistingEmail_ReturnsFalse() {
+            // Assert
+            Assert.IsFalse(result);
+        }
 
-			// Arrange
-			string emailUser = "e.lecocq@hotmail.com";
+        [TestMethod]
+        public void CanBeSubscribed_WithAlreadyExistingEmail_ReturnsFalse()
+        {
 
-			// Act
-			bool result = Process.CheckMail(emailUser);
+            // Arrange
+            string emailUser = "e.lecocq@hotmail.com";
 
-			// Assert
-			Assert.IsFalse(result);
-		}
+            // Act
+            bool result = Process.CheckMail(emailUser);
 
-		[TestMethod]
-		public void CanBeSubscribed_WithAllInputsFilled_ReturnsTrue() {
+            // Assert
+            Assert.IsFalse(result);
+        }
 
-			// Arrange
-			string firstNameUser = "firstNameUser";
-			string nameUser = "nameUser";
-			string pseudoUser = "pseudoUser";
-			string emailUser = "emailUser";
-			string pswdUser = "pswdUser";
-			string confirmPswdUser = "pswdUser";
-			string birthDate = "01/01/1980";
+        [TestMethod]
+        public void CanBeSubscribed_WithAllInputsFilled_ReturnsTrue()
+        {
 
-			// Act
-			bool result = Process.CheckInfo("", firstNameUser, nameUser, pseudoUser, emailUser, pswdUser, confirmPswdUser, birthDate);
+            // Arrange
+            string firstNameUser = "firstNameUser";
+            string nameUser = "nameUser";
+            string pseudoUser = "pseudoUser";
+            string emailUser = "emailUser";
+            string pswdUser = "pswdUser";
+            string confirmPswdUser = "pswdUser";
+            string birthDate = "01/01/1980";
 
-			// Assert
-			Assert.IsTrue(result);
-		}
+            // Act
+            bool result = Process.CheckInfo("", firstNameUser, nameUser, pseudoUser, emailUser, pswdUser, confirmPswdUser, birthDate);
 
-		[TestMethod]
-		public void CanBeSubscribed_WithSamePasswords_ReturnTrue() {
+            // Assert
+            Assert.IsTrue(result);
+        }
 
-			// Arrange
-			string pswdUser = "password";
-			string confirmPswdUser = "password";
+        [TestMethod]
+        public void CanBeSubscribed_WithSamePasswords_ReturnTrue()
+        {
 
-			// Act
-			bool result = Process.CheckSamePswd(pswdUser, confirmPswdUser);
+            // Arrange
+            string pswdUser = "password";
+            string confirmPswdUser = "password";
 
-			// Assert
-			Assert.IsTrue(result);
-		}
+            // Act
+            bool result = Process.CheckSamePswd(pswdUser, confirmPswdUser);
 
-		[TestMethod]
-		public void CanBeSubscribed_WithNotExistingPseudo_ReturnsTrue() {
+            // Assert
+            Assert.IsTrue(result);
+        }
 
-			// Arrange
-			string pseudoUser = "Not existing pseudo";
+        [TestMethod]
+        public void CanBeSubscribed_WithNotExistingPseudo_ReturnsTrue()
+        {
 
-			// Act
-			bool result = Process.CheckPseudo(pseudoUser);
+            // Arrange
+            string pseudoUser = "Not existing pseudo";
 
-			// Assert
-			Assert.IsTrue(result);
-		}
+            // Act
+            bool result = Process.CheckPseudo(pseudoUser);
 
-		[TestMethod]
-		public void CanBeSubscribed_WithNotExistingEmail_ReturnsTrue() {
+            // Assert
+            Assert.IsTrue(result);
+        }
 
-			// Arrange
-			string emailUser = "Not existing email";
+        [TestMethod]
+        public void CanBeSubscribed_WithNotExistingEmail_ReturnsTrue()
+        {
 
-			// Act
-			bool result = Process.CheckMail(emailUser);
+            // Arrange
+            string emailUser = "Not existing email";
 
-			// Assert
-			Assert.IsTrue(result);
-		}
+            // Act
+            bool result = Process.CheckMail(emailUser);
 
-		[TestMethod]
-		public void WhatWillContainsErrorLabel_WithBlankInputs_ReturnsThatYouMustFillAllTheBlanks() {
+            // Assert
+            Assert.IsTrue(result);
+        }
 
-			// Arrange
-			string firstNameUser = "";
-			string nameUser = "";
-			string pseudoUser = "";
-			string emailUser = "";
-			string pswdUser = "";
-			string confirmPswdUser = "";
-			string birthDate = "";
+        [TestMethod]
+        public void WhatWillContainsErrorLabel_WithBlankInputs_ReturnsThatYouMustFillAllTheBlanks()
+        {
 
-			// Act
-			string result = Process.VerifyInscription(firstNameUser, nameUser, pseudoUser, emailUser, pswdUser, confirmPswdUser, birthDate);
+            // Arrange
+            string firstNameUser = "";
+            string nameUser = "";
+            string pseudoUser = "";
+            string emailUser = "";
+            string pswdUser = "";
+            string confirmPswdUser = "";
+            string birthDate = "";
 
-			// Assert
-			Assert.AreEqual("Veuillez remplir tous les champs s'il vous plaît", result);
-		}
+            // Act
+            string result = Process.VerifyInscription(firstNameUser, nameUser, pseudoUser, emailUser, pswdUser, confirmPswdUser, birthDate);
 
-		[TestMethod]
-		public void WhatWillContainsErrorLabel_WithPasswordsNotTheSame_ReturnsThatPasswordsAreNotTheSame() {
+            // Assert
+            Assert.AreEqual("Veuillez remplir tous les champs s'il vous plaît", result);
+        }
 
-			// Arrange
-			string firstNameUser = "test";
-			string nameUser = "test";
-			string pseudoUser = "test";
-			string emailUser = "test";
-			string pswdUser = "password";
-			string confirmPswdUser = "not the same password";
-			string birthDate = "test";
+        [TestMethod]
+        public void WhatWillContainsErrorLabel_WithPasswordsNotTheSame_ReturnsThatPasswordsAreNotTheSame()
+        {
 
-			// Act
-			string result = Process.VerifyInscription(firstNameUser, nameUser, pseudoUser, emailUser, pswdUser, confirmPswdUser, birthDate);
+            // Arrange
+            string firstNameUser = "test";
+            string nameUser = "test";
+            string pseudoUser = "test";
+            string emailUser = "test";
+            string pswdUser = "password";
+            string confirmPswdUser = "not the same password";
+            string birthDate = "test";
 
-			// Assert
-			Assert.AreEqual("Les mots de passe ne correspondent pas.", result);
-		}
+            // Act
+            string result = Process.VerifyInscription(firstNameUser, nameUser, pseudoUser, emailUser, pswdUser, confirmPswdUser, birthDate);
 
-		[TestMethod]
-		public void WhatWillContainsErrorLabel_WithAlreadyExistingPseudo_ReturnsThatPseudoAlreadyExists() {
+            // Assert
+            Assert.AreEqual("Les mots de passe ne correspondent pas.", result);
+        }
 
-			// Arrange
-			string firstNameUser = "test";
-			string nameUser = "test";
-			string pseudoUser = "Octofen";
-			string emailUser = "test";
-			string pswdUser = "password";
-			string confirmPswdUser = "password";
-			string birthDate = "test";
+        [TestMethod]
+        public void WhatWillContainsErrorLabel_WithAlreadyExistingPseudo_ReturnsThatPseudoAlreadyExists()
+        {
 
-			// Act
-			string result = Process.VerifyInscription(firstNameUser, nameUser, pseudoUser, emailUser, pswdUser, confirmPswdUser, birthDate);
+            // Arrange
+            string firstNameUser = "test";
+            string nameUser = "test";
+            string pseudoUser = "Octofen";
+            string emailUser = "test";
+            string pswdUser = "password";
+            string confirmPswdUser = "password";
+            string birthDate = "test";
 
-			// Assert
-			Assert.AreEqual("Le pseudo existe déjà.", result);
-		}
+            // Act
+            string result = Process.VerifyInscription(firstNameUser, nameUser, pseudoUser, emailUser, pswdUser, confirmPswdUser, birthDate);
 
-		[TestMethod]
-		public void WhatWillContainsErrorLabel_WithAlreadyExistingEmail_ReturnsThatEmailAlreadyExists() {
+            // Assert
+            Assert.AreEqual("Le pseudo existe déjà.", result);
+        }
 
-			// Arrange
-			string firstNameUser = "test";
-			string nameUser = "test";
-			string pseudoUser = "test";
-			string emailUser = "e.lecocq@hotmail.com";
-			string pswdUser = "password";
-			string confirmPswdUser = "password";
-			string birthDate = "test";
+        [TestMethod]
+        public void WhatWillContainsErrorLabel_WithAlreadyExistingEmail_ReturnsThatEmailAlreadyExists()
+        {
 
-			// Act
-			string result = Process.VerifyInscription(firstNameUser, nameUser, pseudoUser, emailUser, pswdUser, confirmPswdUser, birthDate);
+            // Arrange
+            string firstNameUser = "test";
+            string nameUser = "test";
+            string pseudoUser = "test";
+            string emailUser = "e.lecocq@hotmail.com";
+            string pswdUser = "password";
+            string confirmPswdUser = "password";
+            string birthDate = "test";
 
-			// Assert
-			Assert.AreEqual("Le mail existe déjà.", result);
-		}
+            // Act
+            string result = Process.VerifyInscription(firstNameUser, nameUser, pseudoUser, emailUser, pswdUser, confirmPswdUser, birthDate);
 
-		[TestMethod]
-		public void WhatWillAppend_WithCorrectInscription_ReturnsOK() {
+            // Assert
+            Assert.AreEqual("Le mail existe déjà.", result);
+        }
 
-			// Arrange
-			string firstNameUser = "correct first name";
-			string nameUser = "correct name";
-			string pseudoUser = "correct pseudo";
-			string emailUser = "correctPseudo@correct.com";
-			string pswdUser = "correct password";
-			string confirmPswdUser = "correct password";
-			string birthDate = "correct birth Date";
+        [TestMethod]
+        public void WhatWillAppend_WithCorrectInscription_ReturnsOK()
+        {
 
-			// Act
-			string result = Process.VerifyInscription(firstNameUser, nameUser, pseudoUser, emailUser, pswdUser, confirmPswdUser, birthDate);
+            // Arrange
+            string firstNameUser = "correct first name";
+            string nameUser = "correct name";
+            string pseudoUser = "correct pseudo";
+            string emailUser = "correctPseudo@correct.com";
+            string pswdUser = "correct password";
+            string confirmPswdUser = "correct password";
+            string birthDate = "correct birth Date";
 
-			// Assert
-			Assert.AreEqual("OK", result);
-		}
-	}
+            // Act
+            string result = Process.VerifyInscription(firstNameUser, nameUser, pseudoUser, emailUser, pswdUser, confirmPswdUser, birthDate);
+
+            // Assert
+            Assert.AreEqual("OK", result);
+        }
+    }
 }
