@@ -1,6 +1,0 @@
-CREATE DEFINER=`admin`@`%` PROCEDURE `beerasc`()
-BEGIN
-SELECT *
-FROM TbBiere
-ORDER BY nombiere ASC;
-END
