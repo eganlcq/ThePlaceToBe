@@ -22,79 +22,9 @@ namespace ThePlaceToBe.Views.InscriptionPage
 		// Méthode lancée lorsque le bouton d'inscription est utilisé
 		private void InscriptionClicked(object sender, EventArgs e) {
 			
-			// Vérification si tout les champs sont remplis
-			if(CheckInfo(null) && CheckInfo("")) {
-
-				// Vérification si l'utilisateur a rentré deux fois le même mot de passe
-				if(CheckSamePswd()) {
-
-					// Vérifie si le pseudo existe déjà dans la base de donnée
-					if(CheckPseudo()) {
-
-						// Vérifie si le mail existe déjà dans la base de donnée
-						if(CheckMail()) {
-							
-							// Effectue l'inscription de l'utilisateur
-							Inscription();
-						}
-						else {
-
-							lblError.Text = "Le mail existe déjà.";
-						}
-					}
-					else {
-
-						lblError.Text = "Le pseudo existe déjà.";
-					}
-				}
-				else {
-
-					lblError.Text = "Les mots de passe ne correspondent pas.";
-				}
-			}
-			else {
-
-				lblError.Text = "Veuillez remplir tous les champs s'il vous plaît";
-			}
-		}
-
-		// Vérification si tout les champs sont remplis
-		bool CheckInfo(string obj) {
-
-			if(firstNameUser.Text != obj && nameUser.Text != obj && pseudoUser.Text != obj && emailUser.Text != obj && pswdUser.Text != obj && confirmPswdUser.Text != obj && datePickerNaissance.ToString() != obj) {
-
-				return true;
-			}
-			else return false;
-		}
-
-		// Vérification si l'utilisateur a rentré deux fois le même mot de passe
-		bool CheckSamePswd() {
-
-			if(pswdUser.Text == confirmPswdUser.Text) return true;
-			else return false;
-		}
-
-		// Vérifie si le pseudo existe déjà dans la base de donnée
-		private bool CheckPseudo() {
-
-			RestService.dic = new Dictionary<string, string> {
-				
-				{ "pseudo", pseudoUser.Text }
-			};
-			Check check = RestService.Request<Check>(RestService.dic, "checkPseudo").Result[0];
-			return check.Verif;
-		}
-
-		// Vérifie si le mail existe déjà dans la base de donnée
-		private bool CheckMail() {
-
-			RestService.dic = new Dictionary<string, string> {
-
-				{ "email", emailUser.Text }
-			};
-			Check check = RestService.Request<Check>(RestService.dic, "checkMail").Result[0];
-			return check.Verif;
+			string response = Process.VerifyInscription(firstNameUser.Text, nameUser.Text, pseudoUser.Text, emailUser.Text, pswdUser.Text, confirmPswdUser.Text, datePickerNaissance.ToString());
+			if(response == "OK") Inscription();
+			else lblError.Text = response;
 		}
 
 		// Initialise des éléments présents dans le xaml
