@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Java.Util;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -6,83 +7,129 @@ namespace ThePlaceToBe.Data
 {
     public static class Process
     {
-		// DEBUT METHODES INSCRIPTION
 
-		public static string VerifyInscription(string firstNameUser, string nameUser, string pseudoUser, string emailUser, string pswdUser, string confirmPswdUser, string birthDate) {
+        // DEBUT METHODES INSCRIPTION
+        #region MethodesInscription
 
-			// Vérification si tout les champs sont remplis
-			if (CheckInfo(null, firstNameUser, nameUser, pseudoUser, emailUser, pswdUser, confirmPswdUser, birthDate)
-				&& 
-				CheckInfo("", firstNameUser, nameUser, pseudoUser, emailUser, pswdUser, confirmPswdUser, birthDate)) {
+        public static string VerifyInscription(string firstNameUser, string nameUser, string pseudoUser, string emailUser, string pswdUser, string confirmPswdUser, string birthDate)
+        {
 
-				// Vérification si l'utilisateur a rentré deux fois le même mot de passe
-				if (CheckSamePswd(pswdUser, confirmPswdUser)) {
+            // Vérification si tout les champs sont remplis
+            if (CheckInfo(null, firstNameUser, nameUser, pseudoUser, emailUser, pswdUser, confirmPswdUser, birthDate)
+                &&
+                CheckInfo("", firstNameUser, nameUser, pseudoUser, emailUser, pswdUser, confirmPswdUser, birthDate))
+            {
 
-					// Vérifie si le pseudo existe déjà dans la base de donnée
-					if (CheckPseudo(pseudoUser)) {
+                // Vérification si l'utilisateur a rentré deux fois le même mot de passe
+                if (CheckSamePswd(pswdUser, confirmPswdUser))
+                {
 
-						// Vérifie si le mail existe déjà dans la base de donnée
-						if (CheckMail(emailUser)) {
+                    // Vérifie si le pseudo existe déjà dans la base de donnée
+                    if (CheckPseudo(pseudoUser))
+                    {
 
-							// Effectue l'inscription de l'utilisateur
-							return "OK";
-						}
-						else {
+                        // Vérifie si le mail existe déjà dans la base de donnée
+                        if (CheckMail(emailUser))
+                        {
 
-							return "Le mail existe déjà.";
-						}
-					}
-					else {
+                            // Effectue l'inscription de l'utilisateur
+                            return "OK";
+                        }
+                        else
+                        {
 
-						return "Le pseudo existe déjà.";
-					}
-				}
-				else {
+                            return "Le mail existe déjà.";
+                        }
+                    }
+                    else
+                    {
 
-					return "Les mots de passe ne correspondent pas.";
-				}
-			}
-			else {
+                        return "Le pseudo existe déjà.";
+                    }
+                }
+                else
+                {
 
-				return "Veuillez remplir tous les champs s'il vous plaît";
-			}
-		}
+                    return "Les mots de passe ne correspondent pas.";
+                }
+            }
+            else
+            {
 
-		public static bool CheckInfo(string obj, string firstNameUser, string nameUser, string pseudoUser, string emailUser, string pswdUser, string confirmPswdUser, string birthDate) {
+                return "Veuillez remplir tous les champs s'il vous plaît";
+            }
+        }
 
-			if (firstNameUser != obj && nameUser != obj && pseudoUser != obj && emailUser != obj && pswdUser != obj && confirmPswdUser != obj && birthDate != obj) {
+        public static bool CheckInfo(string obj, string firstNameUser, string nameUser, string pseudoUser, string emailUser, string pswdUser, string confirmPswdUser, string birthDate)
+        {
 
-				return true;
-			}
-			else return false;
-		}
+            if (firstNameUser != obj && nameUser != obj && pseudoUser != obj && emailUser != obj && pswdUser != obj && confirmPswdUser != obj && birthDate != obj)
+            {
 
-		public static bool CheckSamePswd(string pswdUser, string confirmPswdUser) {
+                return true;
+            }
+            else return false;
+        }
 
-			if (pswdUser == confirmPswdUser) return true;
-			else return false;
-		}
+        public static bool CheckSamePswd(string pswdUser, string confirmPswdUser)
+        {
 
-		public static bool CheckPseudo(string pseudoUser) {
+            if (pswdUser == confirmPswdUser) return true;
+            else return false;
+        }
 
-			RestService.dic = new Dictionary<string, string> {
+        public static bool CheckPseudo(string pseudoUser)
+        {
 
-				{ "pseudo", pseudoUser }
-			};
-			Check check = RestService.Request<Check>(RestService.dic, "checkPseudo").Result[0];
-			return check.Verif;
-		}
+            RestService.dic = new Dictionary<string, string> {
 
-		public static bool CheckMail(string emailUser) {
+                { "pseudo", pseudoUser }
+            };
+            Check check = RestService.Request<Check>(RestService.dic, "checkPseudo").Result[0];
+            return check.Verif;
+        }
 
-			RestService.dic = new Dictionary<string, string> {
+        public static bool CheckMail(string emailUser)
+        {
 
-				{ "email", emailUser }
-			};
-			Check check = RestService.Request<Check>(RestService.dic, "checkMail").Result[0];
-			return check.Verif;
-		}
+            RestService.dic = new Dictionary<string, string> {
 
-		// FIN METHODES INSCRIPTION
-	}
+                { "email", emailUser }
+            };
+            Check check = RestService.Request<Check>(RestService.dic, "checkMail").Result[0];
+            return check.Verif;
+        }
+
+        #endregion MethodesInscription
+        // FIN METHODES INSCRIPTION
+
+
+        // DEBUT METHODES CONNEXION
+        #region MethodesConnexion
+
+        // Vérification si le pseudo et le mot de passe sont corrects
+        public static bool CheckConnexion(string pseudoUser, String pswdUser)
+        {
+            Dictionary<string,string> dic = new Dictionary<string, string>
+            {
+                { "pseudo", pseudoUser },
+                { "pswd", pswdUser}
+            };
+            return RestService.Request<Check>(dic, "checkPassword").Result[0].Verif;
+        }
+
+
+        public static List<string> GetBeerTypes()
+        {
+            Dictionary<string, string> dic = new Dictionary<string, string>();
+
+            //return RestService.Request<List<string>>(dic, "getBeerTypes");
+            List<string> listeTypes = new List<string> { "amer", "sucré" };
+            return listeTypes;
+
+        }
+
+        #endregion MethodesConnexion
+        // FIN METHODES CONNEXION
+    }
 }
