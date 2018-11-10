@@ -5,10 +5,23 @@
     <ContentPage.Content>
         <ScrollView>
             <StackLayout Orientation="Vertical">
+                <Frame BackgroundColor="Transparent"
+                   Margin="0, 10"
+                   CornerRadius="10"
+                   Padding="10, 5"
+                   HasShadow="False"
+                   HorizontalOptions="Start">
+                    <Button Text="Retour"
+                        Style="{StaticResource buttonBlue}"
+                                BackgroundColor="Silver"
+                                FontSize="12"
+                                HeightRequest="35"
+                        Clicked="BtnRetourClicked"/>
+                </Frame>
                 <Frame HorizontalOptions="Center" VerticalOptions="Center" Padding="20" BackgroundColor="Transparent">
                     <Image x:Name="photo"/>
                 </Frame>
-
+                
                 <Frame BackgroundColor="Silver"
                    Margin="0, 10"
                    CornerRadius="10"

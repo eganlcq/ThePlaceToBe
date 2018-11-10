@@ -10,7 +10,7 @@ using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
-
+using ThePlaceToBe.Data;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -34,6 +34,16 @@ namespace ThePlaceToBe.Views.ScanPage
         private void BtnNONClicked(object sender, EventArgs e)
         {
             // PAS DE CODE A EXECUTER CAR BIERE PAS OK
+            Photo.photoIsTaken = true;
+            this.Navigation.PopAsync();
+            
+        }
+
+        // BUTTON RETOUR
+        private void BtnRetourClicked(object sender, EventArgs e)
+        {
+            // Cancel the scan
+            Photo.photoIsTaken = false;
             this.Navigation.PopAsync();
         }
 
@@ -57,6 +67,7 @@ namespace ThePlaceToBe.Views.ScanPage
             string responseString = await response.Content.ReadAsStringAsync();
             response.EnsureSuccessStatusCode();
 
+            Photo.photoIsTaken = false;
             await Navigation.PopAsync();
         }
     }

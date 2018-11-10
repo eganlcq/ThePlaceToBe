@@ -26,10 +26,23 @@ namespace ThePlaceToBe.Views.MainPage
 
             InitializeComponent();
             NavigationPage.SetHasNavigationBar(this, false);
+
             // Initialise des éléments présents dans le xaml
             Init();
             // Initialise la grille qui contiendra la liste des bières se trouvant dans la base de données
             InitBeerGrid();
+        }
+
+        // Restart the scan if the previous one failed the text recognition
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
+
+            if (Photo.photoIsTaken)
+            {
+                TakePhoto();
+                return;
+            }
         }
 
         // Cette méthode se lance lorque l'on clique sur une image de bière
