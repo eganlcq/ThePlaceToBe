@@ -95,7 +95,7 @@ namespace ThePlaceToBe.Views.AchievementPage
         {
             if (pseudoUser.Length <= LONGUEUR_PSEUDO_PETITE)
             {
-                return = FONTSIZE_GRANDE;
+                return FONTSIZE_GRANDE;
             }
             if (pseudoUser.Length <= LONGUEUR_PSEUDO_MOYENNE)
             {
