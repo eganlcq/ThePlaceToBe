@@ -8,7 +8,7 @@ using ThePlaceToBe.Views.InscriptionPage;
 namespace TDDProject
 {
     [TestClass]
-    public class TestConstructors
+    public class ConstructorsTest
     {
         [TestMethod]
         public void Test_Classes()
