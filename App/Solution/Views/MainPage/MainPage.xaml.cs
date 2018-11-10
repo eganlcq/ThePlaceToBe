@@ -15,158 +15,206 @@ using System.Threading.Tasks;
 using ThePlaceToBe.Data;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
-using Process = ThePlaceToBe.Data.Process;
 
 namespace ThePlaceToBe.Views.MainPage
 {
-	[XamlCompilation(XamlCompilationOptions.Compile)]
-	public partial class MainPage : ContentPage
-	{
-		public MainPage() {
-			
-			InitializeComponent();
-			NavigationPage.SetHasNavigationBar(this, false);
-			// Initialise des éléments présents dans le xaml
-			Init();
-			// Initialise la grille qui contiendra la liste des bières se trouvant dans la base de données
-			InitBeerGrid();
-		}
+    [XamlCompilation(XamlCompilationOptions.Compile)]
+    public partial class MainPage : ContentPage
+    {
+        public MainPage()
+        {
 
-		// Cette méthode se lance lorque l'on clique sur une image de bière
-		private void BeerTapped(object s, EventArgs e, Beer beer) {
+            InitializeComponent();
+            NavigationPage.SetHasNavigationBar(this, false);
+            // Initialise des éléments présents dans le xaml
+            Init();
+            // Initialise la grille qui contiendra la liste des bières se trouvant dans la base de données
+            InitBeerGrid();
+        }
 
-			RestService.dic = new Dictionary<string, string> {
+        // Cette méthode se lance lorque l'on clique sur une image de bière
+        private void BeerTapped(object s, EventArgs e, Beer beer)
+        {
 
-				{"idBiere", beer.Idbiere.ToString() }
-			};
-			this.Navigation.PushAsync(new ProductPage.ProductPage());
-		}
+            RestService.dic = new Dictionary<string, string> {
 
-		// Cette méthode se lance lorque l'on clique sur l'image du user
-		private void ProfilMainPageTapped(object sender, EventArgs e) {
-			this.Navigation.PushAsync(new AchievementPage.AchievementPage(User.currentUser.Iduser.ToString()));
-		}
+                {"idBiere", beer.Idbiere.ToString() }
+            };
+            this.Navigation.PushAsync(new ProductPage.ProductPage());
+        }
 
-		// Initialise des éléments présents dans le xaml
-		private void Init() {
+        // Cette méthode se lance lorque l'on clique sur l'image du user
+        private void ProfilMainPageTapped(object sender, EventArgs e)
+        {
+            this.Navigation.PushAsync(new AchievementPage.AchievementPage(User.currentUser.Iduser.ToString()));
+        }
 
-			imgLogo.Source = Constants.appImg + "logo.png";
-			imgAccount.Source = Constants.userImg + User.currentUser.Photo;
-			imgLoupe.Source = Constants.appImg + "loupe.png";
-			lblPseudo.Text = User.currentUser.Pseudo;
-			flavourPicker.Items.Add("Pouet");
-			flavourPicker.Items.Add("Pouet");
-			flavourPicker.Items.Add("Pouet");
+        // Cette méthode se lance lorque l'on clique sur le bouton de scan
+        /*private void ScanClicked(object sender, EventArgs e) {
+			this.Navigation.PushAsync(new ScanPage.ScanPage());
+		}*/
 
-			btnScan.Clicked += (s, e) => TakePhoto();
-		}
+        // Initialise des éléments présents dans le xaml
+        private void Init()
+        {
 
-		// Initialise la grille qui contiendra la liste des bières se trouvant dans la base de données
-		private void InitBeerGrid() {
+            imgLogo.Source = Constants.appImg + "logo.png";
+            imgAccount.Source = Constants.userImg + User.currentUser.Photo;
+            imgLoupe.Source = Constants.appImg + "loupe.png";
+            lblPseudo.Text = User.currentUser.Pseudo;
+            flavourPicker.Items.Add("Pouet");
+            flavourPicker.Items.Add("Pouet");
+            flavourPicker.Items.Add("Pouet");
 
-			RestService.dic = new Dictionary<string, string>();
-			List<Beer> listBiere = RestService.Request<Beer>(RestService.dic, "selectBeer").Result;
-			int nbBiere = listBiere.Count();
-			double nbRow = Math.Ceiling(nbBiere / 3.0);
-			double nbColumn = 3;
+            btnScan.Clicked += (s, e) => TakePhoto();
+        }
 
-			// Ajoute un nombre de ligne proportionnel au nombre de bières récupérées de la base de données
-			AddRows(nbRow);
-			// Ajoute les images de bière dans les cases de la grille
-			AddBeers(nbRow, nbColumn, nbBiere, listBiere);
-		}
+        // Initialise la grille qui contiendra la liste des bières se trouvant dans la base de données
+        private void InitBeerGrid()
+        {
 
-		// Ajoute un nombre de ligne proportionnel au nombre de bières récupérées de la base de données
-		private void AddRows(double nbRow) {
+            RestService.dic = new Dictionary<string, string>();
+            List<Beer> listBiere = RestService.Request<Beer>(RestService.dic, "selectBeer").Result;
+            int nbBiere = listBiere.Count();
+            double nbRow = Math.Ceiling(nbBiere / 3.0);
+            double nbColumn = 3;
 
-			for (int i = 0; i < nbRow; i++) {
+            // Ajoute un nombre de ligne proportionnel au nombre de bières récupérées de la base de données
+            AddRows(nbRow);
+            // Ajoute les images de bière dans les cases de la grille
+            AddBeers(nbRow, nbColumn, nbBiere, listBiere);
+        }
 
-				RowDefinition row = new RowDefinition {
-					Height = 100
-				};
-				beerGrid.RowDefinitions.Add(row);
-			}
-		}
+        // Ajoute un nombre de ligne proportionnel au nombre de bières récupérées de la base de données
+        private void AddRows(double nbRow)
+        {
 
-		// Ajoute les images de bière dans les cases de la grille
-		private void AddBeers(double nbRow, double nbColumn, int nbBiere, List<Beer> listBiere) {
+            for (int i = 0; i < nbRow; i++)
+            {
 
-			int count = 0;
-			for (int x = 0; x < nbRow; x++) {
+                RowDefinition row = new RowDefinition
+                {
+                    Height = 100
+                };
+                beerGrid.RowDefinitions.Add(row);
+            }
+        }
 
-				for (int y = 0; y < nbColumn && count < nbBiere; y++, count++) {
+        // Ajoute les images de bière dans les cases de la grille
+        private void AddBeers(double nbRow, double nbColumn, int nbBiere, List<Beer> listBiere)
+        {
 
-					Beer beer = listBiere[count];
-					string imgBiere = listBiere[count].Image;
-					TapGestureRecognizer tap = new TapGestureRecognizer();
-					// Vérifie si l'image existe, si elle n'existe pas, affiche l'image par défaut
-					Image img = Process.ChooseImage(imgBiere);
-					tap.Tapped += (s, e) => BeerTapped(s, e, beer);
-					img.GestureRecognizers.Add(tap);
-					beerGrid.Children.Add(img, y, x);
-				}
-			}
-		}
+            int count = 0;
+            for (int x = 0; x < nbRow; x++)
+            {
 
-		private async void TakePhoto() {
+                for (int y = 0; y < nbColumn && count < nbBiere; y++, count++)
+                {
 
-			await CrossMedia.Current.Initialize();
+                    Beer beer = listBiere[count];
+                    string imgBiere = listBiere[count].Image;
+                    TapGestureRecognizer tap = new TapGestureRecognizer();
+                    // Vérifie si l'image existe, si elle n'existe pas, affiche l'image par défaut
+                    Image img = ChooseImage(imgBiere);
+                    tap.Tapped += (s, e) => BeerTapped(s, e, beer);
+                    img.GestureRecognizers.Add(tap);
+                    beerGrid.Children.Add(img, y, x);
+                }
+            }
+        }
 
-			var cameraStatus = await CrossPermissions.Current.CheckPermissionStatusAsync(Permission.Camera);
-			var storageStatus = await CrossPermissions.Current.CheckPermissionStatusAsync(Permission.Storage);
+        // Vérifie si l'image existe, si elle n'existe pas, affiche l'image par défaut
+        private Image ChooseImage(string imgBiere)
+        {
 
-			if (cameraStatus != PermissionStatus.Granted || storageStatus != PermissionStatus.Granted) {
-				var results = await CrossPermissions.Current.RequestPermissionsAsync(new[] { Permission.Camera, Permission.Storage });
-				cameraStatus = results[Permission.Camera];
-				storageStatus = results[Permission.Storage];
-			}
+            Image img;
 
-			if (cameraStatus != PermissionStatus.Granted && storageStatus != PermissionStatus.Granted) {
+            if (imgBiere != "" && imgBiere != null)
+            {
+                img = new Image
+                {
+                    Source = Constants.beersImg + imgBiere,
+                    Margin = new Thickness(5, 5)
+                };
+            }
+            else
+            {
+                img = new Image
+                {
+                    Source = Constants.beersImg + "oneBeer.png",
+                    Margin = new Thickness(5, 5)
+                };
+            }
+            return img;
+        }
+
+        private async void TakePhoto()
+        {
+
+            await CrossMedia.Current.Initialize();
+
+            var cameraStatus = await CrossPermissions.Current.CheckPermissionStatusAsync(Permission.Camera);
+            var storageStatus = await CrossPermissions.Current.CheckPermissionStatusAsync(Permission.Storage);
+
+            if (cameraStatus != PermissionStatus.Granted || storageStatus != PermissionStatus.Granted)
+            {
+                var results = await CrossPermissions.Current.RequestPermissionsAsync(new[] { Permission.Camera, Permission.Storage });
+                cameraStatus = results[Permission.Camera];
+                storageStatus = results[Permission.Storage];
+            }
+
+            if (cameraStatus == PermissionStatus.Granted && storageStatus == PermissionStatus.Granted)
+            {
+
+                if (!CrossMedia.Current.IsCameraAvailable || !CrossMedia.Current.IsTakePhotoSupported)
+                {
+
 #pragma warning disable CS4014 // Dans la mesure où cet appel n'est pas attendu, l'exécution de la méthode actuelle continue avant la fin de l'appel
-				DisplayAlert("Permissions Denied", "Unable to take photos.", "OK");
+                    DisplayAlert("No Camera", "No camera available.", "OK");
 #pragma warning restore CS4014 // Dans la mesure où cet appel n'est pas attendu, l'exécution de la méthode actuelle continue avant la fin de l'appel
-			}
-			else {
+                    return;
+                }
 
-				if (!CrossMedia.Current.IsCameraAvailable || !CrossMedia.Current.IsTakePhotoSupported) {
+                var file = await CrossMedia.Current.TakePhotoAsync(new StoreCameraMediaOptions
+                {
 
-#pragma warning disable CS4014 // Dans la mesure où cet appel n'est pas attendu, l'exécution de la méthode actuelle continue avant la fin de l'appel
-					DisplayAlert("No Camera", "No camera available.", "OK");
-#pragma warning restore CS4014 // Dans la mesure où cet appel n'est pas attendu, l'exécution de la méthode actuelle continue avant la fin de l'appel
-					return;
-				}
+                    Directory = "Sample",
+                    Name = "test.jpg",
+                    PhotoSize = PhotoSize.Medium,
+                    CompressionQuality = 92
+                });
 
-				var file = await CrossMedia.Current.TakePhotoAsync(new StoreCameraMediaOptions {
+                if (file == null) return;
 
-					Directory = "Sample",
-					Name = "test.jpg",
-					PhotoSize = PhotoSize.Medium,
-					CompressionQuality = 92
-				});
+                await DisplayAlert("File Location", file.Path, "OK");
 
-				if (file == null) return;
+                ImageSource img = ImageSource.FromStream(() => {
 
-				ImageSource img = ImageSource.FromStream(() => {
+                    var streamImg = file.GetStream();
+                    return streamImg;
+                });
 
-					var streamImg = file.GetStream();
-					return streamImg;
-				});
+                byte[] bitmapData;
+                var stream = new MemoryStream();
+                file.GetStream().CopyTo(stream);
+                bitmapData = stream.ToArray();
+                var fileContent = new ByteArrayContent(bitmapData);
 
-				byte[] bitmapData;
-				var stream = new MemoryStream();
-				file.GetStream().CopyTo(stream);
-				bitmapData = stream.ToArray();
-				var fileContent = new ByteArrayContent(bitmapData);
+                await this.Navigation.PushAsync(new ScanPage.ScanPage(img, fileContent));
 
-				await this.Navigation.PushAsync(new ScanPage.ScanPage(img, fileContent));
+                if (File.Exists(file.Path))
+                {
 
-				if (File.Exists(file.Path)) {
+                    File.Delete(file.Path);
+                }
 
-					File.Delete(file.Path);
-				}
+                file.Dispose();
+            }
+            else
+            {
 
-				file.Dispose();
-			}
-		}
-	}
+                await DisplayAlert("Permissions Denied", "Unable to take photos.", "OK");
+            }
+        }
+    }
 }

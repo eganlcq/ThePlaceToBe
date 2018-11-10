@@ -4,12 +4,13 @@ using System.Text;
 
 namespace ThePlaceToBe.Data
 {
-    class Check
+    public class Check
     {
-		public bool Verif { get; set; }
+        public bool Verif { get; set; }
 
-		public Check() {
+        public Check()
+        {
 
-		}
-	}
+        }
+    }
 }

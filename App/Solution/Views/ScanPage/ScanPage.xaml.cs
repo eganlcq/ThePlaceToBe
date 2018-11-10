@@ -16,44 +16,48 @@ using Xamarin.Forms.Xaml;
 
 namespace ThePlaceToBe.Views.ScanPage
 {
-	[XamlCompilation(XamlCompilationOptions.Compile)]
-	public partial class ScanPage : ContentPage
-	{
-		public ScanPage(ImageSource img, ByteArrayContent ba) {
+    [XamlCompilation(XamlCompilationOptions.Compile)]
+    public partial class ScanPage : ContentPage
+    {
+        public ScanPage(ImageSource img, ByteArrayContent ba)
+        {
 
-			InitializeComponent();
-			NavigationPage.SetHasNavigationBar(this, false);
+            InitializeComponent();
+            NavigationPage.SetHasNavigationBar(this, false);
 
-			photo.Source = img;
+            photo.Source = img;
 
-			btnUpload.Clicked += (s, e) => Upload(ba);
-		}
+            btnUpload.Clicked += (s, e) => Upload(ba);
+        }
 
-		// BOUTON NON SCAN
-		private void BtnNONClicked(object sender, EventArgs e) {
-			// PAS DE CODE A EXECUTER CAR BIERE PAS OK
-			this.Navigation.PopAsync();
-		}
+        // BOUTON NON SCAN
+        private void BtnNONClicked(object sender, EventArgs e)
+        {
+            // PAS DE CODE A EXECUTER CAR BIERE PAS OK
+            this.Navigation.PopAsync();
+        }
 
-		private async void Upload(ByteArrayContent ba) {
+        private async void Upload(ByteArrayContent ba)
+        {
 
-			ba.Headers.ContentType = MediaTypeHeaderValue.Parse("application/octet-stream");
-			ba.Headers.ContentDisposition = new ContentDispositionHeaderValue("form-data") {
+            ba.Headers.ContentType = MediaTypeHeaderValue.Parse("application/octet-stream");
+            ba.Headers.ContentDisposition = new ContentDispositionHeaderValue("form-data")
+            {
 
-				Name = "fileUpload",
-				FileName = lblName.Text + ".jpg"
-			};
+                Name = "fileUpload",
+                FileName = lblName.Text + ".jpg"
+            };
 
-			string boundary = "---8393774hhy37373773";
-			MultipartFormDataContent multipartContent = new MultipartFormDataContent(boundary);
-			multipartContent.Add(ba);
+            string boundary = "---8393774hhy37373773";
+            MultipartFormDataContent multipartContent = new MultipartFormDataContent(boundary);
+            multipartContent.Add(ba);
 
-			HttpClient httpClient = new HttpClient();
-			HttpResponseMessage response = await httpClient.PostAsync("http://www.theplacetobe.ovh/admin/upload.php", multipartContent);
-			string responseString = await response.Content.ReadAsStringAsync();
-			response.EnsureSuccessStatusCode();
+            HttpClient httpClient = new HttpClient();
+            HttpResponseMessage response = await httpClient.PostAsync("http://www.theplacetobe.ovh/admin/upload.php", multipartContent);
+            string responseString = await response.Content.ReadAsStringAsync();
+            response.EnsureSuccessStatusCode();
 
-			await Navigation.PopAsync();
-		}
-	}
+            await Navigation.PopAsync();
+        }
+    }
 }
