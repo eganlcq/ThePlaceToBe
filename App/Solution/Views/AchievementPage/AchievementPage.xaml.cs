@@ -91,7 +91,7 @@ namespace ThePlaceToBe.Views.AchievementPage
             FavorisButton.BackgroundColor = Color.FromHex("3367b0");
         }
 
-        private void InitPseudo(string pseudoUser)
+        private int InitPseudo(string pseudoUser)
         {
             if (pseudoUser.Length <= LONGUEUR_PSEUDO_PETITE)
             {
