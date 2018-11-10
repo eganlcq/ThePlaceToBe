@@ -5,7 +5,7 @@ using System.Text;
 
 namespace ThePlaceToBe.Data
 {
-    class User
+    public class User
     {
 		public static User currentUser;
 
