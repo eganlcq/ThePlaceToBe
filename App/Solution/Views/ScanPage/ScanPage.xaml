@@ -8,7 +8,7 @@
                 <Frame HorizontalOptions="Center" VerticalOptions="Center" Padding="20" BackgroundColor="Transparent">
                     <Image x:Name="photo"/>
                 </Frame>
-                
+
                 <Frame BackgroundColor="Silver"
                    Margin="0, 10"
                    CornerRadius="10"

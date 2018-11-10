@@ -4,7 +4,7 @@ using System.Text;
 
 namespace ThePlaceToBe.Data
 {
-    class Bar
+    public class Bar
     {
 		public int Idbar { get; set; }
 		public string Nombar { get; set; }

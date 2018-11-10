@@ -7,23 +7,22 @@ using System.Text;
 
 namespace ThePlaceToBe.Data
 {
-
 #if DEBUG
-	[Application(Debuggable = true)]
+    [Application(Debuggable = true)]
 #else
 	[Application(Debuggable = false)]
 #endif
-
-	class MainApplication : Application
+    public class MainApplication : Application
     {
-		public MainApplication(IntPtr handle, JniHandleOwnership transer) : base(handle, transer) {
+        public MainApplication(IntPtr handle, JniHandleOwnership transer)
+          : base(handle, transer)
+        {
+        }
 
-		}
-
-		public override void OnCreate() {
-
-			base.OnCreate();
-			CrossCurrentActivity.Current.Init(this);
-		}
-	}
+        public override void OnCreate()
+        {
+            base.OnCreate();
+            CrossCurrentActivity.Current.Init(this);
+        }
+    }
 }
