@@ -23,7 +23,7 @@ namespace ThePlaceToBe.Views.ConnexionPage
 		private void ConnexionClicked(object sender, EventArgs e) {
 			
 			// Vérification si le pseudo et le mot de passe sont corrects
-			bool isPasswordOrUsernameCorrect = CheckConnexion();
+			bool isPasswordOrUsernameCorrect = Process.CheckConnexion(pseudoUser.Text, pswdUser.Text);
 			// Effectue la connexion si le booléen renvoie true
 			Connexion(isPasswordOrUsernameCorrect);
 		}
@@ -40,16 +40,6 @@ namespace ThePlaceToBe.Views.ConnexionPage
 			imgLogo.Source = Constants.appImg + "logo.png";
 			pseudoUser.Completed += (s, e) => pswdUser.Focus();
 			pswdUser.Completed += (s, e) => ConnexionClicked(s, e);
-		}
-
-		// Vérification si le pseudo et le mot de passe sont corrects
-		private bool CheckConnexion() {
-
-			RestService.dic = new Dictionary<string, string> {
-				{ "pseudo", pseudoUser.Text },
-				{ "pswd", pswdUser.Text}
-			};
-			return RestService.Request<Check>(RestService.dic, "checkPassword").Result[0].Verif;
 		}
 
 		// Effectue la connexion si le booléen renvoie true

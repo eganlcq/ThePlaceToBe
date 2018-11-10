@@ -40,7 +40,7 @@ namespace ThePlaceToBe.Views.ProductPage
 				{ "idBeer", beer.Idbiere.ToString()},
 				{ "idUser", User.currentUser.Iduser.ToString()}
 			};
-			List<Beer> listBiere = RestService.Request<Beer>(RestService.dic, "insertFavoris").Result;
+			RestService.Request(RestService.dic, "insertFavoris");
 		}
 
 		// Affiche les info de la bière courante sur la page
