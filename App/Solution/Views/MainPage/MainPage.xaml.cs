@@ -15,6 +15,7 @@ using System.Threading.Tasks;
 using ThePlaceToBe.Data;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
+using Process = ThePlaceToBe.Data.Process;
 
 namespace ThePlaceToBe.Views.MainPage
 {
@@ -45,11 +46,6 @@ namespace ThePlaceToBe.Views.MainPage
 		private void ProfilMainPageTapped(object sender, EventArgs e) {
 			this.Navigation.PushAsync(new AchievementPage.AchievementPage(User.currentUser.Iduser.ToString()));
 		}
-
-		// Cette méthode se lance lorque l'on clique sur le bouton de scan
-		/*private void ScanClicked(object sender, EventArgs e) {
-			this.Navigation.PushAsync(new ScanPage.ScanPage());
-		}*/
 
 		// Initialise des éléments présents dans le xaml
 		private void Init() {
@@ -104,34 +100,12 @@ namespace ThePlaceToBe.Views.MainPage
 					string imgBiere = listBiere[count].Image;
 					TapGestureRecognizer tap = new TapGestureRecognizer();
 					// Vérifie si l'image existe, si elle n'existe pas, affiche l'image par défaut
-					Image img = ChooseImage(imgBiere);
+					Image img = Process.ChooseImage(imgBiere);
 					tap.Tapped += (s, e) => BeerTapped(s, e, beer);
 					img.GestureRecognizers.Add(tap);
 					beerGrid.Children.Add(img, y, x);
 				}
 			}
-		}
-
-		// Vérifie si l'image existe, si elle n'existe pas, affiche l'image par défaut
-		private Image ChooseImage(string imgBiere) {
-			
-			Image img;
-
-			if (imgBiere != "" && imgBiere != null) {
-
-				img = new Image {
-					Source = Constants.beersImg + imgBiere,
-					Margin = new Thickness(5, 5)
-				};
-			}
-			else {
-
-				img = new Image {
-					Source = Constants.beersImg + "oneBeer.png",
-					Margin = new Thickness(5, 5)
-				};
-			}
-			return img;
 		}
 
 		private async void TakePhoto() {
@@ -147,7 +121,12 @@ namespace ThePlaceToBe.Views.MainPage
 				storageStatus = results[Permission.Storage];
 			}
 
-			if (cameraStatus == PermissionStatus.Granted && storageStatus == PermissionStatus.Granted) {
+			if (cameraStatus != PermissionStatus.Granted && storageStatus != PermissionStatus.Granted) {
+#pragma warning disable CS4014 // Dans la mesure où cet appel n'est pas attendu, l'exécution de la méthode actuelle continue avant la fin de l'appel
+				DisplayAlert("Permissions Denied", "Unable to take photos.", "OK");
+#pragma warning restore CS4014 // Dans la mesure où cet appel n'est pas attendu, l'exécution de la méthode actuelle continue avant la fin de l'appel
+			}
+			else {
 
 				if (!CrossMedia.Current.IsCameraAvailable || !CrossMedia.Current.IsTakePhotoSupported) {
 
@@ -166,8 +145,6 @@ namespace ThePlaceToBe.Views.MainPage
 				});
 
 				if (file == null) return;
-
-				await DisplayAlert("File Location", file.Path, "OK");
 
 				ImageSource img = ImageSource.FromStream(() => {
 
@@ -189,10 +166,6 @@ namespace ThePlaceToBe.Views.MainPage
 				}
 
 				file.Dispose();
-			}
-			else {
-
-				await DisplayAlert("Permissions Denied", "Unable to take photos.", "OK");
 			}
 		}
 	}
