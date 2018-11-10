@@ -1,0 +1,381 @@
+html{
+    background: url("../image/fond.jpg") no-repeat center fixed; 
+    background-size: cover;
+}
+@font-face {
+    font-family: "slt";
+    src: url("Good Unicorn - TTF.ttf");
+}
+@media (max-device-width: 800px ){
+    html {
+        background: url("../image/fond2.jpg") no-repeat center fixed;
+        background-size: cover;
+    }
+    #profil img {
+        max-height: 120px;
+    }
+    main {
+        padding-top: 100px;
+    }
+}
+body, html {
+    margin: 0;
+    padding: 0;
+    font-family: "slt";
+    font-size: 1vw;
+    color: #ecf0f1;
+    background-color: unset!important;
+}
+main{
+    padding-top: 9%;
+}
+h1, ul, p{
+    margin: 0;
+    padding: 0;
+}
+#slogan h1 {
+    font-size: 7vw!important;
+}
+a {
+    color: #ecf0f1;
+    text-decoration: none!important;
+    cursor: pointer;
+}
+a:hover {
+    color: #D5B927;
+    transition: all 1s ease;
+}
+legend {
+    font-size: 2em;
+}
+main {
+    width: 80%!important;
+    min-height: 70vh;
+    margin: 0 auto!important;
+}
+#legal {
+    margin: 0 auto!important;
+}
+.container {
+    width: 100%;
+    max-width: none;
+}
+.row {
+    margin: 0!important;
+    text-align: center;
+}
+.imgResize{
+    width: 100%;
+    height: auto;
+}
+#slogan {
+    margin: auto;
+}
+#second{
+    padding-left: 35%;
+}
+#compte h1 {
+    font-size: 1.5vw;
+}
+#societe li {
+    font-size: 2vh;
+    display: block;
+}
+#bandeau {
+    background: black;
+    width: 100%;
+    opacity: 0.7;
+}
+#bandeau h1 {
+    text-align: center;
+    font-size: 3em!important;
+}
+#compte {
+    background-color: black;
+    opacity: 0.7;
+    font-size: 11px;
+    text-align: right;
+    padding-bottom: 5px;
+    padding-right: 50px;
+}
+#compte h1:before {
+    content: url("../image/icon7.png");
+    padding: 10px;
+}
+#app {
+    width: 40%;
+}
+#app input {
+    border: none;
+    background: #620F00;
+    color: #ecf0f1;
+    font-size: 1.2em;
+    font-family: Algerian;
+    text-transform: uppercase;
+    padding: 20px;
+    margin-bottom: 80px;
+    width: 65%;
+    border-radius: 75px;
+    box-shadow: 1px 2px 121px 0px rgba(0,0,0,0.75);
+}
+#app input:hover {
+    color: black;
+    font-weight: 700;
+    letter-spacing: 3px;
+    background: none;
+    transition: all 0.3s ease 0s;
+}
+menu {
+    margin: 0;
+    padding: 0;
+    position: fixed;
+    z-index: 5;
+    width: 100%;
+}
+footer {
+    background: black;
+    font-size: 1.2vh;
+    opacity: 0.9;
+    margin-top: 5%;
+    padding: 20px 0;
+    position: absolute;
+}
+#societe h1 {
+    font-size: 5vh;
+}
+footer li {
+    list-style-type: none;
+    display: inline-block;
+}
+#legal {
+    letter-spacing: 2px;
+    padding: 10px 0;
+}
+#legal li {
+    margin: 0 2%;
+    font-size: 2vh;
+}
+#fond {
+    width: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    background-color: black;
+    z-index: 10;
+    opacity: 0.6;
+}
+#login {
+    margin: auto;
+    position: fixed;
+    z-index: 20;
+    top: 20%;
+    right: 25%;
+    width: 50%;
+}
+#login input {
+    display: block;
+    width: 100%;
+    height: 3em;
+    border-radius: 5px;
+    margin: 10px 0;
+    padding-left: 10px;
+}
+
+#login input[type=submit]:hover, #formCompte input[type=submit]:hover {
+    background: #620F00;
+    border: 2px solid #620F00;
+    color: white;
+}
+#login input[type=submit], #login input[type=button] {
+    width: 50%!important;
+    margin: auto;
+}
+#login input[type=date]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    display: none;
+}
+.selected {
+    color: #D5B927;
+}
+#propos {
+    font-size: 1.5vw;
+    margin: 0 5% 0 40%;
+    border-radius: 50px;
+    padding: 15px;
+    width: 70%;
+    text-align: left;
+    opacity: 0.7;
+    background-color: black;
+    box-shadow: 10px 10px 194px 13px rgba(0,0,0,0.75);
+}
+#propos li {
+    display: inline-block;
+    margin: 0 3%;
+}
+#propos li:hover, #gestion li:hover {
+    color: #D5B927;
+    transition: all 1s ease;
+    cursor: pointer;
+}
+#propos h1 {
+    color: #cac6c3!important;
+    text-decoration: underline;
+}
+#propos video {
+    border-radius: 20px;
+    width: 100%;
+}
+#profil img {
+    border-radius:100px;
+}
+#profil section{
+    width: 100%;
+    display: inline-block;
+    text-align: center;
+}
+#jordan {
+    font-size: 0.8em;
+}
+#logo {
+    float: right;
+    width: 10%;
+    height: 10%;
+}
+#login input[type=button] {
+    margin-top: 30px;
+    background-color: #620F00;
+    border: none;
+    color:white;
+}
+#login input[type=button]:hover {
+    background-color: white;
+    color: #55000F;
+    opacity: 0.7;
+    transition: all 1s ease 0s;
+}
+#avatar {
+    border-radius: 100px;
+    margin-right: 10px!important;
+}
+#compte img, #compte p {
+    display: inline-block;
+    margin: auto;
+}
+#compte p {
+    font-size: 2.7em;
+    cursor: pointer;
+}
+#gestion {
+    text-align: center;
+    position: fixed;
+    display: none;
+    opacity: 0.7;
+    z-index: 50;
+    width:10%;
+    left:91%;
+    top: 13%;
+    font-size: 1.7em;
+}
+#gestion ul {
+    list-style-type: none;
+}
+#gestion li {
+        margin: 10px;
+}
+#gestCompte {
+    width: 50%;
+    opacity: 0.8;
+    border-radius: 10px;
+    padding: 15px;
+    background-color: #202225;
+    margin: auto;
+}
+#erreur1, #erreur2, #erreur3 {
+    font-size: 1.5em;
+    margin: 15px;
+    font-family: "Comic Sans MS",sans-serif;
+    color: red;
+}
+#gestionCompte {
+    margin: auto;
+    border-radius: 50px;
+    text-align: left!important;
+    padding: 15px;
+    width: 30%;
+    opacity: 0.9;
+    background-color: black;
+    box-shadow: 10px 10px 194px 13px rgba(0,0,0,0.75);
+}
+#gestionCompte img {
+    border-radius: 25px;
+}
+#formCompte input {
+    display: block;
+    width: 60%;
+    height: 3em;
+    font-size: 1em;
+    border-radius: 5px;
+    margin: 15px;
+}
+#gestionCompte label {
+    width: 25%;
+    font-size: 2em;
+}
+#gestionCompte input, #gestionCompte label {
+    display: inline-block;
+}
+#formCompte input[type=submit] {
+    display: block;
+    margin: 25px auto;
+}
+#image {
+    display: block!important;
+}
+#crayon {
+    margin-left: 10px;
+}
+#file{
+    display: none!important;
+}
+#erreur3{
+    text-align: center;
+    width: 100%;
+}
+.achievFav {
+    border-top: 5px dashed white;
+    border-bottom: 5px dashed white;
+    margin: auto;
+    text-align: center;
+    border-radius: 50px;
+    list-style-type: none;
+}
+.sectionFav {
+    text-align: left;
+    margin: auto;
+    width: 70%;
+}
+.sectionFav h1 {
+    padding-left: 5%;
+    font-size: 4em;
+    font-weight: bold;
+}
+.achievFav li {
+    display: inline-block;
+    text-align: center;
+    font-size: 2vh;
+    margin: 2% 1%;
+    width: 20%;
+}
+.achievFav li img {
+    display: block;
+    margin: auto;
+}
+.fleche {
+    position: relative;
+    bottom: 70px;
+}
+.fleche2 {
+    position: relative;
+    bottom: 50px;
+}
