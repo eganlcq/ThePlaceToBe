@@ -28,22 +28,25 @@
                    Padding="10, 5"
                    HasShadow="False"
                    HorizontalOptions="Center">
-                    <StackLayout>
+                    <StackLayout x:Name="stackLblAndFrame">
                         <Label Text="Est-ce bien ce qui est écris ?"
                            FontSize="20"
-                           Style="{StaticResource labStyleBoldBlackHorizonCenter}"/>
+                           Style="{StaticResource labStyleBoldBlackHorizonCenter}"
+                           x:Name="labEstCeBienEcrit"/>
                         <Frame BackgroundColor="White"
                            Margin="0, 5, 0, 10"
                            CornerRadius="15"
-                           Padding="5">
+                           Padding="5"
+                               x:Name="frameLblName">
                             <Label Text="Beer Name"
                                Style="{StaticResource labStyleBoldBlackHorizonCenter}"
                                FontSize="16"
                                x:Name="lblName"/>
                         </Frame>
                         <StackLayout Orientation="Horizontal"
-                                 HorizontalOptions="Center"
-                                 Spacing="30">
+                                 HorizontalOptions="CenterAndExpand"
+                                 Spacing="30"
+                                 x:Name="stackWithOUIAndNON">
 
                             <Button Text="OUI"
                                 Style="{StaticResource buttonBlue}"
@@ -55,7 +58,7 @@
                                 FontSize="14"
                                 Style="{StaticResource buttonBlue}"
                                 HeightRequest="40"
-                                Clicked="BtnNONClicked"/>
+                                    x:Name="btnNON"/>
                         </StackLayout>
                     </StackLayout>
                 </Frame>

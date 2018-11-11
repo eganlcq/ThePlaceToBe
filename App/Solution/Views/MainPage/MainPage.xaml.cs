@@ -33,18 +33,6 @@ namespace ThePlaceToBe.Views.MainPage
             InitBeerGrid();
         }
 
-        // Restart the scan if the previous one failed the text recognition
-        protected override void OnAppearing()
-        {
-            base.OnAppearing();
-
-            if (Photo.photoIsTaken)
-            {
-                TakePhoto();
-                return;
-            }
-        }
-
         // Cette méthode se lance lorque l'on clique sur une image de bière
         private void BeerTapped(object s, EventArgs e, Beer beer)
         {
@@ -199,7 +187,6 @@ namespace ThePlaceToBe.Views.MainPage
 
                 if (file == null) return;
 
-                //await DisplayAlert("File Location", file.Path, "OK");
 
                 ImageSource img = ImageSource.FromStream(() => {
 
