@@ -18,6 +18,7 @@ namespace ThePlaceToBe.Views.ConnexionPage
             NavigationPage.SetHasNavigationBar(this, false);
             // Initialise des éléments présents dans le xaml
             Init();
+
         }
 
         // Méthode lancée lorsque le bouton de connexion est utilisé

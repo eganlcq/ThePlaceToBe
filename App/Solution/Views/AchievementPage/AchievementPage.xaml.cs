@@ -83,7 +83,7 @@ namespace ThePlaceToBe.Views.AchievementPage
             List<User> listUser = Process.GetUser(idUser);
 
             pseudo.Text = listUser[0].Pseudo;
-            pseudo.FontSize = InitPseudo(listUser[0].Pseudo);
+            InitPseudo(listUser[0].Pseudo);
             var data = new DonneesView(User.currentUser.Iduser.ToString());
             DataBox.Children.Add(data);
             DataButton.BackgroundColor = Color.FromHex("#4D97FF");
@@ -91,23 +91,26 @@ namespace ThePlaceToBe.Views.AchievementPage
             FavorisButton.BackgroundColor = Color.FromHex("3367b0");
         }
 
-        private int InitPseudo(string pseudoUser)
+        private void InitPseudo(string pseudoUser)
         {
             if (pseudoUser.Length <= LONGUEUR_PSEUDO_PETITE)
             {
-                return FONTSIZE_GRANDE;
+                pseudo.FontSize = FONTSIZE_GRANDE;
+                return;
             }
             if (pseudoUser.Length <= LONGUEUR_PSEUDO_MOYENNE)
             {
-                return FONTSIZE_MOYENNE;
+                pseudo.FontSize = FONTSIZE_MOYENNE;
+                return;
             }
             if (pseudoUser.Length <= LONGUEUR_PSEUDO_GRANDE)
             {
-                return FONTSIZE_PETITE;
+                pseudo.FontSize = FONTSIZE_PETITE;
+                return;
             }
             else
             {
-                return FONTSIZE_TRES_PETITE;
+                pseudo.FontSize = FONTSIZE_TRES_PETITE;
             }
         }
     }

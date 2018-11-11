@@ -199,7 +199,7 @@ namespace ThePlaceToBe.Views.MainPage
 
                 if (file == null) return;
 
-                await DisplayAlert("File Location", file.Path, "OK");
+                //await DisplayAlert("File Location", file.Path, "OK");
 
                 ImageSource img = ImageSource.FromStream(() => {
 

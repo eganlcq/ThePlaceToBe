@@ -1,6 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:cust="clr-namespace:ThePlaceToBe.Data;assembly=ThePlaceToBe.Android"
              x:Class="ThePlaceToBe.Views.InscriptionPage.InscriptionPage">
     <ContentPage.Content>
         <Grid>
@@ -32,14 +33,14 @@
                     </StackLayout>
 
                     <StackLayout>
-                        <Entry x:Name="firstNameUser" Placeholder="Nom" PlaceholderColor="Gray" />
-                        <Entry x:Name="nameUser" Placeholder="Prénom" PlaceholderColor="Gray" />
-                        <Entry x:Name="pseudoUser" Placeholder="Pseudo" PlaceholderColor="Gray" />
-                        <Entry x:Name="emailUser" Placeholder="Adresse@email.com" PlaceholderColor="Gray" />
+                        <cust:MyEntry x:Name="firstNameUser" Placeholder="Nom" PlaceholderColor="Gray" />
+                        <cust:MyEntry x:Name="nameUser" Placeholder="Prénom" PlaceholderColor="Gray" />
+                        <cust:MyEntry x:Name="pseudoUser" Placeholder="Pseudo" PlaceholderColor="Gray" />
+                        <cust:MyEntry x:Name="emailUser" Placeholder="Adresse@email.com" PlaceholderColor="Gray" />
                         <DatePicker x:Name="datePickerNaissance" MinimumDate="01/01/1920"/>
-                        <Entry x:Name="pswdUser" Placeholder="Mot de passe" PlaceholderColor="Gray"
+                        <cust:MyEntry x:Name="pswdUser" Placeholder="Mot de passe" PlaceholderColor="Gray"
                                IsPassword="True"/>
-                        <Entry x:Name="confirmPswdUser" Placeholder="Confirmation de mot de passe" PlaceholderColor="Gray"
+                        <cust:MyEntry x:Name="confirmPswdUser" Placeholder="Confirmation de mot de passe" PlaceholderColor="Gray"
                                IsPassword="True"/>
                         <Label x:Name="lblError" Text="" TextColor="Red" Margin="5, 5, 0, 0"/>
                     </StackLayout>
