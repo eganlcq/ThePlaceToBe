@@ -1,6 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:cust="clr-namespace:ThePlaceToBe.Data;assembly=ThePlaceToBe.Android"
              x:Class="ThePlaceToBe.Views.ConnexionPage.ConnexionPage">
     <ContentPage.Content>
         <Grid>
@@ -33,10 +34,10 @@
                                Margin="0,10,0,5"/>
                     </StackLayout>
 
-                    <StackLayout >
-                        <Entry x:Name="pseudoUser" Placeholder="Pseudo/email" PlaceholderColor="Gray"
+                    <StackLayout x:Name="EntryAndLabError">
+                        <cust:MyEntry x:Name="pseudoUser" Placeholder="Pseudo/email" PlaceholderColor="Gray"
                                TextColor="Black"/>
-                        <Entry x:Name="pswdUser" Placeholder="Mot de passe" PlaceholderColor="Gray"
+                        <cust:MyEntry x:Name="pswdUser" Placeholder="Mot de passe" PlaceholderColor="Gray"
                                TextColor="Black"
                                IsPassword="True"/>
                         <Label x:Name="lblError" Text="" TextColor="Red" Margin="5, 5, 0, 0"/>
