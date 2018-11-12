@@ -33,14 +33,14 @@
                     </StackLayout>
 
                     <StackLayout>
-                        <cust:MyEntry x:Name="firstNameUser" Placeholder="Nom" PlaceholderColor="Gray" />
-                        <cust:MyEntry x:Name="nameUser" Placeholder="Prénom" PlaceholderColor="Gray" />
-                        <cust:MyEntry x:Name="pseudoUser" Placeholder="Pseudo" PlaceholderColor="Gray" />
-                        <cust:MyEntry x:Name="emailUser" Placeholder="Adresse@email.com" PlaceholderColor="Gray" />
+                        <cust:MyEntryInscriptionConnexion x:Name="firstNameUser" Placeholder="Nom" PlaceholderColor="Gray" />
+                        <cust:MyEntryInscriptionConnexion x:Name="nameUser" Placeholder="Prénom" PlaceholderColor="Gray" />
+                        <cust:MyEntryInscriptionConnexion x:Name="pseudoUser" Placeholder="Pseudo" PlaceholderColor="Gray" />
+                        <cust:MyEntryInscriptionConnexion x:Name="emailUser" Placeholder="Adresse@email.com" PlaceholderColor="Gray" />
                         <DatePicker x:Name="datePickerNaissance" MinimumDate="01/01/1920"/>
-                        <cust:MyEntry x:Name="pswdUser" Placeholder="Mot de passe" PlaceholderColor="Gray"
+                        <cust:MyEntryInscriptionConnexion x:Name="pswdUser" Placeholder="Mot de passe" PlaceholderColor="Gray"
                                IsPassword="True"/>
-                        <cust:MyEntry x:Name="confirmPswdUser" Placeholder="Confirmation de mot de passe" PlaceholderColor="Gray"
+                        <cust:MyEntryInscriptionConnexion x:Name="confirmPswdUser" Placeholder="Confirmation de mot de passe" PlaceholderColor="Gray"
                                IsPassword="True"/>
                         <Label x:Name="lblError" Text="" TextColor="Red" Margin="5, 5, 0, 0"/>
                     </StackLayout>

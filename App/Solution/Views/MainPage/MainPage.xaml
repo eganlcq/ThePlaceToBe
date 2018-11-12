@@ -62,17 +62,18 @@
                                  HorizontalOptions="FillAndExpand"
                                  Spacing="0"
                              Margin="0, 10, 0, 0">
-                    <Label Text="Filter :"
+                    <Label Text="Saveur :"
                                FontSize="18"
                                Style="{StaticResource labStyleBoldBlackVerticalCenter}"
                                Margin="10, 0, 10, 5"/>
 
-                    <Picker x:Name="flavourPicker"
+                    <cust:MyPickerFlavour x:Name="flavourPicker"
                             BackgroundColor="White"
                             FontSize="12"
                             WidthRequest="90"
                             HeightRequest="25"
-                            VerticalOptions="Center"/>
+                            VerticalOptions="Center"
+                            Title="Flavour"/>
 
                     <StackLayout Spacing="0"
                                      Orientation="Horizontal"
@@ -81,11 +82,11 @@
                                HeightRequest="30"
                                VerticalOptions="Center"/>
 
-                        <cust:MyEntry BackgroundColor="White"
+                        <cust:MyEntryFilterBeer BackgroundColor="White"
                                VerticalOptions="Center"
                                FontSize="12"
                                HeightRequest="25"
-                               WidthRequest="90"
+                               WidthRequest="150"
                                Margin="10, 0, 10, 0"/>
                     </StackLayout>
 

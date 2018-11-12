@@ -31,7 +31,7 @@
             <Style TargetType="Label"
                    ApplyToDerivedTypes="True">
                 <Setter Property="FontFamily"
-                        Value="Helvetica_Neu_Bold.ttf#Helvetica_Neu_Bold"/>
+                        Value="Helvetica Neu Bold.ttf#Helvetica Neu Bold"/>
                 <Setter Property="FontAttributes"
                         Value="Bold"/>
             </Style>
@@ -39,7 +39,7 @@
             <Style TargetType="Button"
                    ApplyToDerivedTypes="true">
                 <Setter Property="FontFamily"
-                        Value="Helvetica_Neu_Bold.ttf#Helvetica_Neu_Bold"/>
+                        Value="Helvetica Neu Bold.ttf#Helvetica Neu Bold"/>
             </Style>
 
             <Style x:Key="labStyleBoldBlackHorizonCenter" TargetType="Label" ApplyToDerivedTypes="True">
@@ -62,6 +62,7 @@
                 <Setter Property="BackgroundColor" Value="{StaticResource backgroundColor}"/>
                 <Setter Property="BorderWidth" Value="2"/>
             </Style>
+
         </ResourceDictionary>
     </Application.Resources>
 </Application>

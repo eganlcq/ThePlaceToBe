@@ -27,35 +27,71 @@ namespace ThePlaceToBe.Views.ScanPage
 
             photo.Source = img;
 
-            btnUpload.Clicked += (s, e) => Upload(ba);
+            btnUpload.Clicked += (s, e) => Upload(ba, lblName.Text);
+            btnNON.Clicked += (s, e) => BtnNONClicked(s, e, ba);
         }
 
         // BOUTON NON SCAN
-        private void BtnNONClicked(object sender, EventArgs e)
+        private void BtnNONClicked(object sender, EventArgs e, ByteArrayContent ba)
         {
-            // PAS DE CODE A EXECUTER CAR BIERE PAS OK
-            Photo.photoIsTaken = true;
-            this.Navigation.PopAsync();
-            
+            // ASK THE USER TO ENTER THE NAME OF THE BEER
+
+            // Remove button "OUI" and button "NON"
+            stackWithOUIAndNON.Children.RemoveAt(1);
+            stackWithOUIAndNON.Children.RemoveAt(0);
+
+            // Modification of the label
+            labEstCeBienEcrit.Text = "Insérer le nom de la bière";
+
+            // creation of a new entry
+            Entry entryNameBeer = new MyEntryInscriptionConnexion
+            {
+                WidthRequest = 250,
+                VerticalOptions = LayoutOptions.Center,
+                HorizontalTextAlignment = TextAlignment.Center
+            };
+
+            // remove label lblName
+            frameLblName.SetValue(IsVisibleProperty, false);
+
+            Button validateButton = new Button
+            {
+                Text = "Valider",
+                TextColor = Color.FromHex("fff"),
+                FontAttributes = FontAttributes.Bold,
+                CornerRadius = 15,
+                BorderColor = Color.FromHex("3367b0"),
+                BackgroundColor = Color.FromHex("3367b0"),
+                BorderWidth = 2,
+                VerticalOptions = LayoutOptions.Center,
+                HorizontalOptions= LayoutOptions.Center
+            };
+
+            // add the event to upload the image and the name
+            validateButton.Clicked += (s, monEvent) => Upload(ba, entryNameBeer.Text);
+
+            stackLblAndFrame.Children.Add(entryNameBeer);
+            stackLblAndFrame.Children.Add(validateButton);
+            //this.Navigation.PopAsync();
+
         }
 
         // BUTTON RETOUR
         private void BtnRetourClicked(object sender, EventArgs e)
         {
             // Cancel the scan
-            Photo.photoIsTaken = false;
             this.Navigation.PopAsync();
         }
 
-        private async void Upload(ByteArrayContent ba)
+        private async void Upload(ByteArrayContent ba, string LabelName)
         {
-
+            
             ba.Headers.ContentType = MediaTypeHeaderValue.Parse("application/octet-stream");
             ba.Headers.ContentDisposition = new ContentDispositionHeaderValue("form-data")
             {
 
                 Name = "fileUpload",
-                FileName = lblName.Text + ".jpg"
+                FileName = LabelName + ".jpg"
             };
 
             string boundary = "---8393774hhy37373773";
@@ -67,7 +103,6 @@ namespace ThePlaceToBe.Views.ScanPage
             string responseString = await response.Content.ReadAsStringAsync();
             response.EnsureSuccessStatusCode();
 
-            Photo.photoIsTaken = false;
             await Navigation.PopAsync();
         }
     }
