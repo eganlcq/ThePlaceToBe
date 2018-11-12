@@ -35,9 +35,9 @@
                     </StackLayout>
 
                     <StackLayout x:Name="EntryAndLabError">
-                        <cust:MyEntry x:Name="pseudoUser" Placeholder="Pseudo/email" PlaceholderColor="Gray"
+                        <cust:MyEntryInscriptionConnexion x:Name="pseudoUser" Placeholder="Pseudo/email" PlaceholderColor="Gray"
                                TextColor="Black"/>
-                        <cust:MyEntry x:Name="pswdUser" Placeholder="Mot de passe" PlaceholderColor="Gray"
+                        <cust:MyEntryInscriptionConnexion x:Name="pswdUser" Placeholder="Mot de passe" PlaceholderColor="Gray"
                                TextColor="Black"
                                IsPassword="True"/>
                         <Label x:Name="lblError" Text="" TextColor="Red" Margin="5, 5, 0, 0"/>

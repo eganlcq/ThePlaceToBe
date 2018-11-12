@@ -44,7 +44,7 @@ namespace ThePlaceToBe.Views.ScanPage
             labEstCeBienEcrit.Text = "Insérer le nom de la bière";
 
             // creation of a new entry
-            Entry entryNameBeer = new MyEntry
+            Entry entryNameBeer = new MyEntryInscriptionConnexion
             {
                 WidthRequest = 250,
                 VerticalOptions = LayoutOptions.Center,
