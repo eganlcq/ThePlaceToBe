@@ -25,7 +25,7 @@ namespace ThePlaceToBe.Droid
             {
                 Control.Background.SetColorFilter(Android.Graphics.Color.Rgb(51, 103, 176), PorterDuff.Mode.SrcAtop);
                 
-                Control.SetCursorVisible(false);
+                //Control.SetCursorVisible(false);
             }
 
         }
