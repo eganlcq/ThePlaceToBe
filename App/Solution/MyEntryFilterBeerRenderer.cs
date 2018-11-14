@@ -26,7 +26,7 @@ namespace ThePlaceToBe.Droid
                 Control.SetBackgroundColor(Android.Graphics.Color.Transparent);
                 Control.SetPadding(20, 20, 20, 10);
                 Control.SetTextSize(Android.Util.ComplexUnitType.Px, 35);
-                Control.SetCursorVisible(false);
+                //Control.SetCursorVisible(false);
             }
         }
     }
