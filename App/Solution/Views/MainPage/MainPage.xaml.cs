@@ -65,10 +65,14 @@ namespace ThePlaceToBe.Views.MainPage
             imgAccount.Source = Constants.userImg + User.currentUser.Photo;
             imgLoupe.Source = Constants.appImg + "loupe.png";
             lblPseudo.Text = User.currentUser.Pseudo;
-            flavourPicker.Items.Add("Speciale Brune");
-            flavourPicker.Items.Add("Speciale Blonde");
-            flavourPicker.Items.Add("Ambrée");
+            RestService.dic = new Dictionary<string, string>();
+            List<string> listeType = RestService.Request<string>(RestService.dic, "selectType").Result;
 
+            foreach(string type in listeType)
+            {
+                flavourPicker.Items.Add(type);
+            }
+            
             btnScan.Clicked += (s, e) => TakePhoto();
         }
 
