@@ -1,8 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:cust="clr-namespace:ThePlaceToBe.Data;assembly=ThePlaceToBe.Android"
-             x:Class="ThePlaceToBe.Views.MainPage.MainPage">
+             x:Class="ThePlaceToBe.Views.MainPage.MainPage"
+             xmlns:cust="clr-namespace:ThePlaceToBe.Data;assembly=ThePlaceToBe.Android">
     <ContentPage.Content>
         <Grid>
             <Grid.RowDefinitions>
@@ -74,7 +74,7 @@
                             HeightRequest="25"
                             VerticalOptions="Center"
                             Title="Flavour"
-                            SelectedIndexChanged="DisplayBeerByFlavour"/>
+                            SelectedIndexChanged="DisplayBeerByTextAndFlavor"/>
 
                     <StackLayout Spacing="0"
                                      Orientation="Horizontal"
@@ -88,7 +88,9 @@
                                FontSize="12"
                                HeightRequest="25"
                                WidthRequest="120"
-                               Margin="10, 0, 10, 0"/>
+                               Margin="10, 0, 10, 0"
+                                                TextChanged="DisplayBeerByTextAndFlavor"
+                                                x:Name="textPicker"/>
                     </StackLayout>
 
                 </StackLayout>
@@ -117,7 +119,7 @@
                             Style="{StaticResource buttonBlue}"
                             FontSize="20"
                             HorizontalOptions="Center"
-                            VerticalOptions="End"
+                            VerticalOptions="EndAndExpand"
                             WidthRequest="150"
                             Margin="0, 20, 0, 10"
                         x:Name="btnScan"
