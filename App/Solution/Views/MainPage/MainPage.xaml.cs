@@ -21,6 +21,7 @@ namespace ThePlaceToBe.Views.MainPage
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class MainPage : ContentPage
     {
+        double nbRow;
         public MainPage()
         {
 
@@ -30,7 +31,8 @@ namespace ThePlaceToBe.Views.MainPage
             // Initialise des éléments présents dans le xaml
             Init();
             // Initialise la grille qui contiendra la liste des bières se trouvant dans la base de données
-            InitBeerGrid();
+            RestService.dic = new Dictionary<string, string>();
+            InitBeerGrid("selectBeer");
         }
 
         // Cette méthode se lance lorque l'on clique sur une image de bière
@@ -63,21 +65,20 @@ namespace ThePlaceToBe.Views.MainPage
             imgAccount.Source = Constants.userImg + User.currentUser.Photo;
             imgLoupe.Source = Constants.appImg + "loupe.png";
             lblPseudo.Text = User.currentUser.Pseudo;
-            flavourPicker.Items.Add("Pouet");
-            flavourPicker.Items.Add("Pouet");
-            flavourPicker.Items.Add("Pouet");
+            flavourPicker.Items.Add("Speciale Brune");
+            flavourPicker.Items.Add("Speciale Blonde");
+            flavourPicker.Items.Add("Ambrée");
 
             btnScan.Clicked += (s, e) => TakePhoto();
         }
 
         // Initialise la grille qui contiendra la liste des bières se trouvant dans la base de données
-        private void InitBeerGrid()
+        private void InitBeerGrid(string url)
         {
 
-            RestService.dic = new Dictionary<string, string>();
-            List<Beer> listBiere = RestService.Request<Beer>(RestService.dic, "selectBeer").Result;
+            List<Beer> listBiere = RestService.Request<Beer>(RestService.dic, url).Result;
             int nbBiere = listBiere.Count();
-            double nbRow = Math.Ceiling(nbBiere / 3.0);
+            nbRow = Math.Ceiling(nbBiere / 3.0);
             double nbColumn = 3;
 
             // Ajoute un nombre de ligne proportionnel au nombre de bières récupérées de la base de données
@@ -151,69 +152,106 @@ namespace ThePlaceToBe.Views.MainPage
 
         private async void TakePhoto()
         {
-
-            await CrossMedia.Current.Initialize();
-
-            var cameraStatus = await CrossPermissions.Current.CheckPermissionStatusAsync(Permission.Camera);
-            var storageStatus = await CrossPermissions.Current.CheckPermissionStatusAsync(Permission.Storage);
-
-            if (cameraStatus != PermissionStatus.Granted || storageStatus != PermissionStatus.Granted)
+            try
             {
-                var results = await CrossPermissions.Current.RequestPermissionsAsync(new[] { Permission.Camera, Permission.Storage });
-                cameraStatus = results[Permission.Camera];
-                storageStatus = results[Permission.Storage];
-            }
+                await CrossMedia.Current.Initialize();
 
-            if (cameraStatus == PermissionStatus.Granted && storageStatus == PermissionStatus.Granted)
-            {
+                var cameraStatus = await CrossPermissions.Current.CheckPermissionStatusAsync(Permission.Camera);
+                var storageStatus = await CrossPermissions.Current.CheckPermissionStatusAsync(Permission.Storage);
 
-                if (!CrossMedia.Current.IsCameraAvailable || !CrossMedia.Current.IsTakePhotoSupported)
+                if (cameraStatus != PermissionStatus.Granted || storageStatus != PermissionStatus.Granted)
                 {
+                    var results = await CrossPermissions.Current.RequestPermissionsAsync(new[] { Permission.Camera, Permission.Storage });
+                    cameraStatus = results[Permission.Camera];
+                    storageStatus = results[Permission.Storage];
+                }
+
+                if (cameraStatus == PermissionStatus.Granted && storageStatus == PermissionStatus.Granted)
+                {
+
+                    if (!CrossMedia.Current.IsCameraAvailable || !CrossMedia.Current.IsTakePhotoSupported)
+                    {
 
 #pragma warning disable CS4014 // Dans la mesure où cet appel n'est pas attendu, l'exécution de la méthode actuelle continue avant la fin de l'appel
-                    DisplayAlert("No Camera", "No camera available.", "OK");
+                        DisplayAlert("No Camera", "No camera available.", "OK");
 #pragma warning restore CS4014 // Dans la mesure où cet appel n'est pas attendu, l'exécution de la méthode actuelle continue avant la fin de l'appel
-                    return;
-                }
+                        return;
+                    }
 
-                var file = await CrossMedia.Current.TakePhotoAsync(new StoreCameraMediaOptions
+                    var file = await CrossMedia.Current.TakePhotoAsync(new StoreCameraMediaOptions
+                    {
+
+                        Directory = "Sample",
+                        Name = "test.jpg",
+                        PhotoSize = PhotoSize.Medium,
+                        CompressionQuality = 92
+                    });
+
+                    if (file == null) return;
+
+
+                    ImageSource img = ImageSource.FromStream(() => {
+
+                        var streamImg = file.GetStream();
+                        return streamImg;
+                    });
+
+                    byte[] bitmapData;
+                    var stream = new MemoryStream();
+                    file.GetStream().CopyTo(stream);
+                    bitmapData = stream.ToArray();
+                    var fileContent = new ByteArrayContent(bitmapData);
+
+                    await this.Navigation.PushAsync(new ScanPage.ScanPage(img, fileContent));
+
+                    if (File.Exists(file.Path))
+                    {
+
+                        File.Delete(file.Path);
+                    }
+
+                    file.Dispose();
+                }
+                else
                 {
 
-                    Directory = "Sample",
-                    Name = "test.jpg",
-                    PhotoSize = PhotoSize.Medium,
-                    CompressionQuality = 92
-                });
-
-                if (file == null) return;
-
-
-                ImageSource img = ImageSource.FromStream(() => {
-
-                    var streamImg = file.GetStream();
-                    return streamImg;
-                });
-
-                byte[] bitmapData;
-                var stream = new MemoryStream();
-                file.GetStream().CopyTo(stream);
-                bitmapData = stream.ToArray();
-                var fileContent = new ByteArrayContent(bitmapData);
-
-                await this.Navigation.PushAsync(new ScanPage.ScanPage(img, fileContent));
-
-                if (File.Exists(file.Path))
-                {
-
-                    File.Delete(file.Path);
+                    await DisplayAlert("Permissions Denied", "Unable to take photos.", "OK");
                 }
-
-                file.Dispose();
-            }
-            else
+            } catch(Exception e)
             {
+                await DisplayAlert("ERROR", e.ToString(), "OK");
+            }
+            
+        }
 
-                await DisplayAlert("Permissions Denied", "Unable to take photos.", "OK");
+        private void DisplayBeerByFlavour(object sender, EventArgs e)
+        {
+            RemoveAllBeer();
+           /* RestService.dic = new Dictionary<string, string>
+            {
+                { "flavor", flavourPicker.SelectedItem.ToString() }
+            };
+            InitBeerGrid("selectBeerByFlavor");*/
+
+        }
+
+       void FillGrid(List<Beer> listBiere)
+        {
+            int nbBiere = listBiere.Count();
+            nbRow = Math.Ceiling(nbBiere / 3.0);
+            double nbColumn = 3;
+
+            // Ajoute un nombre de ligne proportionnel au nombre de bières récupérées de la base de données
+            AddRows(nbRow);
+            // Ajoute les images de bière dans les cases de la grille
+            AddBeers(nbRow, nbColumn, nbBiere, listBiere);
+        }
+
+        private void RemoveAllBeer()
+        {
+            for(int i =0; i < nbRow; i++)
+            {
+                beerGrid.Children.RemoveAt(0);
             }
         }
     }
