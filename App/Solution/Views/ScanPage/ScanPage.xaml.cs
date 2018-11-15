@@ -1,4 +1,5 @@
-﻿using Plugin.Media;
+﻿using Newtonsoft.Json.Linq;
+using Plugin.Media;
 using Plugin.Media.Abstractions;
 using Plugin.Permissions;
 using Plugin.Permissions.Abstractions;
@@ -26,6 +27,7 @@ namespace ThePlaceToBe.Views.ScanPage
             NavigationPage.SetHasNavigationBar(this, false);
 
             photo.Source = img;
+            TextRecognition(ba);
 
             btnUpload.Clicked += (s, e) => Upload(ba, lblName.Text);
             btnNON.Clicked += (s, e) => BtnNONClicked(s, e, ba);
@@ -104,6 +106,43 @@ namespace ThePlaceToBe.Views.ScanPage
             response.EnsureSuccessStatusCode();
 
             await Navigation.PopAsync();
+        }
+
+        private async void TextRecognition(ByteArrayContent ba)
+        {
+            try
+            {
+                string key = "8bf0245b7b8c4c0cb26da1dcd95647b4";
+                string uriBase = "https://westeurope.api.cognitive.microsoft.com/vision/v1.0/ocr";
+                HttpClient client = new HttpClient();
+                client.DefaultRequestHeaders.Add("Ocp-Apim-Subscription-Key", key);
+                string param = "visualFeatures=Categories,Description,Color";
+                string uri = uriBase + "?" + param;
+                HttpResponseMessage response;
+                ba.Headers.ContentType = new System.Net.Http.Headers.MediaTypeHeaderValue("application/octet-stream");
+                response = await client.PostAsync(uri, ba);
+                string contentString = await response.Content.ReadAsStringAsync();
+                var json = JToken.Parse(contentString);
+                string result = "";
+                foreach (var region in json["regions"])
+                {
+
+                    foreach (var line in region["lines"])
+                    {
+
+                        foreach (var word in line["words"])
+                        {
+
+                            result += word["text"] + "\n";
+                        }
+                    }
+                }
+                await DisplayAlert("TEST", result, "OK");
+            }
+            catch (Exception e)
+            {
+                await DisplayAlert("ERROR", e.ToString(), "OK");
+            }
         }
     }
 }
