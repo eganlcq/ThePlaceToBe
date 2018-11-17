@@ -16,12 +16,12 @@
                                 BackgroundColor="Silver"
                                 FontSize="12"
                                 HeightRequest="35"
-                        Clicked="BtnRetourClicked"/>
+                            x:Name="btnRetour"/>
                 </Frame>
                 <Frame HorizontalOptions="Center" VerticalOptions="Center" Padding="20" BackgroundColor="Transparent">
                     <Image x:Name="photo"/>
                 </Frame>
-                
+
                 <Frame BackgroundColor="Silver"
                    Margin="0, 10"
                    CornerRadius="10"
