@@ -35,7 +35,7 @@ namespace ThePlaceToBe.Views.MainPage
 
 				{"idBiere", beer.Idbiere.ToString() }
 			};
-			this.Navigation.PushAsync(new ProductPage.ProductPage());
+			this.Navigation.PushAsync(new ProductPage.ProductPage(beer));
 		}
 
 		// Cette méthode se lance lorque l'on clique sur l'image du user
@@ -66,18 +66,18 @@ namespace ThePlaceToBe.Views.MainPage
 			string url;
 			RestService.dic = new Dictionary<string, string>();
 
-			if(flav != "ALL" && str != "" && str != null) {
+			if (flav != "ALL" && str != "" && str != null) {
 
 				RestService.dic.Add("flavor", flav);
 				RestService.dic.Add("text", str);
 				url = "selectBeerByTextAndFlavor";
 			}
-			else if(flav == "ALL" && str != "" && str != null) {
+			else if (flav == "ALL" && str != "" && str != null) {
 
 				RestService.dic.Add("text", str);
 				url = "selectBeerByText";
 			}
-			else if((flav != "ALL" && str == "") || (flav != "ALL" && str == null)) {
+			else if ((flav != "ALL" && str == "") || (flav != "ALL" && str == null)) {
 
 				RestService.dic.Add("flavor", flav);
 				url = "selectBeerByFlavor";
@@ -199,13 +199,11 @@ namespace ThePlaceToBe.Views.MainPage
 						var streamImg = file.GetStream();
 						return streamImg;
 					});
-
-					byte[] bitmapData;
+					
 					var stream = new MemoryStream();
 					file.GetStream().CopyTo(stream);
-					bitmapData = stream.ToArray();
+					byte[] bitmapData = stream.ToArray();
 					var fileContent = new ByteArrayContent(bitmapData);
-
 					await this.Navigation.PushAsync(new ScanPage.ScanPage(img, fileContent));
 
 					if (File.Exists(file.Path)) {
@@ -236,14 +234,14 @@ namespace ThePlaceToBe.Views.MainPage
 		private void RemoveAllBeer() {
 			int count = 0;
 			for (int x = 0; x < nbRow; x++) {
-				
+
 				for (int y = 0; y < nbColumn && count < nbBiere; y++, count++) {
 
 					beerGrid.Children.RemoveAt(0);
 				}
 			}
 
-			foreach(var row in beerGrid.RowDefinitions.ToList()) {
+			foreach (var row in beerGrid.RowDefinitions.ToList()) {
 
 				beerGrid.RowDefinitions.Remove(row);
 			}
