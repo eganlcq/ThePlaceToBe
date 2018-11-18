@@ -28,7 +28,11 @@ namespace ThePlaceToBe.Views.ScanPage
 			TextRecognition(ba);
 
 			btnRetour.Clicked += (s, e) => GoBack(s, e, ba);
-			btnUpload.Clicked += (s, e) => Upload(ba, lblName.Text);
+			btnUpload.Clicked += (s, e) => {
+
+				Upload(ba, lblName.Text);
+				InsertTmpBeer(lblName.Text);
+			};
 			btnNON.Clicked += (s, e) => BtnNONClicked(s, e, ba);
 		}
 
@@ -66,7 +70,11 @@ namespace ThePlaceToBe.Views.ScanPage
 			};
 
 			// add the event to upload the image and the name
-			validateButton.Clicked += (s, monEvent) => Upload(ba, entryNameBeer.Text);
+			validateButton.Clicked += (s, monEvent) => {
+
+				Upload(ba, entryNameBeer.Text);
+				InsertTmpBeer(entryNameBeer.Text);
+			};
 
 			stackLblAndFrame.Children.Add(entryNameBeer);
 			stackLblAndFrame.Children.Add(validateButton);
@@ -99,6 +107,16 @@ namespace ThePlaceToBe.Views.ScanPage
 			string responseString = await response.Content.ReadAsStringAsync();
 			response.EnsureSuccessStatusCode();
 			ba.Dispose();
+		}
+
+		private async void InsertTmpBeer(string lblName) {
+
+			RestService.dic = new Dictionary<string, string> {
+
+				{ "nameBeer", lblName },
+				{ "imgBeer", lblName + ".jpg" }
+			};
+			await RestService.Request<Beer>(RestService.dic, "insertTmpBeer");
 
 			await Navigation.PopAsync();
 		}

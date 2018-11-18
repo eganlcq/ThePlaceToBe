@@ -179,5 +179,24 @@ namespace ThePlaceToBe.Data
 		// FIN METHODES ACHIEVEMENTS PAGE
 
 		#endregion
+
+		#region prodcutMethods
+
+		// DEBUT PRODUCT PAGE METHODS
+
+		public static bool CheckFavorite(int idBeer, int idUser) {
+
+			RestService.dic = new Dictionary<string, string> {
+
+				{ "idBiere", idBeer.ToString() },
+				{ "idUser", idUser.ToString() }
+			};
+			Check check = RestService.Request<Check>(RestService.dic, "checkFavoris").Result[0];
+			return check.Verif;
+		}
+
+		// FIN PRODUCT PAGE METHODS
+
+		#endregion
 	}
 }

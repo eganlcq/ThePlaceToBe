@@ -148,8 +148,7 @@
                                 Margin="20,0,0,0"
                                 Clicked="BtnRetourClicked"/>
 
-                        <Button Text="FAVORIS"
-                                Style="{StaticResource buttonBlue}"
+                        <Button Style="{StaticResource buttonBlue}"
                                 FontSize="14"
                                 HeightRequest="40"
                                 HorizontalOptions="EndAndExpand"
