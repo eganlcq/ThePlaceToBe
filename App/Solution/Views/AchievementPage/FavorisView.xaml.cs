@@ -9,85 +9,78 @@ using Xamarin.Forms.Xaml;
 
 namespace ThePlaceToBe.Views.AchievementPage
 {
-    [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class FavorisView : ContentView
-    {
-        public FavorisView()
-        {
-            InitializeComponent();
-        }
+	[XamlCompilation(XamlCompilationOptions.Compile)]
+	public partial class FavorisView : ContentView {
+		public FavorisView() {
 
-        public FavorisView(string idUser)
-        {
-            InitializeComponent();
-            RestService.dic = RestService.dic = new Dictionary<string, string> {
+			InitializeComponent();
+		}
 
-                {"idUser", idUser}
-            };
-            List<Beer> listFavoris = RestService.Request<Beer>(RestService.dic, "selectFavoris").Result;
+		public FavorisView(string idUser) {
 
-            int nbBiere = listFavoris.Count();
-            double nbRow = Math.Ceiling(nbBiere / 3.0);
-            double nbColumn = 3;
-            int count = 0;
+			InitializeComponent();
+			RestService.dic = RestService.dic = new Dictionary<string, string> {
 
-            for (int i = 0; i < nbRow; i++)
-            {
+				{"idUser", idUser}
+			};
+			List<Beer> listFavoris = RestService.Request<Beer>(RestService.dic, "selectFavoris").Result;
 
-                RowDefinition row = new RowDefinition
-                {
-                    Height = 100
-                };
-                favoris.RowDefinitions.Add(row);
-            }
+			int nbBiere = listFavoris.Count();
+			double nbRow = Math.Ceiling(nbBiere / 3.0);
+			double nbColumn = 3;
+			int count = 0;
+
+			for (int i = 0; i < nbRow; i++) {
+
+				RowDefinition row = new RowDefinition {
+
+					Height = 100
+				};
+				favoris.RowDefinitions.Add(row);
+			}
 
 
-            for (int x = 0; x < nbRow; x++)
-            {
+			for (int x = 0; x < nbRow; x++) {
 
-                for (int y = 0; y < nbColumn && count < nbBiere; y++, count++)
-                {
+				for (int y = 0; y < nbColumn && count < nbBiere; y++, count++) {
 
-                    Beer beer = listFavoris[count];
-                    string imgBiere = listFavoris[count].Image;
-                    Image img;
-                    TapGestureRecognizer tap = new TapGestureRecognizer();
+					Beer beer = listFavoris[count];
+					string imgBiere = listFavoris[count].Image;
+					Image img;
+					TapGestureRecognizer tap = new TapGestureRecognizer();
 
-                    if (imgBiere != "" && imgBiere != null)
-                    {
+					if (imgBiere != "" && imgBiere != null) {
 
-                        img = new Image
-                        {
-                            Source = Constants.beersImg + imgBiere,
-                            Margin = new Thickness(5, 5)
-                        };
-                    }
-                    else
-                    {
+						img = new Image {
 
-                        img = new Image
-                        {
-                            Source = Constants.beersImg + "oneBeer.png",
-                            Margin = new Thickness(5, 5)
-                        };
-                    }
+							Source = Constants.beersImg + imgBiere,
+							Margin = new Thickness(5, 5)
+						};
+					}
+					else {
 
-                    tap.Tapped += (s, e) => BeerTapped(s, e, beer);
-                    img.GestureRecognizers.Add(tap);
+						img = new Image {
 
-                    favoris.Children.Add(img, y, x);
-                }
-            }
-        }
+							Source = Constants.beersImg + "oneBeer.png",
+							Margin = new Thickness(5, 5)
+						};
+					}
 
-        private void BeerTapped(object s, EventArgs e, Beer beer)
-        {
+					tap.Tapped += (s, e) => BeerTapped(s, e, beer);
+					img.GestureRecognizers.Add(tap);
 
-            RestService.dic = new Dictionary<string, string> {
+					favoris.Children.Add(img, y, x);
+				}
+			}
+		}
 
-                {"idBiere", beer.Idbiere.ToString() }
-            };
-            this.Navigation.PushAsync(new ProductPage.ProductPage());
-        }
-    }
+		private void BeerTapped(object s, EventArgs e, Beer beer) {
+
+			RestService.dic = new Dictionary<string, string> {
+
+				{"idBiere", beer.Idbiere.ToString() }
+			};
+			this.Navigation.PushAsync(new ProductPage.ProductPage(beer));
+		}
+	}
 }
