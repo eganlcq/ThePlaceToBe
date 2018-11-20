@@ -91,11 +91,34 @@ namespace ThePlaceToBe.Views.ProductPage
 		private void InitMap() {
 
 			List<Bar> listBar = RestService.Request<Bar>(RestService.dic, "selectBar").Result;
-			double lat = 50.669204;
-			double lon = 4.613774;
-			Position pos = new Position(lat, lon);
+			
+			Position pos;
+			double lat;
+			double lon;
+			List<Pin> listPin;
 
-			List<Pin> listPin = AddPinsNeeded(listBar);
+			if(listBar.Count != 0) {
+
+				double sumLat = 0;
+				double sumLon = 0;
+				foreach (Bar bar in listBar) {
+
+					sumLat += bar.Latitude;
+					sumLon += bar.Longitude;
+				}
+				lat = sumLat / listBar.Count;
+				lon = sumLon / listBar.Count;
+				pos = new Position(lat, lon);
+				listPin = AddPinsNeeded(listBar);
+			}
+			else {
+
+				lat = 50.669204;
+				lon = 4.613774;
+				pos = new Position(lat, lon);
+				listPin = new List<Pin>();
+			}
+
 			DisplayMap(pos, listPin);
 		}
 
@@ -103,7 +126,7 @@ namespace ThePlaceToBe.Views.ProductPage
 		private List<Pin> AddPinsNeeded(List<Bar> listBar) {
 
 			List<Pin> listPin = new List<Pin>();
-
+			
 			foreach (Bar bar in listBar) {
 
 				Pin pin = new Pin {
@@ -112,8 +135,10 @@ namespace ThePlaceToBe.Views.ProductPage
 					Label = bar.Nombar,
 					Address = ""
 				};
+				
 				listPin.Add(pin);
 			}
+
 			return listPin;
 		}
 
