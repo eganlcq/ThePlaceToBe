@@ -58,6 +58,7 @@ namespace ThePlaceToBe.Views.InscriptionPage
 			};
 			User.currentUser = RestService.Request<User>(RestService.dic, "userConnexion").Result[0];
 			await this.Navigation.PushAsync(new MainPage.MainPage());
+			App.Current.MainPage = new MainPage.MainPage();
 		}
 	}
 }
