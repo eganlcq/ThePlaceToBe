@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -14,36 +14,36 @@ namespace ThePlaceToBe.Views.ConnexionPage
 		public ConnexionPage() {
 			InitializeComponent();
 			NavigationPage.SetHasNavigationBar(this, false);
-			// Initialise des éléments présents dans le xaml
-			Init();
+            // Initialize the content of the xaml page
+            Init();
 
 		}
 
-		// Méthode lancée lorsque le bouton de connexion est utilisé
+		// This method is running when the connection button is clicked
 		private void ConnexionClicked(object sender, EventArgs e) {
 
-			// Vérification si le pseudo et le mot de passe sont corrects
+			// Check if the pseudo and the password are correct
 			bool isPasswordOrUsernameCorrect = CheckConnexion();
-			// Effectue la connexion si le booléen renvoie true
+			// Complete the connection is a boolean is returned
 			Connexion(isPasswordOrUsernameCorrect);
 		}
 
-		// Affiche la page d'inscription
+		// Display the registration page (inscriptionPage)
 		private void InscriptionClicked(object sender, EventArgs e) {
 
 			this.Navigation.PushAsync(new InscriptionPage.InscriptionPage());
 		}
 
-		// Initialise des éléments présents dans le xaml
-		private void Init() {
+        // Initialize the content of the xaml page
+        private void Init() {
 
 			imgLogo.Source = Constants.appImg + "logo.png";
 			pseudoUser.Completed += (s, e) => pswdUser.Focus();
 			pswdUser.Completed += (s, e) => ConnexionClicked(s, e);
 		}
 
-		// Vérification si le pseudo et le mot de passe sont corrects
-		private bool CheckConnexion() {
+        // Check if the pseudo and the password are correct
+        private bool CheckConnexion() {
 
 			RestService.dic = new Dictionary<string, string> {
 				{ "pseudo", pseudoUser.Text },
@@ -52,8 +52,8 @@ namespace ThePlaceToBe.Views.ConnexionPage
 			return RestService.Request<Check>(RestService.dic, "checkPassword").Result[0].Verif;
 		}
 
-		// Effectue la connexion si le booléen renvoie true
-		private void Connexion(bool isPasswordOrUsernameCorrect) {
+        // Complete the connection is a boolean is returned
+        private void Connexion(bool isPasswordOrUsernameCorrect) {
 
 			if (!isPasswordOrUsernameCorrect) {
 
