@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -31,11 +31,11 @@ namespace ThePlaceToBe.Views.AchievementPage
 
             InitializeComponent();
             NavigationPage.SetHasNavigationBar(this, false);
-            // Initialise des éléments présents dans le xaml
+            // Initialize the content of the xaml page
             Init(idUser);
         }
 
-        // Affiche les données personnelles de l'user
+        // Display the personnal informations about the user
         public void DisplayData()
         {
 
@@ -48,7 +48,7 @@ namespace ThePlaceToBe.Views.AchievementPage
 
         }
 
-        // Affiche les achievements de l'user
+        // Display the achievements about the user
         public void DisplayAchievement()
         {
             DataBox.Children.RemoveAt(0);
@@ -59,7 +59,7 @@ namespace ThePlaceToBe.Views.AchievementPage
             DataButton.BackgroundColor = Color.FromHex("#3367b0");
         }
 
-        // Affiche les bières favorites de l'user
+        // Display the favorites beers of the user
         public void DisplayFavoris()
         {
             DataBox.Children.RemoveAt(0);
@@ -70,13 +70,13 @@ namespace ThePlaceToBe.Views.AchievementPage
             DataButton.BackgroundColor = Color.FromHex("#3367b0");
         }
 
-        // Cette méthode s'exécute lorsque le bouton de retour est utilisé
+        // This method is running when the retour button is clicked
         private void BtnRetourClicked(object sender, EventArgs e)
         {
             this.Navigation.PopAsync();
         }
 
-        // Initialise des éléments présents dans le xaml
+        // Initialize the content of the xaml page
         private void Init(string idUser)
         {
             // return the user with the associated id
@@ -91,6 +91,7 @@ namespace ThePlaceToBe.Views.AchievementPage
             FavorisButton.BackgroundColor = Color.FromHex("3367b0");
         }
 
+        // initialize the font for the pseudo according to is size
         private int InitPseudo(string pseudoUser)
         {
             if (pseudoUser.Length <= LONGUEUR_PSEUDO_PETITE)
