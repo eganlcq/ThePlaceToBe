@@ -57,8 +57,8 @@ namespace ThePlaceToBe.Views.InscriptionPage
 				{ "pswd", pswdUser.Text}
 			};
 			User.currentUser = RestService.Request<User>(RestService.dic, "userConnexion").Result[0];
-			await this.Navigation.PushAsync(new MainPage.MainPage());
-			App.Current.MainPage = new MainPage.MainPage();
+			Navigation.InsertPageBefore(new MainPage.MainPage(), Navigation.NavigationStack[0]);
+			await Navigation.PopToRootAsync();
 		}
 	}
 }
