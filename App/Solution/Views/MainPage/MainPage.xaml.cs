@@ -220,6 +220,7 @@ namespace ThePlaceToBe.Views.MainPage
 
 		}
 
+        // Display the beer in the grid with the parameter to apply a filter on the list
 		private void DisplayBeerByTextAndFlavor(object sender, EventArgs e) {
 			RemoveAllBeer();
 			string flav = flavourPicker.SelectedItem.ToString();
@@ -227,6 +228,7 @@ namespace ThePlaceToBe.Views.MainPage
 			FillBeerGrid(flav, str);
 		}
 
+        // Remove the beer in the grid
 		private void RemoveAllBeer() {
 			int count = 0;
 			for (int x = 0; x < nbRow; x++) {
