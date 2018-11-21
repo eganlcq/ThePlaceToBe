@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -15,23 +15,25 @@ namespace ThePlaceToBe.Views.ProductPage
 		public ProductPage(Beer beer) {
 			InitializeComponent();
 			NavigationPage.SetHasNavigationBar(this, false);
-			// Initialise des éléments présents dans le xaml
-			Init(beer);
-			// Initialise des éléments pour faire fonctionner la map
-			InitMap();
+            // Initialize the content of the xaml page
+            Init(beer);
+            // Initialize the elements necessary for the operation of the map
+            InitMap();
 		}
 
-		// Méthode lancée lorsque l'on clique sur l'image du user
-		private void ProfilMainPageTapped(object sender, EventArgs e) {
+        // This method is running when the avatar picture is clicked
+        private void ProfilMainPageTapped(object sender, EventArgs e) {
 			this.Navigation.PushAsync(new AchievementPage.AchievementPage(User.currentUser.Iduser.ToString()));
 		}
 
-		// Méthode lancée lorsque le bouton de retour est utilisé
+		// This method is running when th "retour" button is clicked
+        // the scan is cancelled
 		private void BtnRetourClicked(object sender, EventArgs e) {
 			this.Navigation.PopAsync();
 		}
 
-		// Méthode lancée lorsque le bouton d'ajout de favoris est utilisé
+		// This method is running when the button to add favorites is clicked
+        // A beer is added as a favorite to a user
 		private void AddFav(Beer beer) {
 			RestService.dic = new Dictionary<string, string> {
 
@@ -43,7 +45,9 @@ namespace ThePlaceToBe.Views.ProductPage
 			btnFavoris.Clicked += (s, e) => RemoveFav(beer);
 		}
 
-		private void RemoveFav(Beer beer) {
+        // This method is running when the button to remove favorites is clicked
+        // The favorite beer is removed
+        private void RemoveFav(Beer beer) {
 
 			RestService.dic = new Dictionary<string, string> {
 
@@ -55,8 +59,8 @@ namespace ThePlaceToBe.Views.ProductPage
 			btnFavoris.Clicked += (s, e) => AddFav(beer);
 		}
 
-		// Affiche les info de la bière courante sur la page
-		private void DisplayBeerInfo(Beer beer) {
+        // Display on the page the informations about the current beer
+        private void DisplayBeerInfo(Beer beer) {
 
 			lblName.Text = beer.Nombiere;
 			lblAlcool.Text = beer.Alcoolemie.ToString() + '%';
@@ -71,8 +75,8 @@ namespace ThePlaceToBe.Views.ProductPage
 			}
 		}
 
-		// Initialise des éléments présents dans le xaml
-		private void Init(Beer beer) {
+        // Initialize the content of the xaml page
+        private void Init(Beer beer) {
 
 			imgLogo.Source = Constants.appImg + "logo.png";
 			imgAccount.Source = Constants.userImg + User.currentUser.Photo;
@@ -91,8 +95,8 @@ namespace ThePlaceToBe.Views.ProductPage
 			}
 		}
 
-		// Initialise des éléments pour faire fonctionner la map
-		private void InitMap() {
+        // Initialize the elements necessary for the operation of the map
+        private void InitMap() {
 
 			List<Bar> listBar = RestService.Request<Bar>(RestService.dic, "selectBar").Result;
 			
@@ -126,7 +130,7 @@ namespace ThePlaceToBe.Views.ProductPage
 			DisplayMap(pos, listPin);
 		}
 
-		// Ajoute un nombre définis de pins dans la liste en fonction du nombre de bar reçu
+		// Add a defined number of pins in the list according to the number of bars received
 		private List<Pin> AddPinsNeeded(List<Bar> listBar) {
 
 			List<Pin> listPin = new List<Pin>();
@@ -146,7 +150,7 @@ namespace ThePlaceToBe.Views.ProductPage
 			return listPin;
 		}
 
-		// Ajoute des pins à la map et change la position de la map
+		// Add the pins on the map and change the position of the map
 		private void DisplayMap(Position pos, List<Pin> listPin) {
 
 			map.MoveToRegion(MapSpan.FromCenterAndRadius(pos, Distance.FromKilometers(0.15)));
