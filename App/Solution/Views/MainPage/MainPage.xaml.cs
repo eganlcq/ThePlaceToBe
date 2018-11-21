@@ -1,4 +1,4 @@
-﻿using Plugin.Media;
+using Plugin.Media;
 using Plugin.Media.Abstractions;
 using Plugin.Permissions;
 using Plugin.Permissions.Abstractions;
@@ -24,11 +24,11 @@ namespace ThePlaceToBe.Views.MainPage
 			InitializeComponent();
 			NavigationPage.SetHasNavigationBar(this, false);
 
-			// Initialise des éléments présents dans le xaml
+			// Initialize the content of the xaml page
 			Init();
 		}
 
-		// Cette méthode se lance lorque l'on clique sur une image de bière
+		// This method is running when a picture of a beer is clicked
 		private void BeerTapped(object s, EventArgs e, Beer beer) {
 
 			RestService.dic = new Dictionary<string, string> {
@@ -38,18 +38,13 @@ namespace ThePlaceToBe.Views.MainPage
 			this.Navigation.PushAsync(new ProductPage.ProductPage(beer));
 		}
 
-		// Cette méthode se lance lorque l'on clique sur l'image du user
+		// This method is running when the avatar picture is clicked
 		private void ProfilMainPageTapped(object sender, EventArgs e) {
 			this.Navigation.PushAsync(new AchievementPage.AchievementPage(User.currentUser.Iduser.ToString()));
 		}
 
-		// Cette méthode se lance lorque l'on clique sur le bouton de scan
-		/*private void ScanClicked(object sender, EventArgs e) {
-			this.Navigation.PushAsync(new ScanPage.ScanPage());
-		}*/
-
-		// Initialise des éléments présents dans le xaml
-		private void Init() {
+        // Initialize the content of the xaml page
+        private void Init() {
 
 			imgLogo.Source = Constants.appImg + "logo.png";
 			imgAccount.Source = Constants.userImg + User.currentUser.Photo;
@@ -60,7 +55,7 @@ namespace ThePlaceToBe.Views.MainPage
 			flavourPicker.SelectedIndex = 0;
 		}
 
-		// Initialise la grille qui contiendra la liste des bières se trouvant dans la base de données
+		// Initialize the grid that will contain the list of the beers from tge database
 		private void FillBeerGrid(string flav, string str) {
 
 			string url;
@@ -92,12 +87,13 @@ namespace ThePlaceToBe.Views.MainPage
 			nbRow = Math.Ceiling(nbBiere / 3.0);
 			nbColumn = 3;
 
-			// Ajoute un nombre de ligne proportionnel au nombre de bières récupérées de la base de données
+			// Add a number of rows proportionnal at the number of beers from the database
 			AddRows(nbRow);
-			// Ajoute les images de bière dans les cases de la grille
+			// Add the beers pictures in the grid
 			AddBeers(nbRow, nbColumn, nbBiere, listBiere);
 		}
 
+        // Initialize the content of the picker (allow to select a type of flavour for beers)
 		private void InitPicker() {
 
 			RestService.dic = new Dictionary<string, string>();
@@ -108,8 +104,8 @@ namespace ThePlaceToBe.Views.MainPage
 			}
 		}
 
-		// Ajoute un nombre de ligne proportionnel au nombre de bières récupérées de la base de données
-		private void AddRows(double nbRow) {
+        // Add a number of rows proportionnal at the number of beers from the database
+        private void AddRows(double nbRow) {
 
 			for (int i = 0; i < nbRow; i++) {
 
@@ -120,8 +116,8 @@ namespace ThePlaceToBe.Views.MainPage
 			}
 		}
 
-		// Ajoute les images de bière dans les cases de la grille
-		private void AddBeers(double nbRow, double nbColumn, int nbBiere, List<Beer> listBiere) {
+        // Add the beers pictures in the grid
+        private void AddBeers(double nbRow, double nbColumn, int nbBiere, List<Beer> listBiere) {
 
 			int count = 0;
 			for (int x = 0; x < nbRow; x++) {
@@ -131,7 +127,7 @@ namespace ThePlaceToBe.Views.MainPage
 					Beer beer = listBiere[count];
 					string imgBiere = listBiere[count].Image;
 					TapGestureRecognizer tap = new TapGestureRecognizer();
-					// Vérifie si l'image existe, si elle n'existe pas, affiche l'image par défaut
+					// check if the pitcure exists and if not, a default picture will be display
 					Image img = ChooseImage(imgBiere);
 					tap.Tapped += (s, e) => BeerTapped(s, e, beer);
 					img.GestureRecognizers.Add(tap);
@@ -140,8 +136,8 @@ namespace ThePlaceToBe.Views.MainPage
 			}
 		}
 
-		// Vérifie si l'image existe, si elle n'existe pas, affiche l'image par défaut
-		private Image ChooseImage(string imgBiere) {
+        // check if the pitcure exists and if not, a default picture will be display
+        private Image ChooseImage(string imgBiere) {
 
 			Image img;
 
@@ -177,10 +173,10 @@ namespace ThePlaceToBe.Views.MainPage
 
 					if (!CrossMedia.Current.IsCameraAvailable || !CrossMedia.Current.IsTakePhotoSupported) {
 
-#pragma warning disable CS4014 // Dans la mesure où cet appel n'est pas attendu, l'exécution de la méthode actuelle continue avant la fin de l'appel
+#pragma warning disable CS4014 // In the situation where this call is not expected, the execution of the actual method continue before the end of the call
 						DisplayAlert("No Camera", "No camera available.", "OK");
-#pragma warning restore CS4014 // Dans la mesure où cet appel n'est pas attendu, l'exécution de la méthode actuelle continue avant la fin de l'appel
-						return;
+#pragma warning restore CS4014 // In the situation where this call is not expected, the execution of the actual method continue before the end of the call
+                        return;
 					}
 
 					var file = await CrossMedia.Current.TakePhotoAsync(new StoreCameraMediaOptions {
