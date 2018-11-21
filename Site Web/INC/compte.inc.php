@@ -16,10 +16,16 @@ class Config extends Db
     }
 
     public function getForm() {
-        $form = "<div id=gestionCompte>";
+        $form = "<div id=gestionCompte><ul id='listeGestionCompte'>";
+        if(isAdmin($_SESSION['user']['pseudo'], $_SESSION['user']['email'])){
+            $form .= "<li><a href=admin.html>Admin</a></li>";
+        }
+        $form .= "<li><a class='selected' href=compte.html>Profile</a></li>";
+        $form .= "<li><a href=achievements.html>Achievements</a></li>";
+        $form .= "<li><a href=favoris.html>Favoris</a></li></ul><div id='contenuCompte'>";
         $form .= "<form method='post' action='formSubmit.html' id='formCompte' name='formCompte enctype=\"multipart/form-data\"'>";
-        $form .= "<div id='image'><img id='imageAvatar' src=image/avatar/".$this->config['photo']." width=100px height= 100px>";
-        $form .= "<label for='file'><img src=image/crayon.png id=crayon width=30px height= 30px></label><input type=file name=file id=file accept=image/*></div>";
+        $form .= "<div id='image'><img id='imageAvatar' src=image/avatar/".$this->config['photo']." width=100px height= 100px alt='Avatar'>";
+        $form .= "<label for='file'><img src=image/crayon.png id=crayon width=30px height= 30px alt='Crayon'></label><input type=file name=file id=file accept=image/*></div>";
         foreach ($this->config as $key=>$value){
             switch ($key){
                 case 'datenaiss': break;
@@ -29,7 +35,7 @@ class Config extends Db
             }
         }
         $form.= "<p id='erreur3'></p>";
-        $form.= "<input type='submit' value='VALIDER'></form></div>";
+        $form.= "<input type='submit' value='VALIDER'></form></div></div>";
         return $form;
     }
 
@@ -40,19 +46,17 @@ class Config extends Db
             $_SESSION['start'] = 0;
             $start = 0;
         }
-
         $array = array_slice($return, $start, 3);
 
-        $fav = "<div class='sectionFav'>";
-        $fav.= "<h1>Achievements</h1>";
-        $fav.= "<ul class=achievFav>";
-        $fav.= "<a id='prec' href='achievements.html'><img src='image/fleche gauche.png' class='fleche'></a>";
+        $fav = "<div class=containerAchiev class='container'><div class='sectionFav row'>";
+        $fav.= "<a id='prec' href='achievements.html' class='col-lg-3 col-xs-4 col-md-3 col-sm-3'><img class='imgResize' src='image/fleche gauche.png' alt='fleche'></a>";
+        $fav.= "<ul class='achievFav col-lg-6 col-xs-4 col-md-6 col-sm-6'>";
         foreach ($array as $key=>$value){
-            $fav.= "<li id=".$value['idsucces']." title='".$value['descr']."'><img src='image/Achievements/".$value['image']."'>".$value['nom']."</li>";
+            $fav.= "<li id=".$value['idsucces']." title='".$value['descr']."'><img class=imgResize src='image/Achievements/".$value['image']."' alt='fleche'>".$value['nom']."</li>";
         }
-        $fav.= "<a id='suiv' href='achievements.html'><img src='image/fleche droite.png' class='fleche'></a>";
         $fav.= "</ul>";
-        $fav.= "</div>";
+        $fav.= "<a id='suiv' href='achievements.html' class='col-lg-3 col-xs-4 col-md-3 col-sm-3'><img class='imgResize' src='image/fleche droite.png' alt='fleche'></a>";
+        $fav.= "</div></div>";
         return $fav;
     }
 
@@ -66,15 +70,14 @@ class Config extends Db
 
         $array = array_slice($return, $start, 3);
 
-        $fav = "<div class='sectionFav'>";
-        $fav.= "<h1>Favoris</h1>";
-        $fav.= "<ul class=achievFav>";
-        $fav.= "<a id='prec' href='favoris.html'><img src='image/fleche gauche.png' class='fleche2'></a>";
+        $fav = "<div class=containerAchiev class='container'><div class='sectionFav row'>";
+        $fav.= "<a id='prec' href='favoris.html' class='col-lg-3 col-xs-4 col-md-3 col-sm-3'><img class='imgResize' src='image/fleche gauche.png' alt='fleche'></a>";
+        $fav.= "<ul class='achievFav col-lg-6 col-xs-4 col-md-6 col-sm-6'>";
         foreach ($array as $key=>$value){
-            $fav.= "<li id=".$value['idbiere']." title='".$value['typebiere']."(".$value['alcoolemie'].")'><img src='image/beers/".$value['image']."'>".$value['nombiere']."</li>";
+            $fav.= "<li id=".$value['idbiere']." title='".$value['typebiere']."(".$value['alcoolemie'].")'><img class=imgResize src='image/beers/".$value['image']."' alt='Bière_favorite'>".$value['nombiere']."</li>";
         }
-        $fav.= "<a id='suiv' href='favoris.html'><img src='image/fleche droite.png' class='fleche2'></a>";
         $fav.= "</ul>";
+        $fav.= "<a id='suiv' href='favoris.html' class='col-lg-3 col-xs-4 col-md-3 col-sm-3'><img class='imgResize' src='image/fleche droite.png' alt='fleche'></a>";
         $fav.= "</div>";
         return $fav;
     }
