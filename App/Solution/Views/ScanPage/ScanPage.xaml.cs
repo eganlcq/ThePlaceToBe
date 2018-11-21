@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json.Linq;
+﻿using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using Plugin.Media;
 using Plugin.Media.Abstractions;
 using Plugin.Permissions;
@@ -24,14 +25,22 @@ namespace ThePlaceToBe.Views.ScanPage
 			InitializeComponent();
 			NavigationPage.SetHasNavigationBar(this, false);
 
+			Init(img, ba);
+		}
+
+		private void Init(ImageSource img, ByteArrayContent ba) {
+
 			photo.Source = img;
 			TextRecognition(ba);
+
+			pickerName.Items.Add("default");
+			pickerName.SelectedIndex = 0;
 
 			btnRetour.Clicked += (s, e) => GoBack(s, e, ba);
 			btnUpload.Clicked += (s, e) => {
 
-				Upload(ba, lblName.Text);
-				InsertTmpBeer(lblName.Text);
+				Upload(ba, pickerName.SelectedIndex.ToString());
+				InsertTmpBeer(pickerName.SelectedIndex.ToString());
 			};
 			btnNON.Clicked += (s, e) => BtnNONClicked(s, e, ba);
 		}
@@ -134,18 +143,16 @@ namespace ThePlaceToBe.Views.ScanPage
 				response = await client.PostAsync(uri, ba);
 				string contentString = await response.Content.ReadAsStringAsync();
 				var json = JToken.Parse(contentString);
-				string result = "";
 				foreach (var region in json["regions"]) {
 
 					foreach (var line in region["lines"]) {
 
 						foreach (var word in line["words"]) {
-
-							result += word["text"] + "\n";
+							
+							pickerName.Items.Add(word["text"].ToString());
 						}
 					}
 				}
-				await DisplayAlert("TEST", result, "OK");
 			}
 			catch (Exception e) {
 				await DisplayAlert("ERROR", e.ToString(), "OK");

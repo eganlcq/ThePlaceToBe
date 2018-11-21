@@ -29,7 +29,7 @@
                    HasShadow="False"
                    HorizontalOptions="Center">
                     <StackLayout x:Name="stackLblAndFrame">
-                        <Label Text="Est-ce bien ce qui est écris ?"
+                        <Label Text="Est-ce bien ce qui est écrit ?"
                            FontSize="20"
                            Style="{StaticResource labStyleBoldBlackHorizonCenter}"
                            x:Name="labEstCeBienEcrit"/>
@@ -38,10 +38,10 @@
                            CornerRadius="15"
                            Padding="5"
                                x:Name="frameLblName">
-                            <Label Text="Beer Name"
+                            <Picker
                                Style="{StaticResource labStyleBoldBlackHorizonCenter}"
                                FontSize="16"
-                               x:Name="lblName"/>
+                               x:Name="pickerName"/>
                         </Frame>
                         <StackLayout Orientation="Horizontal"
                                  HorizontalOptions="CenterAndExpand"
