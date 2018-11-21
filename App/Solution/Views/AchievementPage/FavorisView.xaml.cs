@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -16,6 +16,7 @@ namespace ThePlaceToBe.Views.AchievementPage
 			InitializeComponent();
 		}
 
+        // initialize the view to display the achievement of the user
 		public FavorisView(string idUser) {
 
 			InitializeComponent();
@@ -74,6 +75,7 @@ namespace ThePlaceToBe.Views.AchievementPage
 			}
 		}
 
+        // This method is running when a beer is clicked and display the page about the beer
 		private void BeerTapped(object s, EventArgs e, Beer beer) {
 
 			RestService.dic = new Dictionary<string, string> {
