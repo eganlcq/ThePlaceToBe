@@ -32,16 +32,18 @@ namespace ThePlaceToBe.Views.ProductPage
 		}
 
 		// Méthode lancée lorsque le bouton d'ajout de favoris est utilisé
-		private void AddFav(object sender, EventArgs e, Beer beer) {
+		private void AddFav(Beer beer) {
 			RestService.dic = new Dictionary<string, string> {
 
 				{ "idBeer", beer.Idbiere.ToString()},
 				{ "idUser", User.currentUser.Iduser.ToString()}
 			};
 			RestService.Request(RestService.dic, "insertFavoris");
+			btnFavoris.Text = "Remove Fav";
+			btnFavoris.Clicked += (s, e) => RemoveFav(beer);
 		}
 
-		private void RemoveFav(object sender, EventArgs e, Beer beer) {
+		private void RemoveFav(Beer beer) {
 
 			RestService.dic = new Dictionary<string, string> {
 
@@ -49,6 +51,8 @@ namespace ThePlaceToBe.Views.ProductPage
 				{ "idUser", User.currentUser.Iduser.ToString()}
 			};
 			RestService.Request(RestService.dic, "deleteFavoris");
+			btnFavoris.Text = "Add Fav";
+			btnFavoris.Clicked += (s, e) => AddFav(beer);
 		}
 
 		// Affiche les info de la bière courante sur la page
@@ -79,11 +83,11 @@ namespace ThePlaceToBe.Views.ProductPage
 			if(Process.CheckFavorite(beer.Idbiere, User.currentUser.Iduser)) {
 
 				btnFavoris.Text = "Remove Fav";
-				btnFavoris.Clicked += (s, e) => RemoveFav(s, e, beer);
+				btnFavoris.Clicked += (s, e) => RemoveFav(beer);
 			}
 			else {
 				btnFavoris.Text = "Add Fav";
-				btnFavoris.Clicked += (s, e) => AddFav(s, e, beer);
+				btnFavoris.Clicked += (s, e) => AddFav(beer);
 			}
 		}
 
