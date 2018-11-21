@@ -17,6 +17,7 @@ namespace ThePlaceToBe.Data
         {
         }
 
+        // This method allow to send a request to a webservice with any typeof returned elements
         public static async Task<List<T>> Request<T>(Dictionary<string, string> dic, string page)
         {
 
