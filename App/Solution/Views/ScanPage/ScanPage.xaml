@@ -41,7 +41,8 @@
                             <Picker
                                Style="{StaticResource labStyleBoldBlackHorizonCenter}"
                                FontSize="16"
-                               x:Name="pickerName"/>
+                               x:Name="pickerName"
+                                />
                         </Frame>
                         <StackLayout Orientation="Horizontal"
                                  HorizontalOptions="CenterAndExpand"

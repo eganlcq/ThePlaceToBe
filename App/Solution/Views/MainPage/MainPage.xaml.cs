@@ -1,4 +1,4 @@
-using Plugin.Media;
+﻿using Plugin.Media;
 using Plugin.Media.Abstractions;
 using Plugin.Permissions;
 using Plugin.Permissions.Abstractions;
@@ -173,9 +173,9 @@ namespace ThePlaceToBe.Views.MainPage
 
 					if (!CrossMedia.Current.IsCameraAvailable || !CrossMedia.Current.IsTakePhotoSupported) {
 
-#pragma warning disable CS4014 // In the situation where this call is not expected, the execution of the actual method continue before the end of the call
+#pragma warning disable CS4014
 						DisplayAlert("No Camera", "No camera available.", "OK");
-#pragma warning restore CS4014 // In the situation where this call is not expected, the execution of the actual method continue before the end of the call
+#pragma warning restore CS4014
                         return;
 					}
 
@@ -244,5 +244,14 @@ namespace ThePlaceToBe.Views.MainPage
 				beerGrid.RowDefinitions.Remove(row);
 			}
 		}
-	}
+
+        private void Disconnect(object sender, EventArgs e)
+        {
+
+            Navigation.InsertPageBefore(new ConnexionPage.ConnexionPage(), this);
+            Navigation.PopToRootAsync();
+
+        }
+
+    }
 }

@@ -16,6 +16,28 @@
             <AbsoluteLayout Grid.Row="0"
                             Grid.Column="0">
 
+                <Frame 
+                    Padding="0"
+                    AbsoluteLayout.LayoutFlags="PositionProportional"
+                            AbsoluteLayout.LayoutBounds="0.99,0.05"
+                    WidthRequest="25"
+                    HeightRequest="25"
+                    CornerRadius="5">
+                    <!-- disconnection button -->
+                    <Image 
+                        x:Name="disconnection"
+                        Source="disconnect.png"
+                        BackgroundColor="White"
+                        AbsoluteLayout.LayoutFlags="PositionProportional"
+                        AbsoluteLayout.LayoutBounds="0.99,0.05"
+                        HeightRequest="18"
+                        WidthRequest="18">
+                        <Image.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="Disconnect"/>
+                        </Image.GestureRecognizers>
+                    </Image>
+                </Frame>
+
                 <Image x:Name="imgLogo"
                        WidthRequest="120"
                        AbsoluteLayout.LayoutFlags="PositionProportional"

@@ -32,15 +32,15 @@ namespace ThePlaceToBe.Views.ScanPage
 
 			photo.Source = img;
 			TextRecognition(ba);
-
+            
 			pickerName.Items.Add("default");
 			pickerName.SelectedIndex = 0;
 
 			btnRetour.Clicked += (s, e) => GoBack(s, e, ba);
 			btnUpload.Clicked += (s, e) => {
 
-				Upload(ba, pickerName.SelectedIndex.ToString());
-				InsertTmpBeer(pickerName.SelectedIndex.ToString());
+				Upload(ba, pickerName.SelectedItem.ToString());
+				InsertTmpBeer(pickerName.SelectedItem.ToString());
 			};
 			btnNON.Clicked += (s, e) => BtnNONClicked(s, e, ba);
 		}
@@ -148,8 +148,8 @@ namespace ThePlaceToBe.Views.ScanPage
 					foreach (var line in region["lines"]) {
 
 						foreach (var word in line["words"]) {
-							
-							pickerName.Items.Add(word["text"].ToString());
+
+                            pickerName.Items.Add(word["text"].ToString());
 						}
 					}
 				}
