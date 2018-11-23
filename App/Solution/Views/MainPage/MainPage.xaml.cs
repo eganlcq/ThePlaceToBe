@@ -19,29 +19,22 @@ namespace ThePlaceToBe.Views.MainPage
 		double nbRow;
 		double nbColumn;
 		int nbBiere;
+        List<Beer> originalListBeer;
+        List<Beer> tmpBeerList;
+
 		public MainPage() {
 
 			InitializeComponent();
 			NavigationPage.SetHasNavigationBar(this, false);
 
-			// Initialize the content of the xaml page
-			Init();
+            // Initialize the content of the xaml page
+            RestService.dic = new Dictionary<string, string>();
+            originalListBeer = RestService.Request<Beer>(RestService.dic, "selectBeer").Result;
+            tmpBeerList = new List<Beer>();
+            Init();
 		}
 
-		// This method is running when a picture of a beer is clicked
-		private void BeerTapped(object s, EventArgs e, Beer beer) {
-
-			RestService.dic = new Dictionary<string, string> {
-
-				{"idBiere", beer.Idbiere.ToString() }
-			};
-			this.Navigation.PushAsync(new ProductPage.ProductPage(beer));
-		}
-
-		// This method is running when the avatar picture is clicked
-		private void ProfilMainPageTapped(object sender, EventArgs e) {
-			this.Navigation.PushAsync(new AchievementPage.AchievementPage(User.currentUser.Iduser.ToString()));
-		}
+		
 
         // Initialize the content of the xaml page
         private void Init() {
@@ -57,44 +50,67 @@ namespace ThePlaceToBe.Views.MainPage
 
 		// Initialize the grid that will contain the list of the beers from tge database
 		private void FillBeerGrid(string flav, string str) {
+            
+            FilterBeers(flav, str);
 
-			string url;
-			RestService.dic = new Dictionary<string, string>();
-
-			if (flav != "ALL" && str != "" && str != null) {
-
-				RestService.dic.Add("flavor", flav);
-				RestService.dic.Add("text", str);
-				url = "selectBeerByTextAndFlavor";
-			}
-			else if (flav == "ALL" && str != "" && str != null) {
-
-				RestService.dic.Add("text", str);
-				url = "selectBeerByText";
-			}
-			else if ((flav != "ALL" && str == "") || (flav != "ALL" && str == null)) {
-
-				RestService.dic.Add("flavor", flav);
-				url = "selectBeerByFlavor";
-			}
-			else {
-
-				url = "selectBeer";
-			}
-
-			List<Beer> listBiere = RestService.Request<Beer>(RestService.dic, url).Result;
-			nbBiere = listBiere.Count();
+            nbBiere = tmpBeerList.Count();
 			nbRow = Math.Ceiling(nbBiere / 3.0);
 			nbColumn = 3;
 
 			// Add a number of rows proportionnal at the number of beers from the database
 			AddRows(nbRow);
 			// Add the beers pictures in the grid
-			AddBeers(nbRow, nbColumn, nbBiere, listBiere);
+			AddBeers(nbRow, nbColumn, nbBiere, tmpBeerList);
 		}
 
+        // this method filters the beer according to the arguments selected by the user
+        private void FilterBeers(string flav, string str)
+        {
+            // clear the temporary list
+            tmpBeerList.Clear();
+
+            // Filter WITH A TYPE AND A STRING
+            if (flav != "ALL" && str != "" && str != null)
+            {
+                foreach (Beer beer in originalListBeer)
+                {
+                    if (beer.Typebiere == flav && (beer.Nombiere.ToLower().IndexOf(str.ToLower()) != -1))
+                    {
+                        tmpBeerList.Add(beer);
+                    }
+
+                }
+            }
+            // Filter WITH A STRING
+            else if (flav == "ALL" && str != "" && str != null)
+            {
+                foreach (Beer beer in originalListBeer)
+                {
+                    if ((beer.Nombiere.ToLower().IndexOf(str.ToLower()) != -1))
+                        tmpBeerList.Add(beer);
+                }
+            }
+            // Filter WITH A TYPE
+            else if ((flav != "ALL" && str == "") || (flav != "ALL" && str == null))
+            {
+                foreach (Beer beer in originalListBeer)
+                {
+                    if (beer.Typebiere == flav)
+                        tmpBeerList.Add(beer);
+                }
+            }
+            // NO FILTER
+            else
+            {
+                foreach (Beer beer in originalListBeer)
+                {
+                    tmpBeerList.Add(beer);
+                }
+            }
+        }
+
         // Initialize the content of the picker (allow to select a type of flavour for beers)
-		private void InitPicker() {
+        private void InitPicker() {
 
 			RestService.dic = new Dictionary<string, string>();
 			List<Flavour> listeType = RestService.Request<Flavour>(RestService.dic, "selectType").Result;
@@ -136,27 +152,52 @@ namespace ThePlaceToBe.Views.MainPage
 			}
 		}
 
+        // Remove the beer in the grid
+        private void RemoveAllBeer()
+        {
+            int count = 0;
+            for (int x = 0; x < nbRow; x++)
+            {
+                for (int y = 0; y < nbColumn && count < nbBiere; y++, count++)
+                {
+
+                    beerGrid.Children.RemoveAt(0);
+                }
+            }
+
+            foreach (var row in beerGrid.RowDefinitions.ToList())
+            {
+                beerGrid.RowDefinitions.Remove(row);
+            }
+        }
+
         // check if the pitcure exists and if not, a default picture will be display
-        private Image ChooseImage(string imgBiere) {
+        private Image ChooseImage(string imgBiere)
+        {
+            Image img;
 
-			Image img;
+            if (imgBiere != "" && imgBiere != null)
+            {
+                img = new Image
+                {
+                    Source = Constants.beersImg + imgBiere,
+                    Margin = new Thickness(5, 5)
+                };
+            }
+            else
+            {
+                img = new Image
+                {
+                    Source = Constants.beersImg + "oneBeer.png",
+                    Margin = new Thickness(5, 5)
+                };
+            }
+            return img;
+        }
 
-			if (imgBiere != "" && imgBiere != null) {
-				img = new Image {
-					Source = Constants.beersImg + imgBiere,
-					Margin = new Thickness(5, 5)
-				};
-			}
-			else {
-				img = new Image {
-					Source = Constants.beersImg + "oneBeer.png",
-					Margin = new Thickness(5, 5)
-				};
-			}
-			return img;
-		}
+        #region PHOTO
 
-		private async void TakePhoto() {
+        private async void TakePhoto() {
 			try {
 				await CrossMedia.Current.Initialize();
 
@@ -228,30 +269,37 @@ namespace ThePlaceToBe.Views.MainPage
 			FillBeerGrid(flav, str);
 		}
 
-        // Remove the beer in the grid
-		private void RemoveAllBeer() {
-			int count = 0;
-			for (int x = 0; x < nbRow; x++) {
+        #endregion PHOTO
 
-				for (int y = 0; y < nbColumn && count < nbBiere; y++, count++) {
 
-					beerGrid.Children.RemoveAt(0);
-				}
-			}
+        #region EVENEMENTS
 
-			foreach (var row in beerGrid.RowDefinitions.ToList()) {
-
-				beerGrid.RowDefinitions.Remove(row);
-			}
-		}
-
-        private void Disconnect(object sender, EventArgs e)
+        // This method is running when a picture of a beer is clicked
+        private void BeerTapped(object s, EventArgs e, Beer beer)
         {
 
-            Navigation.InsertPageBefore(new ConnexionPage.ConnexionPage(), this);
-            Navigation.PopToRootAsync();
+            RestService.dic = new Dictionary<string, string> {
 
+                {"idBiere", beer.Idbiere.ToString() }
+            };
+            this.Navigation.PushAsync(new ProductPage.ProductPage(beer));
         }
+
+        // This method is running when the avatar picture is clicked
+        private void ProfilMainPageTapped(object sender, EventArgs e)
+        {
+            this.Navigation.PushAsync(new AchievementPage.AchievementPage(User.currentUser.Iduser.ToString()));
+        }
+
+        // Disconnect the user
+        private void Disconnect(object sender, EventArgs e)
+        {
+            Navigation.InsertPageBefore(new ConnexionPage.ConnexionPage(), this);
+            User.currentUser = null;
+            Navigation.PopToRootAsync();
+        }
+
+        #endregion EVENEMENTS
 
     }
 }
