@@ -11,17 +11,19 @@ idbar int(4) not null auto_increment,
 nombar varchar(32) not null,
 latitude double(10,7) not null,
 longitude double(10,7) not null,
-adresse varchar(128) not null,
-primary key (idbar)
-);
+rue varchar(64) not null,
+numero int not null DEFAULT 1,
+localite int not null,
+accessibilite tinyint(1) not null DEFAULT 0,
+primary key (idbar),
+foreign key (localite) references TbVille(localite)
+); 
 
-create table TbAvis(
-idavis int(5) not null auto_increment,
-idbar int(3) not null,
-avis text not null,
-primary key (idavis),
-foreign key (idbar) references TbBar(idbar)
-);
+create table TbVille(
+localite int not null,
+ville varchar(64) not null,
+primary	key (localite)
+);	
 
 create table TbUser(
 iduser int not null auto_increment,
@@ -33,6 +35,7 @@ email varchar(64) not null,
 mdp varchar(64) not null,
 photo varchar(128) not null DEFAULT 'default.png',
 nbrecherche int DEFAULT 0,
+nbajoutprecedent int DEFAULT 0,
 nbajout int DEFAULT 0,
 datelastco datetime not null DEFAULT current_timestamp,
 primary key (iduser)
@@ -74,3 +77,20 @@ primary key (idbiere, iduser),
 foreign key (idbiere) references TbBiere(idbiere),
 foreign key (iduser) references TbUser(iduser)
 );
+
+create table TbInterBeer(
+idbiere int(4) not null auto_increment,
+nombiere varchar(32) not null,
+image varchar(128) not null,
+primary key (idbiere)
+);
+
+create table TbInterBar(
+idbar int(4) not null auto_increment,
+nombar varchar(32) not null,
+rue varchar(64) not null,
+numero int not null DEFAULT 1,
+localite int not null,
+ville varchar(64) not null,
+primary key (idbar)
+)

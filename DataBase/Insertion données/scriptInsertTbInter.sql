@@ -1,0 +1,1 @@
+ALTER TABLE TbInter auto_increment = 1;
