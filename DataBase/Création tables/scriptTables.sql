@@ -59,7 +59,6 @@ primary key (idbiere)
 );
 
 
-
 create table TbCarte(
 idbiere int(4) not null,
 idbar int(4) not null,
@@ -67,7 +66,6 @@ primary key (idbiere , idbar),
 foreign key (idbiere) references TbBiere(idbiere),
 foreign key (idbar) references TbBar(idbar)
 );
-
 
 
 create table TbFavoris(
@@ -79,18 +77,25 @@ foreign key (iduser) references TbUser(iduser)
 );
 
 create table TbInterBeer(
-idbiere int(4) not null auto_increment,
+idbiere int not null auto_increment,
 nombiere varchar(32) not null,
 image varchar(128) not null,
 primary key (idbiere)
 );
 
 create table TbInterBar(
-idbar int(4) not null auto_increment,
+idbar int not null auto_increment,
 nombar varchar(32) not null,
 rue varchar(64) not null,
 numero int not null DEFAULT 1,
 localite int not null,
 ville varchar(64) not null,
 primary key (idbar)
-)
+);
+
+create table TbInterCarte(
+idcarte int not null auto_increment,
+nombiere varchar(32) not null,
+nombar varchar(32) not null,
+primary key (idcarte)
+);
