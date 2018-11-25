@@ -1,0 +1,7 @@
+CREATE DEFINER=`admin`@`%` PROCEDURE `deletescan`(idscan int)
+BEGIN
+SET SQL_SAFE_UPDATES=0;
+DELETE FROM TbInter
+WHERE idbiere = idscan;
+SET SQL_SAFE_UPDATES=0;
+END
