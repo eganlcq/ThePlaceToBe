@@ -74,10 +74,12 @@ namespace ThePlaceToBe.Views.MainPage
 			btnScan.Clicked += (s, e) => TakePhoto();
 			InitPicker();
 			flavourPicker.SelectedIndex = 0;
-		}
+            disconnection.Source = Constants.appImg + "disconnect.png";
+            menuPageImage.Source = Constants.appImg + "menuPageButton.png";
+        }
 
-		// Initialize the grid that will contain the list of the beers from tge database
-		private void FillBeerGrid(string flav, string str) {
+        // Initialize the grid that will contain the list of the beers from tge database
+        private void FillBeerGrid(string flav, string str) {
             
             FilterBeers(flav, str);
 
