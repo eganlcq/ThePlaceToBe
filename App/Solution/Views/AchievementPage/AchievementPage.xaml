@@ -14,25 +14,23 @@
                 <RelativeLayout>
                     <!--Avatar + bouton-->
                     <Frame 
-                    Margin="10" 
-                    BackgroundColor="White" 
-                    x:Name="avatar"
-                      RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToParent,
+                        x:Name="FrameAvatar"
+                        CornerRadius="100"
+                            RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToParent,
                              Property=Height,
                              Factor=0,
                              Constant=0}"
                         RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToParent,
                              Property=Height,
                              Factor=0,
-                             Constant=0}"
-                    CornerRadius="100"  
-                    HeightRequest="85"
-                    WidthRequest="85">
-                        <Label 
-                        Text="AVATAR" 
-                        TextColor="Black" 
-                        VerticalOptions="Center"
-                        HorizontalOptions="Center"/>
+                             Constant=0}">
+                    <Image
+                    Margin="10" 
+                    BackgroundColor="White" 
+                    x:Name="avatar" 
+                    HeightRequest="65"
+                    WidthRequest="65"
+                        />
                     </Frame>
                     <Button 
                        BackgroundColor="#3367b0"
@@ -44,18 +42,16 @@
                         FontSize="10"
                         RelativeLayout.XConstraint="{ConstraintExpression 
                     Type=RelativeToView,
-                    ElementName=avatar,
+                    ElementName=FrameAvatar,
                     Property=X,
                     Factor=0,
-                    Constant=13}"
+                    Constant=0}"
                         RelativeLayout.YConstraint="{ConstraintExpression 
                     Type=RelativeToView,
-                    ElementName=avatar,
+                    ElementName=FrameAvatar,
                     Property=Y,
                     Factor=1,
                     Constant=125}"/>
-
-
                 </RelativeLayout>
 
                 <RelativeLayout>
