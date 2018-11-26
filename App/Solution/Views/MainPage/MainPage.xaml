@@ -19,19 +19,18 @@
                 <Frame 
                     Padding="0"
                     AbsoluteLayout.LayoutFlags="PositionProportional"
-                            AbsoluteLayout.LayoutBounds="0.99,0.05"
-                    WidthRequest="25"
-                    HeightRequest="25"
-                    CornerRadius="5">
+                    AbsoluteLayout.LayoutBounds="0.99,0.05"
+                    WidthRequest="27"
+                    HeightRequest="27"
+                    CornerRadius="14">
                     <!-- disconnection button -->
                     <Image 
                         x:Name="disconnection"
                         Source="disconnect.png"
-                        BackgroundColor="White"
                         AbsoluteLayout.LayoutFlags="PositionProportional"
                         AbsoluteLayout.LayoutBounds="0.99,0.05"
-                        HeightRequest="18"
-                        WidthRequest="18">
+                        HeightRequest="17"
+                        WidthRequest="17">
                         <Image.GestureRecognizers>
                             <TapGestureRecognizer Tapped="Disconnect"/>
                         </Image.GestureRecognizers>
@@ -84,16 +83,16 @@
                                  HorizontalOptions="FillAndExpand"
                                  Spacing="0"
                              Margin="0, 10, 0, 0">
-                    <!--<Label Text="Saveur :"
+                    <Label Text="Saveur :"
                                FontSize="16"
                                Style="{StaticResource labStyleBoldBlackVerticalCenter}"
-                               Margin="10, 5, 10, 0"/>-->
+                               Margin="10, 5, 5, 0"/>
 
                     <cust:MyPickerFlavour x:Name="flavourPicker"
                             BackgroundColor="White"
                             FontSize="12"
                             Margin="5,0,0,0"
-                            WidthRequest="150"
+                            WidthRequest="130"
                             HeightRequest="25"
                             VerticalOptions="Center"
                             Title="Flavour"
@@ -103,7 +102,7 @@
                                      Orientation="Horizontal"
                                      HorizontalOptions="EndAndExpand">
                         <Image x:Name="imgLoupe"
-                               HeightRequest="30"
+                               HeightRequest="25"
                                VerticalOptions="Center"/>
 
                         <cust:MyEntryFilterBeer BackgroundColor="White"
@@ -111,10 +110,18 @@
                                FontSize="12"
                                HeightRequest="25"
                                WidthRequest="120"
-                               Margin="10, 0, 10, 0"
+                               Margin="10, 0, 5, 0"
                                                 TextChanged="DisplayBeerByTextAndFlavor"
                                                 x:Name="textPicker"/>
                     </StackLayout>
+                    <Image Source="menuPageButton.png"
+                           HeightRequest="25"
+                           WidthRequest="25"
+                           Margin="0,0,5,0">
+                        <Image.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="MenuPageTapped"/>
+                        </Image.GestureRecognizers>
+                    </Image>
 
                 </StackLayout>
 

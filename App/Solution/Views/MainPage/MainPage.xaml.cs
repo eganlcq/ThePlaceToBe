@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Net.Http;
+using System.Runtime.Serialization;
 using ThePlaceToBe.Data;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -22,7 +23,7 @@ namespace ThePlaceToBe.Views.MainPage
         List<Beer> originalListBeer;
         List<Beer> tmpBeerList;
 
-		public MainPage() {
+        public MainPage() {
 
 			InitializeComponent();
 			NavigationPage.SetHasNavigationBar(this, false);
@@ -34,7 +35,34 @@ namespace ThePlaceToBe.Views.MainPage
             Init();
 		}
 
-		
+        /*
+        private void InitPicker<T>(string url, int index)
+        {
+            RestService.dic = new Dictionary<string, string>();
+            List<T> listObject = RestService.Request<T>(RestService.dic, url).Result;
+            FunctionToUse(listObject, index);
+        }
+
+        private void FunctionToUse<T>(List<T> listObject, int index)
+        {
+            switch (index)
+            {
+                case 0 :
+                    foreach (T obj in listObject)
+                    {
+                        beerPicker.Items.Add(obj.GetType().GetProperty("Nombiere").GetValue(obj).ToString());
+                    }
+                    break;
+                case 1:
+                    foreach (T obj in listObject)
+                    {
+                        barPicker.Items.Add(obj.GetType().GetProperty("Nombar").GetValue(obj).ToString());
+                    }
+                    break;
+            }
+        }
+        */
+
 
         // Initialize the content of the xaml page
         private void Init() {
@@ -299,7 +327,14 @@ namespace ThePlaceToBe.Views.MainPage
             Navigation.PopToRootAsync();
         }
 
+        // Change the page to MenuPage
+        private void MenuPageTapped(object sender, EventArgs e)
+        {
+            this.Navigation.PushAsync(new MenuPage.MenuPage());
+        }
+
         #endregion EVENEMENTS
+
 
     }
 }

@@ -137,11 +137,11 @@ namespace ThePlaceToBe.Views.ProductPage
 			
 			foreach (Bar bar in listBar) {
 
-				Pin pin = new Pin {
-					Type = PinType.Generic,
-					Position = new Position(bar.Latitude, bar.Longitude),
-					Label = bar.Nombar,
-					Address = ""
+                Pin pin = new Pin {
+                    Type = PinType.Generic,
+                    Position = new Position(bar.Latitude, bar.Longitude),
+                    Label = bar.Nombar,
+                    Address = bar.Numero.ToString() + " " + bar.Rue
 				};
 				
 				listPin.Add(pin);
