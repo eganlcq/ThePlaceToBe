@@ -1,5 +1,5 @@
 $(document).ready(function(){
-    $('footer a').click(function (event) {
+    $('footer .prevDef a').click(function (event) {
         event.preventDefault();
         appelAjax(this);
     });
@@ -146,9 +146,9 @@ function gereRetour(retour){
                 break;
             case 'gestionCompte':
                 $('#contenuCompte').html(retour[cle]);
-                $('#table form input[type=submit]').click(function (e) {
+                $('#contenuAdmin form input[type=submit]').click(function (e) {
                     var x = e.target.name;
-                    $('#table form').submit(function (event) {
+                    $('#contenuAdmin form').submit(function (event) {
                         event.preventDefault();
                         appelAjax(this, x);
                     });
@@ -156,6 +156,18 @@ function gereRetour(retour){
                 $('#contenuCompte a').click(function (event) {
                     event.preventDefault();
                     appelAjax(this);
+                });
+                $('#menuAdmin a').click(function (e) {
+                    $('#menuAdmin a').removeClass('selected');
+                    $(this).addClass('selected');
+                    e.preventDefault();
+                    appelAjax(this);
+                });
+                $('#contenuAdmin li').click(function (e) {
+                    e.preventDefault();
+                    if($(this).next("form").is(':visible')) ;
+                    else $('#contenuAdmin form:visible').slideToggle();
+                    $(this).next("form").slideToggle();
                 });
                 break;
             case 'adminconnexion':
