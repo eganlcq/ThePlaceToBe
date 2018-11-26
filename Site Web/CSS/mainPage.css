@@ -61,6 +61,11 @@ a {
     cursor: pointer;
 }
 
+hr {
+    margin: 0;
+    background-color: white;
+}
+
 a:hover {
     color: #D5B927;
     transition: all 1s ease;
@@ -147,7 +152,7 @@ a:hover {
         max-width: 30px;
         max-height: 30px;
     }
-    #legal li{
+    #legal li, #protection li{
         display: block;
     }
     .achievFav {
@@ -279,7 +284,7 @@ a:hover {
 }
 #propos li, #listeGestionCompte li {
     display: inline-block;
-    margin: 0 3%;
+    margin: 0 2%;
 }
 #propos li:hover, #gestion li:hover {
     color: #D5B927;
@@ -305,12 +310,12 @@ a:hover {
     Gère les affaires légales du site
 **/
 
-#legal {
+#legal{
     letter-spacing: 2px;
-    padding: 10px 0;
+    padding: 5px 0 10px 0;
     margin: 0 auto!important;
 }
-#legal li {
+#legal li{
     margin: 0 2%;
     font-size: .6em;
 }
@@ -520,7 +525,6 @@ a:hover {
     margin: 25px auto;
 }
 #listeGestionCompte {
-    margin-bottom: 2%;
     font-size: 1.2em;
 }
 
@@ -538,29 +542,7 @@ a:hover {
     padding: 0;
 }
 
-#table {
-    display: grid;
-    grid-gap: 1%;
-    grid-template-columns: auto auto auto auto auto auto auto;
-}
-
-#formAdminGestion {
-    display: contents;
-}
-
-#formAdminGestion input {
-    margin: 0!important;
-    padding: 0!important;
-    width: 100%!important;
-}
-#formAdminGestion img {
-    width: 60px;
-    height: 60px;
-}
-#contenuCompte {
-    padding-bottom: 30px;
-}
-#legalDiv h1, h2 {
+#legalDiv h1, h2, #protection h1 {
     font-size: 1.5em;
     font-weight: bold;
 }
@@ -570,4 +552,92 @@ a:hover {
     background-color: black;
     box-shadow: 10px 10px 194px 13px rgba(0,0,0,0.75);
     font-size: 0.8em;
+}
+
+#protection ul{
+    list-style-type: disc !important;
+}
+
+#protection{
+    padding: 15px;
+    opacity: 0.8;
+    background-color: black;
+    box-shadow: 10px 10px 194px 13px rgba(0,0,0,0.75);
+    font-size: 0.8em;
+}
+
+#protection li{
+    margin: 0 0 0 20px !important;
+}
+
+/*
+    gère la partie admin
+ */
+
+#menuAdmin ul {
+    margin: 2% 0;
+}
+
+#menuAdmin ul:first-child li {
+    margin: 0 15px;
+    display: inline-block;
+}
+
+#contenuAdmin li {
+    background-image: linear-gradient(to right, rgba(255,0,0,0), #620F00, rgba(255,0,0,0));
+    text-align: center;
+}
+
+/*
+    gère la partie des bières dans admin
+ */
+.biereAdmin {
+    display: grid;
+    padding: 3%;
+    grid-template-columns: 40% 20% 40%;
+    grid-template-areas: 'myArea . .' 'myArea . .' 'myArea . .' 'myArea . .' 'myArea . .' '. . .';
+}
+
+.imgBiere {
+    grid-area: myArea;
+    margin: auto;
+}
+
+.biereAdmin input{
+    height: auto!important;
+    margin: 3% auto;
+}
+
+.biereAdmin input[type=submit] {
+    width: 100%!important;
+}
+.biereAdmin label {
+    width: 100%!important;
+    margin: auto;
+}
+
+/*
+    gère la partie des bars dans Admin
+ */
+.barAdmin {
+    margin: auto;
+    width: 80%;
+    display: grid;
+    padding: 3%;
+    grid-template-columns: 30% 70%;
+}
+
+.barAdmin label {
+    margin: auto;
+}
+
+.barAdmin input[type=submit] {
+    width: 70%;
+    margin: auto;
+}
+
+.barAdmin input {
+    height: auto!important;
+    width: 90%!important;
+    margin: 1% auto;
 }
