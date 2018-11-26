@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -62,10 +63,6 @@ namespace ThePlaceToBe.Views.MenuPage
 			var tapSendBeerInBar = new TapGestureRecognizer();
 			tapSendBeerInBar.Tapped += (s, e) => SendBeerInBar();
 			sendBeerInBarFrame.GestureRecognizers.Add(tapSendBeerInBar);
-
-			var tapSendBeer = new TapGestureRecognizer();
-			tapSendBeer.Tapped += (s, e) => SendBeer();
-			sendBeerFrame.GestureRecognizers.Add(tapSendBeer);
 
 			var tapSendBar = new TapGestureRecognizer();
 			tapSendBar.Tapped += (s, e) => SendBar();
@@ -229,22 +226,23 @@ namespace ThePlaceToBe.Views.MenuPage
 			}
 		}
 
-		private async void SendBeer() {
+		private async void SendBeer(byte[] byteArray) {
 
-			string result = CheckBeer();
+			if (labelErrorBeer.Opacity == 1) await labelErrorBeer.FadeTo(0, 250);
+
+			string nameOfBeer;
+
+			if (beerStackPicker.IsVisible) {
+
+				nameOfBeer = beerPickerTextRecognition.SelectedItem.ToString();
+			}
+			else {
+
+				nameOfBeer = entryChooseBeerName.Text;
+			}
+
+			string result = CheckBeer(nameOfBeer);
 			if (result == "OK") {
-				if (labelErrorBeer.Opacity == 1) await labelErrorBeer.FadeTo(0, 250);
-
-				string nameOfBeer;
-
-				if (beerStackPicker.IsVisible) {
-
-					nameOfBeer = beerPickerTextRecognition.SelectedItem.ToString();
-				}
-				else {
-
-					nameOfBeer = entryChooseBeerName.Text;
-				}
 
 				RestService.dic = new Dictionary<string, string> {
 
@@ -256,11 +254,7 @@ namespace ThePlaceToBe.Views.MenuPage
 				};
 				await RestService.Request<Beer>(RestService.dic, "insertTmpBeer");
 				await HideOrShowStack(addBeerStack);
-				/*beerPickerTextRecognition.SelectedItem = null;
-				barForBeerPicker.SelectedItem = null;
-				entryChooseBeerName.Text = null;
-				entryAlcohol.Text = null;
-				entryType.Text = null;*/
+				Upload(byteArray, nameOfBeer);
 			}
 			else {
 
@@ -273,7 +267,7 @@ namespace ThePlaceToBe.Views.MenuPage
 			}
 		}
 
-		private string CheckBeer() {
+		private string CheckBeer(string nameOfBeer) {
 
 			bool isNotNull = CheckIfNotNull();
 			if(!isNotNull) {
@@ -281,17 +275,6 @@ namespace ThePlaceToBe.Views.MenuPage
 				return "Please choose a name and a bar.";
 			}
 			else {
-
-				string nameOfBeer;
-
-				if(beerStackPicker.IsVisible) {
-					
-					nameOfBeer = beerPickerTextRecognition.SelectedItem.ToString();
-				}
-				else {
-
-					nameOfBeer = entryChooseBeerName.Text;
-				}
 
 				RestService.dic = new Dictionary<string, string> {
 
@@ -456,7 +439,11 @@ namespace ThePlaceToBe.Views.MenuPage
 						var stream = new MemoryStream();
 						file.GetStream().CopyTo(stream);
 						byte[] bitmapData = stream.ToArray();
-						
+
+						var tapSendBeer = new TapGestureRecognizer();
+						tapSendBeer.Tapped += (s, e) => SendBeer(bitmapData);
+						sendBeerFrame.GestureRecognizers.Add(tapSendBeer);
+
 						using (var fileContent = new ByteArrayContent(bitmapData)) {
 
 							await TextRecognition(fileContent, beerPickerTextRecognition);
@@ -529,6 +516,30 @@ namespace ThePlaceToBe.Views.MenuPage
 			}
 
 			return true;
+		}
+
+		private async void Upload(byte[] byteArray, string nameOfBeer) {
+
+			
+
+			using (var ba = new ByteArrayContent(byteArray)) {
+
+				ba.Headers.ContentType = MediaTypeHeaderValue.Parse("application/octet-stream");
+				ba.Headers.ContentDisposition = new ContentDispositionHeaderValue("form-data") {
+
+					Name = "fileUpload",
+					FileName = nameOfBeer + ".jpg"
+				};
+
+				string boundary = "---8393774hhy37373773";
+				MultipartFormDataContent multipartContent = new MultipartFormDataContent(boundary);
+				multipartContent.Add(ba);
+
+				HttpClient httpClient = new HttpClient();
+				HttpResponseMessage response = await httpClient.PostAsync("http://www.theplacetobe.ovh/admin/upload.php", multipartContent);
+				string responseString = await response.Content.ReadAsStringAsync();
+				response.EnsureSuccessStatusCode();
+			}
 		}
 	}
 }
