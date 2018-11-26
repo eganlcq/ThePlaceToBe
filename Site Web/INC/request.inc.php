@@ -73,7 +73,17 @@ function gereRequest($retour){
             if($res) toSend($res, '');
             break;
         case 'rgdp':
+            $res = chargeTemplate('rgdp');
+            if($res) toSend($res, '');
+            break;
 
+        case 'protection':
+            $res = chargeTemplate('protection');
+            if($res) toSend($res, '');
+            break;
+        case 'gestionAdmin':
+            $admin = new gestionAdmin();
+            toSend($admin->admin($_POST['senderId']), 'gestionCompte');
             break;
         case 'formSubmit': gereSubmit(); break;
     }
@@ -95,10 +105,10 @@ function gereSubmit(){
             $admin = new gestionAdmin();
             toSend($admin->admin(), 'gestionCompte');
             break;
-        case 'formAdminGestion':
+        case 'BiereAdmin':
             if($_POST['senderName'] === "suppr") $db->call('deletescan', [$_POST['idbiere']]);
             else {
-                $db->call('beerfromscan', [$_POST['idbiere'],$_POST['nombiere'], $_POST['alcoolemie'],$_POST['type'],$_POST['image']]);
+                $db->call('beerfromscan', [$_POST['idbiere'],$_POST['nombiere'], $_POST['alcoolemie'],$_POST['typebiere'],$_POST['image'], $_POST['nombar']]);
                 $file= "image/tmp/".$_POST['image'];
                 $target_file = "image/beers/".$_POST['image'];
 
@@ -107,6 +117,14 @@ function gereSubmit(){
             unlink("image/tmp/".$_POST['image']);
             $admin = new gestionAdmin();
             toSend($admin->admin(), 'gestionCompte');
+            break;
+        case 'BarAdmin':
+            if($_POST['senderName'] === "suppr") $db->call('deletebar', [$_POST['idbar']]);
+            else {
+                $db->call('barfrominter', [$_POST['idbar'], $_POST['nombar'], $_POST['rue'], $_POST['numero'], $_POST['localite'], $_POST['ville'], $_POST['latitude'], $_POST['longitude'], $_POST['accessibilite']]);
+            }
+            $admin = new gestionAdmin();
+            toSend($admin->admin('bar'), 'gestionCompte');
             break;
         case 'connexion':
             $result = $db->call('userconnexion', [$_POST['pseudo'], $_POST['pwd']]);

@@ -54,7 +54,7 @@
     </div>
     <div>
         <img class="imgResize" src="../image/iconFooter.png" id="logo" alt="Logo_ThePlaceToBe">
-        <p><b>Ephec Belgium</b>,<br>Avenue du Ciseau 15,<br>1348 Ottignies-Louvain-la-Neuve</p>
+        <p><b>Ephec Belgique</b>,<br>Avenue du Ciseau 15,<br>1348 Ottignies-Louvain-la-Neuve</p>
         <img class="imgResize" id="map" src="../image/map.PNG" alt="Map_QG">
     </div>
 </section>

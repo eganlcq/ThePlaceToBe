@@ -3,7 +3,7 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>Login</title>
+    <title>Connexion</title>
 </head>
 <body>
 <div id="fond" class="log"></div>

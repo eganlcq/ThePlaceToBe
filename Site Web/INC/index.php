@@ -6,6 +6,6 @@
         <meta http-equiv="refresh" content="2; URL=..">
     </head>
     <body>
-        You are not allowed to access that directory
+        Vous n'êtes pas autorisé à accéder à ce dossier
     </body>
 </html>

@@ -31,6 +31,8 @@ class Config extends Db
                 case 'datenaiss': break;
                 case 'iduser': break;
                 case 'photo':  break;
+                case 'nbajout': break;
+                case 'nbajoutprecedent': break;
                 default : $form.= "<label for=".$key.">".$key."</label><input type=text id=".$key." name=".$key." value=".$value." required><br>";
             }
         }

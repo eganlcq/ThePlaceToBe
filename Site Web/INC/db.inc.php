@@ -31,16 +31,18 @@ class Db
     public function call($nom, $param= []){
         $p =[];
         switch ($nom){
+            case 'barfrominter': array_push($p, '?', '?', '?');
             case 'gestioncompte':
-            case 'userinscription':array_push($p, '?');
-            case 'beerfromscan': array_push($p, '?', '?');
-            case 'verifpseudomail': array_push($p, '?');
+            case 'beerfromscan':
+            case 'userinscription': array_push($p, '?');
+            case 'verifpseudomail': array_push($p, '?', '?', '?');
             case 'verifmdp':
             case 'userconnexion':array_push($p, '?');
             case 'achievementbyuser':
             case 'favorisbyuser':
             case 'verifpseudo':
             case 'deletescan':
+            case 'deletebar':
             case 'verifmail': array_push($p, '?');
                 try {
                     $appel = 'call '.$nom.'('.implode(',', $p).')';
