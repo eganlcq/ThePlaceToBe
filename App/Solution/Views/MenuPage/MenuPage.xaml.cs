@@ -33,8 +33,8 @@ namespace ThePlaceToBe.Views.MenuPage
 		private void Init() {
 
 			imgLogo.Source = imgLogo.Source = Constants.appImg + "logo.png";
-			imgAccount.Source = Constants.userImg + "default.png";
-			lblPseudo.Text = "Octofen";
+			imgAccount.Source = Constants.userImg + User.currentUser.Photo;
+			lblPseudo.Text = User.currentUser.Pseudo;
 			ChangeTapRecognizer(addBeerInBarStack, addBeerInBarFrame);
 
 			InitTapRecognizers();
@@ -152,7 +152,7 @@ namespace ThePlaceToBe.Views.MenuPage
 		}
 
 		private void ProfilMainPageTapped() {
-
+			this.Navigation.PushAsync(new AchievementPage.AchievementPage(User.currentUser.Iduser.ToString()));
 		}
 
 		private async void ChangePickerIntoEntry(StackLayout stack, Entry entry) {
@@ -234,14 +234,18 @@ namespace ThePlaceToBe.Views.MenuPage
 
 			if (beerStackPicker.IsVisible) {
 
-				nameOfBeer = beerPickerTextRecognition.SelectedItem.ToString();
+				if (beerPickerTextRecognition.SelectedItem != null) {
+					nameOfBeer = beerPickerTextRecognition.SelectedItem.ToString();
+				}
+				else nameOfBeer = null;
 			}
 			else {
-
+				
 				nameOfBeer = entryChooseBeerName.Text;
 			}
 
 			string result = CheckBeer(nameOfBeer);
+			
 			if (result == "OK") {
 
 				RestService.dic = new Dictionary<string, string> {
@@ -269,7 +273,7 @@ namespace ThePlaceToBe.Views.MenuPage
 
 		private string CheckBeer(string nameOfBeer) {
 
-			bool isNotNull = CheckIfNotNull();
+			bool isNotNull = CheckIfNotNull(nameOfBeer);
 			if(!isNotNull) {
 
 				return "Please choose a name and a bar.";
@@ -293,7 +297,7 @@ namespace ThePlaceToBe.Views.MenuPage
 			}
 		}
 
-		private bool CheckIfNotNull() {
+		private bool CheckIfNotNull(string nameOfBeer) {
 
 			if(barForBeerPicker.SelectedItem == null) {
 
@@ -301,22 +305,11 @@ namespace ThePlaceToBe.Views.MenuPage
 			}
 			else {
 
-				if (beerStackPicker.IsVisible) {
+				if(nameOfBeer == "" || nameOfBeer == null) {
 
-					if (beerPickerTextRecognition.SelectedItem == null) {
-
-						return false;
-					}
-					else return true;
+					return false;
 				}
-				else {
-
-					if (entryChooseBeerName.Text == null || entryChooseBeerName.Text == "") {
-
-						return false;
-					}
-					else return true;
-				}
+				else return true;
 			}
 		}
 
@@ -442,6 +435,13 @@ namespace ThePlaceToBe.Views.MenuPage
 
 						var tapSendBeer = new TapGestureRecognizer();
 						tapSendBeer.Tapped += (s, e) => SendBeer(bitmapData);
+						if(sendBeerFrame.GestureRecognizers.Count != 0) {
+
+							for(int i = 0; i < sendBeerFrame.GestureRecognizers.Count; i++) {
+
+								sendBeerFrame.GestureRecognizers.RemoveAt(0);
+							}
+						}
 						sendBeerFrame.GestureRecognizers.Add(tapSendBeer);
 
 						using (var fileContent = new ByteArrayContent(bitmapData)) {
