@@ -258,7 +258,12 @@ namespace ThePlaceToBe.Views.MenuPage
 				};
 				await RestService.Request<Beer>(RestService.dic, "insertTmpBeer");
 				await HideOrShowStack(addBeerStack);
-				Upload(byteArray, nameOfBeer);
+
+				using(ByteArrayContent ba = new ByteArrayContent(byteArray)) {
+
+					Upload(ba, nameOfBeer, "upload");
+				}
+				
 			}
 			else {
 
@@ -446,10 +451,11 @@ namespace ThePlaceToBe.Views.MenuPage
 
 						using (var fileContent = new ByteArrayContent(bitmapData)) {
 
-							await TextRecognition(fileContent, beerPickerTextRecognition);
+							Upload(fileContent, "img", "uploadForTextRecognition");
 						}
+						TextRecognition(beerPickerTextRecognition);
 
-						if(!beerStackPicker.IsVisible) {
+						if (!beerStackPicker.IsVisible) {
 
 							ChangeEntryIntoPicker(beerStackPicker, entryChooseBeerName);
 						}
@@ -477,40 +483,20 @@ namespace ThePlaceToBe.Views.MenuPage
 			}
 		}
 
-		private async Task<bool> TextRecognition(ByteArrayContent ba, Picker picker) {
-			try {
-				string key = "8bf0245b7b8c4c0cb26da1dcd95647b4";
-				string uriBase = "https://westeurope.api.cognitive.microsoft.com/vision/v1.0/ocr";
-				HttpClient client = new HttpClient();
-				client.DefaultRequestHeaders.Add("Ocp-Apim-Subscription-Key", key);
-				string param = "visualFeatures=Categories,Description,Color";
-				string uri = uriBase + "?" + param;
-				HttpResponseMessage response;
-				ba.Headers.ContentType = new System.Net.Http.Headers.MediaTypeHeaderValue("application/octet-stream");
-				response = await client.PostAsync(uri, ba);
-				string contentString = await response.Content.ReadAsStringAsync();
-				var json = JToken.Parse(contentString);
-				foreach (var region in json["regions"]) {
+		private bool TextRecognition(Picker picker) {
 
-					foreach (var line in region["lines"]) {
+			RestService.dic = new Dictionary<string, string>() {
 
-						foreach (var word in line["words"]) {
+				{ "image", "img.jpg" }
+			};
+			List<string> list = RestService.Request<string>(RestService.dic, "textRecognition/textRecognition").Result;
 
-							picker.Items.Add(word["text"].ToString());
-						}
-					}
-				}
-			}
-			catch(Java.IO.IOException) {
+			foreach (string str in list) {
 
-
-			}
-			catch (Exception e) {
-
-				await DisplayAlert("ERROR POST", e.ToString(), "OK");
+				picker.Items.Add(str);
 			}
 
-			if(picker.Items.Count == 0) {
+			if (picker.Items.Count == 0) {
 
 				picker.Items.Add("default");
 			}
@@ -518,11 +504,9 @@ namespace ThePlaceToBe.Views.MenuPage
 			return true;
 		}
 
-		private async void Upload(byte[] byteArray, string nameOfBeer) {
+		private async void Upload(ByteArrayContent ba, string nameOfBeer, string url) {
 
-			
-
-			using (var ba = new ByteArrayContent(byteArray)) {
+			try {
 
 				ba.Headers.ContentType = MediaTypeHeaderValue.Parse("application/octet-stream");
 				ba.Headers.ContentDisposition = new ContentDispositionHeaderValue("form-data") {
@@ -530,15 +514,19 @@ namespace ThePlaceToBe.Views.MenuPage
 					Name = "fileUpload",
 					FileName = nameOfBeer + ".jpg"
 				};
-
-				string boundary = "---8393774hhy37373773";
-				MultipartFormDataContent multipartContent = new MultipartFormDataContent(boundary);
+				
+				MultipartFormDataContent multipartContent = new MultipartFormDataContent();
 				multipartContent.Add(ba);
 
 				HttpClient httpClient = new HttpClient();
-				HttpResponseMessage response = await httpClient.PostAsync("http://www.theplacetobe.ovh/admin/upload.php", multipartContent);
+				HttpResponseMessage response = await httpClient.PostAsync("http://www.theplacetobe.ovh/admin/" + url + ".php", multipartContent);
 				string responseString = await response.Content.ReadAsStringAsync();
 				response.EnsureSuccessStatusCode();
+
+			}
+			catch(Exception e) {
+
+				await DisplayAlert("ERROR", e.Message.ToString(), "OK");
 			}
 		}
 	}
