@@ -13,27 +13,27 @@ namespace ThePlaceToBe.Views.ProductPage
 	[XamlCompilation(XamlCompilationOptions.Compile)]
 	public partial class ProductPage : ContentPage {
 
-        TapGestureRecognizer tapGestureRecognizerAddFav = new TapGestureRecognizer();
-        TapGestureRecognizer tapGestureRecognizerRemoveFav = new TapGestureRecognizer();
+		TapGestureRecognizer tapGestureRecognizerAddFav = new TapGestureRecognizer();
+		TapGestureRecognizer tapGestureRecognizerRemoveFav = new TapGestureRecognizer();
 
-        public ProductPage(Beer beer) {
+		public ProductPage(Beer beer) {
 			InitializeComponent();
 			NavigationPage.SetHasNavigationBar(this, false);
-            // Initialize the content of the xaml page
+			// Initialize the content of the xaml page
 
-            Init(beer);
-            // Initialize the elements necessary for the operation of the map
-            InitMap();
+			Init(beer);
+			// Initialize the elements necessary for the operation of the map
+			InitMap();
 		}
 
-        // This method is running when the avatar picture is clicked
-        private void ProfilMainPageTapped(object sender, EventArgs e) {
+		// This method is running when the avatar picture is clicked
+		private void ProfilMainPageTapped(object sender, EventArgs e) {
 			this.Navigation.PushAsync(new AchievementPage.AchievementPage(User.currentUser.Iduser.ToString()));
 		}
 
 
 		// This method is running when the button to add favorites is clicked
-        // A beer is added as a favorite to a user
+		// A beer is added as a favorite to a user
 		private void AddFav(Beer beer) {
 			RestService.dic = new Dictionary<string, string> {
 
@@ -41,14 +41,15 @@ namespace ThePlaceToBe.Views.ProductPage
 				{ "idUser", User.currentUser.Iduser.ToString()}
 			};
 			RestService.Request(RestService.dic, "insertFavoris");
-            btnFavoris.Source = Constants.appImg + "favorisBleu.png";
-            btnFavoris.GestureRecognizers.Clear();
-            btnFavoris.GestureRecognizers.Add(tapGestureRecognizerRemoveFav);
-        }
+			Achievement.CheckFavoris(this);
+			btnFavoris.Source = Constants.appImg + "favorisBleu.png";
+			btnFavoris.GestureRecognizers.Clear();
+			btnFavoris.GestureRecognizers.Add(tapGestureRecognizerRemoveFav);
+		}
 
-        // This method is running when the button to remove favorites is clicked
-        // The favorite beer is removed
-        private void RemoveFav(Beer beer) {
+		// This method is running when the button to remove favorites is clicked
+		// The favorite beer is removed
+		private void RemoveFav(Beer beer) {
 
 			RestService.dic = new Dictionary<string, string> {
 
@@ -56,14 +57,14 @@ namespace ThePlaceToBe.Views.ProductPage
 				{ "idUser", User.currentUser.Iduser.ToString()}
 			};
 			RestService.Request(RestService.dic, "deleteFavoris");
-            btnFavoris.Source = Constants.appImg + "favorisG.png";
-            btnFavoris.GestureRecognizers.Clear();
-            btnFavoris.GestureRecognizers.Add(tapGestureRecognizerAddFav);
-            
-        }
+			btnFavoris.Source = Constants.appImg + "favorisG.png";
+			btnFavoris.GestureRecognizers.Clear();
+			btnFavoris.GestureRecognizers.Add(tapGestureRecognizerAddFav);
 
-        // Display on the page the informations about the current beer
-        private void DisplayBeerInfo(Beer beer) {
+		}
+
+		// Display on the page the informations about the current beer
+		private void DisplayBeerInfo(Beer beer) {
 
 			lblName.Text = beer.Nombiere;
 			lblAlcool.Text = beer.Alcoolemie.ToString() + '%';
@@ -78,44 +79,44 @@ namespace ThePlaceToBe.Views.ProductPage
 			}
 		}
 
-        // Initialize the content of the xaml page
-        private void Init(Beer beer) {
+		// Initialize the content of the xaml page
+		private void Init(Beer beer) {
 
 			imgLogo.Source = Constants.appImg + "logo.png";
 			imgAccount.Source = Constants.userImg + User.currentUser.Photo;
-            retour.Source = Constants.appImg + "retourBleu.png";
+			retour.Source = Constants.appImg + "retourBleu.png";
 
-            lblPseudo.Text = User.currentUser.Pseudo;
+			lblPseudo.Text = User.currentUser.Pseudo;
 			DisplayBeerInfo(beer);
 
-            tapGestureRecognizerRemoveFav.Tapped += (s, e) => {
-                RemoveFav(beer);
-            };
-            tapGestureRecognizerAddFav.Tapped += (s, e) => {
-                AddFav(beer);
-            };
+			tapGestureRecognizerRemoveFav.Tapped += (s, e) => {
+				RemoveFav(beer);
+			};
+			tapGestureRecognizerAddFav.Tapped += (s, e) => {
+				AddFav(beer);
+			};
 
-            if (Process.CheckFavorite(beer.Idbiere, User.currentUser.Iduser)) {
-                btnFavoris.Source = Constants.appImg + "favorisBleu.png";
-                btnFavoris.GestureRecognizers.Add(tapGestureRecognizerRemoveFav);
-            }
+			if (Process.CheckFavorite(beer.Idbiere, User.currentUser.Iduser)) {
+				btnFavoris.Source = Constants.appImg + "favorisBleu.png";
+				btnFavoris.GestureRecognizers.Add(tapGestureRecognizerRemoveFav);
+			}
 			else {
-                btnFavoris.Source = Constants.appImg + "favorisG.png";
-                btnFavoris.GestureRecognizers.Add(tapGestureRecognizerAddFav);
-            }
+				btnFavoris.Source = Constants.appImg + "favorisG.png";
+				btnFavoris.GestureRecognizers.Add(tapGestureRecognizerAddFav);
+			}
 		}
 
-        // Initialize the elements necessary for the operation of the map
-        private void InitMap() {
+		// Initialize the elements necessary for the operation of the map
+		private void InitMap() {
 
 			List<Bar> listBar = RestService.Request<Bar>(RestService.dic, "selectBar").Result;
-			
+
 			Position pos;
 			double lat;
 			double lon;
 			List<Pin> listPin;
 
-			if(listBar.Count != 0) {
+			if (listBar.Count != 0) {
 
 				double sumLat = 0;
 				double sumLon = 0;
@@ -144,16 +145,16 @@ namespace ThePlaceToBe.Views.ProductPage
 		private List<Pin> AddPinsNeeded(List<Bar> listBar) {
 
 			List<Pin> listPin = new List<Pin>();
-			
+
 			foreach (Bar bar in listBar) {
 
-                Pin pin = new Pin {
-                    Type = PinType.Generic,
-                    Position = new Position(bar.Latitude, bar.Longitude),
-                    Label = bar.Nombar,
-                    Address = bar.Numero.ToString() + " " + bar.Rue
+				Pin pin = new Pin {
+					Type = PinType.Generic,
+					Position = new Position(bar.Latitude, bar.Longitude),
+					Label = bar.Nombar,
+					Address = bar.Numero.ToString() + " " + bar.Rue
 				};
-				
+
 				listPin.Add(pin);
 			}
 
@@ -171,12 +172,11 @@ namespace ThePlaceToBe.Views.ProductPage
 			}
 		}
 
-        // This method is running when th "retour" button is clicked
-        // the scan is cancelled
-        private void RetourProdPage(object sender, EventArgs e)
-        {
-            this.Navigation.PopAsync();
-        }
+		// This method is running when th "retour" button is clicked
+		// the scan is cancelled
+		private void RetourProdPage(object sender, EventArgs e) {
+			this.Navigation.PopAsync();
+		}
 
-    }
+	}
 }

@@ -14,36 +14,36 @@ namespace ThePlaceToBe.Views.ConnexionPage
 		public ConnexionPage() {
 			InitializeComponent();
 			NavigationPage.SetHasNavigationBar(this, false);
-            // Initialize the content of the xaml page
-            Init();
+			// Initialise des éléments présents dans le xaml
+			Init();
 
 		}
 
-		// This method is running when the connection button is clicked
+		// Méthode lancée lorsque le bouton de connexion est utilisé
 		private void ConnexionClicked(object sender, EventArgs e) {
 
-			// Check if the pseudo and the password are correct
+			// Vérification si le pseudo et le mot de passe sont corrects
 			bool isPasswordOrUsernameCorrect = CheckConnexion();
-			// Complete the connection is a boolean is returned
+			// Effectue la connexion si le booléen renvoie true
 			Connexion(isPasswordOrUsernameCorrect);
 		}
 
-		// Display the registration page (inscriptionPage)
+		// Affiche la page d'inscription
 		private void InscriptionClicked(object sender, EventArgs e) {
 
 			this.Navigation.PushAsync(new InscriptionPage.InscriptionPage());
 		}
 
-        // Initialize the content of the xaml page
-        private void Init() {
+		// Initialise des éléments présents dans le xaml
+		private void Init() {
 
 			imgLogo.Source = Constants.appImg + "logo.png";
 			pseudoUser.Completed += (s, e) => pswdUser.Focus();
 			pswdUser.Completed += (s, e) => ConnexionClicked(s, e);
 		}
 
-        // Check if the pseudo and the password are correct
-        private bool CheckConnexion() {
+		// Vérification si le pseudo et le mot de passe sont corrects
+		private bool CheckConnexion() {
 
 			RestService.dic = new Dictionary<string, string> {
 				{ "pseudo", pseudoUser.Text },
@@ -52,8 +52,8 @@ namespace ThePlaceToBe.Views.ConnexionPage
 			return RestService.Request<Check>(RestService.dic, "checkPassword").Result[0].Verif;
 		}
 
-        // Complete the connection is a boolean is returned
-        private void Connexion(bool isPasswordOrUsernameCorrect) {
+		// Effectue la connexion si le booléen renvoie true
+		private void Connexion(bool isPasswordOrUsernameCorrect) {
 
 			if (!isPasswordOrUsernameCorrect) {
 
@@ -64,7 +64,12 @@ namespace ThePlaceToBe.Views.ConnexionPage
 				List<User> listUser = RestService.Request<User>(RestService.dic, "userConnexion").Result;
 				User.currentUser = listUser[0];
 
-                Navigation.InsertPageBefore(new MainPage.MainPage(), this);
+				if (Achievement.CheckAnniversaire(this)) {
+					DisplayAlert("Achievement", "Joyeux anniversaire !!", "merci");
+				}
+				Achievement.CheckRajoutBiere(this);
+
+				Navigation.InsertPageBefore(new MainPage.MainPage(), this);
 				Navigation.PopToRootAsync();
 			}
 		}

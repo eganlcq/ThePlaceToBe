@@ -4,7 +4,7 @@
              x:Class="ThePlaceToBe.Views.MenuPage.MenuPage">
     <ContentPage.Content>
 
-        <StackLayout Spacing="0">
+        <StackLayout Spacing="0" VerticalOptions="FillAndExpand">
             <AbsoluteLayout Grid.Row="0"
                             Grid.Column="0">
                 <Image x:Name="imgLogo"
@@ -249,16 +249,20 @@
                 VerticalOptions="End"
                 HorizontalOptions="Start"
                 Margin="15,0,0,-45">
-                <!-- retour button -->
-                <Image 
+                
+            </StackLayout>
+            <!-- retour button -->
+            <Image 
                             x:Name="retour"
                             HeightRequest="40"
-                            WidthRequest="40">
-                    <Image.GestureRecognizers>
-                        <TapGestureRecognizer Tapped="Retour"/>
-                    </Image.GestureRecognizers>
-                </Image>
-            </StackLayout>
+                            WidthRequest="40"
+                HorizontalOptions="StartAndExpand"
+                VerticalOptions="EndAndExpand"
+                Margin="10, 0, 0, 10">
+                <Image.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="Retour"/>
+                </Image.GestureRecognizers>
+            </Image>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>
