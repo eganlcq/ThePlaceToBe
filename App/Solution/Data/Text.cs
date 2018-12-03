@@ -4,16 +4,14 @@ using System.Text;
 
 namespace ThePlaceToBe.Data
 {
-    public class Text
-    {
+	public class Text {
 
-        public string TexteFromPagePHP { get; set; }
+		public string TexteFromPagePHP { get; set; }
 
-        public Text()
-        {
+		public Text() {
 
-        }
+		}
 
 
-    }
+	}
 }
