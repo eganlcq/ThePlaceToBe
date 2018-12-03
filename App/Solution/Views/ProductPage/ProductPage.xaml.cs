@@ -12,10 +12,15 @@ namespace ThePlaceToBe.Views.ProductPage
 {
 	[XamlCompilation(XamlCompilationOptions.Compile)]
 	public partial class ProductPage : ContentPage {
-		public ProductPage(Beer beer) {
+
+        TapGestureRecognizer tapGestureRecognizerAddFav = new TapGestureRecognizer();
+        TapGestureRecognizer tapGestureRecognizerRemoveFav = new TapGestureRecognizer();
+
+        public ProductPage(Beer beer) {
 			InitializeComponent();
 			NavigationPage.SetHasNavigationBar(this, false);
             // Initialize the content of the xaml page
+
             Init(beer);
             // Initialize the elements necessary for the operation of the map
             InitMap();
@@ -26,11 +31,6 @@ namespace ThePlaceToBe.Views.ProductPage
 			this.Navigation.PushAsync(new AchievementPage.AchievementPage(User.currentUser.Iduser.ToString()));
 		}
 
-		// This method is running when th "retour" button is clicked
-        // the scan is cancelled
-		private void BtnRetourClicked(object sender, EventArgs e) {
-			this.Navigation.PopAsync();
-		}
 
 		// This method is running when the button to add favorites is clicked
         // A beer is added as a favorite to a user
@@ -41,9 +41,10 @@ namespace ThePlaceToBe.Views.ProductPage
 				{ "idUser", User.currentUser.Iduser.ToString()}
 			};
 			RestService.Request(RestService.dic, "insertFavoris");
-			btnFavoris.Text = "Remove Fav";
-			btnFavoris.Clicked += (s, e) => RemoveFav(beer);
-		}
+            btnFavoris.Source = Constants.appImg + "favorisBleu.png";
+            btnFavoris.GestureRecognizers.Clear();
+            btnFavoris.GestureRecognizers.Add(tapGestureRecognizerRemoveFav);
+        }
 
         // This method is running when the button to remove favorites is clicked
         // The favorite beer is removed
@@ -55,9 +56,11 @@ namespace ThePlaceToBe.Views.ProductPage
 				{ "idUser", User.currentUser.Iduser.ToString()}
 			};
 			RestService.Request(RestService.dic, "deleteFavoris");
-			btnFavoris.Text = "Add Fav";
-			btnFavoris.Clicked += (s, e) => AddFav(beer);
-		}
+            btnFavoris.Source = Constants.appImg + "favorisG.png";
+            btnFavoris.GestureRecognizers.Clear();
+            btnFavoris.GestureRecognizers.Add(tapGestureRecognizerAddFav);
+            
+        }
 
         // Display on the page the informations about the current beer
         private void DisplayBeerInfo(Beer beer) {
@@ -80,19 +83,26 @@ namespace ThePlaceToBe.Views.ProductPage
 
 			imgLogo.Source = Constants.appImg + "logo.png";
 			imgAccount.Source = Constants.userImg + User.currentUser.Photo;
-			lblPseudo.Text = User.currentUser.Pseudo;
-			//Beer beer = RestService.Request<Beer>(RestService.dic, "selectOneBeer").Result[0];
+            retour.Source = Constants.appImg + "retourBleu.png";
+
+            lblPseudo.Text = User.currentUser.Pseudo;
 			DisplayBeerInfo(beer);
 
-			if(Process.CheckFavorite(beer.Idbiere, User.currentUser.Iduser)) {
+            tapGestureRecognizerRemoveFav.Tapped += (s, e) => {
+                RemoveFav(beer);
+            };
+            tapGestureRecognizerAddFav.Tapped += (s, e) => {
+                AddFav(beer);
+            };
 
-				btnFavoris.Text = "Remove Fav";
-				btnFavoris.Clicked += (s, e) => RemoveFav(beer);
-			}
+            if (Process.CheckFavorite(beer.Idbiere, User.currentUser.Iduser)) {
+                btnFavoris.Source = Constants.appImg + "favorisBleu.png";
+                btnFavoris.GestureRecognizers.Add(tapGestureRecognizerRemoveFav);
+            }
 			else {
-				btnFavoris.Text = "Add Fav";
-				btnFavoris.Clicked += (s, e) => AddFav(beer);
-			}
+                btnFavoris.Source = Constants.appImg + "favorisG.png";
+                btnFavoris.GestureRecognizers.Add(tapGestureRecognizerAddFav);
+            }
 		}
 
         // Initialize the elements necessary for the operation of the map
@@ -160,5 +170,13 @@ namespace ThePlaceToBe.Views.ProductPage
 				map.Pins.Add(pin);
 			}
 		}
-	}
+
+        // This method is running when th "retour" button is clicked
+        // the scan is cancelled
+        private void RetourProdPage(object sender, EventArgs e)
+        {
+            this.Navigation.PopAsync();
+        }
+
+    }
 }

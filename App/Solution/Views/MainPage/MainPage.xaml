@@ -143,16 +143,6 @@
 
                     </Grid>
                 </ScrollView>
-
-                <Button Text="Scan"
-                            Style="{StaticResource buttonBlue}"
-                            FontSize="20"
-                            HorizontalOptions="Center"
-                            VerticalOptions="EndAndExpand"
-                            WidthRequest="150"
-                            Margin="0, 20, 0, 10"
-                        x:Name="btnScan"
-                        />
             </StackLayout>
         </Grid>
     </ContentPage.Content>

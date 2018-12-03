@@ -63,8 +63,8 @@ namespace ThePlaceToBe.Views.ConnexionPage
 
 				List<User> listUser = RestService.Request<User>(RestService.dic, "userConnexion").Result;
 				User.currentUser = listUser[0];
-				
-				Navigation.InsertPageBefore(new MainPage.MainPage(), this);
+
+                Navigation.InsertPageBefore(new MainPage.MainPage(), this);
 				Navigation.PopToRootAsync();
 			}
 		}

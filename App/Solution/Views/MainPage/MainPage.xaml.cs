@@ -7,7 +7,6 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Net.Http;
-using System.Runtime.Serialization;
 using ThePlaceToBe.Data;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -35,34 +34,6 @@ namespace ThePlaceToBe.Views.MainPage
             Init();
 		}
 
-        /*
-        private void InitPicker<T>(string url, int index)
-        {
-            RestService.dic = new Dictionary<string, string>();
-            List<T> listObject = RestService.Request<T>(RestService.dic, url).Result;
-            FunctionToUse(listObject, index);
-        }
-
-        private void FunctionToUse<T>(List<T> listObject, int index)
-        {
-            switch (index)
-            {
-                case 0 :
-                    foreach (T obj in listObject)
-                    {
-                        beerPicker.Items.Add(obj.GetType().GetProperty("Nombiere").GetValue(obj).ToString());
-                    }
-                    break;
-                case 1:
-                    foreach (T obj in listObject)
-                    {
-                        barPicker.Items.Add(obj.GetType().GetProperty("Nombar").GetValue(obj).ToString());
-                    }
-                    break;
-            }
-        }
-        */
-
 
         // Initialize the content of the xaml page
         private void Init() {
@@ -71,7 +42,6 @@ namespace ThePlaceToBe.Views.MainPage
 			imgAccount.Source = Constants.userImg + User.currentUser.Photo;
 			imgLoupe.Source = Constants.appImg + "loupe.png";
 			lblPseudo.Text = User.currentUser.Pseudo;
-			btnScan.Clicked += (s, e) => TakePhoto();
 			InitPicker();
 			flavourPicker.SelectedIndex = 0;
             disconnection.Source = Constants.appImg + "disconnect.png";
@@ -225,82 +195,15 @@ namespace ThePlaceToBe.Views.MainPage
             return img;
         }
 
-        #region PHOTO
-
-        private async void TakePhoto() {
-			try {
-				await CrossMedia.Current.Initialize();
-
-				var cameraStatus = await CrossPermissions.Current.CheckPermissionStatusAsync(Permission.Camera);
-				var storageStatus = await CrossPermissions.Current.CheckPermissionStatusAsync(Permission.Storage);
-
-				if (cameraStatus != PermissionStatus.Granted || storageStatus != PermissionStatus.Granted) {
-					var results = await CrossPermissions.Current.RequestPermissionsAsync(new[] { Permission.Camera, Permission.Storage });
-					cameraStatus = results[Permission.Camera];
-					storageStatus = results[Permission.Storage];
-				}
-
-				if (cameraStatus == PermissionStatus.Granted && storageStatus == PermissionStatus.Granted) {
-
-					if (!CrossMedia.Current.IsCameraAvailable || !CrossMedia.Current.IsTakePhotoSupported) {
-
-#pragma warning disable CS4014
-						DisplayAlert("No Camera", "No camera available.", "OK");
-#pragma warning restore CS4014
-                        return;
-					}
-
-					var file = await CrossMedia.Current.TakePhotoAsync(new StoreCameraMediaOptions {
-
-						Directory = "Sample",
-						Name = "test.jpg",
-						PhotoSize = PhotoSize.Medium,
-						CompressionQuality = 92
-					});
-
-					if (file == null) return;
-
-
-					ImageSource img = ImageSource.FromStream(() => {
-
-						var streamImg = file.GetStream();
-						return streamImg;
-					});
-					
-					var stream = new MemoryStream();
-					file.GetStream().CopyTo(stream);
-					byte[] bitmapData = stream.ToArray();
-					var fileContent = new ByteArrayContent(bitmapData);
-					await this.Navigation.PushAsync(new ScanPage.ScanPage(img, fileContent));
-
-					if (File.Exists(file.Path)) {
-
-						File.Delete(file.Path);
-					}
-
-					file.Dispose();
-				}
-				else {
-
-					await DisplayAlert("Permissions Denied", "Unable to take photos.", "OK");
-				}
-			}
-			catch (Exception e) {
-				await DisplayAlert("ERROR", e.ToString(), "OK");
-			}
-
-		}
 
         // Display the beer in the grid with the parameter to apply a filter on the list
-		private void DisplayBeerByTextAndFlavor(object sender, EventArgs e) {
-			RemoveAllBeer();
-			string flav = flavourPicker.SelectedItem.ToString();
-			string str = textPicker.Text;
-			FillBeerGrid(flav, str);
-		}
-
-        #endregion PHOTO
-
+        private void DisplayBeerByTextAndFlavor(object sender, EventArgs e)
+        {
+            RemoveAllBeer();
+            string flav = flavourPicker.SelectedItem.ToString();
+            string str = textPicker.Text;
+            FillBeerGrid(flav, str);
+        }
 
         #region EVENEMENTS
 

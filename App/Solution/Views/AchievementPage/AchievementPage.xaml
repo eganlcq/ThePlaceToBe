@@ -28,8 +28,6 @@
                     Margin="10" 
                     BackgroundColor="White" 
                     x:Name="avatar" 
-                    HeightRequest="65"
-                    WidthRequest="65"
                         />
                     </Frame>
                     <Button 

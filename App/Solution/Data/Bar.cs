@@ -10,8 +10,11 @@ namespace ThePlaceToBe.Data
 		public string Nombar { get; set; }
 		public double Latitude { get; set; }
 		public double Longitude { get; set; }
+        public string Rue { get; set; }
+        public int Numero { get; set; }
 
-		public Bar() {
+
+        public Bar() {
 
 		}
     }

@@ -84,7 +84,7 @@ namespace ThePlaceToBe.Views.AchievementPage
 
             pseudo.Text = listUser[0].Pseudo;
             pseudo.FontSize = InitPseudo(listUser[0].Pseudo);
-            avatar.Source = listUser[0].Photo;
+            avatar.Source = Constants.userImg + listUser[0].Photo;
             var data = new DonneesView(User.currentUser.Iduser.ToString());
             DataBox.Children.Add(data);
             DataButton.BackgroundColor = Color.FromHex("#4D97FF");
