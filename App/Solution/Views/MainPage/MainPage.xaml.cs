@@ -191,7 +191,7 @@ namespace ThePlaceToBe.Views.MainPage
 		// This method is running when a picture of a beer is clicked
 		private void BeerTapped(object s, EventArgs e, Beer beer) {
 
-			Achievement.CheckRecherche(this);
+			Achievement.CheckRecherche();
 
 			RestService.dic = new Dictionary<string, string> {
 

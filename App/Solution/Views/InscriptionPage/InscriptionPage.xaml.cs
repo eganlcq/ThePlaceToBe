@@ -14,11 +14,11 @@ namespace ThePlaceToBe.Views.InscriptionPage
 		public InscriptionPage() {
 			InitializeComponent();
 			NavigationPage.SetHasNavigationBar(this, false);
-            // Initialize the content of the xaml page
-            Init();
+			// Initialise des éléments présents dans le xaml
+			Init();
 		}
 
-		// This method is running when the inscription button is clicked
+		// Méthode lancée lorsque le bouton d'inscription est utilisé
 		private void InscriptionClicked(object sender, EventArgs e) {
 
 			string response = Process.VerifyInscription(firstNameUser.Text, nameUser.Text, pseudoUser.Text, emailUser.Text, pswdUser.Text, confirmPswdUser.Text, datePickerNaissance.ToString());
@@ -26,8 +26,8 @@ namespace ThePlaceToBe.Views.InscriptionPage
 			else lblError.Text = response;
 		}
 
-        // Initialize the content of the xaml page
-        private void Init() {
+		// Initialise des éléments présents dans le xaml
+		private void Init() {
 
 			imgLogo.Source = Constants.appImg + "logo.png";
 			firstNameUser.Completed += (s, e) => nameUser.Focus();
@@ -38,7 +38,7 @@ namespace ThePlaceToBe.Views.InscriptionPage
 			confirmPswdUser.Completed += (s, e) => InscriptionClicked(s, e);
 		}
 
-		// This method complete the registration
+		// Effectue l'inscription de l'utilisateur
 		private async void Inscription() {
 
 			RestService.dic = new Dictionary<string, string> {
@@ -59,6 +59,8 @@ namespace ThePlaceToBe.Views.InscriptionPage
 			User.currentUser = RestService.Request<User>(RestService.dic, "userConnexion").Result[0];
 			Navigation.InsertPageBefore(new MainPage.MainPage(), Navigation.NavigationStack[0]);
 			await Navigation.PopToRootAsync();
+
+			Popup.DisplayPopup("Welcome, " + User.currentUser.Prenom + " " + User.currentUser.Nom);
 		}
 	}
 }

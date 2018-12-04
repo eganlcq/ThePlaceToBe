@@ -36,6 +36,7 @@ namespace ThePlaceToBe.Views.MenuPage
 			imgAccount.Source = Constants.userImg + User.currentUser.Photo;
 			retour.Source = Constants.appImg + "retourBlanc.png";
 			lblPseudo.Text = User.currentUser.Pseudo;
+			disconnection.Source = Constants.appImg + "disconnect.png";
 			ChangeTapRecognizer(addBeerInBarStack, addBeerInBarFrame);
 			ChangeTapRecognizer(dataProtectionStack, showDataProtectionFrame);
 			ChangeTapRecognizer(TauxAlcoolParVerreStack, showTauxAlcoolParVerreFrame);
@@ -226,7 +227,8 @@ namespace ThePlaceToBe.Views.MenuPage
 				RestService.dic = new Dictionary<string, string> {
 
 					{ "beer", beerPicker.SelectedItem.ToString() },
-					{ "bar", barPicker.SelectedItem.ToString() }
+					{ "bar", barPicker.SelectedItem.ToString() },
+					{ "idUser", User.currentUser.Iduser.ToString() }
 				};
 				await RestService.Request<Beer>(RestService.dic, "insertTmpBeerInBar");
 				await HideOrShowStack(addBeerInBarStack);
@@ -289,7 +291,8 @@ namespace ThePlaceToBe.Views.MenuPage
 					{ "alcool", entryAlcohol.Text },
 					{ "type", entryType.Text },
 					{ "imgBeer", nameOfBeer + ".jpg" },
-					{ "bar", barForBeerPicker.SelectedItem.ToString() }
+					{ "bar", barForBeerPicker.SelectedItem.ToString() },
+					{ "idUser", User.currentUser.Iduser.ToString() }
 				};
 				await RestService.Request<Beer>(RestService.dic, "insertTmpBeer");
 				await HideOrShowStack(addBeerStack);
@@ -357,7 +360,8 @@ namespace ThePlaceToBe.Views.MenuPage
 					{ "nameStreet", entryNameStreet.Text },
 					{ "ZIPCode", entryZIPCode.Text },
 					{ "nameCity", entryNameCity.Text },
-					{ "accessibility", "1" }
+					{ "accessibility", "1" },
+					{ "idUser", User.currentUser.Iduser.ToString() }
 				};
 				await RestService.Request<Beer>(RestService.dic, "insertTmpBar");
 				await HideOrShowStack(addBarStack);
@@ -543,6 +547,12 @@ namespace ThePlaceToBe.Views.MenuPage
 		// return to the previous page
 		private void Retour(object sender, EventArgs e) {
 			this.Navigation.PopAsync();
+		}
+
+		private void Disconnect(object sender, EventArgs e) {
+			Navigation.InsertPageBefore(new ConnexionPage.ConnexionPage(), Navigation.NavigationStack[0]);
+			User.currentUser = null;
+			Navigation.PopToRootAsync();
 		}
 	}
 }

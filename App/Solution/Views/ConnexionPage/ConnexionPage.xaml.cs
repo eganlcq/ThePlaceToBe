@@ -64,13 +64,15 @@ namespace ThePlaceToBe.Views.ConnexionPage
 				List<User> listUser = RestService.Request<User>(RestService.dic, "userConnexion").Result;
 				User.currentUser = listUser[0];
 
-				if (Achievement.CheckAnniversaire(this)) {
-					DisplayAlert("Achievement", "Joyeux anniversaire !!", "merci");
+				if (Achievement.CheckAnniversaire()) {
+					Popup.DisplayPopup("Joyeux anniversaire, " + User.currentUser.Prenom + " " + User.currentUser.Nom + " !!!");
 				}
-				Achievement.CheckRajoutBiere(this);
+				Achievement.CheckRajoutBiere();
 
 				Navigation.InsertPageBefore(new MainPage.MainPage(), this);
 				Navigation.PopToRootAsync();
+
+				Popup.DisplayPopup("Welcome back, " + User.currentUser.Prenom + " " + User.currentUser.Nom);
 			}
 		}
 	}

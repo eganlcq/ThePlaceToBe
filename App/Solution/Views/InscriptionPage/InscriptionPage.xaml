@@ -48,7 +48,7 @@
                 </StackLayout>
 
                 <StackLayout HorizontalOptions="Center">
-                    <!-- INSCRIPTION BUTTON-->
+                    <!-- BOUTON INSCRIPTION-->
                     <Button Text="INSCRIPTION"
                             Style="{StaticResource buttonBlue}"
                             FontSize="20" 

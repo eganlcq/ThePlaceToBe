@@ -41,7 +41,7 @@ namespace ThePlaceToBe.Views.ProductPage
 				{ "idUser", User.currentUser.Iduser.ToString()}
 			};
 			RestService.Request(RestService.dic, "insertFavoris");
-			Achievement.CheckFavoris(this);
+			Achievement.CheckFavoris();
 			btnFavoris.Source = Constants.appImg + "favorisBleu.png";
 			btnFavoris.GestureRecognizers.Clear();
 			btnFavoris.GestureRecognizers.Add(tapGestureRecognizerRemoveFav);
@@ -85,6 +85,7 @@ namespace ThePlaceToBe.Views.ProductPage
 			imgLogo.Source = Constants.appImg + "logo.png";
 			imgAccount.Source = Constants.userImg + User.currentUser.Photo;
 			retour.Source = Constants.appImg + "retourBleu.png";
+			disconnection.Source = Constants.appImg + "disconnect.png";
 
 			lblPseudo.Text = User.currentUser.Pseudo;
 			DisplayBeerInfo(beer);
@@ -176,6 +177,12 @@ namespace ThePlaceToBe.Views.ProductPage
 		// the scan is cancelled
 		private void RetourProdPage(object sender, EventArgs e) {
 			this.Navigation.PopAsync();
+		}
+
+		private void Disconnect(object sender, EventArgs e) {
+			Navigation.InsertPageBefore(new ConnexionPage.ConnexionPage(), Navigation.NavigationStack[0]);
+			User.currentUser = null;
+			Navigation.PopToRootAsync();
 		}
 
 	}
