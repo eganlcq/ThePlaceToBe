@@ -433,12 +433,23 @@ namespace ThePlaceToBe.Views.MenuPage
 							return;
 						}
 
-						var file = await CrossMedia.Current.TakePhotoAsync(new StoreCameraMediaOptions {
-							Directory = "Sample",
-							Name = "test.jpg",
-							PhotoSize = PhotoSize.Medium,
-							CompressionQuality = 92
-						});
+						var takePhoto = await DisplayAlert("NOTE", "Do you want to take a photo or pick a photo in your library ?", "Take a photo", "Pick a photo");
+
+						MediaFile file;
+						if(takePhoto) {
+
+							file = await CrossMedia.Current.TakePhotoAsync(new StoreCameraMediaOptions {
+								Directory = "Sample",
+								Name = "test.jpg",
+								PhotoSize = PhotoSize.Medium,
+								CompressionQuality = 92
+							});
+						}
+						else {
+
+							file = await CrossMedia.Current.PickPhotoAsync();
+						}
+						
 
 						if (file == null) return;
 
