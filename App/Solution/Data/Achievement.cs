@@ -92,16 +92,27 @@ namespace ThePlaceToBe.Data {
 			List<Beer> listBiere = RestService.Request<Beer>(RestService.dic, "countFav").Result;
 			if (a == 1) {
 				modifyDic(ID_FAV_ONE_ACH);
-				Popup.DisplayPopup("Vous avez débloqué le succès 'Ajouter 1 bière en favoris'  ! ");
+				if (RestService.Request<Count>(RestService.dic, "checkSucces").Result[0].Counter == 0) {
+
+					Popup.DisplayPopup("Vous avez débloqué le succès 'Ajouter 1 bière en favoris'  ! ");
+				}	
 			}
 			else if (a == 10) {
 				modifyDic(ID_FAV_TEN_ACH);
-				Popup.DisplayPopup("Vous avez débloqué le succès 'Ajouter 10 bières en favoris'  ! ");
+				Count test = RestService.Request<Count>(RestService.dic, "checkSucces").Result[0];
+				if (RestService.Request<Count>(RestService.dic, "checkSucces").Result[0].Counter == 0) {
+
+					Popup.DisplayPopup("Vous avez débloqué le succès 'Ajouter 10 bières en favoris'  ! ");
+				}
 			}
 			else if (a == listBiere.Count) {
 				modifyDic(ID_FAV_ALL_ACH);
-				Popup.DisplayPopup("Vous avez débloqué le succès 'Ajouter plein de bières en favoris'  ! ");
+				if (RestService.Request<Count>(RestService.dic, "checkSucces").Result[0].Counter == 0) {
+
+					Popup.DisplayPopup("Vous avez débloqué le succès 'Ajouter plein de bières en favoris'  ! ");
+				}
 			}
+			RestService.Request(RestService.dic, "insertSucces");
 			//check nbr achievment
 			if (CheckNbreAch(1, ID_SUCCES_ONE_ACH)) {
 				Popup.DisplayPopup("Vous avez 1 succes ! ");
