@@ -41,6 +41,8 @@ namespace ThePlaceToBe.Views.InscriptionPage
 		// Effectue l'inscription de l'utilisateur
 		private async void Inscription() {
 
+			List<string> str = new List<string>();
+
 			RestService.dic = new Dictionary<string, string> {
 
 				{ "firstName", firstNameUser.Text },
@@ -60,7 +62,8 @@ namespace ThePlaceToBe.Views.InscriptionPage
 			Navigation.InsertPageBefore(new MainPage.MainPage(), Navigation.NavigationStack[0]);
 			await Navigation.PopToRootAsync();
 
-			Popup.DisplayPopup("Welcome, " + User.currentUser.Prenom + " " + User.currentUser.Nom);
+			Popup.listString.Add("Welcome, " + User.currentUser.Prenom + " " + User.currentUser.Nom);
+			Popup.DisplayPopup();
 		}
 	}
 }

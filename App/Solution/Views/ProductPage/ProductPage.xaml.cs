@@ -45,6 +45,11 @@ namespace ThePlaceToBe.Views.ProductPage
 			btnFavoris.Source = Constants.appImg + "favorisB.png";
 			btnFavoris.GestureRecognizers.Clear();
 			btnFavoris.GestureRecognizers.Add(tapGestureRecognizerRemoveFav);
+
+			if(Popup.listString.Count != 0) {
+
+				Popup.DisplayPopup();
+			}
 		}
 
 		// This method is running when the button to remove favorites is clicked

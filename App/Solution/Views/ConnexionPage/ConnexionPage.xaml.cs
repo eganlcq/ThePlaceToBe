@@ -65,14 +65,16 @@ namespace ThePlaceToBe.Views.ConnexionPage
 				User.currentUser = listUser[0];
 
 				if (Achievement.CheckAnniversaire()) {
-					Popup.DisplayPopup("Joyeux anniversaire, " + User.currentUser.Prenom + " " + User.currentUser.Nom + " !!!");
+					Popup.listString.Add("Joyeux anniversaire, " + User.currentUser.Prenom + " " + User.currentUser.Nom + " !!!");
 				}
 				Achievement.CheckRajoutBiere();
 
 				Navigation.InsertPageBefore(new MainPage.MainPage(), this);
 				Navigation.PopToRootAsync();
+				
+				Popup.listString.Add("Welcome back, " + User.currentUser.Prenom + " " + User.currentUser.Nom);
 
-				Popup.DisplayPopup("Welcome back, " + User.currentUser.Prenom + " " + User.currentUser.Nom);
+				Popup.DisplayPopup();
 			}
 		}
 	}

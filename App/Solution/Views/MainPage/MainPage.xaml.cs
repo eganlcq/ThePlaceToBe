@@ -198,6 +198,11 @@ namespace ThePlaceToBe.Views.MainPage
 				{"idBiere", beer.Idbiere.ToString() }
 			};
 			this.Navigation.PushAsync(new ProductPage.ProductPage(beer));
+
+			if (Popup.listString.Count != 0) {
+
+				Popup.DisplayPopup();
+			}
 		}
 
 		// This method is running when the avatar picture is clicked
