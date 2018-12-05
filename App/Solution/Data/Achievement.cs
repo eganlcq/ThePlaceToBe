@@ -46,39 +46,38 @@ namespace ThePlaceToBe.Data {
 
 			if (a == 1) {
 				modifyDic(ID_SEARCH_ONE_ACH);
-				Popup.DisplayPopup("Vous avez débloqué le succès 'Faire une recherche'  ! ");
+				Popup.listString.Add("Vous avez débloqué le succès 'Faire une recherche'  ! ");
 			}
 			else if (a == 5) {
 				modifyDic(ID_SEARCH_FIVE_ACH);
-				Popup.DisplayPopup("Vous avez débloqué le succès 'Faire 5 recherche'  ! ");
+				Popup.listString.Add("Vous avez débloqué le succès 'Faire 5 recherche'  ! ");
 			}
 			else if (a == 10) {
 				modifyDic(ID_SEARCH_TEN_ACH);
-				Popup.DisplayPopup("Vous avez débloqué le succès 'Faire 10 recherche'  ! ");
+				Popup.listString.Add("Vous avez débloqué le succès 'Faire 10 recherche'  ! ");
 			}
 			else if (a == 15) {
 				modifyDic(ID_SEARCH_FIFTEEN_ACH);
-				Popup.DisplayPopup("Vous avez débloqué le succès 'Faire 15 recherche'  ! ");
+				Popup.listString.Add("Vous avez débloqué le succès 'Faire 15 recherche'  ! ");
 			}
 			else if (a == 20) {
 				modifyDic(ID_SEARCH_TWENTY_ACH);
-				Popup.DisplayPopup("Vous avez débloqué le succès 'Faire 20 recherche'  ! ");
+				Popup.listString.Add("Vous avez débloqué le succès 'Faire 20 recherche'  ! ");
 			}
 			RestService.Request(RestService.dic, "insertSucces");
 
 			if (CheckNbreAch(1, ID_SUCCES_ONE_ACH)) {
-				Popup.DisplayPopup("Vous avez 1 succes ! ");
+				Popup.listString.Add("Vous avez 1 succes ! ");
 			}
 			else if (CheckNbreAch(5, ID_SUCCES_FIVE_ACH)) {
-				Popup.DisplayPopup("Vous avez 5 succes ! ");
+				Popup.listString.Add("Vous avez 5 succes ! ");
 			}
 			else if (CheckNbreAch(10, ID_SUCCES_TEN_ACH)) {
-				Popup.DisplayPopup("Vous avez 10 succes ! ");
+				Popup.listString.Add("Vous avez 10 succes ! ");
 			}
 			else if (CheckNbreAch(15, ID_SUCCES_FIFTEEN_ACH)) {
-				Popup.DisplayPopup("Vous avez 15 succes ! ");
+				Popup.listString.Add("Vous avez 15 succes ! ");
 			}
-
 		}
 
 		public static void CheckFavoris() {
@@ -94,7 +93,7 @@ namespace ThePlaceToBe.Data {
 				modifyDic(ID_FAV_ONE_ACH);
 				if (RestService.Request<Count>(RestService.dic, "checkSucces").Result[0].Counter == 0) {
 
-					Popup.DisplayPopup("Vous avez débloqué le succès 'Ajouter 1 bière en favoris'  ! ");
+					Popup.listString.Add("Vous avez débloqué le succès 'Ajouter 1 bière en favoris'  ! ");
 				}	
 			}
 			else if (a == 10) {
@@ -102,29 +101,29 @@ namespace ThePlaceToBe.Data {
 				Count test = RestService.Request<Count>(RestService.dic, "checkSucces").Result[0];
 				if (RestService.Request<Count>(RestService.dic, "checkSucces").Result[0].Counter == 0) {
 
-					Popup.DisplayPopup("Vous avez débloqué le succès 'Ajouter 10 bières en favoris'  ! ");
+					Popup.listString.Add("Vous avez débloqué le succès 'Ajouter 10 bières en favoris'  ! ");
 				}
 			}
 			else if (a == listBiere.Count) {
 				modifyDic(ID_FAV_ALL_ACH);
 				if (RestService.Request<Count>(RestService.dic, "checkSucces").Result[0].Counter == 0) {
 
-					Popup.DisplayPopup("Vous avez débloqué le succès 'Ajouter plein de bières en favoris'  ! ");
+					Popup.listString.Add("Vous avez débloqué le succès 'Ajouter plein de bières en favoris'  ! ");
 				}
 			}
 			RestService.Request(RestService.dic, "insertSucces");
 			//check nbr achievment
 			if (CheckNbreAch(1, ID_SUCCES_ONE_ACH)) {
-				Popup.DisplayPopup("Vous avez 1 succes ! ");
+				Popup.listString.Add("Vous avez 1 succes ! ");
 			}
 			else if (CheckNbreAch(5, ID_SUCCES_FIVE_ACH)) {
-				Popup.DisplayPopup("Vous avez 5 succes ! ");
+				Popup.listString.Add("Vous avez 5 succes ! ");
 			}
 			else if (CheckNbreAch(10, ID_SUCCES_TEN_ACH)) {
-				Popup.DisplayPopup("Vous avez 10 succes ! ");
+				Popup.listString.Add("Vous avez 10 succes ! ");
 			}
 			else if (CheckNbreAch(15, ID_SUCCES_FIFTEEN_ACH)) {
-				Popup.DisplayPopup("Vous avez 15 succes ! ");
+				Popup.listString.Add("Vous avez 15 succes ! ");
 			}
 		}
 
@@ -134,16 +133,16 @@ namespace ThePlaceToBe.Data {
 				RestService.Request(RestService.dic, "insertSucces");
 				//rajouter insert de achievement
 				if (CheckNbreAch(1, ID_SUCCES_ONE_ACH)) {
-					Popup.DisplayPopup("Vous avez 1 succes ! ");
+					Popup.listString.Add("Vous avez 1 succes ! ");
 				}
 				else if (CheckNbreAch(5, ID_SUCCES_FIVE_ACH)) {
-					Popup.DisplayPopup("Vous avez 5 succes ! ");
+					Popup.listString.Add("Vous avez 5 succes ! ");
 				}
 				else if (CheckNbreAch(10, ID_SUCCES_TEN_ACH)) {
-					Popup.DisplayPopup("Vous avez 10 succes ! ");
+					Popup.listString.Add("Vous avez 10 succes ! ");
 				}
 				else if (CheckNbreAch(15, ID_SUCCES_FIFTEEN_ACH)) {
-					Popup.DisplayPopup("Vous avez 15 succes ! ");
+					Popup.listString.Add("Vous avez 15 succes ! ");
 				}
 				return true;
 			}
@@ -153,38 +152,38 @@ namespace ThePlaceToBe.Data {
 		public static void CheckRajoutBiere() {
 			if (User.currentUser.NbAjout > User.currentUser.NbAjoutPrecedent && User.currentUser.NbAjout >= 1 && User.currentUser.NbAjoutPrecedent < 1) {
 				modifyDic(ID_SUCCES_ONE_BIERE);
-				Popup.DisplayPopup("Vous avez obtenu le succes 'Rajouter une bière dans l'application' ! ");
+				Popup.listString.Add("Vous avez obtenu le succes 'Rajouter une bière dans l'application' ! ");
 			}
 			else if (User.currentUser.NbAjout > User.currentUser.NbAjoutPrecedent && User.currentUser.NbAjout >= 5 && User.currentUser.NbAjoutPrecedent < 5) {
 				modifyDic(ID_SUCCES_FIVE_BIERE);
-				Popup.DisplayPopup("Vous avez obtenu le succes 'Rajouter 5 bière dans l'application' ! ");
+				Popup.listString.Add("Vous avez obtenu le succes 'Rajouter 5 bière dans l'application' ! ");
 			}
 			else if (User.currentUser.NbAjout > User.currentUser.NbAjoutPrecedent && User.currentUser.NbAjout >= 10 && User.currentUser.NbAjoutPrecedent < 10) {
 				modifyDic(ID_SUCCES_TEN_BIERE);
-				Popup.DisplayPopup("Vous avez obtenu le succes 'Rajouter 10 bière dans l'application' ! ");
+				Popup.listString.Add("Vous avez obtenu le succes 'Rajouter 10 bière dans l'application' ! ");
 			}
 			else if (User.currentUser.NbAjout > User.currentUser.NbAjoutPrecedent && User.currentUser.NbAjout >= 15 && User.currentUser.NbAjoutPrecedent < 15) {
 				modifyDic(ID_SUCCES_FIFTEEN_BIERE);
-				Popup.DisplayPopup("Vous avez obtenu le succes 'Rajouter 15 bière dans l'application' ! ");
+				Popup.listString.Add("Vous avez obtenu le succes 'Rajouter 15 bière dans l'application' ! ");
 			}
 			else if (User.currentUser.NbAjout > User.currentUser.NbAjoutPrecedent && User.currentUser.NbAjout >= 20 && User.currentUser.NbAjoutPrecedent < 20) {
 				modifyDic(ID_SUCCES_TWENTY_BIERE);
-				Popup.DisplayPopup("Vous avez obtenu le succes 'Rajouter 20 bière dans l'application' ! ");
+				Popup.listString.Add("Vous avez obtenu le succes 'Rajouter 20 bière dans l'application' ! ");
 			}
 			RestService.Request(RestService.dic, "insertSucces");
 
 
 			if (CheckNbreAch(1, ID_SUCCES_ONE_ACH)) {
-				Popup.DisplayPopup("Vous avez 1 succes ! ");
+				Popup.listString.Add("Vous avez 1 succes ! ");
 			}
 			else if (CheckNbreAch(5, ID_SUCCES_FIVE_ACH)) {
-				Popup.DisplayPopup("Vous avez 5 succes ! ");
+				Popup.listString.Add("Vous avez 5 succes ! ");
 			}
 			else if (CheckNbreAch(10, ID_SUCCES_TEN_ACH)) {
-				Popup.DisplayPopup("Vous avez 10 succes ! ");
+				Popup.listString.Add("Vous avez 10 succes ! ");
 			}
 			else if (CheckNbreAch(15, ID_SUCCES_FIFTEEN_ACH)) {
-				Popup.DisplayPopup("Vous avez 15 succes ! ");
+				Popup.listString.Add("Vous avez 15 succes ! ");
 			}
 		}
 
