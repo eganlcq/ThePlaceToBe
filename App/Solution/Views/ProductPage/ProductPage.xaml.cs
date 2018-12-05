@@ -34,15 +34,15 @@ namespace ThePlaceToBe.Views.ProductPage
 
 		// This method is running when the button to add favorites is clicked
 		// A beer is added as a favorite to a user
-		private void AddFav(Beer beer) {
+		private async void AddFav(Beer beer) {
 			RestService.dic = new Dictionary<string, string> {
 
 				{ "idBeer", beer.Idbiere.ToString()},
 				{ "idUser", User.currentUser.Iduser.ToString()}
 			};
-			RestService.Request(RestService.dic, "insertFavoris");
+			await RestService.Request<Beer>(RestService.dic, "insertFavoris");
 			Achievement.CheckFavoris();
-			btnFavoris.Source = Constants.appImg + "favorisBleu.png";
+			btnFavoris.Source = Constants.appImg + "favorisB.png";
 			btnFavoris.GestureRecognizers.Clear();
 			btnFavoris.GestureRecognizers.Add(tapGestureRecognizerRemoveFav);
 		}
@@ -98,7 +98,7 @@ namespace ThePlaceToBe.Views.ProductPage
 			};
 
 			if (Process.CheckFavorite(beer.Idbiere, User.currentUser.Iduser)) {
-				btnFavoris.Source = Constants.appImg + "favorisBleu.png";
+				btnFavoris.Source = Constants.appImg + "favorisB.png";
 				btnFavoris.GestureRecognizers.Add(tapGestureRecognizerRemoveFav);
 			}
 			else {
