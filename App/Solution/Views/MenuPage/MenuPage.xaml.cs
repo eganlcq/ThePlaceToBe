@@ -514,8 +514,20 @@ namespace ThePlaceToBe.Views.MenuPage
 			};
 			List<string> list = RestService.Request<string>(RestService.dic, "textRecognition/textRecognition").Result;
 
+			if(picker.Items.Count != 0) {
+
+				for(int i = 0; i < picker.Items.Count; i++) {
+
+					picker.Items.RemoveAt(0);
+				}
+			}
+
 			foreach (string str in list) {
-				picker.Items.Add(str);
+
+				if(str != "" && str != null) {
+
+					picker.Items.Add(str);
+				}
 			}
 
 			if (picker.Items.Count == 0) {

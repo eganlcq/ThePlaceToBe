@@ -77,11 +77,12 @@
                                     <StackLayout Spacing="0">
                                         <Frame BackgroundColor="#c6c6c6"
                                                CornerRadius="2"
-                                               Padding="2"
+                                               Padding="5"
                                                    x:Name="addBeerInBarFrame">
-                                            <Label Text="Add a beer in a bar"
+                                            <Label Text="Contribute to our app"
                                                    TextColor="#363636"
-                                                   HorizontalOptions="CenterAndExpand"/>
+                                                   HorizontalOptions="CenterAndExpand"
+                                                   FontSize="18"/>
                                         </Frame>
 
                                         <StackLayout BackgroundColor="#a6a6a6"
@@ -200,11 +201,12 @@
                                     <StackLayout Spacing="0">
                                         <Frame BackgroundColor="#c6c6c6"
                                                CornerRadius="2"
-                                               Padding="2"
+                                               Padding="5"
                                                    x:Name="showTauxAlcoolParVerreFrame">
                                             <Label Text="Taux alcool par verre"
                                                    TextColor="#363636"
-                                                   HorizontalOptions="CenterAndExpand"/>
+                                                   HorizontalOptions="CenterAndExpand"
+                                                   FontSize="18"/>
                                         </Frame>
                                         <StackLayout
                                                 BackgroundColor="#a6a6a6"
@@ -222,11 +224,12 @@
                                     <StackLayout Spacing="0">
                                         <Frame BackgroundColor="#c6c6c6"
                                                CornerRadius="2"
-                                               Padding="2"
+                                               Padding="5"
                                                    x:Name="showRappelDangerAlcoolFrame">
                                             <Label Text="Dangers de l'alcool"
                                                    TextColor="#363636"
-                                                   HorizontalOptions="CenterAndExpand"/>
+                                                   HorizontalOptions="CenterAndExpand"
+                                                   FontSize="18"/>
                                         </Frame>
                                         <StackLayout
                                                 BackgroundColor="#a6a6a6"
@@ -244,11 +247,12 @@
                                     <StackLayout Spacing="0">
                                         <Frame BackgroundColor="#c6c6c6"
                                                CornerRadius="2"
-                                               Padding="2"
+                                               Padding="5"
                                                    x:Name="showDataProtectionFrame">
                                             <Label Text="Protection des données"
                                                    TextColor="#363636"
-                                                   HorizontalOptions="CenterAndExpand"/>
+                                                   HorizontalOptions="CenterAndExpand"
+                                                   FontSize="18"/>
                                         </Frame>
                                         <StackLayout
                                                 BackgroundColor="#a6a6a6"
