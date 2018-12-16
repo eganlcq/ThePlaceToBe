@@ -86,7 +86,7 @@
                                HeightRequest="25"
                                VerticalOptions="Center"
                                Margin="5, 0, 0, 0"/>
-                    
+
                     <cust:MyPickerFlavour x:Name="flavourPicker"
                             BackgroundColor="White"
                             FontSize="12"
@@ -97,7 +97,7 @@
                             Title="Flavour"
                             SelectedIndexChanged="DisplayBeerByTextAndFlavor"/>
 
-                    
+
                     <StackLayout Spacing="0"
                                      Orientation="Horizontal"
                                      HorizontalOptions="EndAndExpand">
@@ -109,7 +109,7 @@
                                VerticalOptions="Center"
                                FontSize="12"
                                HeightRequest="25"
-                               WidthRequest="130"
+                               WidthRequest="120"
                                Margin="10, 0, 5, 0"
                                                 TextChanged="DisplayBeerByTextAndFlavor"
                                                 x:Name="textPicker"/>

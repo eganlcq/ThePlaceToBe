@@ -48,7 +48,7 @@ namespace ThePlaceToBe.Views.AchievementPage
                 };
                 StackLayout tmpStack2 = new StackLayout
                 {
-                    BackgroundColor = Color.DimGray,
+                    BackgroundColor = Color.White,
                 };
 
                 tmpStack2.Orientation = StackOrientation.Horizontal;

@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace ThePlaceToBe.Data {
+namespace ThePlaceToBe.Data
+{
 	public class Beer {
 
 		public int Idbiere { get; set; }

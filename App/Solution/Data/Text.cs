@@ -4,14 +4,18 @@ using System.Text;
 
 namespace ThePlaceToBe.Data
 {
-	public class Text {
+    public class Text
+    {
 
-		public string TexteFromPagePHP { get; set; }
+        public string TexteProdData { get; set; }
+        public string TexteTauxAlcool { get; set; }
+        public string TexteRappel { get; set; }
 
-		public Text() {
+        public Text()
+        {
 
-		}
+        }
 
 
-	}
+    }
 }

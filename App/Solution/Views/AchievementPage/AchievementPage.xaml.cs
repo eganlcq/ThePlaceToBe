@@ -90,6 +90,7 @@ namespace ThePlaceToBe.Views.AchievementPage
             DataButton.BackgroundColor = Color.FromHex("#4D97FF");
             AchievementButton.BackgroundColor = Color.FromHex("#3367b0");
             FavorisButton.BackgroundColor = Color.FromHex("3367b0");
+            retour.Source = Constants.appImg + "retourBleu.png";
         }
 
         // initialize the font for the pseudo according to is size

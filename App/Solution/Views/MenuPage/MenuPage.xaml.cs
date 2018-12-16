@@ -18,564 +18,754 @@ using Xamarin.Forms.Xaml;
 
 namespace ThePlaceToBe.Views.MenuPage
 {
-	[XamlCompilation(XamlCompilationOptions.Compile)]
-	public partial class MenuPage : ContentPage {
+    [XamlCompilation(XamlCompilationOptions.Compile)]
+    public partial class MenuPage : ContentPage
+    {
 
-		List<StackLayout> listStack = new List<StackLayout>();
+        List<StackLayout> listStack = new List<StackLayout>();
+        List<Bar> listBars = new List<Bar>();
 
-		public MenuPage() {
-			InitializeComponent();
-			NavigationPage.SetHasNavigationBar(this, false);
-			// Initialize the content of the xaml page
-			Init();
-		}
+        public MenuPage()
+        {
+            InitializeComponent();
+            NavigationPage.SetHasNavigationBar(this, false);
+            // Initialize the content of the xaml page
+            Init();
+        }
 
-		// Initialize the content of the xaml page
-		private void Init() {
-			imgLogo.Source = imgLogo.Source = Constants.appImg + "logo.png";
-			imgAccount.Source = Constants.userImg + User.currentUser.Photo;
-			retour.Source = Constants.appImg + "retourBlanc.png";
-			lblPseudo.Text = User.currentUser.Pseudo;
-			disconnection.Source = Constants.appImg + "disconnect.png";
-			ChangeTapRecognizer(addBeerInBarStack, addBeerInBarFrame);
-			ChangeTapRecognizer(dataProtectionStack, showDataProtectionFrame);
-			ChangeTapRecognizer(TauxAlcoolParVerreStack, showTauxAlcoolParVerreFrame);
-			ChangeTapRecognizer(RappelDangerAlcoolStack, showRappelDangerAlcoolFrame);
+        // Initialize the content of the xaml page
+        private void Init()
+        {
+            imgLogo.Source = imgLogo.Source = Constants.appImg + "logo.png";
+            imgAccount.Source = Constants.userImg + User.currentUser.Photo;
+            retour.Source = Constants.appImg + "retourBlanc.png";
+            lblPseudo.Text = User.currentUser.Pseudo;
+            disconnection.Source = Constants.appImg + "disconnect.png";
+            logoHandicape.Source = Constants.appImg + "logoHandicapeBlanc.png";
+            //logoHandicape
+            ChangeTapRecognizer(addBeerInBarStack, addBeerInBarFrame);
+            ChangeTapRecognizer(dataProtectionStack, showDataProtectionFrame);
+            ChangeTapRecognizer(TauxAlcoolParVerreStack, showTauxAlcoolParVerreFrame);
+            ChangeTapRecognizer(RappelDangerAlcoolStack, showRappelDangerAlcoolFrame);
+            ChangeTapRecognizer(ListBarsStack, showListBarsFrame);
 
-			InitListStackLayout();
-			DisplayProtDataText();
-			DisplayAlcoholRatePerGlassText();
-			DisplayWarningAboutAlcoholText();
-			InitTapRecognizers();
-			InitBeerPicker();
-			InitBarPicker();
-		}
+            InitListStackLayout();
+            DisplayText();
+            InitTapRecognizers();
+            InitBeerPicker();
+            InitBarPicker();
+            InitListBars();
 
-		// set all the stack from the tableview in a list
-		private void InitListStackLayout() {
-			listStack.Add(addBeerInBarStack);
-			listStack.Add(addBeerStack);
-			listStack.Add(addBarStack);
-			listStack.Add(dataProtectionStack);
-			listStack.Add(TauxAlcoolParVerreStack);
-			listStack.Add(RappelDangerAlcoolStack);
+            HideOrShowStack(addBeerInBarStack);
 
-		}
+        }
 
-		// initialize the evenements when an element is clicked
-		private void InitTapRecognizers() {
-			var tapAddBeer = new TapGestureRecognizer();
-			tapAddBeer.Tapped += (s, e) => AddNewBeer();
-			addBeerFrame.GestureRecognizers.Add(tapAddBeer);
-
-			var tapAddBar = new TapGestureRecognizer();
-			tapAddBar.Tapped += (s, e) => AddNewBar(addBeerInBarStack);
-			addBarFrame.GestureRecognizers.Add(tapAddBar);
-
-			var tapChooseNameBeer = new TapGestureRecognizer();
-			tapChooseNameBeer.Tapped += (s, e) => ChangePickerIntoEntry(beerStackPicker, entryChooseBeerName);
-			chooseNameBeerFrame.GestureRecognizers.Add(tapChooseNameBeer);
-
-			var tapAddBarForBeer = new TapGestureRecognizer();
-			tapAddBarForBeer.Tapped += (s, e) => AddNewBar(addBeerStack);
-			addBarForBeerFrame.GestureRecognizers.Add(tapAddBarForBeer);
-
-			var tapSendBeerInBar = new TapGestureRecognizer();
-			tapSendBeerInBar.Tapped += (s, e) => SendBeerInBar();
-			sendBeerInBarFrame.GestureRecognizers.Add(tapSendBeerInBar);
-
-			var tapSendBar = new TapGestureRecognizer();
-			tapSendBar.Tapped += (s, e) => SendBar();
-			sendBarFrame.GestureRecognizers.Add(tapSendBar);
-
-		}
-
-		// Send the text about data protection in the xaml page
-		private void DisplayProtDataText() {/*
+        // this method initialize the content of listBars with the bars present in the database
+        private void InitListBars()
+        {
             RestService.dic = new Dictionary<string, string>();
-            List<Text> text = RestService.Request<Text>(RestService.dic, "getTextFromFileTXT").Result;*/
+            listBars = RestService.Request<Bar>(RestService.dic, "selectAllBar").Result;
 
-			dataProtectionText.Text = "Hey salut";//text[0].TexteFromPagePHP;
-		}
+            foreach (Bar b in listBars)
+            {
 
-		// Send the text about data protection in the xaml page
-		private void DisplayAlcoholRatePerGlassText() {/*
+                Label tmpBarNom = new Label
+                {
+                    Text = b.Nombar,
+                    TextColor = Color.Black,
+                    FontSize = 12
+                };
+
+                string tmpAccessibilite = "";
+                string tmpIMG = "";
+                if (b.Accessibilite.ToString() == "0")
+                {
+                    tmpAccessibilite = "Ce bar ne possède pas d'accès adapté aux handicapés.";
+                    tmpIMG = "logoHandicapeRouge.png";
+                }
+                else if (b.Accessibilite.ToString() == "1")
+                {
+                    tmpAccessibilite = "Ce bar est facile d'accès aux handicapés.";
+                    tmpIMG = "logoHandicapeVert.png";
+                }
+                else
+                {
+                    tmpAccessibilite = "Erreur de récupération de donnée.";
+                }
+
+                Label accessibilite = new Label
+                {
+                    Text = tmpAccessibilite,
+                    TextColor = Color.Black,
+                    FontSize = 10
+                };
+                Image img = new Image
+                {
+                    Source = Constants.appImg + tmpIMG,
+                    HeightRequest = 12
+                };
+                Label adresse = new Label
+                {
+                    Text = b.Rue + " " + b.Numero.ToString(),
+                    TextColor = Color.Black,
+                    FontSize = 10
+                };
+
+                StackLayout tmpstackAcces = new StackLayout();
+                tmpstackAcces.Orientation = StackOrientation.Horizontal;
+                tmpstackAcces.Children.Add(accessibilite);
+                tmpstackAcces.Children.Add(img);
+
+                StackLayout tmpStack = new StackLayout
+                {
+                    Spacing = 5,
+                    Margin = new Thickness(5)
+                };
+                StackLayout tmpStack2 = new StackLayout
+                {
+                    BackgroundColor = Color.White,
+                };
+
+                tmpStack.Children.Add(tmpBarNom);
+                tmpStack.Children.Add(tmpstackAcces);
+                tmpStack.Children.Add(adresse);
+                tmpStack2.Orientation = StackOrientation.Horizontal;
+                tmpStack2.Children.Add(tmpStack);
+                ListBarsGrid.Children.Add(tmpStack2);
+
+            }
+
+        }
+
+        // set all the stack from the tableview in a list
+        private void InitListStackLayout()
+        {
+            listStack.Add(addBeerInBarStack);
+            listStack.Add(addBeerStack);
+            listStack.Add(addBarStack);
+            listStack.Add(dataProtectionStack);
+            listStack.Add(TauxAlcoolParVerreStack);
+            listStack.Add(RappelDangerAlcoolStack);
+            listStack.Add(ListBarsStack);
+
+        }
+
+        // initialize the evenements when an element is clicked
+        private void InitTapRecognizers()
+        {
+            var tapAddBeer = new TapGestureRecognizer();
+            tapAddBeer.Tapped += (s, e) => AddNewBeer();
+            addBeerFrame.GestureRecognizers.Add(tapAddBeer);
+
+            var tapAddBar = new TapGestureRecognizer();
+            tapAddBar.Tapped += (s, e) => AddNewBar(addBeerInBarStack);
+            addBarFrame.GestureRecognizers.Add(tapAddBar);
+
+            var tapChooseNameBeer = new TapGestureRecognizer();
+            tapChooseNameBeer.Tapped += (s, e) => ChangePickerIntoEntry(beerStackPicker, entryChooseBeerName);
+            chooseNameBeerFrame.GestureRecognizers.Add(tapChooseNameBeer);
+
+            var tapAddBarForBeer = new TapGestureRecognizer();
+            tapAddBarForBeer.Tapped += (s, e) => AddNewBar(addBeerStack);
+            addBarForBeerFrame.GestureRecognizers.Add(tapAddBarForBeer);
+
+            var tapSendBeerInBar = new TapGestureRecognizer();
+            tapSendBeerInBar.Tapped += (s, e) => SendBeerInBar();
+            sendBeerInBarFrame.GestureRecognizers.Add(tapSendBeerInBar);
+
+            var tapSendBar = new TapGestureRecognizer();
+            tapSendBar.Tapped += (s, e) => SendBar();
+            sendBarFrame.GestureRecognizers.Add(tapSendBar);
+
+            var tapChangeHandicapeAcces = new TapGestureRecognizer();
+            tapChangeHandicapeAcces.Tapped += (s, e) => ChangeHandicapeAcces();
+            logoHandicape.GestureRecognizers.Add(tapChangeHandicapeAcces);
+        }
+
+        private void ChangeHandicapeAcces()
+        {
+            if(logoHandicape.Source.ToString().Split('/').Last() == "logoHandicapeBlanc.png")
+            {
+                logoHandicape.Source = Constants.appImg + "logoHandicapeBleu.png";
+            }
+            else if (logoHandicape.Source.ToString().Split('/').Last() == "logoHandicapeBleu.png")
+            {
+                logoHandicape.Source = Constants.appImg + "logoHandicapeBlanc.png";
+            }
+        }
+
+        // Send the texts in the xaml page
+        private void DisplayText()
+        {
+            List<Text> textL = RestService.Request<Text>(RestService.dic, "getTextFromFileTXT").Result;
+
+            dataProtectionText.Text = textL[0].TexteProdData;
+            TauxAlcoolParVerreText.Text = textL[1].TexteTauxAlcool;
+            RappelDangerAlcoolText.Text = textL[2].TexteRappel;
+        }
+
+        // initialize the content of the picker for beers
+        private void InitBeerPicker()
+        {
             RestService.dic = new Dictionary<string, string>();
-            List<Text> text = RestService.Request<Text>(RestService.dic, "getTextFromFileTXT").Result;*/
+            List<Beer> listBeer = RestService.Request<Beer>(RestService.dic, "selectBeer").Result;
 
-			TauxAlcoolParVerreText.Text = "Hey salut";//text[0].TexteFromPagePHP;
-		}
+            foreach (Beer beer in listBeer)
+            {
+                beerPicker.Items.Add(beer.Nombiere);
+            }
+        }
 
-		// Send the text about data protection in the xaml page
-		private void DisplayWarningAboutAlcoholText() {/*
+        // initialize the content of the picker for bars
+        private void InitBarPicker()
+        {
             RestService.dic = new Dictionary<string, string>();
-            List<Text> text = RestService.Request<Text>(RestService.dic, "getTextFromFileTXT").Result;*/
+            List<Bar> listBar = RestService.Request<Bar>(RestService.dic, "selectAllBar").Result;
 
-			RappelDangerAlcoolText.Text = "Hey salut";//text[0].TexteFromPagePHP;
-		}
+            foreach (Bar bar in listBar)
+            {
+                barPicker.Items.Add(bar.Nombar);
+                barForBeerPicker.Items.Add(bar.Nombar);
+            }
+        }
 
-		// initialize the content of the picker for beers
-		private void InitBeerPicker() {
-			RestService.dic = new Dictionary<string, string>();
-			List<Beer> listBeer = RestService.Request<Beer>(RestService.dic, "selectBeer").Result;
-
-			foreach (Beer beer in listBeer) {
-				beerPicker.Items.Add(beer.Nombiere);
-			}
-		}
-
-		// initialize the content of the picker for bars
-		private void InitBarPicker() {
-			RestService.dic = new Dictionary<string, string>();
-			List<Bar> listBar = RestService.Request<Bar>(RestService.dic, "selectAllBar").Result;
-
-			foreach (Bar bar in listBar) {
-				barPicker.Items.Add(bar.Nombar);
-				barForBeerPicker.Items.Add(bar.Nombar);
-			}
-		}
-
-		// change the evenement of the main frame
-		private void ChangeTapRecognizer(StackLayout stack, Frame frame) {
-			TapGestureRecognizer tap = new TapGestureRecognizer();
+        // change the evenement of the main frame
+        private void ChangeTapRecognizer(StackLayout stack, Frame frame)
+        {
+            TapGestureRecognizer tap = new TapGestureRecognizer();
 #pragma warning disable CS4014 // Dans la mesure où cet appel n'est pas attendu, l'exécution de la méthode actuelle continue avant la fin de l'appel
-			tap.Tapped += (s, e) => HideOrShowStack(stack);
+            tap.Tapped += (s, e) => HideOrShowStack(stack);
 #pragma warning restore CS4014 // Dans la mesure où cet appel n'est pas attendu, l'exécution de la méthode actuelle continue avant la fin de l'appel
 
-			if (frame.GestureRecognizers.Count != 0) {
-				frame.GestureRecognizers.RemoveAt(0);
-			}
+            if (frame.GestureRecognizers.Count != 0)
+            {
+                frame.GestureRecognizers.RemoveAt(0);
+            }
 
-			frame.GestureRecognizers.Add(tap);
-		}
+            frame.GestureRecognizers.Add(tap);
+        }
 
-		private async Task<bool> HideOrShowStack(StackLayout stack) {
-			if (!stack.IsVisible && stack.TranslationY == 0) {
-				foreach (StackLayout stackLayout in listStack) {
-					if (stackLayout.IsVisible) {
-						stackLayout.IsVisible = false;
-					}
-				}
-				stack.Opacity = 0;
-				stack.IsVisible = true;
-				await stack.FadeTo(1, 250);
-			}
-			else if (stack.IsVisible) {
-				await stack.TranslateTo(stack.TranslationX, stack.TranslationY - stack.Height);
-				stack.IsVisible = false;
+        private async Task<bool> HideOrShowStack(StackLayout stack)
+        {
+            if (!stack.IsVisible && stack.TranslationY == 0)
+            {
+                foreach (StackLayout stackLayout in listStack)
+                {
+                    if (stackLayout.IsVisible)
+                    {
+                        stackLayout.IsVisible = false;
+                    }
+                }
+                stack.Opacity = 0;
+                stack.IsVisible = true;
+                await stack.FadeTo(1, 250);
+            }
+            else if (stack.IsVisible)
+            {
+                await stack.TranslateTo(stack.TranslationX, stack.TranslationY - stack.Height);
+                stack.IsVisible = false;
 
-				if (stack == addBeerStack || stack == addBarStack) {
-					if (stack == addBeerStack) {
-						beerPickerTextRecognition.SelectedItem = null;
-						barForBeerPicker.SelectedItem = null;
-						entryChooseBeerName.Text = null;
-						entryAlcohol.Text = null;
-						entryType.Text = null;
-					}
+                if (stack == addBeerStack || stack == addBarStack)
+                {
+                    if (stack == addBeerStack)
+                    {
+                        beerPickerTextRecognition.SelectedItem = null;
+                        barForBeerPicker.SelectedItem = null;
+                        entryChooseBeerName.Text = null;
+                        entryAlcohol.Text = null;
+                        entryType.Text = null;
+                    }
 
-					if (stack == addBarStack) {
-						entryNameBar.Text = null;
-						entryNumStreet.Text = null;
-						entryNameStreet.Text = null;
-						entryZIPCode.Text = null;
-						entryNameCity.Text = null;
-					}
+                    if (stack == addBarStack)
+                    {
+                        entryNameBar.Text = null;
+                        entryNumStreet.Text = null;
+                        entryNameStreet.Text = null;
+                        entryZIPCode.Text = null;
+                        entryNameCity.Text = null;
+                    }
 
-					ChangeTapRecognizer(addBeerInBarStack, addBeerInBarFrame);
-				}
-			}
-			else {
-				foreach (StackLayout stackLayout in listStack) {
-					if (stackLayout.IsVisible) {
-						stackLayout.IsVisible = false;
-					}
-				}
-				stack.IsVisible = true;
-				await stack.TranslateTo(stack.TranslationX, stack.TranslationY + stack.Height);
-			}
-			return true;
-		}
+                    ChangeTapRecognizer(addBeerInBarStack, addBeerInBarFrame);
+                }
+            }
+            else
+            {
+                foreach (StackLayout stackLayout in listStack)
+                {
+                    if (stackLayout.IsVisible)
+                    {
+                        stackLayout.IsVisible = false;
+                    }
+                }
+                stack.IsVisible = true;
+                await stack.TranslateTo(stack.TranslationX, stack.TranslationY + stack.Height);
+            }
+            return true;
+        }
 
-		// This method is running when the avatar picture is clicked
-		private void ProfilMenuPageTapped() {
-			this.Navigation.PushAsync(new AchievementPage.AchievementPage(User.currentUser.Iduser.ToString()));
-		}
+        // This method is running when the avatar picture is clicked
+        private void ProfilMenuPageTapped()
+        {
+            this.Navigation.PushAsync(new AchievementPage.AchievementPage(User.currentUser.Iduser.ToString()));
+        }
 
-		// change the display of the screen to hide the picker and show an entry
-		private async void ChangePickerIntoEntry(StackLayout stack, Entry entry) {
-			await stack.FadeTo(0, 250);
-			stack.IsVisible = false;
+        // change the display of the screen to hide the picker and show an entry
+        private async void ChangePickerIntoEntry(StackLayout stack, Entry entry)
+        {
+            await stack.FadeTo(0, 250);
+            stack.IsVisible = false;
 
-			entry.IsVisible = true;
-			await entry.FadeTo(1, 250);
-		}
+            entry.IsVisible = true;
+            await entry.FadeTo(1, 250);
+        }
 
-		// change the display of the screen to hide the entry and show a picker
-		private async void ChangeEntryIntoPicker(StackLayout stack, Entry entry) {
-			await entry.FadeTo(0, 250);
-			entry.IsVisible = false;
+        // change the display of the screen to hide the entry and show a picker
+        private async void ChangeEntryIntoPicker(StackLayout stack, Entry entry)
+        {
+            await entry.FadeTo(0, 250);
+            entry.IsVisible = false;
 
-			stack.IsVisible = true;
-			await stack.FadeTo(1, 250);
-		}
+            stack.IsVisible = true;
+            await stack.FadeTo(1, 250);
+        }
 
-		// this method send a request to insert a beer in a bar in the database
-		private async void SendBeerInBar() {
-			string result = CheckBeerInBar();
-			if (result == "OK") {
-				if (labelErrorBeerInBar.Opacity == 1) await labelErrorBeerInBar.FadeTo(0, 250);
-				RestService.dic = new Dictionary<string, string> {
+        // this method send a request to insert a beer in a bar in the database
+        private async void SendBeerInBar()
+        {
+            string result = CheckBeerInBar();
+            if (result == "OK")
+            {
+                if (labelErrorBeerInBar.Opacity == 1) await labelErrorBeerInBar.FadeTo(0, 250);
+                RestService.dic = new Dictionary<string, string> {
 
-					{ "beer", beerPicker.SelectedItem.ToString() },
-					{ "bar", barPicker.SelectedItem.ToString() },
-					{ "idUser", User.currentUser.Iduser.ToString() }
-				};
-				await RestService.Request<Beer>(RestService.dic, "insertTmpBeerInBar");
-				await HideOrShowStack(addBeerInBarStack);
-				beerPicker.SelectedItem = null;
-				barPicker.SelectedItem = null;
-			}
-			else {
-				if (labelErrorBeerInBar.Opacity == 1) {
-					await labelErrorBeerInBar.FadeTo(0, 250);
-				}
-				labelErrorBeerInBar.Text = result;
-				await labelErrorBeerInBar.FadeTo(1, 250);
-			}
-		}
+                    { "beer", beerPicker.SelectedItem.ToString() },
+                    { "bar", barPicker.SelectedItem.ToString() },
+                    { "idUser", User.currentUser.Iduser.ToString() }
+                };
+                await RestService.Request<Beer>(RestService.dic, "insertTmpBeerInBar");
+                await HideOrShowStack(addBeerInBarStack);
+                beerPicker.SelectedItem = null;
+                barPicker.SelectedItem = null;
+            }
+            else
+            {
+                if (labelErrorBeerInBar.Opacity == 1)
+                {
+                    await labelErrorBeerInBar.FadeTo(0, 250);
+                }
+                labelErrorBeerInBar.Text = result;
+                await labelErrorBeerInBar.FadeTo(1, 250);
+            }
+        }
 
-		// This method verify if a beer is in a bar or not
-		private string CheckBeerInBar() {
-			if (beerPicker.SelectedItem == null || barPicker.SelectedItem == null) {
-				return "Please choose a beer and a bar.";
-			}
-			else {
-				RestService.dic = new Dictionary<string, string> {
+        // This method verify if a beer is in a bar or not
+        private string CheckBeerInBar()
+        {
+            if (beerPicker.SelectedItem == null || barPicker.SelectedItem == null)
+            {
+                return "Please choose a beer and a bar.";
+            }
+            else
+            {
+                RestService.dic = new Dictionary<string, string> {
 
-					{ "beer", beerPicker.SelectedItem.ToString() },
-					{ "bar", barPicker.SelectedItem.ToString() }
-				};
-				bool check = RestService.Request<Check>(RestService.dic, "checkBeerInBar").Result[0].Verif;
+                    { "beer", beerPicker.SelectedItem.ToString() },
+                    { "bar", barPicker.SelectedItem.ToString() }
+                };
+                bool check = RestService.Request<Check>(RestService.dic, "checkBeerInBar").Result[0].Verif;
 
-				if (check) {
-					return "The beer is already in the bar";
-				}
-				else {
-					return "OK";
-				}
-			}
-		}
+                if (check)
+                {
+                    return "The beer is already in the bar";
+                }
+                else
+                {
+                    return "OK";
+                }
+            }
+        }
 
-		// this method send a request to insert a beer in the database
-		private async void SendBeer(byte[] byteArray) {
-			if (labelErrorBeer.Opacity == 1) await labelErrorBeer.FadeTo(0, 250);
+        // this method send a request to insert a beer in the database
+        private async void SendBeer(byte[] byteArray)
+        {
+            if (labelErrorBeer.Opacity == 1) await labelErrorBeer.FadeTo(0, 250);
 
-			string nameOfBeer;
+            string nameOfBeer;
 
-			if (beerStackPicker.IsVisible) {
-				if (beerPickerTextRecognition.SelectedItem != null) {
-					nameOfBeer = beerPickerTextRecognition.SelectedItem.ToString();
-				}
-				else nameOfBeer = null;
-			}
-			else {
-				nameOfBeer = entryChooseBeerName.Text;
-			}
+            if (beerStackPicker.IsVisible)
+            {
+                if (beerPickerTextRecognition.SelectedItem != null)
+                {
+                    nameOfBeer = beerPickerTextRecognition.SelectedItem.ToString();
+                }
+                else nameOfBeer = null;
+            }
+            else
+            {
+                nameOfBeer = entryChooseBeerName.Text;
+            }
 
-			string result = CheckBeer(nameOfBeer);
+            string result = CheckBeer(nameOfBeer);
 
-			if (result == "OK") {
-				RestService.dic = new Dictionary<string, string> {
+            if (result == "OK")
+            {
+                RestService.dic = new Dictionary<string, string> {
 
-					{ "nameBeer", nameOfBeer },
-					{ "alcool", entryAlcohol.Text },
-					{ "type", entryType.Text },
-					{ "imgBeer", nameOfBeer + ".jpg" },
-					{ "bar", barForBeerPicker.SelectedItem.ToString() },
-					{ "idUser", User.currentUser.Iduser.ToString() }
-				};
-				await RestService.Request<Beer>(RestService.dic, "insertTmpBeer");
-				await HideOrShowStack(addBeerStack);
-				using (ByteArrayContent ba = new ByteArrayContent(byteArray)) {
+                    { "nameBeer", nameOfBeer },
+                    { "alcool", entryAlcohol.Text },
+                    { "type", entryType.Text },
+                    { "imgBeer", nameOfBeer + ".jpg" },
+                    { "bar", barForBeerPicker.SelectedItem.ToString() },
+                    { "idUser", User.currentUser.Iduser.ToString() }
+                };
+                await RestService.Request<Beer>(RestService.dic, "insertTmpBeer");
+                await HideOrShowStack(addBeerStack);
+                using (ByteArrayContent ba = new ByteArrayContent(byteArray))
+                {
 
-					Upload(ba, nameOfBeer, "upload");
-				}
-			}
-			else {
+                    Upload(ba, nameOfBeer, "upload");
+                }
+            }
+            else
+            {
 
-				if (labelErrorBeer.Opacity == 1) {
+                if (labelErrorBeer.Opacity == 1)
+                {
 
-					await labelErrorBeer.FadeTo(0, 250);
-				}
-				labelErrorBeer.Text = result;
-				await labelErrorBeer.FadeTo(1, 250);
-			}
-		}
+                    await labelErrorBeer.FadeTo(0, 250);
+                }
+                labelErrorBeer.Text = result;
+                await labelErrorBeer.FadeTo(1, 250);
+            }
+        }
 
-		// this method verify if a beer is in the database or not
-		private string CheckBeer(string nameOfBeer) {
-			bool isNotNull = CheckIfNotNull(nameOfBeer);
-			if (!isNotNull) {
-				return "Please choose a name and a bar.";
-			}
-			else {
-				RestService.dic = new Dictionary<string, string> {
+        // this method verify if a beer is in the database or not
+        private string CheckBeer(string nameOfBeer)
+        {
+            bool isNotNull = CheckIfNotNull(nameOfBeer);
+            if (!isNotNull)
+            {
+                return "Please choose a name and a bar.";
+            }
+            else
+            {
+                RestService.dic = new Dictionary<string, string> {
 
-					{ "beer", nameOfBeer }
-				};
-				bool check = RestService.Request<Check>(RestService.dic, "checkBeer").Result[0].Verif;
+                    { "beer", nameOfBeer }
+                };
+                bool check = RestService.Request<Check>(RestService.dic, "checkBeer").Result[0].Verif;
 
-				if (check) {
-					return "The beer already exists";
-				}
-				else {
-					return "OK";
-				}
-			}
-		}
+                if (check)
+                {
+                    return "The beer already exists";
+                }
+                else
+                {
+                    return "OK";
+                }
+            }
+        }
 
-		private bool CheckIfNotNull(string nameOfBeer) {
-			if (barForBeerPicker.SelectedItem == null) {
-				return false;
-			}
-			else {
+        private bool CheckIfNotNull(string nameOfBeer)
+        {
+            if (barForBeerPicker.SelectedItem == null)
+            {
+                return false;
+            }
+            else
+            {
 
-				if (nameOfBeer == "" || nameOfBeer == null) {
-					return false;
-				}
-				else return true;
-			}
-		}
+                if (nameOfBeer == "" || nameOfBeer == null)
+                {
+                    return false;
+                }
+                else return true;
+            }
+        }
 
-		// this method send a request to insert a bar in the database
-		private async void SendBar() {
-			string result = CheckBar();
-			if (result == "OK") {
-				if (labelErrorBar.Opacity == 1) await labelErrorBar.FadeTo(0, 250);
+        // this method send a request to insert a bar in the database
+        private async void SendBar()
+        {
+            string result = CheckBar();
+            if (result == "OK")
+            {
+                if (labelErrorBar.Opacity == 1) await labelErrorBar.FadeTo(0, 250);
 
-				RestService.dic = new Dictionary<string, string> {
+                var accessible = CheckAccessibility(); ;
 
-					{ "nameBar", entryNameBar.Text },
-					{ "numStreet", entryNumStreet.Text },
-					{ "nameStreet", entryNameStreet.Text },
-					{ "ZIPCode", entryZIPCode.Text },
-					{ "nameCity", entryNameCity.Text },
-					{ "accessibility", "1" },
-					{ "idUser", User.currentUser.Iduser.ToString() }
-				};
-				await RestService.Request<Beer>(RestService.dic, "insertTmpBar");
-				await HideOrShowStack(addBarStack);
-			}
-			else {
-				if (labelErrorBar.Opacity == 1) {
-					await labelErrorBar.FadeTo(0, 250);
-				}
-				labelErrorBar.Text = result;
-				await labelErrorBar.FadeTo(1, 250);
-			}
-		}
+                RestService.dic = new Dictionary<string, string> {
 
-		// this method verify if the bar exist or not
-		private string CheckBar() {
-			if (entryNameBar.Text == null || entryNameBar.Text == "") {
-				return "Please choose a name for the bar.";
-			}
-			else if (entryNumStreet.Text != null && entryNumStreet.Text != "" && !Int32.TryParse(entryNumStreet.Text, out int valNumStreet)) {
-				return "The number of the street must be a number.";
-			}
-			else if (entryZIPCode.Text != null && entryZIPCode.Text != "" && !Int32.TryParse(entryZIPCode.Text, out int valZIP)) {
-				return "The ZIP code must be a number.";
-			}
-			else {
-				RestService.dic = new Dictionary<string, string> {
+                    { "nameBar", entryNameBar.Text },
+                    { "numStreet", entryNumStreet.Text },
+                    { "nameStreet", entryNameStreet.Text },
+                    { "ZIPCode", entryZIPCode.Text },
+                    { "nameCity", entryNameCity.Text },
+                    { "accessibility", accessible.ToString() },
+                    { "idUser", User.currentUser.Iduser.ToString() }
+                };
+                await RestService.Request<Beer>(RestService.dic, "insertTmpBar");
+                await HideOrShowStack(addBarStack);
+            }
+            else
+            {
+                if (labelErrorBar.Opacity == 1)
+                {
+                    await labelErrorBar.FadeTo(0, 250);
+                }
+                labelErrorBar.Text = result;
+                await labelErrorBar.FadeTo(1, 250);
+            }
+        }
 
-					{ "bar", entryNameBar.Text }
-				};
-				bool check = RestService.Request<Check>(RestService.dic, "checkBar").Result[0].Verif;
+        private int CheckAccessibility()
+        {
+            DisplayAlert("erreur", logoHandicape.Source.ToString().Split('/').Last(), "ok");
+            if (logoHandicape.Source.ToString().Split('/').Last() == "logoHandicapeBlanc.png")
+            {
+                return 0;
+            }
+            else if(logoHandicape.Source.ToString().Split('/').Last() == "logoHandicapeBleu.png")
+            {
+                return 1;
+            }
+            else
+            {
+                return 0;
+            }
+        }
 
-				if (check) {
-					return "The bar already exists";
-				}
-				else {
-					return "OK";
-				}
-			}
-		}
+        // this method verify if the bar exist or not
+        private string CheckBar()
+        {
+            if (entryNameBar.Text == null || entryNameBar.Text == "")
+            {
+                return "Please choose a name for the bar.";
+            }
+            else if (entryNumStreet.Text != null && entryNumStreet.Text != "" && !Int32.TryParse(entryNumStreet.Text, out int valNumStreet))
+            {
+                return "The number of the street must be a number.";
+            }
+            else if (entryZIPCode.Text != null && entryZIPCode.Text != "" && !Int32.TryParse(entryZIPCode.Text, out int valZIP))
+            {
+                return "The ZIP code must be a number.";
+            }
+            else
+            {
+                RestService.dic = new Dictionary<string, string> {
 
-		private async void AddNewBar(StackLayout stackToHide) {
-			await HideOrShowStack(stackToHide);
-			ChangeTapRecognizer(addBarStack, addBeerInBarFrame);
-			await HideOrShowStack(addBarStack);
-		}
+                    { "bar", entryNameBar.Text }
+                };
+                bool check = RestService.Request<Check>(RestService.dic, "checkBar").Result[0].Verif;
 
-		// this method add a bar by using the scan
-		private async void AddNewBeer() {
-			var answer = await DisplayAlert("NOTE", "You will need to take a photo in order to add a beer, is it ok ?", "Yes", "No");
+                if (check)
+                {
+                    return "The bar already exists";
+                }
+                else
+                {
+                    return "OK";
+                }
+            }
+        }
 
-			if (answer) {
-				try {
-					await CrossMedia.Current.Initialize();
+        private async void AddNewBar(StackLayout stackToHide)
+        {
+            await HideOrShowStack(stackToHide);
+            ChangeTapRecognizer(addBarStack, addBeerInBarFrame);
+            await HideOrShowStack(addBarStack);
+        }
 
-					var cameraStatus = await CrossPermissions.Current.CheckPermissionStatusAsync(Permission.Camera);
-					var storageStatus = await CrossPermissions.Current.CheckPermissionStatusAsync(Permission.Storage);
+        // this method add a bar by using the scan
+        private async void AddNewBeer()
+        {
+            var answer = await DisplayAlert("NOTE", "You will need to take a photo in order to add a beer, is it ok ?", "Yes", "No");
 
-					if (cameraStatus != PermissionStatus.Granted || storageStatus != PermissionStatus.Granted) {
-						var results = await CrossPermissions.Current.RequestPermissionsAsync(new[] { Permission.Camera, Permission.Storage });
-						cameraStatus = results[Permission.Camera];
-						storageStatus = results[Permission.Storage];
-					}
+            if (answer)
+            {
+                try
+                {
+                    await CrossMedia.Current.Initialize();
 
-					if (cameraStatus == PermissionStatus.Granted && storageStatus == PermissionStatus.Granted) {
-						if (!CrossMedia.Current.IsCameraAvailable || !CrossMedia.Current.IsTakePhotoSupported) {
+                    var cameraStatus = await CrossPermissions.Current.CheckPermissionStatusAsync(Permission.Camera);
+                    var storageStatus = await CrossPermissions.Current.CheckPermissionStatusAsync(Permission.Storage);
+
+                    if (cameraStatus != PermissionStatus.Granted || storageStatus != PermissionStatus.Granted)
+                    {
+                        var results = await CrossPermissions.Current.RequestPermissionsAsync(new[] { Permission.Camera, Permission.Storage });
+                        cameraStatus = results[Permission.Camera];
+                        storageStatus = results[Permission.Storage];
+                    }
+
+                    if (cameraStatus == PermissionStatus.Granted && storageStatus == PermissionStatus.Granted)
+                    {
+                        if (!CrossMedia.Current.IsCameraAvailable || !CrossMedia.Current.IsTakePhotoSupported)
+                        {
 #pragma warning disable CS4014 // Dans la mesure où cet appel n'est pas attendu, l'exécution de la méthode actuelle continue avant la fin de l'appel
-							DisplayAlert("No Camera", "No camera available.", "OK");
+                            DisplayAlert("No Camera", "No camera available.", "OK");
 #pragma warning restore CS4014 // Dans la mesure où cet appel n'est pas attendu, l'exécution de la méthode actuelle continue avant la fin de l'appel
-							return;
-						}
+                            return;
+                        }
 
-						var takePhoto = await DisplayAlert("NOTE", "Do you want to take a photo or pick a photo in your library ?", "Take a photo", "Pick a photo");
+                        var takePhoto = await DisplayAlert("NOTE", "Do you want to take a photo or pick a photo in your library ?", "Take a photo", "Pick a photo");
 
-						MediaFile file;
-						if(takePhoto) {
+                        MediaFile file;
+                        if (takePhoto)
+                        {
 
-							file = await CrossMedia.Current.TakePhotoAsync(new StoreCameraMediaOptions {
-								Directory = "Sample",
-								Name = "test.jpg",
-								PhotoSize = PhotoSize.Medium,
-								CompressionQuality = 92
-							});
-						}
-						else {
+                            file = await CrossMedia.Current.TakePhotoAsync(new StoreCameraMediaOptions
+                            {
+                                Directory = "Sample",
+                                Name = "test.jpg",
+                                PhotoSize = PhotoSize.Medium,
+                                CompressionQuality = 92
+                            });
+                        }
+                        else
+                        {
 
-							file = await CrossMedia.Current.PickPhotoAsync();
-						}
-						
-
-						if (file == null) return;
+                            file = await CrossMedia.Current.PickPhotoAsync();
+                        }
 
 
-						ImageSource img = ImageSource.FromStream(() => {
+                        if (file == null) return;
 
-							var streamImg = file.GetStream();
-							return streamImg;
-						});
 
-						photoBeer.Source = img;
+                        ImageSource img = ImageSource.FromStream(() => {
 
-						var stream = new MemoryStream();
-						file.GetStream().CopyTo(stream);
-						byte[] bitmapData = stream.ToArray();
+                            var streamImg = file.GetStream();
+                            return streamImg;
+                        });
 
-						var tapSendBeer = new TapGestureRecognizer();
-						tapSendBeer.Tapped += (s, e) => SendBeer(bitmapData);
-						if (sendBeerFrame.GestureRecognizers.Count != 0) {
+                        photoBeer.Source = img;
 
-							for (int i = 0; i < sendBeerFrame.GestureRecognizers.Count; i++) {
-								sendBeerFrame.GestureRecognizers.RemoveAt(0);
-							}
-						}
-						sendBeerFrame.GestureRecognizers.Add(tapSendBeer);
+                        var stream = new MemoryStream();
+                        file.GetStream().CopyTo(stream);
+                        byte[] bitmapData = stream.ToArray();
 
-						using (var fileContent = new ByteArrayContent(bitmapData)) {
+                        var tapSendBeer = new TapGestureRecognizer();
+                        tapSendBeer.Tapped += (s, e) => SendBeer(bitmapData);
+                        if (sendBeerFrame.GestureRecognizers.Count != 0)
+                        {
 
-							Upload(fileContent, "img", "uploadForTextRecognition");
-						}
-						TextRecognition(beerPickerTextRecognition);
+                            for (int i = 0; i < sendBeerFrame.GestureRecognizers.Count; i++)
+                            {
+                                sendBeerFrame.GestureRecognizers.RemoveAt(0);
+                            }
+                        }
+                        sendBeerFrame.GestureRecognizers.Add(tapSendBeer);
 
-						if (!beerStackPicker.IsVisible) {
-							ChangeEntryIntoPicker(beerStackPicker, entryChooseBeerName);
-						}
+                        using (var fileContent = new ByteArrayContent(bitmapData))
+                        {
 
-						await HideOrShowStack(addBeerInBarStack);
-						ChangeTapRecognizer(addBeerStack, addBeerInBarFrame);
-						await HideOrShowStack(addBeerStack);
+                            Upload(fileContent, "img", "uploadForTextRecognition");
+                        }
+                        TextRecognition(beerPickerTextRecognition);
 
-						if (File.Exists(file.Path)) {
-							File.Delete(file.Path);
-						}
+                        if (!beerStackPicker.IsVisible)
+                        {
+                            ChangeEntryIntoPicker(beerStackPicker, entryChooseBeerName);
+                        }
 
-						file.Dispose();
-					}
-					else {
-						await DisplayAlert("Permissions Denied", "Unable to take photos.", "OK");
-					}
-				}
-				catch (Exception e) {
-					await DisplayAlert("ERROR PHOTO", e.ToString(), "OK");
-				}
-			}
-		}
+                        await HideOrShowStack(addBeerInBarStack);
+                        ChangeTapRecognizer(addBeerStack, addBeerInBarFrame);
+                        await HideOrShowStack(addBeerStack);
 
-		// this method is used to send an picture an get the text on it
-		private bool TextRecognition(Picker picker) {
-			RestService.dic = new Dictionary<string, string>() {
+                        if (File.Exists(file.Path))
+                        {
+                            File.Delete(file.Path);
+                        }
 
-				{ "image", "img.jpg" }
-			};
-			List<string> list = RestService.Request<string>(RestService.dic, "textRecognition/textRecognition").Result;
+                        file.Dispose();
+                    }
+                    else
+                    {
+                        await DisplayAlert("Permissions Denied", "Unable to take photos.", "OK");
+                    }
+                }
+                catch (Exception e)
+                {
+                    await DisplayAlert("ERROR PHOTO", e.ToString(), "OK");
+                }
+            }
+        }
 
-			if(picker.Items.Count != 0) {
+        // this method is used to send an picture an get the text on it
+        private bool TextRecognition(Picker picker)
+        {
+            RestService.dic = new Dictionary<string, string>() {
 
-				for(int i = 0; i < picker.Items.Count; i++) {
+                { "image", "img.jpg" }
+            };
+            List<string> list = RestService.Request<string>(RestService.dic, "textRecognition/textRecognition").Result;
 
-					picker.Items.RemoveAt(0);
-				}
-			}
+            if (picker.Items.Count != 0)
+            {
+                for (int i = 0; i < picker.Items.Count; i++)
+                {
+                    picker.Items.RemoveAt(0);
+                }
+            }
 
-			foreach (string str in list) {
+            foreach (string str in list)
+            {
+                if (str != "" && str != null)
+                {
+                    picker.Items.Add(str);
+                }
+            }
 
-				if(str != "" && str != null) {
+            if (picker.Items.Count == 0)
+            {
+                picker.Items.Add("default");
+            }
 
-					picker.Items.Add(str);
-				}
-			}
+            return true;
+        }
 
-			if (picker.Items.Count == 0) {
+        // this method upload the a pitcure on the server
+        private async void Upload(ByteArrayContent ba, string nameOfBeer, string url)
+        {
+            {
+                try
+                {
+                    ba.Headers.ContentType = MediaTypeHeaderValue.Parse("application/octet-stream");
+                    ba.Headers.ContentDisposition = new ContentDispositionHeaderValue("form-data")
+                    {
 
-				picker.Items.Add("default");
-			}
+                        Name = "fileUpload",
+                        FileName = nameOfBeer + ".jpg"
+                    };
 
-			return true;
-		}
+                    MultipartFormDataContent multipartContent = new MultipartFormDataContent();
+                    multipartContent.Add(ba);
 
-		// this method upload the a pitcure on the server
-		private async void Upload(ByteArrayContent ba, string nameOfBeer, string url) {
-			{
-				try {
+                    HttpClient httpClient = new HttpClient();
+                    HttpResponseMessage response = await httpClient.PostAsync("http://www.theplacetobe.ovh/admin/" + url + ".php", multipartContent);
+                    string responseString = await response.Content.ReadAsStringAsync();
+                    response.EnsureSuccessStatusCode();
 
-					ba.Headers.ContentType = MediaTypeHeaderValue.Parse("application/octet-stream");
-					ba.Headers.ContentDisposition = new ContentDispositionHeaderValue("form-data") {
+                }
+                catch (Exception e)
+                {
 
-						Name = "fileUpload",
-						FileName = nameOfBeer + ".jpg"
-					};
+                    await DisplayAlert("ERROR", e.Message.ToString(), "OK");
+                }
+            }
+        }
 
-					MultipartFormDataContent multipartContent = new MultipartFormDataContent();
-					multipartContent.Add(ba);
+        // this method method is running when the back icon is clicked
+        // return to the previous page
+        private void Retour(object sender, EventArgs e)
+        {
+            this.Navigation.PopAsync();
+        }
 
-					HttpClient httpClient = new HttpClient();
-					HttpResponseMessage response = await httpClient.PostAsync("http://www.theplacetobe.ovh/admin/" + url + ".php", multipartContent);
-					string responseString = await response.Content.ReadAsStringAsync();
-					response.EnsureSuccessStatusCode();
-
-				}
-				catch (Exception e) {
-
-					await DisplayAlert("ERROR", e.Message.ToString(), "OK");
-				}
-			}
-		}
-
-		// this method method is running when the back icon is clicked
-		// return to the previous page
-		private void Retour(object sender, EventArgs e) {
-			this.Navigation.PopAsync();
-		}
-
-		private void Disconnect(object sender, EventArgs e) {
-			Navigation.InsertPageBefore(new ConnexionPage.ConnexionPage(), Navigation.NavigationStack[0]);
-			User.currentUser = null;
-			Navigation.PopToRootAsync();
-		}
-	}
+        // this method is running when the disconnect button is clicked
+        private void Disconnect(object sender, EventArgs e)
+        {
+            Navigation.InsertPageBefore(new ConnexionPage.ConnexionPage(), Navigation.NavigationStack[0]);
+            User.currentUser = null;
+            Navigation.PopToRootAsync();
+        }
+    }
 }

@@ -150,20 +150,19 @@
 
                     </StackLayout>
                 </Frame>
-                <Button Text="RETOUR"
-                    HorizontalOptions="Start"
-                    TextColor="White"
-                    BackgroundColor="#3367b0"
-                    BorderColor="#3367b0"
-                    BorderWidth="2"
-                    BorderRadius="10"
-                    FontSize="12"
-                     HeightRequest="35"
-                    Margin="16,10,0,10"
-                    Clicked="BtnRetourClicked"/>
+                <!-- retour button -->
+                <Image 
+                    x:Name="retour"
+                    HeightRequest="40"
+                    WidthRequest="40"
+                    HorizontalOptions="StartAndExpand"
+                    VerticalOptions="EndAndExpand"
+                    Margin="10, 0, 0, 10">
+                    <Image.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="BtnRetourClicked"/>
+                    </Image.GestureRecognizers>
+                </Image>
             </StackLayout>
-            <!--</Frame>-->
-
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

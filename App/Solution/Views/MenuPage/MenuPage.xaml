@@ -7,7 +7,6 @@
         <StackLayout Spacing="0" VerticalOptions="FillAndExpand">
             <AbsoluteLayout Grid.Row="0"
                             Grid.Column="0">
-
                 <Frame 
                     Padding="0"
                     AbsoluteLayout.LayoutFlags="PositionProportional"
@@ -27,7 +26,7 @@
                         </Image.GestureRecognizers>
                     </Image>
                 </Frame>
-
+                
                 <Image x:Name="imgLogo"
                        WidthRequest="120"
                        AbsoluteLayout.LayoutFlags="PositionProportional"
@@ -69,64 +68,66 @@
 
             <ScrollView>
                 <StackLayout>
-                    <TableView Margin="10"
+                    <TableView Margin="30,20"
                            HasUnevenRows="True">
                         <TableRoot>
                             <TableSection>
                                 <ViewCell>
                                     <StackLayout Spacing="0">
-                                        <Frame BackgroundColor="#c6c6c6"
+                                        <Frame BackgroundColor="White"
+                                               HeightRequest="30"
                                                CornerRadius="2"
-                                               Padding="5"
+                                               Padding="2"
                                                    x:Name="addBeerInBarFrame">
-                                            <Label Text="Contribute to our app"
-                                                   TextColor="#363636"
-                                                   HorizontalOptions="CenterAndExpand"
-                                                   FontSize="18"/>
+                                            <Label Text="Ajouter une bière dans une bar"
+                                                   FontSize="Medium"
+                                                   TextColor="#3367b0"
+                                                   HorizontalOptions="Center"
+                                                   VerticalOptions="Center"/>
                                         </Frame>
 
-                                        <StackLayout BackgroundColor="#a6a6a6"
+                                        <StackLayout BackgroundColor="#cccccc"
                                                      Spacing="0"
                                                      Padding="5"
                                                      x:Name="addBeerInBarStack"
                                                          IsVisible="False">
-                                            <Picker Title="Pick a beer" FontSize="12" x:Name="beerPicker"/>
+                                            <Picker Title="Choisir une bière" FontSize="12" x:Name="beerPicker"/>
                                             <Frame Margin="0, 5, 0, 10"
                                                    HorizontalOptions="EndAndExpand"
                                                    CornerRadius="15"
-                                                   BackgroundColor="#666666"
+                                                   BackgroundColor="white"
                                                    Padding="5"
                                                        x:Name="addBeerFrame">
-                                                <Label Text="The beer doesn't exist"
-                                                       TextColor="#c6c6c6"
+                                                <Label Text="La bière n'existe pas"
+                                                       TextColor="#3367b0"
                                                        FontSize="10"/>
                                             </Frame>
-                                            <Picker Title="Pick a bar" FontSize="12" x:Name="barPicker"/>
+                                            <Picker Title="Choisir un bar" FontSize="12" x:Name="barPicker"/>
                                             <Frame Margin="0, 5, 0, 10"
                                                    HorizontalOptions="EndAndExpand"
                                                    CornerRadius="15"
-                                                   BackgroundColor="#666666"
+                                                   BackgroundColor="white"
                                                    Padding="5"
                                                        x:Name="addBarFrame">
-                                                <Label Text="The bar doesn't exist"
-                                                       TextColor="#c6c6c6"
+                                                <Label Text="Le bar n'existe pas"
+                                                       TextColor="#3367b0"
                                                        FontSize="10"/>
                                             </Frame>
                                             <Label TextColor="DarkRed" Opacity="0" FontSize="12" Margin="5, 0, 0, 0" x:Name="labelErrorBeerInBar"/>
                                             <Frame Margin="80, 10, 80, 10"
                                                    HorizontalOptions="FillAndExpand"
                                                    CornerRadius="5"
-                                                   BackgroundColor="#666666"
+                                                   BackgroundColor="White"
                                                    Padding="5"
                                                        x:Name="sendBeerInBarFrame">
-                                                <Label Text="SEND"
-                                                       TextColor="#c6c6c6"
+                                                <Label Text="ENVOYER"
+                                                       TextColor="#3367b0"
                                                        FontSize="10"
                                                            HorizontalOptions="CenterAndExpand"/>
                                             </Frame>
                                         </StackLayout>
 
-                                        <StackLayout BackgroundColor="#a6a6a6"
+                                        <StackLayout BackgroundColor="#cccccc"
                                                      Spacing="0"
                                                      Padding="5"
                                                      x:Name="addBeerStack"
@@ -137,79 +138,120 @@
                                             </Frame>
                                             <StackLayout Padding="0" HorizontalOptions="FillAndExpand" Spacing="0">
                                                 <StackLayout Orientation="Horizontal" Padding="0" x:Name="beerStackPicker">
-                                                    <Picker Title="Choose a name" FontSize="12" HorizontalOptions="StartAndExpand" WidthRequest="100" x:Name="beerPickerTextRecognition"/>
+                                                    <Picker Title="Choisir un nom" FontSize="12" HorizontalOptions="StartAndExpand" WidthRequest="100" x:Name="beerPickerTextRecognition"/>
                                                     <Frame HorizontalOptions="End"
                                                                 CornerRadius="15"
-                                                                BackgroundColor="#666666"
+                                                                BackgroundColor="White"
                                                                 Padding="5"
                                                                VerticalOptions="EndAndExpand"
                                                                HasShadow="False"
                                                                x:Name="chooseNameBeerFrame">
-                                                        <Label Text="Not in the list ?"
-                                                                    TextColor="#c6c6c6"
+                                                        <Label Text="Pas dans la liste ?"
+                                                                    TextColor="#3367b0"
                                                                     FontSize="10"/>
                                                     </Frame>
                                                 </StackLayout>
-                                                <Entry Placeholder="Name of the beer" FontSize="12" IsVisible="False" Opacity="0" x:Name="entryChooseBeerName"/>
+                                                <Entry Placeholder="Nom de la bière" FontSize="12" IsVisible="False" Opacity="0" x:Name="entryChooseBeerName"/>
                                                 <StackLayout Orientation="Horizontal" Padding="0">
-                                                    <Picker Title="Choose one bar" FontSize="12" HorizontalOptions="StartAndExpand" WidthRequest="100" x:Name="barForBeerPicker"/>
+                                                    <Picker Title="Choisir un bar" FontSize="12" HorizontalOptions="StartAndExpand" WidthRequest="100" x:Name="barForBeerPicker"/>
                                                     <Frame HorizontalOptions="End"
                                                                 CornerRadius="15"
-                                                                BackgroundColor="#666666"
+                                                                BackgroundColor="White"
                                                                 Padding="5"
                                                                VerticalOptions="EndAndExpand"
                                                                HasShadow="False"
                                                                x:Name="addBarForBeerFrame">
-                                                        <Label Text="Not in the list ?"
-                                                                    TextColor="#c6c6c6"
+                                                        <Label Text="Pas dans la liste ?"
+                                                                    TextColor="#3367b0"
                                                                     FontSize="10"/>
                                                     </Frame>
                                                 </StackLayout>
-                                                <Entry Placeholder="Alcohol (optionnal)" FontSize="12" x:Name="entryAlcohol"/>
-                                                <Entry Placeholder="Type (optionnal)" FontSize="12" x:Name="entryType"/>
+                                                <Entry Placeholder="Alcool (optionnel)" FontSize="12" x:Name="entryAlcohol"/>
+                                                <Entry Placeholder="Type (optionnel)" FontSize="12" x:Name="entryType"/>
                                                 <Label TextColor="DarkRed" Opacity="0" FontSize="12" Margin="5, 0, 0, 0" x:Name="labelErrorBeer"/>
                                                 <Frame HorizontalOptions="FillAndExpand"
                                                                 CornerRadius="5"
-                                                                BackgroundColor="#666666"
+                                                                BackgroundColor="white"
                                                                 Padding="5"
                                                                HasShadow="False"
                                                            Margin="10, 20, 10, 0"
                                                            x:Name="sendBeerFrame">
-                                                    <Label Text="SEND"
-                                                                    TextColor="#c6c6c6"
-                                                                    FontSize="10"
-                                                               HorizontalOptions="CenterAndExpand"/>
+                                                    <Label Text="ENVOYER"
+                                                           BackgroundColor="white"
+                                                           TextColor="#3367b0"
+                                                           FontSize="10"
+                                                           HorizontalOptions="CenterAndExpand"/>
                                                 </Frame>
                                             </StackLayout>
                                         </StackLayout>
 
-                                        <StackLayout BackgroundColor="#a6a6a6" Spacing="0" Padding="5" x:Name="addBarStack" IsVisible="False">
-                                            <Entry Placeholder="Name of the bar" FontSize="12" x:Name="entryNameBar"/>
-                                            <Entry Placeholder="Number street (optionnal)" FontSize="12" x:Name="entryNumStreet"/>
-                                            <Entry Placeholder="Name street (optionnal)" FontSize="12" x:Name="entryNameStreet"/>
-                                            <Entry Placeholder="ZIP code (optionnal)" FontSize="12" x:Name="entryZIPCode"/>
-                                            <Entry Placeholder="Name city (optionnal)" FontSize="12" x:Name="entryNameCity"/>
+                                        <StackLayout BackgroundColor="#cccccc" Spacing="0" Padding="5" x:Name="addBarStack" IsVisible="False">
+                                            <StackLayout Spacing="0"
+                                                         Orientation="Horizontal">
+                                                <Entry Placeholder="Nom du bar" FontSize="12" x:Name="entryNameBar" HorizontalOptions="FillAndExpand"/>
+                                                <Image 
+                                                    x:Name="logoHandicape"
+                                                    HeightRequest="40"
+                                                    WidthRequest="40"
+                                                    Margin="10, 0, 0, 10"
+                                                    HorizontalOptions="End">
+                                                </Image>
+                                                
+                                            </StackLayout>
+                                            <Entry Placeholder="Numero de rue (optionnel)" FontSize="12" x:Name="entryNumStreet"/>
+                                            <Entry Placeholder="Nom de rue (optionnel)" FontSize="12" x:Name="entryNameStreet"/>
+                                            <Entry Placeholder="Code postal (optionnel)" FontSize="12" x:Name="entryZIPCode"/>
+                                            <Entry Placeholder="Ville/village (optionnel)" FontSize="12" x:Name="entryNameCity"/>
                                             <Label TextColor="DarkRed" Opacity="0" FontSize="12" Margin="5, 0, 0, 0" x:Name="labelErrorBar"/>
-                                            <Frame HorizontalOptions="FillAndExpand" CornerRadius="5" BackgroundColor="#666666" Padding="5" HasShadow="False" Margin="10, 20, 10, 0" x:Name="sendBarFrame">
-                                                <Label Text="SEND" TextColor="#c6c6c6" FontSize="10" HorizontalOptions="CenterAndExpand"/>
+                                            <Frame HorizontalOptions="FillAndExpand" CornerRadius="5" BackgroundColor="White" Padding="5" HasShadow="False" Margin="10, 20, 10, 0" x:Name="sendBarFrame">
+                                                <Label Text="ENVOYER" BackgroundColor="white" TextColor="#3367b0" FontSize="10" HorizontalOptions="CenterAndExpand"/>
                                             </Frame>
                                         </StackLayout>
                                     </StackLayout>
                                 </ViewCell>
-                                <!-- Taux alcool par verre-->
+                                <!-- list of the bars-->
                                 <ViewCell>
                                     <StackLayout Spacing="0">
-                                        <Frame BackgroundColor="#c6c6c6"
+                                        <Frame BackgroundColor="White"
+                                               HeightRequest="30"
                                                CornerRadius="2"
-                                               Padding="5"
-                                                   x:Name="showTauxAlcoolParVerreFrame">
-                                            <Label Text="Taux alcool par verre"
-                                                   TextColor="#363636"
+                                               Padding="2"
+                                                   x:Name="showListBarsFrame">
+                                            <Label Text="Bars"
+                                                   FontSize="Medium"
+                                                   TextColor="#3367b0"
                                                    HorizontalOptions="CenterAndExpand"
-                                                   FontSize="18"/>
+                                                   VerticalOptions="Center"/>
                                         </Frame>
                                         <StackLayout
-                                                BackgroundColor="#a6a6a6"
+                                                BackgroundColor="#cccccc"
+                                                Spacing="0"
+                                                Padding="5"
+                                                x:Name="ListBarsStack"
+                                                IsVisible="false">
+                                            <StackLayout x:Name="ListBarsGrid">
+                                                
+                                            </StackLayout>
+
+                                        </StackLayout>
+                                    </StackLayout>
+                                </ViewCell>
+                                <!-- alcool informations -->
+                                <ViewCell>
+                                    <StackLayout Spacing="0">
+                                        <Frame BackgroundColor="White"
+                                               HeightRequest="30"
+                                               CornerRadius="2"
+                                               Padding="2"
+                                                   x:Name="showTauxAlcoolParVerreFrame">
+                                            <Label Text="Taux alcool par verre"
+                                                   FontSize="Medium"
+                                                   TextColor="#3367b0"
+                                                   HorizontalOptions="CenterAndExpand"
+                                                   VerticalOptions="Center"/>
+                                        </Frame>
+                                        <StackLayout
+                                                BackgroundColor="#cccccc"
                                                 Spacing="0"
                                                 Padding="5"
                                                 x:Name="TauxAlcoolParVerreStack"
@@ -219,20 +261,22 @@
                                         </StackLayout>
                                     </StackLayout>
                                 </ViewCell>
-                                <!-- Rappel danger alcool-->
+                                <!-- warning alcool-->
                                 <ViewCell>
                                     <StackLayout Spacing="0">
-                                        <Frame BackgroundColor="#c6c6c6"
+                                        <Frame BackgroundColor="White"
+                                               HeightRequest="30"
                                                CornerRadius="2"
-                                               Padding="5"
+                                               Padding="2"
                                                    x:Name="showRappelDangerAlcoolFrame">
                                             <Label Text="Dangers de l'alcool"
-                                                   TextColor="#363636"
+                                                   FontSize="Medium"
+                                                   TextColor="#3367b0"
                                                    HorizontalOptions="CenterAndExpand"
-                                                   FontSize="18"/>
+                                                   VerticalOptions="Center"/>
                                         </Frame>
                                         <StackLayout
-                                                BackgroundColor="#a6a6a6"
+                                                BackgroundColor="#cccccc"
                                                 Spacing="0"
                                                 Padding="5"
                                                 x:Name="RappelDangerAlcoolStack"
@@ -242,20 +286,22 @@
                                         </StackLayout>
                                     </StackLayout>
                                 </ViewCell>
-                                <!-- protection de données-->
+                                <!-- data protection-->
                                 <ViewCell>
-                                    <StackLayout Spacing="0">
-                                        <Frame BackgroundColor="#c6c6c6"
+                                    <StackLayout Spacing="0" >
+                                        <Frame BackgroundColor="white"
                                                CornerRadius="2"
-                                               Padding="5"
+                                               Padding="2"
+                                               HeightRequest="30"
                                                    x:Name="showDataProtectionFrame">
                                             <Label Text="Protection des données"
-                                                   TextColor="#363636"
+                                                   FontSize="Medium"
+                                                   TextColor="#3367b0"
                                                    HorizontalOptions="CenterAndExpand"
-                                                   FontSize="18"/>
+                                                   VerticalOptions="Center"/>
                                         </Frame>
                                         <StackLayout
-                                                BackgroundColor="#a6a6a6"
+                                                BackgroundColor="#cccccc"
                                                 Spacing="0"
                                                 Padding="5"
                                                 x:Name="dataProtectionStack"
@@ -274,13 +320,13 @@
                 VerticalOptions="End"
                 HorizontalOptions="Start"
                 Margin="15,0,0,-45">
-                
+
             </StackLayout>
-            <!-- retour button -->
+            <!-- back button -->
             <Image 
-                            x:Name="retour"
-                            HeightRequest="40"
-                            WidthRequest="40"
+                x:Name="retour"
+                HeightRequest="40"
+                WidthRequest="40"
                 HorizontalOptions="StartAndExpand"
                 VerticalOptions="EndAndExpand"
                 Margin="10, 0, 0, 10">

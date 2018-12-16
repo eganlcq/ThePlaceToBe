@@ -12,6 +12,7 @@ namespace ThePlaceToBe.Data
 		public double Longitude { get; set; }
         public string Rue { get; set; }
         public int Numero { get; set; }
+        public int Accessibilite { get; set; }
 
 
         public Bar() {
