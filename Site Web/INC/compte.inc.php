@@ -22,7 +22,8 @@ class Config extends Db
         }
         $form .= "<li><a class='selected' href=compte.html>Profile</a></li>";
         $form .= "<li><a href=achievements.html>Achievements</a></li>";
-        $form .= "<li><a href=favoris.html>Favoris</a></li></ul><div id='contenuCompte'>";
+        $form .= "<li><a href=favoris.html>Favoris</a></li>";
+        $form .= "<li style='vertical-align:middle; float: right;'><a href='slogan.html'><i class='glyphicon glyphicon-remove' style='color: white'></i></a></li></ul><div id='contenuCompte'>";
         $form .= "<form method='post' action='formSubmit.html' id='formCompte' name='formCompte enctype=\"multipart/form-data\"'>";
         $form .= "<div id='image'><img id='imageAvatar' src=image/avatar/".$this->config['photo']." width=100px height= 100px alt='Avatar'>";
         $form .= "<label for='file'><img src=image/crayon.png id=crayon width=30px height= 30px alt='Crayon'></label><input type=file name=file id=file accept=image/*></div>";

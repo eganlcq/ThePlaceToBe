@@ -6,6 +6,6 @@
     </div>
     <div id="app" class="col-lg-6 col-xs-12 col-md-6 col-sm-12">
         <img class="imgResize" src="../image/ThePlaceToBe.png" alt="Image_Logo_ThePlaceToBe">
-        <input type="button" value="Télécharger application">
+        <a href="downloadAppli.html">Télécharger application</a>
     </div>
 </div>

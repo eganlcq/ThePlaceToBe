@@ -76,7 +76,6 @@ function gereRequest($retour){
             $res = chargeTemplate('rgdp');
             if($res) toSend($res, '');
             break;
-
         case 'protection':
             $res = chargeTemplate('protection');
             if($res) toSend($res, '');
@@ -84,6 +83,14 @@ function gereRequest($retour){
         case 'gestionAdmin':
             $admin = new gestionAdmin();
             toSend($admin->admin($_POST['senderId']), 'gestionCompte');
+            break;
+        case 'contact':
+            $res = chargeTemplate('contact');
+            if($res) toSend($res, 'contact');
+            break;
+        case 'downloadAppli':
+            $res = chargeTemplate('downloadappli');
+            if($res) toSend($res, '');
             break;
         case 'formSubmit': gereSubmit(); break;
     }
@@ -125,6 +132,14 @@ function gereSubmit(){
             }
             $admin = new gestionAdmin();
             toSend($admin->admin('bar'), 'gestionCompte');
+            break;
+        case 'BarBiereAdmin':
+            if($_POST['senderName'] === "suppr") $db->call('deletecarte', [$_POST['idcarte']]);
+            else {
+                $db->call('cartefrominter', [$_POST['idcarte'], $_POST['nombiere'], $_POST['nombar']]);
+            }
+            $admin = new gestionAdmin();
+            toSend($admin->admin('liaison'), 'gestionCompte');
             break;
         case 'connexion':
             $result = $db->call('userconnexion', [$_POST['pseudo'], $_POST['pwd']]);
@@ -176,7 +191,6 @@ function verifErreur($form){
         case 'formAdmin':
             $temp = 'admin';
             $erreur = 4;
-            if($_POST['pwdAdmin'] !== $_POST['verifPwd']) $msg = "veuillez insérer le même mot de passe !";
             if($_POST['pwdAdmin'] !== "Passw0rd!") $msg = "Mot de passe érroné !";
             break;
         case "connexion":
@@ -186,8 +200,11 @@ function verifErreur($form){
         case "inscription":
             $erreur = 1;
             switch (true){
-                case ( $interval < 16 ):
+                case ( $interval < 16):
                     $msg = "<b>Vous n'avez pas l'âge pour créer un compte !</b><br>";
+                    break;
+                case ( $interval > 100 ):
+                    $msg = "<b>Age improbable !</b><br>";
                     break;
                 case ($return_pseudo === "FALSE" && $return_mail === "FALSE"):
                     $msg = "<b>Adresse mail et/ou pseudo déjà pris !</b>";

@@ -23,15 +23,21 @@ class gestionAdmin extends Db {
         $sth = $this->db->getIPdo()->prepare('SELECT * from TbInterBeer');
         $sth->execute();
         $return = $sth->fetchAll(PDO::FETCH_ASSOC);
-
         $affichage="<ul>";
         foreach ($return as $key=>$value) {
+            $sth2 = $this->db->getIPdo()->prepare('SELECT nom, prenom from TbUser where iduser = ?');
+            $sth2->execute([$value['user']]);
+            $return2 = $sth2->fetchAll(PDO::FETCH_ASSOC);
+
             $affichage.="<hr><li>".$value['nombiere']."</li>";
             $affichage.="<form method='post' action='formSubmit.html' class='biereAdmin' id='BiereAdmin' style='display:none'>";
+            $affichage.="<label for='nom'>Nom</label><input type=text name='nom' id='nomUser' value='".$return2[0]['nom']."'>";
+            $affichage.="<label for='prenom'>Prenom</label><input type=text name='prenom' id='prenomUser' value='".$return2[0]['prenom']."'>";
             foreach ($value as $cle=>$valeur){
                 switch ($cle){
+                    case 'user': break;
                     case "idbiere": $affichage.="<input type=text name=".$cle." id=".$cle." value='".$valeur."' style=display:none>"; break;
-                    case "image": $affichage.="<img class=imgBiere src=image/tmp/".$valeur." style='height:100%; width:60%'><input type=text value=".$valeur." name=".$cle." id=".$cle." style='display:none'>"; break;
+                    case "image": $affichage.="<img class=imgBiere src='image/tmp/".$valeur."' style='height:100%; width:60%'><input type=text value=".$valeur." name=".$cle." id=".$cle." style='display:none'>"; break;
                     default: $affichage.="<label for='".$cle."'>".$cle."</label><input type=text name=".$cle." id=".$cle." value='".$valeur."'>";
                 }
             }
@@ -49,10 +55,17 @@ class gestionAdmin extends Db {
 
         $affichage="<ul>";
         foreach ($return as $key=>$value) {
+            $sth2 = $this->db->getIPdo()->prepare('SELECT nom, prenom from TbUser where iduser = ?');
+            $sth2->execute([$value['user']]);
+            $return2 = $sth2->fetchAll(PDO::FETCH_ASSOC);
+
             $affichage.="<hr><li>".$value['nombar']."</li>";
             $affichage.="<form method='post' action='formSubmit.html' class='barAdmin' id='BarAdmin' style='display:none'>";
+            $affichage.="<label for='nom'>Nom</label><input type=text name='nom' id='nomUser' value='".$return2[0]['nom']."'>";
+            $affichage.="<label for='prenom'>Prenom</label><input type=text name='prenom' id='prenomUser' value='".$return2[0]['prenom']."'>";
             foreach ($value as $cle=>$valeur){
                 switch ($cle){
+                    case 'user': break;
                     case "idbar": $affichage.="<input type=text name=".$cle." id=".$cle." value='".$valeur."' style=display:none>"; break;
                     case "localite": case "latitude": case "numero": $affichage.="<label for='".$cle."'>".$cle."</label><input type=number name=".$cle." id=".$cle." value='".$valeur."'>"; break;
                     default: $affichage.="<label for='".$cle."'>".$cle."</label><input type=text name=".$cle." id=".$cle." value='".$valeur."'>";
@@ -67,6 +80,31 @@ class gestionAdmin extends Db {
     }
 
     public function liaison(){
+        $sth = $this->db->getIPdo()->prepare('SELECT * from TbInterCarte');
+        $sth->execute();
+        $return = $sth->fetchAll(PDO::FETCH_ASSOC);
 
+        $affichage="<ul>";
+        foreach ($return as $key=>$value) {
+            $sth2 = $this->db->getIPdo()->prepare('SELECT nom, prenom from TbUser where iduser = ?');
+            $sth2->execute([$value['user']]);
+            $return2 = $sth2->fetchAll(PDO::FETCH_ASSOC);
+
+            $affichage.="<hr><li>".$value['nombiere']."/".$value['nombar']."</li>";
+            $affichage.="<form method='post' action='formSubmit.html' class='barAdmin' id='BarBiereAdmin' style='display:none'>";
+            $affichage.="<label for='nom'>Nom</label><input type=text name='nom' id='nomUser' value='".$return2[0]['nom']."'>";
+            $affichage.="<label for='prenom'>Prenom</label><input type=text name='prenom' id='prenomUser' value='".$return2[0]['prenom']."'>";
+            foreach ($value as $cle=>$valeur){
+                switch ($cle){
+                    case 'idcarte': $affichage.="<input type=text name=".$cle." id=".$cle." value='".$valeur."' style=display:none>"; break;
+                    case 'user': break;
+                    default: $affichage.="<label for='".$cle."'>".$cle."</label><input type=text name=".$cle." id=".$cle." value='".$valeur."'>";
+                }
+            }
+            $affichage.="<input type='submit' name='suppr' value='Supprimer'><input type='submit' name='Encoder' value='Encoder'></form>";
+        }
+        $affichage.="</ul>";
+
+        return $affichage;
     }
 }

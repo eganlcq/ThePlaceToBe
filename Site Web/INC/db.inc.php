@@ -35,13 +35,15 @@ class Db
             case 'gestioncompte':
             case 'beerfromscan':
             case 'userinscription': array_push($p, '?');
-            case 'verifpseudomail': array_push($p, '?', '?', '?');
+            case 'verifpseudomail': array_push($p, '?', '?');
+            case 'cartefrominter': array_push($p, '?');
             case 'verifmdp':
             case 'userconnexion':array_push($p, '?');
             case 'achievementbyuser':
             case 'favorisbyuser':
             case 'verifpseudo':
             case 'deletescan':
+            case 'deletecarte':
             case 'deletebar':
             case 'verifmail': array_push($p, '?');
                 try {

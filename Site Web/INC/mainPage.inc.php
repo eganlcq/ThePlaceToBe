@@ -5,8 +5,10 @@
     <title>ThePlaceToBe</title>
     <meta charset=utf-8>
     <meta name="viewport" content="width=device-width">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <link rel="stylesheet" href="CSS/bootstrap.min.css">
     <link rel="stylesheet" href="CSS/mainPage.css">
+    <link rel="shortcut icon" href="image/iconFooter.png">
     <script src="JS/jquery.min.js"></script>
     <script type="text/javascript" src="JS/index.js"></script>
     <noscript>
@@ -39,7 +41,7 @@
             </div>
             <div id="app" class="col-lg-6 col-xs-12 col-md-6 col-sm-12">
                 <img class="imgResize" src="../image/ThePlaceToBe.png" alt="Image_Logo_ThePlaceToBe">
-                <input type="button" value="Télécharger application">
+                <a href="downloadAppli.html">Télécharger application</a>
             </div>
         </div>
     </main>
