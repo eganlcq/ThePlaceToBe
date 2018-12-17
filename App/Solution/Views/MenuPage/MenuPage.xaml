@@ -68,7 +68,7 @@
 
             <ScrollView>
                 <StackLayout>
-                    <TableView Margin="30,20"
+                    <TableView Margin="20,20"
                            HasUnevenRows="True">
                         <TableRoot>
                             <TableSection>
@@ -98,7 +98,8 @@
                                                    BackgroundColor="white"
                                                    Padding="5"
                                                        x:Name="addBeerFrame">
-                                                <Label Text="La bière n'existe pas"
+                                                
+                                                <Label Text="Bière inexistante"
                                                        TextColor="#3367b0"
                                                        FontSize="10"/>
                                             </Frame>
@@ -109,9 +110,10 @@
                                                    BackgroundColor="white"
                                                    Padding="5"
                                                        x:Name="addBarFrame">
-                                                <Label Text="Le bar n'existe pas"
+                                                <Label Text="Bar inexistant"
                                                        TextColor="#3367b0"
                                                        FontSize="10"/>
+                                                
                                             </Frame>
                                             <Label TextColor="DarkRed" Opacity="0" FontSize="12" Margin="5, 0, 0, 0" x:Name="labelErrorBeerInBar"/>
                                             <Frame Margin="80, 10, 80, 10"
@@ -138,7 +140,7 @@
                                             </Frame>
                                             <StackLayout Padding="0" HorizontalOptions="FillAndExpand" Spacing="0">
                                                 <StackLayout Orientation="Horizontal" Padding="0" x:Name="beerStackPicker">
-                                                    <Picker Title="Choisir un nom" FontSize="12" HorizontalOptions="StartAndExpand" WidthRequest="100" x:Name="beerPickerTextRecognition"/>
+                                                    <Picker Title="Choisir un nom" FontSize="12" HorizontalOptions="StartAndExpand" WidthRequest="90" x:Name="beerPickerTextRecognition"/>
                                                     <Frame HorizontalOptions="End"
                                                                 CornerRadius="15"
                                                                 BackgroundColor="White"
@@ -146,14 +148,17 @@
                                                                VerticalOptions="EndAndExpand"
                                                                HasShadow="False"
                                                                x:Name="chooseNameBeerFrame">
-                                                        <Label Text="Pas dans la liste ?"
+                                                        <Image HeightRequest="15"
+                                                       WidthRequest="15"
+                                                       x:Name="boutonPlus1"/>
+                                                        <!--<Label Text="Pas dans la liste ?"
                                                                     TextColor="#3367b0"
-                                                                    FontSize="10"/>
+                                                                    FontSize="10"/>-->
                                                     </Frame>
                                                 </StackLayout>
                                                 <Entry Placeholder="Nom de la bière" FontSize="12" IsVisible="False" Opacity="0" x:Name="entryChooseBeerName"/>
                                                 <StackLayout Orientation="Horizontal" Padding="0">
-                                                    <Picker Title="Choisir un bar" FontSize="12" HorizontalOptions="StartAndExpand" WidthRequest="100" x:Name="barForBeerPicker"/>
+                                                    <Picker Title="Choisir un bar" FontSize="12" HorizontalOptions="StartAndExpand" WidthRequest="90" x:Name="barForBeerPicker"/>
                                                     <Frame HorizontalOptions="End"
                                                                 CornerRadius="15"
                                                                 BackgroundColor="White"
@@ -161,9 +166,12 @@
                                                                VerticalOptions="EndAndExpand"
                                                                HasShadow="False"
                                                                x:Name="addBarForBeerFrame">
-                                                        <Label Text="Pas dans la liste ?"
+                                                        <Image HeightRequest="15"
+                                                       WidthRequest="15"
+                                                       x:Name="boutonPlus2"/>
+                                                        <!--<Label Text="Pas dans la liste ?"
                                                                     TextColor="#3367b0"
-                                                                    FontSize="10"/>
+                                                                    FontSize="10"/>-->
                                                     </Frame>
                                                 </StackLayout>
                                                 <Entry Placeholder="Alcool (optionnel)" FontSize="12" x:Name="entryAlcohol"/>
@@ -191,8 +199,8 @@
                                                 <Entry Placeholder="Nom du bar" FontSize="12" x:Name="entryNameBar" HorizontalOptions="FillAndExpand"/>
                                                 <Image 
                                                     x:Name="logoHandicape"
-                                                    HeightRequest="40"
-                                                    WidthRequest="40"
+                                                    HeightRequest="30"
+                                                    WidthRequest="30"
                                                     Margin="10, 0, 0, 10"
                                                     HorizontalOptions="End">
                                                 </Image>

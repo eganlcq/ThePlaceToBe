@@ -42,7 +42,9 @@ namespace ThePlaceToBe.Views.MenuPage
             lblPseudo.Text = User.currentUser.Pseudo;
             disconnection.Source = Constants.appImg + "disconnect.png";
             logoHandicape.Source = Constants.appImg + "logoHandicapeBlanc.png";
-            //logoHandicape
+            boutonPlus1.Source = Constants.appImg + "iconePlus.png";
+            boutonPlus2.Source = Constants.appImg + "iconePlus.png";
+
             ChangeTapRecognizer(addBeerInBarStack, addBeerInBarFrame);
             ChangeTapRecognizer(dataProtectionStack, showDataProtectionFrame);
             ChangeTapRecognizer(TauxAlcoolParVerreStack, showTauxAlcoolParVerreFrame);
@@ -519,7 +521,6 @@ namespace ThePlaceToBe.Views.MenuPage
 
         private int CheckAccessibility()
         {
-            DisplayAlert("erreur", logoHandicape.Source.ToString().Split('/').Last(), "ok");
             if (logoHandicape.Source.ToString().Split('/').Last() == "logoHandicapeBlanc.png")
             {
                 return 0;
