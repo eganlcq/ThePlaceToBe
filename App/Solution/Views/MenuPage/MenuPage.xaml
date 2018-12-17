@@ -79,7 +79,7 @@
                                                CornerRadius="2"
                                                Padding="2"
                                                    x:Name="addBeerInBarFrame">
-                                            <Label Text="Ajouter une bière dans une bar"
+                                            <Label Text="Contribuer à l'application"
                                                    FontSize="Medium"
                                                    TextColor="#3367b0"
                                                    HorizontalOptions="Center"

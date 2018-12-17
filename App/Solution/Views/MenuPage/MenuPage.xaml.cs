@@ -365,7 +365,7 @@ namespace ThePlaceToBe.Views.MenuPage
         {
             if (beerPicker.SelectedItem == null || barPicker.SelectedItem == null)
             {
-                return "Please choose a beer and a bar.";
+                return "Choisissez une bière et un bar.";
             }
             else
             {
@@ -378,7 +378,7 @@ namespace ThePlaceToBe.Views.MenuPage
 
                 if (check)
                 {
-                    return "The beer is already in the bar";
+                    return "La bière existe déjà.";
                 }
                 else
                 {
@@ -447,7 +447,7 @@ namespace ThePlaceToBe.Views.MenuPage
             bool isNotNull = CheckIfNotNull(nameOfBeer);
             if (!isNotNull)
             {
-                return "Please choose a name and a bar.";
+                return "Choisissez un nom et un bar.";
             }
             else
             {
@@ -459,7 +459,7 @@ namespace ThePlaceToBe.Views.MenuPage
 
                 if (check)
                 {
-                    return "The beer already exists";
+                    return "La bière existe déjà.";
                 }
                 else
                 {
@@ -540,15 +540,15 @@ namespace ThePlaceToBe.Views.MenuPage
         {
             if (entryNameBar.Text == null || entryNameBar.Text == "")
             {
-                return "Please choose a name for the bar.";
+                return "Choisissez un  nom pour le bar.";
             }
             else if (entryNumStreet.Text != null && entryNumStreet.Text != "" && !Int32.TryParse(entryNumStreet.Text, out int valNumStreet))
             {
-                return "The number of the street must be a number.";
+                return "Le numéro de rue doit être un chiffre.";
             }
             else if (entryZIPCode.Text != null && entryZIPCode.Text != "" && !Int32.TryParse(entryZIPCode.Text, out int valZIP))
             {
-                return "The ZIP code must be a number.";
+                return "Le code postal doit être un numéro.";
             }
             else
             {
@@ -560,7 +560,7 @@ namespace ThePlaceToBe.Views.MenuPage
 
                 if (check)
                 {
-                    return "The bar already exists";
+                    return "Le bar existe déjà.";
                 }
                 else
                 {
@@ -579,7 +579,7 @@ namespace ThePlaceToBe.Views.MenuPage
         // this method add a bar by using the scan
         private async void AddNewBeer()
         {
-            var answer = await DisplayAlert("NOTE", "You will need to take a photo in order to add a beer, is it ok ?", "Yes", "No");
+            var answer = await DisplayAlert("NOTE", "Vous aurez besoin de prendre une photo pour ajouter une bière, acceptez-vous ?", "Oui", "Non");
 
             if (answer)
             {
@@ -602,12 +602,12 @@ namespace ThePlaceToBe.Views.MenuPage
                         if (!CrossMedia.Current.IsCameraAvailable || !CrossMedia.Current.IsTakePhotoSupported)
                         {
 #pragma warning disable CS4014 // Dans la mesure où cet appel n'est pas attendu, l'exécution de la méthode actuelle continue avant la fin de l'appel
-                            DisplayAlert("No Camera", "No camera available.", "OK");
+                            DisplayAlert("Pas de camera", "Pas de camera disponible.", "OK");
 #pragma warning restore CS4014 // Dans la mesure où cet appel n'est pas attendu, l'exécution de la méthode actuelle continue avant la fin de l'appel
                             return;
                         }
 
-                        var takePhoto = await DisplayAlert("NOTE", "Do you want to take a photo or pick a photo in your library ?", "Take a photo", "Pick a photo");
+                        var takePhoto = await DisplayAlert("NOTE", "Voulez-vous prendre une photo ou choisir un photo dans votre librairie ?", "Prendre une photo", "Choisir une photo");
 
                         MediaFile file;
                         if (takePhoto)
@@ -680,12 +680,12 @@ namespace ThePlaceToBe.Views.MenuPage
                     }
                     else
                     {
-                        await DisplayAlert("Permissions Denied", "Unable to take photos.", "OK");
+                        await DisplayAlert("Permissions refusées", "La photo ne peut pas être prise.", "OK");
                     }
                 }
                 catch (Exception e)
                 {
-                    await DisplayAlert("ERROR PHOTO", e.ToString(), "OK");
+                    await DisplayAlert("ERREUR PHOTO", e.ToString(), "OK");
                 }
             }
         }
@@ -749,7 +749,7 @@ namespace ThePlaceToBe.Views.MenuPage
                 catch (Exception e)
                 {
 
-                    await DisplayAlert("ERROR", e.Message.ToString(), "OK");
+                    await DisplayAlert("ERREUR", e.Message.ToString(), "OK");
                 }
             }
         }
