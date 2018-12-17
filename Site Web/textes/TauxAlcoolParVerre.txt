@@ -1,0 +1,38 @@
+﻿Il est impossible de mesurer le taux d'alcool présent dans le sang de manière précise.
+Ce taux varie selon le sexe de la personne, selon sa corpulence ainsi que de nombreux autres paramètres (fatigue, stress, médicaments ...).
+Les valeurs ci-dessous ne sont présentes qu'à titre indicatif (pour un verre d'alcool standard) et ne doivent donc pas être considérée comme étant fidèle à la réalité.
+
+Le corps élimine de 0,1 à 0,15 mg d'alcool par heure.
+Pour la majorité des pays de l'UE, le taux d'alcool dans le sang ne doit pas dépasser les 0,5g.
+
+Homme d'environ 57 kilos
+- Un verre représente environ 34mg.
+
+Homme d'environ 68 kilos
+- Un verre représente environ 29mg.
+
+Homme d'environ 80 kilos
+- Un verre représente environ 25mg.
+
+Homme d'environ 91 kilos
+- Un verre représente environ 22mg.
+
+Homme d'environ 113 kilos
+- Un verre représente environ 17mg.
+
+
+Femme d'environ 45 kilos
+- Un verre représente environ 50mg.
+
+Femme d'environ 57 kilos
+- Un verre représente environ 40mg.
+
+Femme d'environ 68 kilos
+- Un verre représente environ 34mg.
+
+Femme d'environ 80 kilos
+- Un verre représente environ 29mg.
+
+Femme d'environ 91 kilos
+- Un verre représente environ 26mg.
+
