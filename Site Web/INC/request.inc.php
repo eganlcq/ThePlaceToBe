@@ -1,6 +1,7 @@
 <?php
 require_once 'db.inc.php';
 require_once 'compte.inc.php';
+require_once 'GestionAdmin.inc.php';
 require_once 'functions.inc.php';
 
 if(count(get_included_files())==1) die('--access denied--');
@@ -17,17 +18,14 @@ function gereRequest($retour){
     switch ($retour){
         case 'about':  $res = chargeTemplate($retour);
                   if($res) toSend($res, 'about');
-                  else error('fichier non chargé !');
                   break;
         case 'slogan':
             $res = chargeTemplate($retour);
             if($res) toSend($res, 'slogan');
-            else error('fichier non chargé !');
             break;
         case 'login' :
             $res = chargeTemplate($retour);
             if($res) toSend($res, 'login');
-            else error('fichier non chargé !');
             break;
         case 'logout':
             $res = chargeTemplate('slogan');
@@ -53,6 +51,7 @@ function gereRequest($retour){
                 toSend($conf->getAchiv($_SESSION['start']), "achiev");
             }
             break;
+        case 'erreur': toSend("SLT", ""); break;
         case 'favoris':
             $conf = new Config();
 
@@ -64,6 +63,34 @@ function gereRequest($retour){
 
                 toSend($conf->getFav($_SESSION['startFav']), "achiev");
             }
+            break;
+        case 'admin':
+            $res = chargeTemplate('adminlogin');
+            if($res) toSend($res, 'adminconnexion');
+            break;
+        case 'legal':
+            $res = chargeTemplate('legal');
+            if($res) toSend($res, '');
+            break;
+        case 'rgdp':
+            $res = chargeTemplate('rgdp');
+            if($res) toSend($res, '');
+            break;
+        case 'protection':
+            $res = chargeTemplate('protection');
+            if($res) toSend($res, '');
+            break;
+        case 'gestionAdmin':
+            $admin = new gestionAdmin();
+            toSend($admin->admin($_POST['senderId']), 'gestionCompte');
+            break;
+        case 'contact':
+            $res = chargeTemplate('contact');
+            if($res) toSend($res, 'contact');
+            break;
+        case 'downloadAppli':
+            $res = chargeTemplate('downloadappli');
+            if($res) toSend($res, '');
             break;
         case 'formSubmit': gereSubmit(); break;
     }
@@ -81,6 +108,39 @@ function gereSubmit(){
     if(!isset($_POST['senderId'])) $_POST['senderId']= "";
 
     switch ($_POST['senderId']){
+        case 'formAdmin':
+            $admin = new gestionAdmin();
+            toSend($admin->admin(), 'gestionCompte');
+            break;
+        case 'BiereAdmin':
+            if($_POST['senderName'] === "suppr") $db->call('deletescan', [$_POST['idbiere']]);
+            else {
+                $db->call('beerfromscan', [$_POST['idbiere'],$_POST['nombiere'], $_POST['alcoolemie'],$_POST['typebiere'],$_POST['image'], $_POST['nombar']]);
+                $file= "image/tmp/".$_POST['image'];
+                $target_file = "image/beers/".$_POST['image'];
+
+                rename($file, $target_file);
+            }
+            unlink("image/tmp/".$_POST['image']);
+            $admin = new gestionAdmin();
+            toSend($admin->admin(), 'gestionCompte');
+            break;
+        case 'BarAdmin':
+            if($_POST['senderName'] === "suppr") $db->call('deletebar', [$_POST['idbar']]);
+            else {
+                $db->call('barfrominter', [$_POST['idbar'], $_POST['nombar'], $_POST['rue'], $_POST['numero'], $_POST['localite'], $_POST['ville'], $_POST['latitude'], $_POST['longitude'], $_POST['accessibilite']]);
+            }
+            $admin = new gestionAdmin();
+            toSend($admin->admin('bar'), 'gestionCompte');
+            break;
+        case 'BarBiereAdmin':
+            if($_POST['senderName'] === "suppr") $db->call('deletecarte', [$_POST['idcarte']]);
+            else {
+                $db->call('cartefrominter', [$_POST['idcarte'], $_POST['nombiere'], $_POST['nombar']]);
+            }
+            $admin = new gestionAdmin();
+            toSend($admin->admin('liaison'), 'gestionCompte');
+            break;
         case 'connexion':
             $result = $db->call('userconnexion', [$_POST['pseudo'], $_POST['pwd']]);
             $_SESSION['user'] = $result[0];
@@ -128,6 +188,11 @@ function verifErreur($form){
     $interval = $date->diff(new DateTime())->format("%Y");
 
     switch($form){
+        case 'formAdmin':
+            $temp = 'admin';
+            $erreur = 4;
+            if($_POST['pwdAdmin'] !== "Passw0rd!") $msg = "Mot de passe érroné !";
+            break;
         case "connexion":
             $erreur = 2;
             if($return_mdp === "FALSE" || $return_pseudo === "TRUE") $msg = "<b>Nom d'utilisateur ou mot de passe est incorrect !</b>";
@@ -135,8 +200,11 @@ function verifErreur($form){
         case "inscription":
             $erreur = 1;
             switch (true){
-                case ( $interval < 16 ):
+                case ( $interval < 16):
                     $msg = "<b>Vous n'avez pas l'âge pour créer un compte !</b><br>";
+                    break;
+                case ( $interval > 100 ):
+                    $msg = "<b>Age improbable !</b><br>";
                     break;
                 case ($return_pseudo === "FALSE" && $return_mail === "FALSE"):
                     $msg = "<b>Adresse mail et/ou pseudo déjà pris !</b>";
@@ -160,24 +228,31 @@ function verifErreur($form){
             elseif($return_mail === 'FALSE') $msg = "<b>Adresse mail et/ou pseudo déjà pris !</b>";
             break;
     }
-
-    chargeErreur($msg, $temp, $erreur);
+    if($msg) {
+        chargeErreur($msg, $temp, $erreur);
+    }
     return $msg;
 }
 
 function chargeErreur($msg, $temp, $erreur){
-    if($msg){
-        if($temp === "compte"){
+    switch ($temp){
+        case 'compte':
             if(isAuthenticated()){
                 $conf = new Config();
                 toSend($conf->getForm(), 'compte');
             }
-            toSend($msg, 'erreur'.$erreur);
-        }
-        else {
+            break;
+        case 'admin':
+            if(isAuthenticated()){
+                $conf = new Config();
+                toSend($conf->getForm(), 'compte');
+            }
+            $res = chargeTemplate('adminlogin');
+            if($res) toSend($res, 'adminconnexion');
+            break;
+        default:
             $res = chargeTemplate($temp);
             if($res) toSend($res, $temp);
-            toSend($msg, 'erreur'.$erreur);
-        }
     }
+    toSend($msg, 'erreur'.$erreur);
 }

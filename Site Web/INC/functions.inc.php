@@ -6,3 +6,6 @@ function monPrint_r($liste){
 function isAuthenticated(){
     return (isset($_SESSION['user']))? true : false;
 }
+function isAdmin($pseudo, $email){
+    return ($pseudo === 'Admin')? ($email === 'placetobe.ephec@hotmail.com'):false ? true: false;
+}
